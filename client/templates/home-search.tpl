@@ -7,7 +7,7 @@
         </label>
         <div class="col-xs-5">
           <div class="input-group input-group-lg">
-            <input type="text" ng-model="" name="text" class="form-control" placeholder="your strengths"/>
+            <input type="text" name="text" class="form-control" placeholder="your strengths"/>
             <span class="input-group-btn">
               <button ng-click="" class="btn btn-primary" aria-label="search">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>

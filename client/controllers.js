@@ -34,10 +34,16 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
-'$state', '$meteorCollection', '$meteorSubscribe',
-function($scope, $state, $meteorCollection, $meteorSubscribe){
+'$state', '$meteorCollection', '$meteorSubscribe', '$http',
+function($scope, $state, $meteorCollection, $meteorSubscribe, $http){
 
-    $scope.jobs = jobs;
+  
+    $http.get('data/test_data.json').success(function(data){
+        $scope.jobs = data;
+        console.log($scope.jobs);
+    });   
+        
+    // $scope.jobs = jobs;
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
     //         return Datasets.find({});
@@ -57,11 +63,54 @@ function($scope, $state, $meteorCollection, $meteorSubscribe){
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope','$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$http',
     function($scope, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils){
+        $state, $meteorObject, $rootScope, $meteorUtils, $http){
 
-    $scope.jobs = jobs;
+    $scope.resultsLoading = true;
+
+    $http.get('data/test_data.json').success(function(data){
+        $scope.jobs = data;
+        $scope.careers = _.chain($scope.jobs)
+            .groupBy('standardized_title')
+            .map(function(value, key) {
+                return {
+                    standardized_title: key,
+                    skills: _.chain(_.flatten(_.pluck(value, "skills")))
+                                    .groupBy(function(skill) {return skill;})
+                                    .sortBy(function(skill) { return -skill.length;}) //sort descending by frequency
+                                    .flatten()
+                                    .uniq()
+                                    .value(),
+                    categories: _.chain(_.flatten(_.pluck(value, "category")))
+                                    .groupBy(function(cat) {return cat;})
+                                    .sortBy(function(cat) { return -cat.length;}) //sort descending by frequency
+                                    .flatten()
+                                    .uniq()
+                                    .value(),
+                    job_ids: _.flatten(_.pluck(value, "job_id")),
+                    num_ids: _.flatten(_.pluck(value, "job_id")).length
+                }
+            })
+            .value();
+
+        $scope.resultsLoading = false;
+        console.log($scope.careers);
+    });  
+
+
+// var result = _.chain(data)
+//     .groupBy("FlexCategoryName")
+//     .map(function(value, key) {
+//         return {
+//             FlexCategoryName: key,
+//             Cost: sum(_.pluck(value, "Cost")),
+//             Impressions: sum(_.pluck(value, "Impressions"))
+//         }
+//     })
+//     .value();
+
+    // $scope.jobs = jobs;
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
     //         return Datasets.find({});
@@ -84,6 +133,7 @@ angular.module('reflectivePath').controller('CareerViewController', ['$scope',
 function($scope, $meteorSubscribe, $stateParams, $meteorObject, $meteorCollection, $meteorUtils){
 
     $scope.jobs = jobs;
+
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
     //         return Datasets.find({});
