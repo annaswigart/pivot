@@ -15,16 +15,33 @@
   <div class="col-xs-9">
 
     <div class="row">
-      <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
-      ng-model="searchQuery" ng-model-options="{debounce: 250}"/></h3>
+      <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
+      ng-model="setQuery" ng-model-options="{debounce: 250}"/></h3> -->
+      <form class="form-horizontal" onsubmit="this.reset(); return false;" name="resultsQuery" role="form">
+      <div class="form-group">
+        <label class="search-label col-xs-5">
+          Careers related to
+        </label>
+        <div class="col-xs-5">
+          <div class="input-group input-group-lg">
+            <input type="text" name="text" class="form-control" ng-model="query"/>
+            <span class="input-group-btn">
+              <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
+                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+              </button>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
     </div>
 
     <div class="row" ng-if="!resultsLoading">
-      <div class="col-xs-12" ng-repeat="career in careers | filter: searchQuery | orderBy: career.num_ids | limitTo: 20">
-<!--       <div class="col-xs-12" ng-repeat="job in jobs" id="{{job._id}}">
- -->    <div class="result-box card">
-          <h4>{{career.standardized_title}}</h4>
+<!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
+      <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids' | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
+      <div class="result-box card">
+          <h4>{{career.standardized_title}} ({{career.num_ids}})</h4>
           <div class="row">
 
             <div class="skills-wrapper col-xs-5">
@@ -43,9 +60,8 @@
           </div>
         </div>
       </div>
+        <button ng-repeat="i in getNumberAsArray(numberOfPages()) track by $index" ng-click="setCurrentPage($index)">{{$index + 1}}</button>
     </div>
-    
+
   </div>
-
-
 </div>
