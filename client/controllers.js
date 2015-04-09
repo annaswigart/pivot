@@ -19,52 +19,49 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
 '$state', '$meteorCollection', '$meteorSubscribe', 'currentQueryService',
 function($scope, $state, $meteorCollection, $meteorSubscribe, currentQueryService){   
 
-    // $scope.resultsLoading = true;
-
-    // // $meteorSubscribe.subscribe('jobs').then(function(sub){
-    // //     $scope.jobs = $meteorCollection(function(){
-    // //         return Jobs.find({});
-    // //     });
-    // // });
-
-    // $meteorSubscribe.subscribe('careers').then(function(sub){
-    //     $scope.careers = $meteorCollection(function(){
-    //         return Careers.find({});
-    //     });
-    //     $scope.resultsLoading = false;
-        
-    // });
-
     $scope.setQuery = function(input) {
         $scope.query = currentQueryService.setQuery(input);
         console.log($scope.query);
         console.log("Get query " + currentQueryService.getCurrentQuery());
+        $scope.appendQueryStack(input);
         return $scope.query;
     }
 
-    // $scope.query = currentQueryService.query;
-    // console.log($scope.query);
+    $scope.appendQueryStack = function(input) {
+        currentQueryService.queryStack.push(input);
+        console.log(currentQueryService.queryStack);
+    }
+
+    $scope.query = currentQueryService.query;
 
 }]);
 
 // Query field, shared across controllers
 angular.module('reflectivePath').service('currentQueryService', function () {
 
+    var queryInit = '';
+    var queryStackInit = []
     return {
-        query: 'sales',
+        query: queryInit,
+        queryStack: queryStackInit,
         getCurrentQuery: function () {
             return query;
         },
         setQuery: function(input) {
             var split = input.split(" ");
             query = split.join("+");
+            // queryStack.push(input);
             return query;
-
         },
+        // appendQueryStack: function(input){
+        //     queryStack.push(input);
+        // }
+        // getQueryStack: function() {
+        //     console.log('getQueryStack Service Error');
+        //     return queryStack;
+        // }
     };
 });
-
-
 
 
 // ***********************************
@@ -86,7 +83,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
 
     $meteorSubscribe.subscribe('careers').then(function(sub){
         $scope.careers = $meteorCollection(function(){
-            return Careers.find({});
+            return Careers.find({}, {sort: {num_ids: -1}});
         });
 
         // Pagination
@@ -111,10 +108,23 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
     $scope.setQuery = function(input) {
         $scope.query = currentQueryService.setQuery(input);
         console.log($scope.query);
+        $scope.appendQueryStack(input);
         return $scope.query;
     }
 
+    $scope.appendQueryStack = function(input) {
+        currentQueryService.queryStack.push(input);
+        console.log(currentQueryService.queryStack);
+    }
+
     $scope.query = currentQueryService.getCurrentQuery();
+
+    $scope.queryStack = currentQueryService.queryStack;
+    // console.log(queryStack);
+    // $scope.getCurrentQuery = function(){
+    //     return currentQueryService.query;
+    // }
+    
 
     // $scope.skills = _.chain(jobs)
     //             .groupBy('skills')

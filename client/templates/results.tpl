@@ -3,11 +3,14 @@
 
   <div class="col-xs-3">
     <div class="sidebar">
-      <div class="highlights card">
+      <!-- <div class="highlights card">
         <h4>Highlights</h4>
-      </div>
+      </div> -->
         <div class="history card">
           <h4>History</h4>
+          <ul>
+            <li ng-repeat="q in queryStack">{{q}}</li>
+          </ul>
         </div>
     </div>
   </div>
@@ -17,7 +20,7 @@
     <div class="row">
       <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
       ng-model="setQuery" ng-model-options="{debounce: 250}"/></h3> -->
-      <form class="form-horizontal" onsubmit="this.reset(); return false;" name="resultsQuery" role="form">
+      <form class="form-horizontal" name="resultsQuery" role="form">
       <div class="form-group">
         <label class="search-label col-xs-5">
           Careers related to
@@ -39,7 +42,7 @@
 
     <div class="row" ng-if="!resultsLoading">
 <!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
-      <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids' | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
+      <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
       <div class="result-box card">
           <h4>{{career.standardized_title}} ({{career.num_ids}})</h4>
           <div class="row">
