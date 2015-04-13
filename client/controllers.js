@@ -16,23 +16,30 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
-'$state', '$meteorCollection', '$meteorSubscribe', 'currentQueryService',
-function($scope, $state, $meteorCollection, $meteorSubscribe, currentQueryService){   
+'$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
+function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
 
-    $scope.setQuery = function(input) {
+
+    $scope.query = $window.localStorage.getItem('currentQuery');
+    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
+
+   $scope.setQuery = function(input) {
+        //set query
         $scope.query = currentQueryService.setQuery(input);
-        console.log($scope.query);
-        console.log("Get query " + currentQueryService.getCurrentQuery());
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        currentQueryService.queryStack = $scope.queryStackData;
         $scope.appendQueryStack(input);
+        $window.localStorage.queryStack = JSON.stringify(currentQueryService.queryStack);
+        $scope.queryStackData = JSON.parse($window.localStorage.queryStack);
+       
         return $scope.query;
     }
 
     $scope.appendQueryStack = function(input) {
         currentQueryService.queryStack.push(input);
-        console.log(currentQueryService.queryStack);
     }
-
-    $scope.query = currentQueryService.query;
 
 }]);
 
@@ -45,21 +52,20 @@ angular.module('reflectivePath').service('currentQueryService', function () {
         query: queryInit,
         queryStack: queryStackInit,
         getCurrentQuery: function () {
+            // localstorage['currentQuery'] = query;
             return query;
         },
         setQuery: function(input) {
             var split = input.split(" ");
             query = split.join("+");
-            // queryStack.push(input);
+            // localstorage['queryStack'] = query
             return query;
         },
-        // appendQueryStack: function(input){
-        //     queryStack.push(input);
-        // }
-        // getQueryStack: function() {
-        //     console.log('getQueryStack Service Error');
-        //     return queryStack;
-        // }
+
+        getQueryStack: function() {
+            // localstorage['queryStack'] = queryStack;
+            return queryStack;
+        }
     };
 });
 
@@ -69,11 +75,12 @@ angular.module('reflectivePath').service('currentQueryService', function () {
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope','$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', 'currentQueryService',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
     function($scope, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, currentQueryService){
+        $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 
     $scope.resultsLoading = true;
+    // $scope.$storage = $localStorage;
 
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
@@ -86,7 +93,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
             return Careers.find({}, {sort: {num_ids: -1}});
         });
 
+
         // Pagination
+        $scope.filteredCareers = $scope.careers;
+
         $scope.currentPage = 0; 
         $scope.pageSize = 20;
         $scope.setCurrentPage = function(currentPage) {
@@ -98,32 +108,38 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
         };
 
         $scope.numberOfPages = function() {
-            return Math.ceil($scope.careers.length/ $scope.pageSize);
+            return Math.ceil($scope.filteredCareers.length/ $scope.pageSize);
         };
 
         $scope.resultsLoading = false;
 
     });
 
+    $scope.query = $window.localStorage.getItem('currentQuery');
+    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
+    console.log('init query stack: ' + $scope.queryStack);
+
     $scope.setQuery = function(input) {
+        //set query
         $scope.query = currentQueryService.setQuery(input);
+        $window.localStorage.currentQuery = $scope.query;
         console.log($scope.query);
+
+        //update query stack
         $scope.appendQueryStack(input);
+        $window.localStorage.queryStack = JSON.stringify(currentQueryService.queryStack);
+        $scope.queryStackData = JSON.parse($window.localStorage.queryStack);
+       
+        
+        console.log('localstorage querystack: ' + $window.localStorage.queryStack);
         return $scope.query;
     }
 
     $scope.appendQueryStack = function(input) {
         currentQueryService.queryStack.push(input);
-        console.log(currentQueryService.queryStack);
+        console.log('Query stack service: ' + currentQueryService.queryStack);
+        console.log('localstorage querystack: ' + localStorage['queryStack'])
     }
-
-    $scope.query = currentQueryService.getCurrentQuery();
-
-    $scope.queryStack = currentQueryService.queryStack;
-    // console.log(queryStack);
-    // $scope.getCurrentQuery = function(){
-    //     return currentQueryService.query;
-    // }
     
 
     // $scope.skills = _.chain(jobs)

@@ -7,9 +7,9 @@
         <h4>Highlights</h4>
       </div> -->
         <div class="history card">
-          <h4>History</h4>
+          <h4>Recent Searches</h4>
           <ul>
-            <li ng-repeat="q in queryStack">{{q}}</li>
+            <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
           </ul>
         </div>
     </div>
