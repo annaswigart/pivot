@@ -16,6 +16,7 @@
   </div>
 
   <div class="col-xs-9">
+    
 
     <div class="row">
       <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
@@ -50,13 +51,13 @@
             <div class="skills-wrapper col-xs-5">
               Top Skills:
               <ul>
-                <li ng-repeat="skill in career.skills | limitTo: 5">{{skill}}</li>
+                <li ng-repeat="skill in career.skills | limitTo: 5">{{skill.name}}</li>
               </ul>
             </div>
 
             <div class="tags-wrapper col-xs-7">
               <ul>
-                <li ng-repeat="category in career.categories | limitTo: 5"><span class="label label-default">{{category}}</span></li>
+                <li ng-repeat="category in career.categories | limitTo: 5"><span class="label label-default">{{category.name}}</span></li>
               </ul>
             </div>
 
