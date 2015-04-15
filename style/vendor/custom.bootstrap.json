@@ -10,7 +10,7 @@
   "forms":                true,
   "buttons":              true,
 
-  "glyphicons":           false,
+  "glyphicons":           true,
   "button-groups":        true,
   "input-groups":         true,
   "navs":                 true,

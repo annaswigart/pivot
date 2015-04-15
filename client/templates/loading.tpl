@@ -1,4 +1,3 @@
-<h2 class="text-muted" style="text-align: center;">Loading...</h2>
-<div class="progress">
-    <div class="progress-bar progress-bar-striped progress-bar-primary active" role="progressbar" style="width: 70%"></div>
+<div style="text-align: center; margin-top: 30px">
+    <i class="fa fa-spinner fa-spin fa-3x"></i>
 </div>
