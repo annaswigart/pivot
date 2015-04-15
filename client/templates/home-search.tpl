@@ -13,13 +13,11 @@
           </label>
 
           <ul class="opts">
-            <li ng-class='{"optSelect":searchType==skill}' ng-click="searchType=skill" data-placeholder="Skill">Skill</li>
-            <li ng-class='{"optSelect":searchType==industry}' ng-click="searchType=industry" data-placeholder="Industry">Industry</li>
-            <li ng-class='{"optSelect":searchType==title}' ng-click="searchType=title" data-placeholder="Job Title or Career Name">Title</li>
+            <li ng-repeat="cat in searchCategories" ng-class="{optSelected: isSelected(cat)}" ng-click="selectCategory(cat)" ng-attr-id="{{ 'searchLabel-' + cat.name }}">{{cat.name}}</li>
           </ul>
 
           <div class="input-group input-group-lg">
-            <input type="text" name="text" class="form-control" placeholder="placeholder text" ng-model="searchQuery"/>
+            <input type="text" name="text" class="form-control" placeholder="{{selectedCategory.placeholder}}" ng-model="searchQuery"/>
             <span class="input-group-btn">
               <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
                 <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
