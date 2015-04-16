@@ -20,7 +20,7 @@
             <input type="text" name="text" class="form-control" placeholder="{{selectedCategory.placeholder}}" ng-model="searchQuery"/>
             <span class="input-group-btn">
               <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <span class="fa fa-search" aria-hidden="true"></span>
               </button>
             </span>
           </div>

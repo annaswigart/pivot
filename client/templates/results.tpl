@@ -31,7 +31,7 @@
             <input type="text" name="text" class="form-control" ng-model="query"/>
             <span class="input-group-btn">
               <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
-                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                <span class="fa fa-search" aria-hidden="true"></span>
               </button>
             </span>
           </div>
@@ -45,7 +45,10 @@
 <!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
       <div class="result-box">
-          <h4>{{career.standardized_title}} ({{career.num_ids}})</h4>
+          <h4>{{career.standardized_title}} ({{career.num_ids}})
+            <span class="fa fa-thumb-tack" aria-label="pin this career" ng-class="{pin: !isActive, pinSelected: isActive}"  ng-init="isActive = false" ng-click="isActive = !isActive"></span>
+          </h4>
+
           <div class="row">
 
             <div class="skills-wrapper col-xs-5">
