@@ -1,19 +1,39 @@
 
 <div class="row">
 
+  <!-- SIDEBAR -->
+
   <div class="col-xs-3">
-    <div class="sidebar">
+
+    <div class="row">
       <!-- <div class="highlights card">
         <h4>Highlights</h4>
       </div> -->
-        <div class="history card">
+        <div class="sidebar history card">
           <h4>Recent Searches</h4>
           <ul>
             <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
           </ul>
         </div>
     </div>
+
+    <div class="row">
+        <div class="sidebar smartSort card">
+          <h4>Smart Sort</h4>
+        </div>
+    </div>
+
+    <div class="row">
+      <div class="sidebar compare card">
+        <h4>Compare Careers</h4>
+        <h5>Pinned Careers</h5>
+        <h5>Recently Viewed Careers</h5>
+      </div>
+    </div>
+
   </div>
+
+<!-- MAIN -->
 
   <div class="col-xs-8">
     
@@ -22,22 +42,22 @@
       <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
       ng-model="setQuery" ng-model-options="{debounce: 250}"/></h3> -->
       <form class="form-horizontal" name="resultsQuery" role="form">
-      <div class="form-group">
-        <label class="search-label col-xs-5">
-          Careers related to
-        </label>
-        <div class="col-xs-5">
-          <div class="input-group input-group-lg">
-            <input type="text" name="text" class="form-control" ng-model="query"/>
-            <span class="input-group-btn">
-              <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
-                <span class="fa fa-search" aria-hidden="true"></span>
-              </button>
-            </span>
+        <div class="form-group">
+          <label class="search-label col-xs-5">
+            Careers related to
+          </label>
+          <div class="col-xs-5">
+            <div class="input-group input-group-lg">
+              <input type="text" name="text" class="form-control" ng-model="query"/>
+              <span class="input-group-btn">
+                <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
+                  <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-    </form>
+      </form>
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
     </div>
 
