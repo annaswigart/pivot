@@ -18,19 +18,13 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 }
             },
         })
-        .state('navBar', {
-            url: '/',
-            views: {
-                
-                navBar: {
-                    templateUrl: 'client/templates/nav-bar.tpl',
-                    controller: 'NavBarController'
-                }
-            }
-        })
         .state('results', {
             url: '/results/:query', //query terms should probably be in the URL
             views: {
+                navBar: {
+                    templateUrl: 'client/templates/nav-bar.tpl',
+                    controller: 'NavBarController'
+                },
                 // search results
                 'main@': {
                     templateUrl: 'client/templates/results.tpl',
@@ -41,6 +35,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
         .state('results.careerView', {
             url: '/results/:query/:careerId',
             views: {
+                navBar: {
+                    templateUrl: 'client/templates/nav-bar.tpl',
+                    controller: 'NavBarController'
+                },
                 // view that lets user drill into a career
                 'main@': {
                     templateUrl: 'client/templates/view-career.tpl',
@@ -51,6 +49,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
         .state('results.compareCareers', {
             url: '/results/:query/:careerId1/:careerId2',
             views: {
+                navBar: {
+                    templateUrl: 'client/templates/nav-bar.tpl',
+                    controller: 'NavBarController'
+                },
                 // view that lets user compare two careers at a time
                 "main@": {
                     templateUrl: 'client/templates/compare-careers.tpl',
