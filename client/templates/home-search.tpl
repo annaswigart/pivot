@@ -13,7 +13,7 @@
           </label>
 
           <ul class="opts">
-            <li ng-repeat="cat in searchCategories" ng-class="{optSelected: isSelected(cat)}" ng-click="selectCategory(cat)" ng-attr-id="{{ 'searchLabel-' + cat.name }}">{{cat.name}}</li>
+            <li ng-repeat="cat in searchCategories" ng-class="{optSelected: isSelected(cat)}" ng-click="selectCategory(cat)" ng-attr-id="{{ 'searchLabel-' + cat.name }}" ng-mouseover="">{{cat.name}}</li>
           </ul>
 
           <div class="input-group input-group-lg">
