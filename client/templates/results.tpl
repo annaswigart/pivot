@@ -1,5 +1,5 @@
 
-<div class="row">
+<div class="row ">
 
   <!-- SIDEBAR -->
 
@@ -35,7 +35,7 @@
 
 <!-- MAIN -->
 
-  <div class="col-xs-8">
+  <div class="col-xs-9">
     
 
     <div class="row">
