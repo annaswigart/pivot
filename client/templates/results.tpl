@@ -15,7 +15,7 @@
     </div>
   </div>
 
-  <div class="col-xs-9">
+  <div class="col-xs-8">
     
 
     <div class="row">
@@ -41,10 +41,10 @@
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
     </div>
 
-    <div class="row" ng-if="!resultsLoading">
+    <div class="row card" ng-if="!resultsLoading">
 <!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
-      <div class="result-box card">
+      <div class="result-box">
           <h4>{{career.standardized_title}} ({{career.num_ids}})</h4>
           <div class="row">
 

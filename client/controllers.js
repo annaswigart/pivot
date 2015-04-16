@@ -18,6 +18,22 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
 '$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
 function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
+    
+    $scope.searchCategories = [
+        {name:'Skill', placeholder: "Skill"},
+        {name:'Industry', placeholder: "Industry"},
+        {name:'Title', placeholder: "Job Title or Career Name"}
+    ];
+
+    $scope.selectedCategory = $scope.searchCategories[0];
+
+    $scope.selectCategory = function(category) {
+        $scope.selectedCategory = category;
+    }
+
+    $scope.isSelected = function(category) {
+        return $scope.selectedCategory === category;
+    }
 
 
     $scope.query = $window.localStorage.getItem('currentQuery');
