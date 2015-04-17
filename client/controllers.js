@@ -1,8 +1,10 @@
 
+if (Meteor.isClient) {
+
 // ***********************************
 // NavBarController
 // ***********************************
-angular.module('reflectivePath').controller('NavBarController', ['$scope',
+angular.module('reflectivePath').controller('NavBarController', ['$scope', 
 '$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject',
 function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject) {
 
@@ -15,9 +17,9 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // ***********************************
 // HomeSearchController
 // ***********************************
-angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
+angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
-function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
+function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
     
     $scope.searchCategories = [
         {name:'Skill', placeholder: "Skill"},
@@ -40,10 +42,11 @@ function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQu
     // JSON.parse to read the stack in as an array
     $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
 
-   $scope.setQuery = function(input) {
-         //set query
+    $scope.setQuery = function(input) {
+        //set query
         $scope.query = currentQueryService.setQuery(input);
         $window.localStorage.currentQuery = $scope.query;
+
 
         //update query stack
         $scope.appendQueryStack(input);
@@ -56,6 +59,13 @@ function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQu
     $scope.appendQueryStack = function(input) {
         currentQueryService.queryStack.push(input);
     }
+
+    $meteor.subscribe('clientQuery').then(function(sub){
+
+        $scope.clientQuery = $meteor.collection(function(){
+            return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
+        });
+    });
 
 }]);
 
@@ -86,9 +96,9 @@ angular.module('reflectivePath').service('currentQueryService', function () {
 // ResultsController
 // ***********************************
 
-angular.module('reflectivePath').controller('ResultsController', ['$scope','$meteorCollection',
+angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
     '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
-    function($scope, $meteorCollection, $stateParams, $meteorSubscribe,
+    function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
         $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
@@ -104,15 +114,19 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
             console.log($scope.numResultsDisplayed);
     }
 
-    $meteorSubscribe.subscribe('careersFiltered').then(function(sub){
+   
+    $meteor.autorun($scope, function() {
+        $meteor.subscribe('careersFiltered').then(function(sub){
 
-        $scope.careers = $meteorCollection(function(){
-            return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
+            $scope.careers = $meteor.collection(function() {
+                return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
+            });
+
+            $scope.resultsLoading = false;
+
         });
-
-        $scope.resultsLoading = false;
-
     });
+
 
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
@@ -188,3 +202,6 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 
 
 }]);
+
+
+} //if Meteor isClient

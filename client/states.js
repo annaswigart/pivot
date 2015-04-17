@@ -8,12 +8,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
             url: '/',
             views: {
                 navBar: {
-                    templateUrl: 'client/templates/nav-bar.tpl',
+                    templateUrl: 'client/templates/nav-bar.ng.html',
                     controller: 'NavBarController'
                 },
                 // search box-- initial view
                 main: {
-                    templateUrl: 'client/templates/home-search.tpl',
+                    templateUrl: 'client/templates/home-search.ng.html',
                     controller: 'HomeSearchController'
                 }
             },
@@ -22,12 +22,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
             url: '/results/:query', //query terms should probably be in the URL
             views: {
                 navBar: {
-                    templateUrl: 'client/templates/nav-bar.tpl',
+                    templateUrl: 'client/templates/nav-bar.ng.html',
                     controller: 'NavBarController'
                 },
                 // search results
                 'main@': {
-                    templateUrl: 'client/templates/results.tpl',
+                    templateUrl: 'client/templates/results.ng.html',
                     controller: 'ResultsController'
                 }
             }
@@ -36,12 +36,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
             url: '/results/:query/:careerId',
             views: {
                 navBar: {
-                    templateUrl: 'client/templates/nav-bar.tpl',
+                    templateUrl: 'client/templates/nav-bar.ng.html',
                     controller: 'NavBarController'
                 },
                 // view that lets user drill into a career
                 'main@': {
-                    templateUrl: 'client/templates/view-career.tpl',
+                    templateUrl: 'client/templates/view-career.ng.html',
                     controller: 'CareerViewController'
                 }
             }
@@ -50,12 +50,12 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
             url: '/results/:query/:careerId1/:careerId2',
             views: {
                 navBar: {
-                    templateUrl: 'client/templates/nav-bar.tpl',
+                    templateUrl: 'client/templates/nav-bar.ng.html',
                     controller: 'NavBarController'
                 },
                 // view that lets user compare two careers at a time
                 "main@": {
-                    templateUrl: 'client/templates/compare-careers.tpl',
+                    templateUrl: 'client/templates/compare-careers.ng.html',
                     controller: 'CompareViewController'
                 }
             }

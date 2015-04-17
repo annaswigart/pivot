@@ -4,18 +4,15 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default navbar-fixed-top">
+    <div ng-app="reflectivePath">
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div ui-view="navBar"></div>
+            </div>
+        </nav>
+
         <div class="container">
-            <div ui-view="navBar"></div>
-            <!-- <ul class="nav navbar-nav navbar-right df-login">
-                {{>loginButtons}}
-            </ul> -->
+            <div ui-view="main"></div>
         </div>
-
-    </nav>
-
-    <div class="container">
-        <div ui-view="main"></div>
     </div>
-
 </body>
