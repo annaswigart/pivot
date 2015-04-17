@@ -43,7 +43,8 @@
 
     <div class="row card" ng-if="!resultsLoading">
 <!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
-      <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize">
+<!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | filter: query)) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->
+      <div class="col-xs-12" ng-repeat="career in careers">
       <div class="result-box">
           <h4>{{career.standardized_title}} ({{career.num_ids}})</h4>
           <div class="row">
@@ -64,7 +65,7 @@
           </div>
         </div>
       </div>
-        <button ng-repeat="i in getNumberAsArray(numberOfPages()) track by $index" ng-click="setCurrentPage($index)">{{$index + 1}}</button>
+        <button ng-click="showMoreResults()">Show More</button>
     </div>
 
   </div>

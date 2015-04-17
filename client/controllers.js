@@ -91,40 +91,35 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
     function($scope, $meteorCollection, $stateParams, $meteorSubscribe,
         $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 
+    $scope.query = $window.localStorage.getItem('currentQuery');
+    // JSON.parse to read the stack in as an array
+    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
+
     $scope.resultsLoading = true;
+    
+    $scope.numResultsDisplayed = 20;
 
-    $meteorSubscribe.subscribe('careers').then(function(sub){
+    $scope.showMoreResults = function() {
+            $scope.numResultsDisplayed += 10;
+            console.log($scope.numResultsDisplayed);
+    }
+
+    $meteorSubscribe.subscribe('careersFiltered').then(function(sub){
+
         $scope.careers = $meteorCollection(function(){
-            return Careers.find({});
+            return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
         });
-
-        // Pagination
-        $scope.filteredCareers = $scope.careers;
-
-        $scope.currentPage = 0; 
-        $scope.pageSize = 20;
-        $scope.setCurrentPage = function(currentPage) {
-            $scope.currentPage = currentPage;
-        }
-
-        $scope.getNumberAsArray = function (num) {
-            return new Array(num);
-        };
-
-        $scope.numberOfPages = function() {
-            return Math.ceil($scope.filteredCareers.length/ $scope.pageSize);
-        };
 
         $scope.resultsLoading = false;
 
     });
 
-    $meteorSubscribe.subscribe('jobs').then(function(sub){
-        $scope.jobs = $meteorCollection(function(){
-            return Jobs.find({}, {fields: {job_id: 1, skills: 1} });
-        });
+    // $meteorSubscribe.subscribe('jobs').then(function(sub){
+    //     $scope.jobs = $meteorCollection(function(){
+    //         return Jobs.find({}, {fields: {job_id: 1, skills: 1} });
+    //     });
 
-    });
+    // });
 
     // $meteorSubscribe.subscribe('skills').then(function(sub){
 
@@ -135,10 +130,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
     //     $scope.skill = $scope.skills[0]
     // });
 
-    $scope.query = $window.localStorage.getItem('currentQuery');
-    // JSON.parse to read the stack in as an array
-    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
-
+    
     $scope.setQuery = function(input) {
         //set query
         $scope.query = currentQueryService.setQuery(input);
