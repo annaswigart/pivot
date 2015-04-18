@@ -79,8 +79,7 @@ angular.module('reflectivePath').service('currentQueryService', function () {
             return query;
         },
         setQuery: function(input) {
-            var split = input.split(" ");
-            query = split.join("+");
+            query = input;
             return query;
         },
         getQueryStack: function() {
@@ -167,31 +166,34 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     }
     
 
+    $scope.checkState = function(name){
+        return $state.current.name == name;
+    }
+
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
     
+    // parse string from local storage
+    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
 
-    // $scope.checkState = function(name){
-    //     return $state.current.name == name;
-    // }
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(career){
+        if (_.contains($scope.pinnedCareers, career)) {
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        } else {
+            $scope.pinnedCareers.push(career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        }
+    }
 
-    // // add or remove pinned careers to local storage
-
-    // $scope.pinnedCareer = $window.localStorage.getItem('pinnedCareer');
-
-    // $scope.pinnedCareerData = JSON.parse($window.localStorage.getItem('pinnedCareerStack'))
-
-    // $scope.pinnedCareerStack = function(career){
-    //     //set pinned career
-
-    //     //update pinned career stack
-
-
-    // }
-
-    // // append pinned career
-
-    // // remove pinned career
-
-
+    // apply class to pinned careers
+    $scope.isPinned = function(career) {
+        return _.contains($scope.pinnedCareers, career);
+    }
 
 }]);
 
