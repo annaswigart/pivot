@@ -120,14 +120,38 @@ a {
   border-bottom: 1px solid @gray-lighter; 
 }
 
+.resultTitle {
+  display: inline-block;
+}
+
 // Pinning
 
 .pin {
-  padding: 0px @padding-base-horizontal;
+  font-size: @font-size-large;
+  padding: @padding-base-vertical @padding-base-horizontal;
   color: @gray-light;
+  cursor: pointer;
+
 }
 
 .pinSelected {
-  padding: 0px @padding-base-horizontal;
+  font-size: @font-size-large;
+  padding: @padding-base-vertical @padding-base-horizontal;
   color: @brand-primary;
+  cursor: pointer;
+
+}
+
+.xRemove {
+  color: #fff;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin: 0px @padding-base-horizontal;
+}
+
+li:hover .xRemove {
+  color: @gray-light;
+}
+
+li .xRemove:hover {
+  color: @brand-danger;
 }
