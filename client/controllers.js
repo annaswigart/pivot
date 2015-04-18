@@ -60,12 +60,6 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, 
         currentQueryService.queryStack.push(input);
     }
 
-    $meteor.subscribe('clientQuery').then(function(sub){
-
-        $scope.clientQuery = $meteor.collection(function(){
-            return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
-        });
-    });
 
 }]);
 
@@ -114,19 +108,24 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
             console.log($scope.numResultsDisplayed);
     }
 
+
    
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('careersFiltered').then(function(sub){
+        $meteor.subscribe('careers', {
+            limit:  parseInt($scope.getReactively('numResultsDisplayed')),
+            sort: {num_ids: -1},
+            reactive: false
+        }, $scope.getReactively('query')).then(function(sub){
 
             $scope.careers = $meteor.collection(function() {
-                return CareersFiltered.find({}, {limit: $scope.getReactively('numResultsDisplayed')});
+                return Careers.find({});
+                //return Careers.find({limit: $scope.getReactively('numResultsDisplayed')});
             });
-
+            
             $scope.resultsLoading = false;
-
         });
     });
-
+        
 
     // $meteorSubscribe.subscribe('jobs').then(function(sub){
     //     $scope.jobs = $meteorCollection(function(){
