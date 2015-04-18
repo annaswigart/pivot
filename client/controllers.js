@@ -19,18 +19,22 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
 '$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
 function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
     
+    // search categories and placeholder text
     $scope.searchCategories = [
         {name:'Skill', placeholder: "Skill"},
         {name:'Industry', placeholder: "Industry"},
         {name:'Title', placeholder: "Job Title or Career Name"}
     ];
 
+    // init selected search category
     $scope.selectedCategory = $scope.searchCategories[0];
 
+    // change selected search category
     $scope.selectCategory = function(category) {
         $scope.selectedCategory = category;
     }
 
+    // for changing style applied to search category
     $scope.isSelected = function(category) {
         return $scope.selectedCategory === category;
     }
@@ -160,9 +164,28 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
 
     
 
-    $scope.checkState = function(name){
-        return $state.current.name == name;
-    }
+    // $scope.checkState = function(name){
+    //     return $state.current.name == name;
+    // }
+
+    // // add or remove pinned careers to local storage
+
+    // $scope.pinnedCareer = $window.localStorage.getItem('pinnedCareer');
+
+    // $scope.pinnedCareerData = JSON.parse($window.localStorage.getItem('pinnedCareerStack'))
+
+    // $scope.pinnedCareerStack = function(career){
+    //     //set pinned career
+
+    //     //update pinned career stack
+
+
+    // }
+
+    // // append pinned career
+
+    // // remove pinned career
+
 
 
 }]);
