@@ -5,10 +5,9 @@
 
   <div class="col-xs-3">
 
+    <!-- RECENT SEARCHES -->
+
     <div class="row">
-      <!-- <div class="highlights card">
-        <h4>Highlights</h4>
-      </div> -->
         <div class="sidebar history card">
           <h4>Recent Searches</h4>
           <ul>
@@ -17,16 +16,23 @@
         </div>
     </div>
 
+    <!-- SMART SORT -->
+
     <div class="row">
         <div class="sidebar smartSort card">
           <h4>Smart Sort</h4>
         </div>
     </div>
 
+    <!-- COMPARE  -->
+
     <div class="row">
       <div class="sidebar compare card">
         <h4>Compare Careers</h4>
         <h5>Pinned Careers</h5>
+          <ul>
+            <!-- <li ng-repeat="p in pinnedCareers track by $index">{{p}}</li> -->
+          </ul>
         <h5>Recently Viewed Careers</h5>
       </div>
     </div>
@@ -37,6 +43,7 @@
 
   <div class="col-xs-9">
     
+    <!-- SEARCH BOX -->
 
     <div class="row">
       <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
@@ -44,7 +51,7 @@
       <form class="form-horizontal" name="resultsQuery" role="form">
         <div class="form-group">
           <label class="search-label col-xs-5">
-            Careers related to
+            <h3>Careers related to</h3>
           </label>
           <div class="col-xs-5">
             <div class="input-group input-group-lg">
@@ -60,6 +67,8 @@
       </form>
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
     </div>
+
+    <!-- RESULTS -->
 
     <div class="row card" ng-if="!resultsLoading">
 <!--       <div class="col-xs-12" ng-repeat="career in (filteredCareers = (careers | orderBy: '-num_ids')) | startFrom: currentPage * pageSize  | limitTo:pageSize"> -->

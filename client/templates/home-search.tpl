@@ -1,6 +1,8 @@
 <div class="row">
   <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
 
+  <!-- SEARCH BOX CTA -->
+
   <div class="col-xs-8 col-xs-offset-2 cta-search-box" ng-if="!resultsLoading">
 
     <form class="form-horizontal" onsubmit="this.reset(); return false;" name="homeQuery" role="form">
@@ -9,7 +11,7 @@
         <div class="col-xs-10 col-xs-offset-1">
 
           <label class="search-label">
-            Explore career profiles. Find a better career.
+            <h2>Explore career profiles. Find a better career.</h2>
           </label>
 
           <ul class="opts">
@@ -31,4 +33,5 @@
     </form>
 
   </div>
+  
 </div>
