@@ -1,8 +1,10 @@
 
+if (Meteor.isClient) {
+
 // ***********************************
 // NavBarController
 // ***********************************
-angular.module('reflectivePath').controller('NavBarController', ['$scope',
+angular.module('reflectivePath').controller('NavBarController', ['$scope', 
 '$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject',
 function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject) {
 
@@ -15,9 +17,9 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // ***********************************
 // HomeSearchController
 // ***********************************
-angular.module('reflectivePath').controller('HomeSearchController', ['$scope',
+angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
-function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
+function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
     
     // search categories and placeholder text
     $scope.searchCategories = [
@@ -44,10 +46,11 @@ function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQu
     // JSON.parse to read the stack in as an array
     $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
 
-   $scope.setQuery = function(input) {
-         //set query
+    $scope.setQuery = function(input) {
+        //set query
         $scope.query = currentQueryService.setQuery(input);
         $window.localStorage.currentQuery = $scope.query;
+
 
         //update query stack
         $scope.appendQueryStack(input);
@@ -60,6 +63,7 @@ function($scope, $state, $meteorCollection, $meteorSubscribe, $window, currentQu
     $scope.appendQueryStack = function(input) {
         currentQueryService.queryStack.push(input);
     }
+
 
 }]);
 
@@ -90,45 +94,49 @@ angular.module('reflectivePath').service('currentQueryService', function () {
 // ResultsController
 // ***********************************
 
-angular.module('reflectivePath').controller('ResultsController', ['$scope','$meteorCollection',
+angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
     '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
-    function($scope, $meteorCollection, $stateParams, $meteorSubscribe,
+    function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
         $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 
+    $scope.query = $window.localStorage.getItem('currentQuery');
+    // JSON.parse to read the stack in as an array
+    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
+
     $scope.resultsLoading = true;
+    
+    $scope.numResultsDisplayed = 20;
 
-    $meteorSubscribe.subscribe('careers').then(function(sub){
-        $scope.careers = $meteorCollection(function(){
-            return Careers.find({});
+    $scope.showMoreResults = function() {
+            $scope.numResultsDisplayed += 10;
+            console.log($scope.numResultsDisplayed);
+    }
+
+
+   
+    $meteor.autorun($scope, function() {
+        $meteor.subscribe('careers', {
+            limit:  parseInt($scope.getReactively('numResultsDisplayed')),
+            sort: {num_ids: -1},
+            reactive: false
+        }, $scope.getReactively('query')).then(function(sub){
+
+            $scope.careers = $meteor.collection(function() {
+                return Careers.find({});
+                //return Careers.find({limit: $scope.getReactively('numResultsDisplayed')});
+            });
+            
+            $scope.resultsLoading = false;
         });
-
-        // Pagination
-        $scope.filteredCareers = $scope.careers;
-
-        $scope.currentPage = 0; 
-        $scope.pageSize = 20;
-        $scope.setCurrentPage = function(currentPage) {
-            $scope.currentPage = currentPage;
-        }
-
-        $scope.getNumberAsArray = function (num) {
-            return new Array(num);
-        };
-
-        $scope.numberOfPages = function() {
-            return Math.ceil($scope.filteredCareers.length/ $scope.pageSize);
-        };
-
-        $scope.resultsLoading = false;
-
     });
+        
 
-    $meteorSubscribe.subscribe('jobs').then(function(sub){
-        $scope.jobs = $meteorCollection(function(){
-            return Jobs.find({}, {fields: {job_id: 1, skills: 1} });
-        });
+    // $meteorSubscribe.subscribe('jobs').then(function(sub){
+    //     $scope.jobs = $meteorCollection(function(){
+    //         return Jobs.find({}, {fields: {job_id: 1, skills: 1} });
+    //     });
 
-    });
+    // });
 
     // $meteorSubscribe.subscribe('skills').then(function(sub){
 
@@ -139,10 +147,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope','$met
     //     $scope.skill = $scope.skills[0]
     // });
 
-    $scope.query = $window.localStorage.getItem('currentQuery');
-    // JSON.parse to read the stack in as an array
-    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
-
+    
     $scope.setQuery = function(input) {
         //set query
         $scope.query = currentQueryService.setQuery(input);
@@ -219,3 +224,6 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 
 
 }]);
+
+
+} //if Meteor isClient

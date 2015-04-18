@@ -4,13 +4,11 @@
 # but you can also edit it by hand.
 
 meteor-platform
-mrt:moment
-nemo64:bootstrap
+twbs:bootstrap
 less
 urigo:angular
+angularui:angular-ui-router
 fortawesome:fontawesome
 mquandalle:bower
-accounts-password
-mrt:accounts-ui-bootstrap-3
-http
 alethes:lodash
+urigo:angular-utils-pagination
