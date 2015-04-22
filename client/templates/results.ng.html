@@ -9,20 +9,27 @@
 
     <div class="row">
         <div class="sidebar history card">
+          <form class="form-horizontal" name="resultsQuery" role="form">
+            <div class="form-group"> 
+              <div class="input-group input-group-lg">
+                <input type="text" name="text" class="form-control" ng-model="query"/>
+                <span class="input-group-btn">
+                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a>
           <h4>Recent Searches</h4>
           <ul>
-            <li ng-repeat="q in queryStack track by $index">{{q}}</li>
+            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)">{{q}}</a></li>
           </ul>
         </div>
     </div>
 
-    <!-- SMART SORT -->
-
-    <div class="row">
-        <div class="sidebar smartSort card">
-          <h4>Smart Sort</h4>
-        </div>
-    </div>
+    
 
     <!-- COMPARE  -->
 
@@ -46,18 +53,22 @@
 <!-- MAIN -->
 
   <div class="col-xs-9">
-    
-    <!-- SEARCH BOX -->
+
+    <!-- SMART SORT -->
 
     <div class="row">
-      <!-- <h3>Careers related to <input type="text" placeholder="Search skills" class="search-box"
-      ng-model="setQuery" ng-model-options="{debounce: 250}"/></h3> -->
-      <form class="form-horizontal" name="resultsQuery" role="form">
-        <div class="form-group">
+        <div class="sidebar smartSort card">
+          <h4>Personalize Results</h4>
+        </div>
+    </div>
+    
+    <!-- SEARCH STATEMENT -->
+
+    <div class="row">
           <label class="search-label col-xs-5">
-            <h3>Careers related to</h3>
+            <h3>Careers related to <span class="query-display-text"><b>{{query}}</b></span></h3>
           </label>
-          <div class="col-xs-5">
+          <!-- <div class="col-xs-5">
             <div class="input-group input-group-lg">
               <input type="text" name="text" class="form-control" ng-model="query"/>
               <span class="input-group-btn">
@@ -67,8 +78,8 @@
               </span>
             </div>
           </div>
-        </div>
-      </form>
+        </div> -->
+
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.ng.html'"></div>
     </div>
 
