@@ -11,7 +11,7 @@
         <div class="sidebar history card">
           <h4>Recent Searches</h4>
           <ul>
-            <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
+            <li ng-repeat="q in queryStack track by $index">{{q}}</li>
           </ul>
         </div>
     </div>
@@ -59,7 +59,7 @@
           </label>
           <div class="col-xs-5">
             <div class="input-group input-group-lg">
-              <input type="text" name="text" class="form-control" ng-model="query" ng-model-options="{debounce: 500}"/>
+              <input type="text" name="text" class="form-control" ng-model="query"/>
               <span class="input-group-btn">
                 <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
                   <span class="fa fa-search" aria-hidden="true"></span>

@@ -18,8 +18,8 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$meteorCollection', '$meteorSubscribe', '$window', 'currentQueryService',
-function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, currentQueryService){   
+'$state', '$meteorCollection', '$meteorSubscribe', '$window',
+function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){   
     
     // search categories and placeholder text
     $scope.searchCategories = [
@@ -43,19 +43,23 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, 
 
 
     $scope.query = $window.localStorage.getItem('currentQuery');
+
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
     // JSON.parse to read the stack in as an array
-    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
+    $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
     $scope.setQuery = function(input) {
         //set query
-        $scope.query = currentQueryService.setQuery(input);
+        $scope.query = input;
         $window.localStorage.currentQuery = $scope.query;
 
-
         //update query stack
-        $scope.appendQueryStack(input);
-        $window.localStorage.queryStack = JSON.stringify(currentQueryService.queryStack);
-        $scope.queryStackData = JSON.parse($window.localStorage.queryStack);
+        $scope.queryStack.unshift(input);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
     }
@@ -67,52 +71,48 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window, 
 
 }]);
 
-// Query field, shared across controllers
-angular.module('reflectivePath').service('currentQueryService', function () {
-
-    var queryInit = '';
-    var queryStackInit = []
-    return {
-        query: queryInit,
-        queryStack: queryStackInit,
-        getCurrentQuery: function () {
-            return query;
-        },
-        setQuery: function(input) {
-            query = input;
-            return query;
-        },
-        getQueryStack: function() {
-            return queryStack;
-        }
-    };
-});
-
 
 // ***********************************
 // ResultsController
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window',
     function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
+        $state, $meteorObject, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
-    // JSON.parse to read the stack in as an array
-    $scope.queryStackData = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    $scope.resultsLoading = true;
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        return $scope.query;
+    }
     
-    $scope.numResultsDisplayed = 20;
+    $scope.numResultsDisplayed = 10;
 
     $scope.showMoreResults = function() {
             $scope.numResultsDisplayed += 10;
-            console.log($scope.numResultsDisplayed);
     }
 
 
-   
+    $scope.resultsLoading = true;
+    
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careers', {
             limit:  parseInt($scope.getReactively('numResultsDisplayed')),
@@ -128,48 +128,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
             $scope.resultsLoading = false;
         });
     });
-        
-
-    // $meteorSubscribe.subscribe('jobs').then(function(sub){
-    //     $scope.jobs = $meteorCollection(function(){
-    //         return Jobs.find({}, {fields: {job_id: 1, skills: 1} });
-    //     });
-
-    // });
-
-    // $meteorSubscribe.subscribe('skills').then(function(sub){
-
-    //     $scope.skills = $meteorCollection(function(){
-    //         return Skills.find({});
-    //     });
-
-    //     $scope.skill = $scope.skills[0]
-    // });
-
     
-    $scope.setQuery = function(input) {
-        //set query
-        $scope.query = currentQueryService.setQuery(input);
-        $window.localStorage.currentQuery = $scope.query;
-        console.log($scope.query);
-
-        //update query stack
-        $scope.appendQueryStack(input);
-        $window.localStorage.queryStack = JSON.stringify(currentQueryService.queryStack);
-        $scope.queryStackData = JSON.parse($window.localStorage.queryStack);
-     
-        return $scope.query;
-    }
-
-    $scope.appendQueryStack = function(input) {
-        currentQueryService.queryStack.push(input);
-    }
-    
-
-    $scope.checkState = function(name){
-        return $state.current.name == name;
-    }
-
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
@@ -197,12 +156,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
 }]);
 
-// Start from filter
-angular.module('reflectivePath').filter('startFrom', function() {
-    return function(input, start) {         
-        return input.slice(start);
-    };
-});
 
 
 // ***********************************
