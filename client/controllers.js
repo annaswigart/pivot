@@ -117,7 +117,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $meteor.subscribe('careers', {
             limit:  parseInt($scope.getReactively('numResultsDisplayed')),
             sort: {num_ids: -1},
-            reactive: false
+            reactive: false,
         }, $scope.getReactively('query')).then(function(sub){
 
             $scope.careers = $meteor.collection(function() {

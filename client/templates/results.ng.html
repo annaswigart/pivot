@@ -59,7 +59,7 @@
           </label>
           <div class="col-xs-5">
             <div class="input-group input-group-lg">
-              <input type="text" name="text" class="form-control" ng-model="query"/>
+              <input type="text" name="text" class="form-control" ng-model="query" ng-model-options="{debounce: 500}"/>
               <span class="input-group-btn">
                 <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
                   <span class="fa fa-search" aria-hidden="true"></span>
