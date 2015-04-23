@@ -9,18 +9,11 @@
 
     <div class="row">
         <div class="sidebar history card">
-          <h4>Recent Searches</h4>
+          <h4>Search</h4>
+          <h5>Recent Searches</h5>
           <ul>
             <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
           </ul>
-        </div>
-    </div>
-
-    <!-- SMART SORT -->
-
-    <div class="row">
-        <div class="sidebar smartSort card">
-          <h4>Smart Sort</h4>
         </div>
     </div>
 
@@ -38,6 +31,7 @@
             </li>
           </ul>
         <h5>Recently Viewed Careers</h5>
+        <button type="button" class="btn btn-default btn-block">COMPARE</button>
       </div>
     </div>
 
@@ -46,6 +40,19 @@
 <!-- MAIN -->
 
   <div class="col-xs-9">
+
+    <!-- PERSONALIZE RESULTS -->
+
+    <div class="row card">
+      <h4>Personalize Results</h4>
+      <h5>
+        Are you interested in careers that involve: 
+        <strong>management</strong> 
+        ?
+      </h5>
+      <button type="button" class="btn btn-default btn-sm">YES</button>
+      <button type="button" class="btn btn-default btn-sm">NO</button>
+    </div>
     
     <!-- SEARCH BOX -->
 
@@ -75,9 +82,15 @@
     <!-- RESULTS -->
 
     <div class="row card" ng-if="!resultsLoading"> 
+
+      <div class="result-box">
+        <h3>Career profiles related to <strong>{{query}}</strong></h3>
+      </div>
+
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
+
         <div class="result-box">
-          <h4>{{career.standardized_title}} ({{career.num_ids}})
+          <h4><a ui-sref="careerView({careerId: career._id})">{{career.standardized_title}} ({{career.num_ids}})</a>
              <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
           </h4>
 
@@ -98,6 +111,7 @@
 
           </div>
         </div>
+
       </div>
         <button ng-click="showMoreResults()">Show More</button>
     </div>

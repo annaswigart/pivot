@@ -208,9 +208,20 @@ angular.module('reflectivePath').filter('startFrom', function() {
 // ***********************************
 // CareerViewController
 // ***********************************
-angular.module('reflectivePath').controller('CareerViewController', ['$scope',
-'$meteorSubscribe', '$stateParams', '$meteorObject', '$meteorCollection', '$meteorUtils',
-function($scope, $meteorSubscribe, $stateParams, $meteorObject, $meteorCollection, $meteorUtils){
+angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
+ '$stateParams',
+function($scope, $meteor, $stateParams){
+
+    // $scope.careerID = $stateParams.careerId;
+
+    $meteor.autorun($scope, function() {
+        $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
+            $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
+            console.log($scope.career);
+        });
+    });
+
+   
 
 
 }]); 

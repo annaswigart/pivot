@@ -32,8 +32,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 }
             }
         })
-        .state('results.careerView', {
-            url: '/results/:query/:careerId',
+        .state('careerView', {
+            url: '/:careerId',
             views: {
                 navBar: {
                     templateUrl: 'client/templates/nav-bar.ng.html',
