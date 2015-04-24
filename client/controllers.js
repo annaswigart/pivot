@@ -94,7 +94,7 @@ angular.module('reflectivePath').service('currentQueryService', function () {
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils',  'currentQueryService',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
     function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
         $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 

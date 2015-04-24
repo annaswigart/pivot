@@ -60,14 +60,16 @@
         <div class="col-xs-6">
           <h5>SKILLS</h5>
           <ul>
-            <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">{{skill.name}} ({{skill.count}})</li>
+            <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 15">
+              {{skill.name}} ({{skill.count}})</li>
           </ul>
         </div>
 
         <div class="tags-wrapper col-xs-6">
           <h5>INDUSTRIES</h5>
           <ul>
-            <li ng-repeat="category in career.categories | limitTo: 20"><span class="label label-default">{{category.name}} ({{category.count}})</span></li>
+            <li ng-repeat="category in career.categories | limitTo: 10"><span class="label label-default industryTag colorTransFast">
+              {{category.name}} ({{category.count}})</span></li>
           </ul>
         </div>
 
@@ -82,6 +84,16 @@
         <div class="col-xs-6">
           <h5>EDUCATION</h5>
         </div>
+
+        <div class="col-xs-12">
+          <h5>Data Source</h5>
+          This career profile is a composite of <strong>{{career.job_ids.length}} job 
+          postings</strong> and the O*NET profile for <a href="" target="_blank">O*Net Title</a>. 
+          Salary information is sourced from the Bureau of Labor Statistics 
+          <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
+        </div>
+
+        <hr class="hr-border">
 
         <!-- Section: Get Hired -->
         <h4 class="col-xs-12">Get Hired</h4>
