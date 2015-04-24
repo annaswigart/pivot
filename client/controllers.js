@@ -94,7 +94,7 @@ angular.module('reflectivePath').service('currentQueryService', function () {
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', 'currentQueryService',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils',  'currentQueryService',
     function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
         $state, $meteorObject, $rootScope, $meteorUtils, $window, currentQueryService){
 
@@ -209,8 +209,8 @@ angular.module('reflectivePath').filter('startFrom', function() {
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams',
-function($scope, $meteor, $stateParams){
+ '$stateParams', '$window',
+function($scope, $meteor, $stateParams, $window){
 
     // $scope.careerID = $stateParams.careerId;
 
@@ -220,6 +220,31 @@ function($scope, $meteor, $stateParams){
             console.log($scope.career);
         });
     });
+
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(career){
+        if (_.contains($scope.pinnedCareers, career)) {
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        } else {
+            $scope.pinnedCareers.push(career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        }
+    }
+
+    // apply class to pinned careers
+    $scope.isPinned = function(career) {
+        return _.contains($scope.pinnedCareers, career);
+    }
 
    
 
@@ -231,10 +256,34 @@ function($scope, $meteor, $stateParams){
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope',
-'$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject',
-function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject){
+'$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject', '$window',
+function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject, $window){
 
 
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(career){
+        if (_.contains($scope.pinnedCareers, career)) {
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        } else {
+            $scope.pinnedCareers.push(career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        }
+    }
+
+    // apply class to pinned careers
+    $scope.isPinned = function(career) {
+        return _.contains($scope.pinnedCareers, career);
+    }
 
 }]);
 

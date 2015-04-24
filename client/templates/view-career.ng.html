@@ -46,21 +46,63 @@
 
       <div class="profile card">
 
-        <h2>{{career.standardized_title}}</h2>
+        <h2 class="titleSection">{{career.standardized_title}}
+          <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
+        </h2>
 
-        <h4 class="titleSection">About This Career</h4>
+        <!-- Section: About This Career-->
+        <h4 class="col-xs-12">About This Career</h4>
 
-        <h5>ACTIVITIES</h5>
+        <div class="col-xs-12">
+          <h5>ACTIVITIES</h5>
+        </div>
 
-        <h5>SKILLS</h5>
+        <div class="col-xs-6">
+          <h5>SKILLS</h5>
+          <ul>
+            <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">{{skill.name}} ({{skill.count}})</li>
+          </ul>
+        </div>
 
-        <h5>INDUSTRIES</h5>
+        <div class="tags-wrapper col-xs-6">
+          <h5>INDUSTRIES</h5>
+          <ul>
+            <li ng-repeat="category in career.categories | limitTo: 20"><span class="label label-default">{{category.name}} ({{category.count}})</span></li>
+          </ul>
+        </div>
 
-        <h5>WORK ENVIRONMENT</h5>
+        <div class="col-xs-12">
+          <h5>WORK ENVIRONMENT</h5>
+        </div>
 
-        <h5>SALARY</h5>
+        <div class="col-xs-6">
+          <h5>SALARY</h5>
+        </div>
+          
+        <div class="col-xs-6">
+          <h5>EDUCATION</h5>
+        </div>
 
-        <h5>EDUCATION</h5>
+        <!-- Section: Get Hired -->
+        <h4 class="col-xs-12">Get Hired</h4>
+
+        <div class="col-xs-4">
+          <h5>TOP COMPANIES</h5>
+          <ul>
+            <li ng-repeat="company in career.companies | orderBy: '-count' | limitTo:6">{{company.name}} ({{company.count}})</li>
+          </ul>
+        </div>
+
+        <div class="col-xs-4">
+          <h5>SAMPLE JOB TITLES</h5>
+          <ul>
+            <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo:6">{{title.name}} ({{title.count}})</li>
+          </ul>
+        </div>
+
+        <div class="col-xs-4">
+          <h5>RESUME KEYWORDS</h5>
+        </div>
 
 
       </div>
