@@ -38,6 +38,13 @@
             </li>
           </ul>
         <h5>Recently Viewed Careers</h5>
+          <ul>
+            <li ng-repeat="v in viewedCareers track by $index" class="careerName">
+              <span>
+                {{v}}
+              </span>
+            </li>
+          </ul>
         <button type="button" class="btn btn-default btn-block">COMPARE</button>
       </div>
     </div>

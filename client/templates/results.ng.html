@@ -40,7 +40,7 @@
 
         <div class="result-box">
           <h4 class="careerName">
-            <a ui-sref="careerView({careerId: career._id})">{{career.standardized_title}} ({{career.num_ids}})</a>
+            <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title)">{{career.standardized_title}} ({{career.num_ids}})</a>
             <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
           </h4>
 

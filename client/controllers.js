@@ -158,6 +158,24 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         return _.contains($scope.pinnedCareers, career);
     }
 
+
+    // init viewed careers in local storage
+    if($window.localStorage.getItem("viewedCareers") === null){
+        $window.localStorage.viewedCareers = '[]';
+    }
+
+    // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    // view career
+    $scope.viewCareer = function(career) {
+        // update array of viewed careers and only keep 4
+        $scope.viewedCareers.unshift(career);
+        $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,4);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
+    }
+
+
     // placeholder text
     $scope.placeholderText = [
         {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
@@ -215,6 +233,23 @@ function($scope, $meteor, $stateParams, $window){
     // apply class to pinned careers
     $scope.isPinned = function(career) {
         return _.contains($scope.pinnedCareers, career);
+    }
+
+
+    // init viewed careers in local storage
+    if($window.localStorage.getItem("viewedCareers") === null){
+        $window.localStorage.viewedCareers = '[]';
+    }
+
+    // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    // view career
+    $scope.viewCareer = function(career) {
+        // update array of viewed careers and only keep 4
+        $scope.viewedCareers.unshift(career);
+        $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,4);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
     // placeholder text
@@ -302,6 +337,22 @@ function($scope, $meteor, $stateParams, $window){
     // apply class to pinned careers
     $scope.isPinned = function(career) {
         return _.contains($scope.pinnedCareers, career);
+    }
+
+    // init viewed careers in local storage
+    if($window.localStorage.getItem("viewedCareers") === null){
+        $window.localStorage.viewedCareers = '[]';
+    }
+
+    // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    // view career
+    $scope.viewCareer = function(career) {
+        // update array of viewed careers and only keep 4
+        $scope.viewedCareers.unshift(career);
+        $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,4);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
 }]);
