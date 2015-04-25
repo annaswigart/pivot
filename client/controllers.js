@@ -158,6 +158,20 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         return _.contains($scope.pinnedCareers, career);
     }
 
+    // placeholder text
+    $scope.placeholderText = [
+        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
+        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
+        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
+        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
+        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
+        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
+        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
+        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
+        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
+        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
+    ];
+
 }]);
 
 
@@ -165,9 +179,58 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 // ***********************************
 // CareerViewController
 // ***********************************
-angular.module('reflectivePath').controller('CareerViewController', ['$scope',
-'$meteorSubscribe', '$stateParams', '$meteorObject', '$meteorCollection', '$meteorUtils',
-function($scope, $meteorSubscribe, $stateParams, $meteorObject, $meteorCollection, $meteorUtils){
+angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
+ '$stateParams', '$window',
+function($scope, $meteor, $stateParams, $window){
+
+    // $scope.careerID = $stateParams.careerId;
+
+    $meteor.autorun($scope, function() {
+        $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
+            $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
+            console.log($scope.career);
+        });
+    });
+
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(career){
+        if (_.contains($scope.pinnedCareers, career)) {
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        } else {
+            $scope.pinnedCareers.push(career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        }
+    }
+
+    // apply class to pinned careers
+    $scope.isPinned = function(career) {
+        return _.contains($scope.pinnedCareers, career);
+    }
+
+    // placeholder text
+    $scope.placeholderText = [
+        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
+        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
+        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
+        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
+        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
+        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
+        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
+        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
+        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
+        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
+    ];
+   
 
 
 }]); 
@@ -177,10 +240,34 @@ function($scope, $meteorSubscribe, $stateParams, $meteorObject, $meteorCollectio
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope',
-'$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject',
-function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject){
+'$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject', '$window',
+function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject, $window){
 
 
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(career){
+        if (_.contains($scope.pinnedCareers, career)) {
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        } else {
+            $scope.pinnedCareers.push(career);
+            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+        }
+    }
+
+    // apply class to pinned careers
+    $scope.isPinned = function(career) {
+        return _.contains($scope.pinnedCareers, career);
+    }
 
 }]);
 

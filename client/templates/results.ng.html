@@ -3,7 +3,7 @@
 
   <!-- SIDEBAR -->
 
-  <div class="col-xs-3">
+  <div class="col-xs-3 sidebar">
 
     <!-- RECENT SEARCHES -->
 
@@ -29,22 +29,21 @@
         </div>
     </div>
 
-    
-
     <!-- COMPARE  -->
 
     <div class="row">
-      <div class="sidebar compare card">
-        <h4>Compare Careers</h4>
+      <div class="compare card">
+        <h4 class="cardTitle">Compare Careers</h4>
         <h5>Pinned Careers</h5>
           <ul>
-            <li ng-repeat="p in pinnedCareers track by $index">
-              <span class="fa fa-square-o" aria-label="select career" ng-click="" ng-class="ng-show"></span>
+            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
+              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
               {{p}}
-              <span class="fa fa-times xRemove" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
+              <span class="fa fa-times xRemove colorTransFast" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
             </li>
           </ul>
         <h5>Recently Viewed Careers</h5>
+        <button type="button" class="btn btn-default btn-block">COMPARE</button>
       </div>
     </div>
 
@@ -52,14 +51,20 @@
 
 <!-- MAIN -->
 
-  <div class="col-xs-9">
+  <div class="col-xs-9 main">
 
-    <!-- SMART SORT -->
+    <!-- PERSONALIZE RESULTS -->
 
-    <div class="row">
-        <div class="sidebar smartSort card">
-          <h4>Personalize Results</h4>
-        </div>
+    <div class="row card">
+      <h4 class="cardTitle">Personalize Results</h4>
+      <h5>
+        Are you interested in careers that involve: 
+        <strong>management</strong> 
+        ?
+      </h5>
+      <button type="button" class="btn btn-default btn-sm">YES</button>
+      <button type="button" class="btn btn-default btn-sm">NO</button>
+
     </div>
     
     <!-- SEARCH STATEMENT -->
@@ -87,29 +92,46 @@
     <!-- RESULTS -->
 
     <div class="row card" ng-if="!resultsLoading"> 
+
+      <div class="result-box">
+        <h3>Career profiles related to <strong>{{query}}</strong></h3>
+      </div>
+
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
+
         <div class="result-box">
-          <h4>{{career.standardized_title}} ({{career.num_ids}})
-             <span class="fa fa-thumb-tack pin" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
+          <h4 class="careerName">
+            <a ui-sref="careerView({careerId: career._id})">{{career.standardized_title}} ({{career.num_ids}})</a>
+            <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
           </h4>
+
+          <div class="row col-xs-12">
+            <h5>ACTIVITIES</h5>
+            <ul>
+              <li ng-repeat="activity in placeholderText | limitTo: 3" class="longListItem">
+                {{activity.text}}</li>
+            </ul>
+          </div>
 
           <div class="row">
 
-            <div class="skills-wrapper col-xs-5">
-              Top Skills:
+            <div class="skills-wrapper col-xs-4">
+              <h5>TOP SKILLS</h5>
               <ul>
                 <li ng-repeat="skill in career.skills | limitTo: 5">{{skill.name}}</li>
               </ul>
             </div>
 
-            <div class="tags-wrapper col-xs-7">
+            <div class="tags-wrapper col-xs-8">
+              <h5>TOP INDUSTRIES</h5>
               <ul>
-                <li ng-repeat="category in career.categories | limitTo: 5"><span class="label label-default">{{category.name}}</span></li>
+                <li ng-repeat="category in career.categories | limitTo: 5"><span class="industryTag colorTransFast">{{category.name}}</span></li>
               </ul>
             </div>
 
           </div>
         </div>
+
       </div>
         <button ng-click="showMoreResults()">Show More</button>
     </div>

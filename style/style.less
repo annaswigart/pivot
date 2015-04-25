@@ -13,8 +13,6 @@
 // Sites
 @import "sites/home.import.less";
 
-@navbar-padding: 70px;
-
 // Miscellaneous
 
 body {
@@ -29,11 +27,35 @@ h2 {
 
 ul {
   list-style-type: none;
+  padding-left: 0px;
 }
 
 li {
   text-decoration: none;
 }
+
+.fa-li {
+  color: @gray-light;
+}
+
+.row {
+  margin: 0px;
+  margin-left: @padding-base-horizontal*-1;
+}
+
+
+// Home Search
+
+.search-label {
+  display: inline-block;
+  text-align: center;
+}
+
+.careerName {
+  text-transform: capitalize;
+}
+
+// Links
 
 a:hover {
   text-decoration: none;
@@ -43,15 +65,124 @@ a {
   text-decoration: none;
 }
 
-.row {
-  margin: 0px;
-  margin-left: @padding-base-horizontal*-1;
+
+// Nav
+
+@navbar-padding: 70px;
+
+.navbar {
+  box-shadow: 0px 3px 3px @gray-light;
 }
+
+
+// Main
+
+.main h5 {
+  color: @brand-primary-dark;
+}
+
+
+// Sidebar
+
+.sidebar .card{
+    padding: @padding-base-vertical*2 @padding-base-horizontal*2;
+}
+
+
+// Cards
+
+.card {
+  padding: @padding-base-vertical*4 @padding-base-horizontal*4;
+  margin: @padding-base-vertical*2 @padding-base-horizontal*-1 @padding-base-vertical*2 @padding-base-horizontal;
+  box-shadow: 0px 2px 2px @gray-light;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.cardTitle {
+  border-bottom: 1px solid @brand-primary;
+}
+
+.skill-wrapper {
+  /*display: inline-block;*/
+}
+
+.label {
+  display: inline-block;
+}
+
+.hr {
+  background-color: @gray-light;
+  height: 1px;
+  margin: @padding-base-vertical*4 0px;
+}
+
+.query-link {
+  cursor: pointer;
+}
+
+// Results
+
+
+// Tags
+
+.tags-wrapper li {
+  display: inline-block;
+}
+
+.industryTag {
+  color: @gray-dark;
+  background-color: @brand-primary-light;
+  font-size: 90%;
+  line-height: 3;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin-right: @padding-base-horizontal;
+  border-radius: @border-radius-small;
+  cursor: pointer;
+}
+
+.industryTag:hover{
+  color: @brand-primary;
+  background-color: @brand-primary-lighter;
+}
+
+// Pinning
+
+.pin {
+  font-size: 80%;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  color: @gray-light;
+  cursor: pointer;
+
+}
+
+.pinSelected {
+  font-size: 80%;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  color: @brand-primary;
+  cursor: pointer;
+
+}
+
+.xRemove {
+  color: #fff;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin: 0px @padding-base-horizontal;
+}
+
+li:hover .xRemove {
+  color: @gray-light;
+}
+
+li .xRemove:hover {
+  color: @gray;
+}
+
 
 // Home Search
 
 .search-label {
-  display: inline-block;
+  display: block;
   text-align: center;
 }
 
@@ -80,82 +211,63 @@ a {
   background-color: @brand-primary;
 }
 
-/*div.container {
-}*/
-
-/*.content-wrapper {
-}*/
-
-// Cards
-
-.card {
-  padding: @padding-base-vertical*2 @padding-base-horizontal*2;
-  margin: @padding-base-vertical*2 @padding-base-horizontal*-1 @padding-base-vertical*2 @padding-base-horizontal;
-  box-shadow: 0px 2px 2px @gray-light;
-  background-color: #ffffff;
-}
-
-.skill-wrapper {
-  /*display: inline-block;*/
-}
-
-.tags-wrapper {
-  /*display: inline-block;*/
-}
-
-.label {
-  display: inline-block;
-}
-
-// Sidebar
-
-.sidebar {
-    
-}
-
-.query-link {
-  cursor: pointer;
-}
 
 // Results
 
 .result-box {
   padding: @padding-base-vertical*2 @padding-base-horizontal*2;
-  border-bottom: 1px solid @gray-lighter; 
+  border-bottom: 1px solid @gray-light; 
 }
 
 .resultTitle {
   display: inline-block;
 }
 
-// Pinning
 
-.pin {
-  font-size: @font-size-large;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @gray-light;
-  cursor: pointer;
+// View Career
+
+.sectionTitle {
+  padding-top: @padding-base-vertical*2;
+  padding-bottom: @padding-base-vertical*4;
+}
+
+.titleSubSection {
+  padding: @padding-base-vertical*6 0px;
+}
+
+.sourceBox {
+  background: @gray-lightest;
+  border: 1px solid @gray-lighter;
+  box-shadow: -6px 0px @brand-primary;
+  padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
+  margin: @padding-base-vertical*4 0px;
 
 }
 
-.pinSelected {
-  font-size: @font-size-large;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @brand-primary;
-  cursor: pointer;
-
+.subSection {
+  padding-bottom: @padding-base-vertical*10;
 }
 
-.xRemove {
-  color: #fff;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  margin: 0px @padding-base-horizontal;
+.subSection .longListItem {
+  margin-bottom: @padding-base-vertical*4;
 }
 
-li:hover .xRemove {
-  color: @gray-light;
+.sourceBox span {
+  font-size: @font-size-small;
 }
 
-li .xRemove:hover {
-  color: @brand-danger;
+// Compare
+
+.checkbox {
+  padding: @padding-base-horizontal/2;
+  margin: 0px;
+  color: gray;
+  display: inline-block;
+}
+
+
+// Transitions
+
+.colorTransFast {
+  transition: color 300ms, background-color 300ms;
 }
