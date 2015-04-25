@@ -1,41 +1,9 @@
 
 <div class="row ">
 
-  <!-- SIDEBAR -->
+<!-- SIDEBAR -->
 
-  <div class="col-xs-3 sidebar">
-
-    <!-- RECENT SEARCHES -->
-
-    <div class="row">
-        <div class="history card">
-          <h4 class="cardTitle">Search</h4>
-          <h5>Recent Searches</h5>
-          <ul>
-            <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
-          </ul>
-        </div>
-    </div>
-
-    <!-- COMPARE  -->
-
-    <div class="row">
-      <div class="compare card">
-        <h4 class="cardTitle">Compare Careers</h4>
-        <h5>Pinned Careers</h5>
-          <ul>
-            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
-              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
-              {{p}}
-              <span class="fa fa-times xRemove colorTransFast" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
-            </li>
-          </ul>
-        <h5>Recently Viewed Careers</h5>
-        <button type="button" class="btn btn-default btn-block">COMPARE</button>
-      </div>
-    </div>
-
-  </div>
+  <div ng-include="'client/templates/sidebar.ng.html'"></div>
 
 <!-- MAIN -->
 
@@ -106,7 +74,8 @@
             <h6>Data Source</h6>
             <span>
               This career profile is a composite of <strong>{{career.job_ids.length}} job 
-              postings</strong> and the O*NET profile for <a href="" target="_blank">O*Net Title</a>. 
+              postings</strong> and the O*NET profile for 
+              <a href="http://www.onetonline.org/link/summary/{{career.onet_codes[0].name}}" target="_blank">{{career.onet_titles[0].name}}</a>. 
               Salary information is sourced from the Bureau of Labor Statistics 
               <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
             </span>
