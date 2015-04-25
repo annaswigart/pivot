@@ -252,6 +252,11 @@ function($scope, $meteor, $stateParams, $window){
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
+    // Hide O*Net-related info if no O*Net title associated with this career
+    $scope.onetIsNull = function(career) {
+        return career == 'null'
+    }
+
     // placeholder text
     $scope.placeholderText = [
         {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},

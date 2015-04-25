@@ -53,7 +53,7 @@
             </ul>
           </div>
 
-          <div class="col-xs-12 subSection">
+          <div class="col-xs-12 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>WORK ENVIRONMENT</h5>
             <ul class="fa-ul">
               <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
@@ -62,22 +62,28 @@
             </ul>
           </div>
 
-          <div class="col-xs-6 subSection">
+          <div class="col-xs-6 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>SALARY</h5>
           </div>
             
-          <div class="col-xs-6 subSection">
+          <div class="col-xs-6 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>EDUCATION</h5>
           </div>
 
           <div class="col-xs-12 sourceBox">
             <h6>Data Source</h6>
             <span>
-              This career profile is a composite of <strong>{{career.job_ids.length}} job 
-              postings</strong> and the O*NET profile for 
-              <a href="http://www.onetonline.org/link/summary/{{career.onet_codes[0].name}}" target="_blank">{{career.onet_titles[0].name}}</a>. 
-              Salary information is sourced from the Bureau of Labor Statistics 
-              <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
+              This career profile is a composite of 
+              <strong>{{career.job_ids.length}} job postings</strong>
+
+              <span ng-hide="onetIsNull(career.onet_titles[0].name)"> and the O*NET profile for 
+                <a href="http://www.onetonline.org/link/summary/{{career.onet_codes[0].name}}" target="_blank">
+                  {{career.onet_titles[0].name}}
+                </a>. 
+                Salary information is sourced from the Bureau of Labor Statistics 
+                <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
+              </span>
+              
             </span>
           </div>
 
