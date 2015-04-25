@@ -40,9 +40,8 @@
         <h5>Recently Viewed Careers</h5>
           <ul>
             <li ng-repeat="v in viewedCareers track by $index" class="careerName">
-              <span>
+              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
                 {{v}}
-              </span>
             </li>
           </ul>
         <button type="button" class="btn btn-default btn-block">COMPARE</button>
