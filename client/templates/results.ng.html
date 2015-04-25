@@ -67,24 +67,7 @@
 
     </div>
     
-    <!-- SEARCH STATEMENT -->
 
-    <div class="row">
-          <label class="search-label col-xs-5">
-            <h3>Careers related to <span class="query-display-text"><b>{{query}}</b></span></h3>
-          </label>
-          <!-- <div class="col-xs-5">
-            <div class="input-group input-group-lg">
-              <input type="text" name="text" class="form-control" ng-model="query"/>
-              <span class="input-group-btn">
-                <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
-                  <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-              </span>
-            </div>
-          </div>
-        </div> -->
-     </div>
   <div class="row">
       <div ng-if="resultsLoading" ng-include="'client/templates/loading.ng.html'"></div>
   </div>
@@ -92,7 +75,7 @@
     <!-- RESULTS -->
 
     <div class="row card" ng-if="!resultsLoading"> 
-
+      <!-- SEARCH STATEMENT -->
       <div class="result-box">
         <h3>Career profiles related to <strong>{{query}}</strong></h3>
       </div>
