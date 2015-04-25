@@ -1,41 +1,9 @@
 
 <div class="row ">
 
-  <!-- SIDEBAR -->
+<!-- SIDEBAR -->
 
-  <div class="col-xs-3 sidebar">
-
-    <!-- RECENT SEARCHES -->
-
-    <div class="row">
-        <div class="history card">
-          <h4 class="cardTitle">Search</h4>
-          <h5>Recent Searches</h5>
-          <ul>
-            <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
-          </ul>
-        </div>
-    </div>
-
-    <!-- COMPARE  -->
-
-    <div class="row">
-      <div class="compare card">
-        <h4 class="cardTitle">Compare Careers</h4>
-        <h5>Pinned Careers</h5>
-          <ul>
-            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
-              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
-              {{p}}
-              <span class="fa fa-times xRemove colorTransFast" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
-            </li>
-          </ul>
-        <h5>Recently Viewed Careers</h5>
-        <button type="button" class="btn btn-default btn-block">COMPARE</button>
-      </div>
-    </div>
-
-  </div>
+  <div ng-include="'client/templates/sidebar.ng.html'"></div>
 
 <!-- MAIN -->
 

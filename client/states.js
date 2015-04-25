@@ -18,6 +18,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 }
             },
         })
+        
         .state('results', {
             url: '/results/:query', //query terms should probably be in the URL
             views: {
@@ -32,6 +33,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 }
             }
         })
+
         .state('careerView', {
             url: '/:careerId',
             views: {

@@ -1,0 +1,45 @@
+<div class="col-xs-3 sidebar">
+
+    <!-- SEARCH -->
+
+    <div class="row">
+        <div class="sidebar card">
+          <form class="form-horizontal" name="resultsQuery" role="form">
+            <div class="form-group"> 
+              <div class="input-group input-group-lg">
+                <input type="text" name="text" class="form-control" ng-model="query"/>
+                <span class="input-group-btn">
+                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
+                    <span class="fa fa-search" aria-hidden="true"></span>
+                  </button>
+                </span>
+              </div>
+            </div>
+          </form>
+          <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a>
+          <h4>Recent Searches</h4>
+          <ul>
+            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)">{{q}}</a></li>
+          </ul>
+        </div>
+    </div>
+
+    <!-- COMPARE  -->
+
+    <div class="row">
+      <div class="compare card">
+        <h4 class="cardTitle">Compare Careers</h4>
+        <h5>Pinned Careers</h5>
+          <ul>
+            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
+              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
+              {{p}}
+              <span class="fa fa-times xRemove colorTransFast" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
+            </li>
+          </ul>
+        <h5>Recently Viewed Careers</h5>
+        <button type="button" class="btn btn-default btn-block">COMPARE</button>
+      </div>
+    </div>
+
+</div>
