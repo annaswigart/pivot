@@ -95,10 +95,6 @@ a {
   /*display: inline-block;*/
 }
 
-.longListItem {
-  margin-bottom: @padding-base-vertical*4;
-}
-
 .label {
   display: inline-block;
 }
@@ -223,13 +219,19 @@ li .xRemove:hover {
 
 .sourceBox {
   background: @gray-lightest;
-  padding: @padding-base-vertical*2 @padding-base-horizontal*6 @padding-base-vertical*4;
+  border: 1px solid @gray-lighter;
+  box-shadow: -6px 0px @brand-primary;
+  padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
   margin: @padding-base-vertical*4 0px;
 
 }
 
 .subSection {
-  padding-bottom: @padding-base-vertical*15;
+  padding-bottom: @padding-base-vertical*10;
+}
+
+.subSection .longListItem {
+  margin-bottom: @padding-base-vertical*4;
 }
 
 .sourceBox span {
