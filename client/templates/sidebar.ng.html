@@ -42,6 +42,7 @@
             <li ng-repeat="v in viewedCareers track by $index" class="careerName">
               <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
                 {{v}}
+              <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(v)}" ng-click="togglePinnedCareer(v)"></span>
             </li>
           </ul>
         <button type="button" class="btn btn-default btn-block">COMPARE</button>
