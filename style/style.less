@@ -13,8 +13,6 @@
 // Sites
 @import "sites/home.import.less";
 
-@navbar-padding: 70px;
-
 // Miscellaneous
 
 body {
@@ -27,10 +25,6 @@ h2 {
   font-weight: normal;
 }
 
-.titleSection {
-  border-bottom: 1px solid @brand-primary;
-}
-
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -40,6 +34,21 @@ li {
   text-decoration: none;
 }
 
+.fa-li {
+  color: @gray-light;
+}
+
+.row {
+  margin: 0px;
+  margin-left: @padding-base-horizontal*-1;
+}
+
+.careerName {
+  text-transform: capitalize;
+}
+
+// Links
+
 a:hover {
   text-decoration: none;
 }
@@ -48,14 +57,113 @@ a {
   text-decoration: none;
 }
 
-.row {
-  margin: 0px;
-  margin-left: @padding-base-horizontal*-1;
+
+// Nav
+
+@navbar-padding: 70px;
+
+
+// Main
+
+.main h5 {
+  color: @brand-primary-dark;
 }
 
-.titleSection {
+
+// Sidebar
+
+.sidebar .card{
+    padding: @padding-base-vertical*2 @padding-base-horizontal*2;
+}
+
+
+// Cards
+
+.card {
+  padding: @padding-base-vertical*4 @padding-base-horizontal*4;
+  margin: @padding-base-vertical*2 @padding-base-horizontal*-1 @padding-base-vertical*2 @padding-base-horizontal;
+  box-shadow: 0px 2px 2px @gray-light;
+  background-color: #ffffff;
+  overflow: hidden;
+}
+
+.cardTitle {
   border-bottom: 1px solid @brand-primary;
 }
+
+.skill-wrapper {
+  /*display: inline-block;*/
+}
+
+.longListItem {
+  margin-bottom: @padding-base-vertical*4;
+}
+
+.label {
+  display: inline-block;
+}
+
+.hr {
+  background-color: @gray-light;
+  height: 1px;
+  margin: @padding-base-vertical*4 0px;
+}
+
+
+// Tags
+
+.tags-wrapper li {
+  display: inline-block;
+}
+
+.industryTag {
+  color: @gray-dark;
+  background-color: @brand-primary-light;
+  font-size: 90%;
+  line-height: 3;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin-right: @padding-base-horizontal;
+  border-radius: @border-radius-small;
+  cursor: pointer;
+}
+
+.industryTag:hover{
+  color: @brand-primary;
+  background-color: @brand-primary-lighter;
+}
+
+// Pinning
+
+.pin {
+  font-size: 80%;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  color: @gray-light;
+  cursor: pointer;
+
+}
+
+.pinSelected {
+  font-size: 80%;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  color: @brand-primary;
+  cursor: pointer;
+
+}
+
+.xRemove {
+  color: #fff;
+  padding: @padding-base-vertical @padding-base-horizontal;
+  margin: 0px @padding-base-horizontal;
+}
+
+li:hover .xRemove {
+  color: @gray-light;
+}
+
+li .xRemove:hover {
+  color: @gray;
+}
+
 
 // Home Search
 
@@ -89,53 +197,6 @@ a {
   background-color: @brand-primary;
 }
 
-/*div.container {
-}*/
-
-/*.content-wrapper {
-}*/
-
-// Cards
-
-.card {
-  padding: @padding-base-vertical*2 @padding-base-horizontal*2;
-  margin: @padding-base-vertical*2 @padding-base-horizontal*-1 @padding-base-vertical*2 @padding-base-horizontal;
-  box-shadow: 0px 2px 2px @gray-light;
-  background-color: #ffffff;
-  overflow: hidden;
-}
-
-.skill-wrapper {
-  /*display: inline-block;*/
-}
-
-.tags-wrapper {
-  /*display: inline-block;*/
-}
-
-.label {
-  display: inline-block;
-}
-
-
-// Tags
-
-.industryTag {
-  color: @gray-dark;
-  background-color: @brand-primary-lighter;
-  font-weight: normal;
-  cursor: pointer;
-}
-
-.industryTag:hover{
-  background-color: @brand-primary-light;
-}
-
-// Sidebar
-
-.sidebar {
-    
-}
 
 // Results
 
@@ -148,36 +209,31 @@ a {
   display: inline-block;
 }
 
-// Pinning
 
-.pin {
-  font-size: 80%;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @gray-light;
-  cursor: pointer;
+// View Career
+
+.sectionTitle {
+  padding-top: @padding-base-vertical*2;
+  padding-bottom: @padding-base-vertical*4;
+}
+
+.titleSubSection {
+  padding: @padding-base-vertical*6 0px;
+}
+
+.sourceBox {
+  background: @gray-lightest;
+  padding: @padding-base-vertical*2 @padding-base-horizontal*6 @padding-base-vertical*4;
+  margin: @padding-base-vertical*4 0px;
 
 }
 
-.pinSelected {
-  font-size: 80%;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @brand-primary;
-  cursor: pointer;
-
+.subSection {
+  padding-bottom: @padding-base-vertical*15;
 }
 
-.xRemove {
-  color: #fff;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  margin: 0px @padding-base-horizontal;
-}
-
-li:hover .xRemove {
-  color: @gray-light;
-}
-
-li .xRemove:hover {
-  color: @brand-danger;
+.sourceBox span {
+  font-size: @font-size-small;
 }
 
 // Compare
@@ -189,8 +245,9 @@ li .xRemove:hover {
   display: inline-block;
 }
 
+
 // Transitions
 
 .colorTransFast {
-  transition: color 300ms;
+  transition: color 300ms, background-color 300ms;
 }
