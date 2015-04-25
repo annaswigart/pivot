@@ -30,10 +30,12 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){
 
     // init selected search category
     $scope.selectedCategory = $scope.searchCategories[0];
+    $window.localStorage.searchCategory = $scope.selectedCategory.name;
 
     // change selected search category
     $scope.selectCategory = function(category) {
         $scope.selectedCategory = category;
+        $window.localStorage.searchCategory = $scope.selectedCategory.name;
     }
 
     // for changing style applied to search category
@@ -59,6 +61,7 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){
 
         //update query stack
         $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
@@ -87,6 +90,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     if($window.localStorage.getItem("queryStack") === null){
         $window.localStorage.queryStack = '[]';
     }
+
+    $scope.selectedCategory = JSON.stringify($window.localStorage.getItem('searchCategory'));
 
     // JSON.parse to read the stack in as an array
     $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
@@ -122,10 +127,9 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
             $scope.careers = $meteor.collection(function() {
                 return Careers.find({});
-                //return Careers.find({limit: $scope.getReactively('numResultsDisplayed')});
             });
             
-            $scope.resultsLoading = false;
+            $scope.resultsLoading = !$scope.resultsLoading;
         });
     });
     
