@@ -1,4 +1,8 @@
 
+CareerData = new Mongo.Collection("careerData");
+
+
+
 if (Meteor.isClient) {
 
 // ***********************************
@@ -85,6 +89,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $state, $meteorObject, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
+    
+    if ($scope.submittedQuery == undefined) {
+        $scope.submittedQuery = $scope.query;
+    }
 
     // init queryStack in local storage, if doesn't exist
     if($window.localStorage.getItem("queryStack") === null){
@@ -99,6 +107,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
+        $scope.submittedQuery = $scope.query;
         $window.localStorage.currentQuery = $scope.query;
 
         //update query stack
@@ -115,24 +124,34 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
             $scope.numResultsDisplayed += 10;
     }
 
-
-    $scope.resultsLoading = true;
     
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('careers', {
+        $meteor.subscribe('careerResults', {
             limit:  parseInt($scope.getReactively('numResultsDisplayed')),
             sort: {num_ids: -1},
             reactive: false,
-        }, $scope.getReactively('query')).then(function(sub){
+        }, $scope.getReactively('submittedQuery')).then(function(sub){
+            
+            $scope.resultsLoading = true;
 
             $scope.careers = $meteor.collection(function() {
                 return Careers.find({});
+                $scope.resultsLoading = false;
             });
+
+            console.log($scope.careers);
             
-            $scope.resultsLoading = !$scope.resultsLoading;
         });
     });
-    
+
+    $scope.careers = $meteor.collection(function() {
+                return Careers.find({}, {sort: {num_ids: -1}});
+                $scope.resultsLoading = false;
+     });
+
+            
+            
+
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
