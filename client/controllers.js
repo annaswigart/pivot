@@ -170,11 +170,30 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
     // view career
     $scope.viewCareer = function(careerName, careerId) {
+
         var viewedCareer = {name: careerName, id: careerId};
-        console.log(viewedCareer);
+
         // update array of viewed careers and only keep 3
         $scope.viewedCareers.unshift(viewedCareer);
-        $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,3);
+        
+        // temp var for the for loop
+        var uniqIds = [];
+        var listCopy = [];
+
+        // iterate through viewdCareers
+        for (var i = 0; i < $scope.viewedCareers.length; i++) {
+            var thisId = $scope.viewedCareers[i].id;
+            if (!_.contains(uniqIds, thisId)) {
+                // track ids encountered
+                uniqIds.push(thisId);
+                // add uniq object to listCopy
+                listCopy.push($scope.viewedCareers[i]);
+            }
+        }
+
+        // update with deduped list, keep only 3
+        $scope.viewedCareers = listCopy.slice(0,3);
+
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
@@ -208,9 +227,27 @@ function($scope, $meteor, $stateParams, $window){
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log($scope.career);
+            // console.log($scope.career);
         });
     });
+
+    // functions for search sidebar
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        return $scope.query;
+    }
 
 
     // init pinned careers in local storage
@@ -248,11 +285,30 @@ function($scope, $meteor, $stateParams, $window){
 
     // view career
     $scope.viewCareer = function(careerName, careerId) {
+
         var viewedCareer = {name: careerName, id: careerId};
-        console.log(viewedCareer);
+
         // update array of viewed careers and only keep 3
         $scope.viewedCareers.unshift(viewedCareer);
-        $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,3);
+        
+        // temp var for the for loop
+        var uniqIds = [];
+        var listCopy = [];
+
+        // iterate through viewdCareers
+        for (var i = 0; i < $scope.viewedCareers.length; i++) {
+            var thisId = $scope.viewedCareers[i].id;
+            if (!_.contains(uniqIds, thisId)) {
+                // track ids encountered
+                uniqIds.push(thisId);
+                // add uniq object to listCopy
+                listCopy.push($scope.viewedCareers[i]);
+            }
+        }
+
+        // update with deduped list, keep only 3
+        $scope.viewedCareers = listCopy.slice(0,3);
+
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
@@ -324,57 +380,66 @@ angular.module('reflectivePath').controller('SidebarController', ['$scope', '$me
 function($scope, $meteor, $stateParams, $window){
 
 
-    // init pinned careers in local storage
-    if($window.localStorage.getItem("pinnedCareers") === null){
-        $window.localStorage.pinnedCareers = '[]';
-    }
+    // // init pinned careers in local storage
+    // if($window.localStorage.getItem("pinnedCareers") === null){
+    //     $window.localStorage.pinnedCareers = '[]';
+    // }
     
-    // parse string from local storage
-    $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+    // // parse string from local storage
+    // $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
 
-    // toggle pinned career (remove / add)
-    $scope.togglePinnedCareer = function(career){
-        if (_.contains($scope.pinnedCareers, career)) {
-            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
-        } else {
-            $scope.pinnedCareers.push(career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
-        }
-    }
+    // // toggle pinned career (remove / add)
+    // $scope.togglePinnedCareer = function(career){
+    //     if (_.contains($scope.pinnedCareers, career)) {
+    //         $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
+    //         $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+    //     } else {
+    //         $scope.pinnedCareers.push(career);
+    //         $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+    //     }
+    // }
 
-    // apply class to pinned careers
-    $scope.isPinned = function(career) {
-        return _.contains($scope.pinnedCareers, career);
-    }
+    // // apply class to pinned careers
+    // $scope.isPinned = function(career) {
+    //     return _.contains($scope.pinnedCareers, career);
+    // }
 
-    // init viewed careers in local storage
-    if($window.localStorage.getItem("viewedCareers") === null){
-        $window.localStorage.viewedCareers = '[]';
-    }
+    // // init viewed careers in local storage
+    // if($window.localStorage.getItem("viewedCareers") === null){
+    //     $window.localStorage.viewedCareers = '[]';
+    // }
 
-    // parse string from local storage
-    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+    // // parse string from local storage
+    // $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
 
     // // view career
     // $scope.viewCareer = function(careerName, careerId) {
+
     //     var viewedCareer = {name: careerName, id: careerId};
-    //     console.log(viewedCareer);
+
     //     // update array of viewed careers and only keep 3
     //     $scope.viewedCareers.unshift(viewedCareer);
-    //     $scope.viewedCareers = _.uniq($scope.viewedCareers).slice(0,3);
+        
+    //     // temp var for the for loop
+    //     var uniqIds = [];
+    //     var listCopy = [];   
+
+    //     // iterate through viewdCareers
+    //     for (var i = 0; i < $scope.viewedCareers.length; i++) {
+    //         var thisId = $scope.viewedCareers[i].id;
+    //         if (!_.contains(uniqIds, thisId)) {
+    //             // track ids encountered
+    //             uniqIds.push(thisId);
+    //             // add uniq object to listCopy
+    //             listCopy.push($scope.viewedCareers[i]);
+    //         }
+    //     }
+
+    //     // update with deduped list, keep only 3
+    //     $scope.viewedCareers = listCopy.slice(0,3);
+
     //     $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     // }
-
-    // get careerId for sidebar links to career views
-    // $scope.getCareerId = function(careerName) {
-    //     console.log("careerName: " + careerName);
-    //     $meteor.subscribe('careerSidebarLinks', careerName).then(function(sub) {
-    //         $scope.career = Careers.find({})[0];
-    //     });
-    //     console.log("Get recent: " + $scope.career);
-    //     return $scope.career._id;
-    // }    
 
 }]);
 
