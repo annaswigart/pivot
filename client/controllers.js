@@ -124,16 +124,15 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
             $scope.numResultsDisplayed += 10;
     }
 
+
+    // $scope.resultsLoading = true;
     
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerResults', {
-            limit:  parseInt($scope.getReactively('numResultsDisplayed')),
-            sort: {num_ids: -1},
-            reactive: false,
+            sort: {score: -1},
+            limit:  parseInt($scope.getReactively('numResultsDisplayed')),            
         }, $scope.getReactively('submittedQuery')).then(function(sub){
             
-            $scope.resultsLoading = true;
-
             $scope.careers = $meteor.collection(function() {
                 return Careers.find({});
                 $scope.resultsLoading = false;
@@ -144,11 +143,12 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         });
     });
 
+ $meteor.autorun($scope, function() {
     $scope.careers = $meteor.collection(function() {
-                return Careers.find({}, {sort: {score: -1}});
-                $scope.resultsLoading = false;
+            return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
+                // $scope.resultsLoading = false;
      });
-
+});
             
             
 
