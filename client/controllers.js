@@ -1,4 +1,8 @@
 
+CareerData = new Mongo.Collection("careerData");
+
+
+
 if (Meteor.isClient) {
 
 // ***********************************
@@ -85,6 +89,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $state, $meteorObject, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
+    
+    if ($scope.submittedQuery == undefined) {
+        $scope.submittedQuery = $scope.query;
+    }
 
     // init queryStack in local storage, if doesn't exist
     if($window.localStorage.getItem("queryStack") === null){
@@ -99,6 +107,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
+        $scope.submittedQuery = $scope.query;
         $window.localStorage.currentQuery = $scope.query;
 
         //update query stack
@@ -116,23 +125,33 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     }
 
 
-    $scope.resultsLoading = true;
+    // $scope.resultsLoading = true;
     
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('careers', {
-            limit:  parseInt($scope.getReactively('numResultsDisplayed')),
-            sort: {num_ids: -1},
-            reactive: false,
-        }, $scope.getReactively('query')).then(function(sub){
-
+        $meteor.subscribe('careerResults', {
+            sort: {score: -1},
+            limit:  parseInt($scope.getReactively('numResultsDisplayed')),            
+        }, $scope.getReactively('submittedQuery')).then(function(sub){
+            
             $scope.careers = $meteor.collection(function() {
                 return Careers.find({});
+                $scope.resultsLoading = false;
             });
+
+            console.log($scope.careers);
             
-            $scope.resultsLoading = !$scope.resultsLoading;
         });
     });
-    
+
+ $meteor.autorun($scope, function() {
+    $scope.careers = $meteor.collection(function() {
+            return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
+                // $scope.resultsLoading = false;
+     });
+});
+            
+            
+
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
