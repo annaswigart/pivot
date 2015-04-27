@@ -145,7 +145,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     });
 
     $scope.careers = $meteor.collection(function() {
-                return Careers.find({}, {sort: {num_ids: -1}});
+                return Careers.find({}, {sort: {score: -1}});
                 $scope.resultsLoading = false;
      });
 
