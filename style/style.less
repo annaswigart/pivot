@@ -156,6 +156,10 @@ a {
 
 }
 
+.pin:hover {
+  color: @gray;
+}
+
 .pinSelected {
   font-size: 80%;
   padding: @padding-base-vertical @padding-base-horizontal;
@@ -167,7 +171,6 @@ a {
 .xRemove {
   color: #fff;
   padding: @padding-base-vertical @padding-base-horizontal;
-  margin: 0px @padding-base-horizontal;
   cursor: pointer;
 }
 
@@ -262,9 +265,23 @@ li .xRemove:hover {
 .checkbox {
   padding: @padding-base-horizontal/2;
   margin: 0px;
-  color: gray;
+  color: @gray;
   display: inline-block;
   cursor: pointer;
+}
+
+.checkbox:hover {
+  color: @gray-dark;
+}
+
+.sidebarList {
+  margin-left: 32px;
+  text-indent: -16px;
+  font-size: @font-size-small;
+}
+.sidebarListTail {
+  text-indent: 0px;
+  font-size: 100%;
 }
 
 
