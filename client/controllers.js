@@ -258,7 +258,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         } else {
             $scope.comparedCareers.push(careerId);
         }
-        console.log($scope.comparedCareers);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 
@@ -423,7 +422,6 @@ function($scope, $meteor, $stateParams, $window){
         } else {
             $scope.comparedCareers.push(careerId);
         }
-        console.log($scope.comparedCareers);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 
@@ -466,9 +464,11 @@ angular.module('reflectivePath').controller('CompareViewController', ['$scope', 
 function($scope, $meteor, $stateParams, $window){
 
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
-            $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log($scope.career);
+        $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
+            $scope.career1 = $meteor.object(Careers, {_id: $stateParams.careerId1});
+            $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2})
+            console.log($scope.career1);
+            console.log($scope.career2);
         });
     });
 
@@ -593,7 +593,6 @@ function($scope, $meteor, $stateParams, $window){
         } else {
             $scope.comparedCareers.push(careerId);
         }
-        console.log($scope.comparedCareers);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 

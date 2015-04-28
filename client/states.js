@@ -48,8 +48,8 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 }
             }
         })
-        .state('compareCareers', {
-            url: '/:careerId1/:careerId2',
+        .state('compareView', {
+            url: '/:careerId1&:careerId2',
             views: {
                 navBar: {
                     templateUrl: 'client/templates/nav-bar.ng.html',
