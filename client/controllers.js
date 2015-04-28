@@ -243,6 +243,30 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
+    // init compared careers in local storage
+    if($window.localStorage.getItem("checkedCareers") === null){
+        $window.localStorage.comparedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.comparedCareers = JSON.parse($window.localStorage.comparedCareers);
+
+    // toggle compared career (check / uncheck)
+    $scope.toggleComparedCareer = function(careerId) {
+        if (_.contains($scope.comparedCareers, careerId)) {
+            $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+        } else {
+            $scope.comparedCareers.push(careerId);
+        }
+        console.log($scope.comparedCareers);
+        $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
+    }
+
+    // apply checkbox style if checked
+    $scope.isCompared = function(careerId) {
+        return _.contains($scope.comparedCareers, careerId);
+    }
+
     // placeholder text
     $scope.placeholderText = [
         {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
@@ -384,6 +408,32 @@ function($scope, $meteor, $stateParams, $window){
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);
     }
 
+    // init compared careers in local storage
+    if($window.localStorage.getItem("checkedCareers") === null){
+        $window.localStorage.comparedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.comparedCareers = JSON.parse($window.localStorage.comparedCareers);
+
+    // toggle compared career (check / uncheck)
+    $scope.toggleComparedCareer = function(careerId) {
+        if (_.contains($scope.comparedCareers, careerId)) {
+            $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+        } else {
+            $scope.comparedCareers.push(careerId);
+        }
+        console.log($scope.comparedCareers);
+        $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
+    }
+
+    // apply checkbox style if checked
+    $scope.isCompared = function(careerId) {
+        return _.contains($scope.comparedCareers, careerId);
+    }
+
+    // apply inactive style when less than 2 checked
+
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
@@ -452,9 +502,6 @@ angular.module('reflectivePath').controller('SidebarController', ['$scope', '$me
 function($scope, $meteor, $stateParams, $window){
 
 
-    // apply checkbox style if checked
-
-    // apply inactive style when less than 2 checked
 
 }]);
 
