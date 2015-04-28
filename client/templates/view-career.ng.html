@@ -16,7 +16,7 @@
       <div class="profile card">
 
         <h2 class="cardTitle careerName">{{career.standardized_title}}
-          <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career.standardized_title)}" ng-click="togglePinnedCareer(career.standardized_title)"></span>
+          <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
         </h2>
 
         <!-- Section: About This Career-->

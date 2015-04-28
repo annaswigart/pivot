@@ -1,4 +1,8 @@
 
+CareerData = new Mongo.Collection("careerData");
+
+
+
 if (Meteor.isClient) {
 
 // ***********************************
@@ -85,6 +89,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $state, $meteorObject, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
+    
+    if ($scope.submittedQuery == undefined) {
+        $scope.submittedQuery = $scope.query;
+    }
 
     // init queryStack in local storage, if doesn't exist
     if($window.localStorage.getItem("queryStack") === null){
@@ -99,6 +107,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
+        $scope.submittedQuery = $scope.query;
         $window.localStorage.currentQuery = $scope.query;
 
         //update query stack
@@ -116,23 +125,33 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     }
 
 
-    $scope.resultsLoading = true;
+    // $scope.resultsLoading = true;
     
     $meteor.autorun($scope, function() {
-        $meteor.subscribe('careers', {
-            limit:  parseInt($scope.getReactively('numResultsDisplayed')),
-            sort: {num_ids: -1},
-            reactive: false,
-        }, $scope.getReactively('query')).then(function(sub){
-
+        $meteor.subscribe('careerResults', {
+            sort: {score: -1},
+            limit:  parseInt($scope.getReactively('numResultsDisplayed')),            
+        }, $scope.getReactively('submittedQuery')).then(function(sub){
+            
             $scope.careers = $meteor.collection(function() {
                 return Careers.find({});
+                $scope.resultsLoading = false;
             });
+
+            console.log($scope.careers);
             
-            $scope.resultsLoading = !$scope.resultsLoading;
         });
     });
-    
+
+ $meteor.autorun($scope, function() {
+    $scope.careers = $meteor.collection(function() {
+            return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
+                // $scope.resultsLoading = false;
+     });
+});
+            
+            
+
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
@@ -143,19 +162,46 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
 
     // toggle pinned career (remove / add)
-    $scope.togglePinnedCareer = function(career){
-        if (_.contains($scope.pinnedCareers, career)) {
-            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
-        } else {
-            $scope.pinnedCareers.push(career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+    $scope.togglePinnedCareer = function(careerName, careerId){
+
+        var pinnedCareer = {name: careerName, id: careerId};
+
+        // create list of pinnedIds
+        var pinnedIds = []
+        for (var i = 0; i < $scope.pinnedCareers.length; i++) {
+            pinnedIds.push($scope.pinnedCareers[i].id);
         }
+
+        // if career id is pinned, remove it
+        if (_.contains(pinnedIds, careerId)) {
+            // remove id from pinned list
+            pinnedIds = _.without(pinnedIds, careerId)
+            // init listCopy for removing career
+            var listCopy = [];
+            // 
+            for (var i = 0; i < pinnedIds.length; i++) {
+                listCopy.push($scope.pinnedCareers[i]);
+            }
+            $scope.pinnedCareers = listCopy;
+        } else {
+            // else career id isn't pinned, so add it
+            // add pinned career
+            $scope.pinnedCareers.push(pinnedCareer);
+        }
+
+        $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
     }
 
+
     // apply class to pinned careers
-    $scope.isPinned = function(career) {
-        return _.contains($scope.pinnedCareers, career);
+    $scope.isPinned = function(careerId) {
+        // create list of pinnedIds
+        var pinnedIds = []
+        for (var i = 0; i < $scope.pinnedCareers.length; i++) {
+            pinnedIds.push($scope.pinnedCareers[i].id);
+        }
+        // return true if pinnedIds contains careerId
+        return _.contains(pinnedIds, careerId);
     }
 
 
@@ -180,7 +226,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         var uniqIds = [];
         var listCopy = [];
 
-        // iterate through viewdCareers
+        // iterate through viewedCareers
         for (var i = 0; i < $scope.viewedCareers.length; i++) {
             var thisId = $scope.viewedCareers[i].id;
             if (!_.contains(uniqIds, thisId)) {
@@ -227,7 +273,7 @@ function($scope, $meteor, $stateParams, $window){
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            // console.log($scope.career);
+            console.log($scope.career);
         });
     });
 
@@ -259,19 +305,45 @@ function($scope, $meteor, $stateParams, $window){
     $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
 
     // toggle pinned career (remove / add)
-    $scope.togglePinnedCareer = function(career){
-        if (_.contains($scope.pinnedCareers, career)) {
-            $scope.pinnedCareers = _.without($scope.pinnedCareers, career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
-        } else {
-            $scope.pinnedCareers.push(career);
-            $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+    $scope.togglePinnedCareer = function(careerName, careerId){
+
+        var pinnedCareer = {name: careerName, id: careerId};
+
+        // create list of pinnedIds
+        var pinnedIds = []
+        for (var i = 0; i < $scope.pinnedCareers.length; i++) {
+            pinnedIds.push($scope.pinnedCareers[i].id);
         }
+
+        // if career id is pinned, remove it
+        if (_.contains(pinnedIds, careerId)) {
+            // remove id from pinned list
+            pinnedIds = _.without(pinnedIds, careerId)
+            // init listCopy for removing career
+            var listCopy = [];
+            // 
+            for (var i = 0; i < pinnedIds.length; i++) {
+                listCopy.push($scope.pinnedCareers[i]);
+            }
+            $scope.pinnedCareers = listCopy;
+        } else {
+            // else career id isn't pinned, so add it
+            // add pinned career
+            $scope.pinnedCareers.push(pinnedCareer);
+        }
+
+        $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
     }
 
     // apply class to pinned careers
-    $scope.isPinned = function(career) {
-        return _.contains($scope.pinnedCareers, career);
+    $scope.isPinned = function(careerId) {
+        // create list of pinnedIds
+        var pinnedIds = []
+        for (var i = 0; i < $scope.pinnedCareers.length; i++) {
+            pinnedIds.push($scope.pinnedCareers[i].id);
+        }
+        // return true if pinnedIds contains careerId
+        return _.contains(pinnedIds, careerId);
     }
 
 
