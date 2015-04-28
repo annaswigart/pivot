@@ -33,7 +33,7 @@
 
         <h5>Pinned Careers</h5>
           <ul>
-            <li ng-repeat="p in pinnedCareers" class="careerName">
+            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
               <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
               <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.name, p.id)">
                 {{p.name}}

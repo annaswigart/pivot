@@ -175,17 +175,17 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         // if career id is pinned, remove it
         if (_.contains(pinnedIds, careerId)) {
             // remove id from pinned list
-            pinnedIds = _.without(pinnedIds, careerId)
-            // init listCopy for removing career
+            pinnedIds = _.without(pinnedIds, careerId);
+
             var listCopy = [];
-            // 
+            // for each pinnedId, add pinnedCareer object to listCopy
             for (var i = 0; i < pinnedIds.length; i++) {
-                listCopy.push($scope.pinnedCareers[i]);
+                listCopy.push(_.findWhere($scope.pinnedCareers, {id: pinnedIds[i]}));
             }
+            // update pinnedCareers (pin removed)
             $scope.pinnedCareers = listCopy;
         } else {
-            // else career id isn't pinned, so add it
-            // add pinned career
+            // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
         }
 
@@ -318,17 +318,17 @@ function($scope, $meteor, $stateParams, $window){
         // if career id is pinned, remove it
         if (_.contains(pinnedIds, careerId)) {
             // remove id from pinned list
-            pinnedIds = _.without(pinnedIds, careerId)
-            // init listCopy for removing career
+            pinnedIds = _.without(pinnedIds, careerId);
+
             var listCopy = [];
-            // 
+            // for each pinnedId, add pinnedCareer object to listCopy
             for (var i = 0; i < pinnedIds.length; i++) {
-                listCopy.push($scope.pinnedCareers[i]);
+                listCopy.push(_.findWhere($scope.pinnedCareers, {id: pinnedIds[i]}));
             }
+            // update pinnedCareers (pin removed)
             $scope.pinnedCareers = listCopy;
         } else {
-            // else career id isn't pinned, so add it
-            // add pinned career
+            // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
         }
 
