@@ -43,16 +43,17 @@ li {
   margin-left: @padding-base-horizontal*-1;
 }
 
+.listIconTail {
+  text-indent: 0px;
+  font-size: 100%;
+}
+
 
 // Home Search
 
 .search-label {
   display: inline-block;
   text-align: center;
-}
-
-.careerName {
-  text-transform: capitalize;
 }
 
 // Links
@@ -75,6 +76,24 @@ a {
 }
 
 
+// Vertical Dividers
+
+.border-right, .border-left, .border-both {
+    position: relative;
+}
+.border-left:before, .border-right:after {
+    position: absolute;
+    content:'';
+    height: auto;
+    top: 0px;
+    bottom: 0px;
+    border-right: 1px solid @gray-light;
+    width: 0;
+}
+.border-left:before { left: -1px; }
+.border-right:after { right: 0px; }
+
+
 // Main
 
 .main h5 {
@@ -84,10 +103,50 @@ a {
 
 // Sidebar
 
-.sidebar .card{
+.sidebar .card {
     padding: @padding-base-vertical*2 @padding-base-horizontal*2;
 }
 
+.checkbox {
+  padding: @padding-base-vertical/2 @padding-base-horizontal/2;
+  margin: 0px;
+  color: @gray;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.checkbox:hover {
+  color: @gray-dark;
+}
+
+.fa-square {
+  color: @gray-lighter;
+  cursor: inherit;
+}
+
+.fa-square:hover {
+  color: @gray-lighter;
+}
+
+.sidebarList {
+  font-size: @font-size-small;
+}
+
+.sidebarColLeft {
+  padding-top: @padding-base-vertical;
+  vertical-align: top;
+}
+
+.sidebarColMid {
+ width: 170px;
+ padding: @padding-base-vertical 0px 0px @padding-base-horizontal;
+ vertical-align: top;
+}
+
+.sidebarColRight{
+  padding-top: @padding-base-vertical;
+  vertical-align: top;
+}
 
 // Cards
 
@@ -101,6 +160,7 @@ a {
 
 .cardTitle {
   border-bottom: 1px solid @brand-primary;
+  padding-bottom: @padding-base-vertical;
 }
 
 .skill-wrapper {
@@ -121,8 +181,6 @@ a {
   cursor: pointer;
 }
 
-// Results
-
 
 // Tags
 
@@ -138,7 +196,6 @@ a {
   padding: @padding-base-vertical @padding-base-horizontal;
   margin-right: @padding-base-horizontal;
   border-radius: @border-radius-small;
-  cursor: pointer;
 }
 
 .industryTag:hover{
@@ -156,6 +213,10 @@ a {
 
 }
 
+.pin:hover {
+  color: @gray;
+}
+
 .pinSelected {
   font-size: 80%;
   padding: @padding-base-vertical @padding-base-horizontal;
@@ -166,8 +227,8 @@ a {
 
 .xRemove {
   color: #fff;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  margin: 0px @padding-base-horizontal;
+  padding: @padding-base-vertical/2 @padding-base-horizontal;
+  cursor: pointer;
 }
 
 li:hover .xRemove {
@@ -214,13 +275,44 @@ li .xRemove:hover {
 
 // Results
 
-.result-box {
-  padding: @padding-base-vertical*2 @padding-base-horizontal*2;
+.results .card {
+  padding: @padding-base-vertical*4 @padding-base-horizontal*2;
+}
+
+.resultBox {
+  padding: @padding-base-vertical 0px;
   border-bottom: 1px solid @gray-light; 
+}
+
+.resultsHeader {
+  margin: 0px; 
+  padding: 12px 12px 12px 0px;
 }
 
 .resultTitle {
   display: inline-block;
+}
+
+.showMore {
+  background: none;
+  border: none;
+  text-align: center;
+}
+
+.showMore h6 {
+  margin: @padding-base-vertical*4 0px @padding-base-vertical;
+}
+
+.showMore:hover h6 {
+  color: @brand-primary;
+}
+
+.showMore .fa {
+  color: @brand-primary;
+}
+
+.showMore:hover .fa {
+  color: @brand-primary-dark;
 }
 
 
@@ -258,13 +350,13 @@ li .xRemove:hover {
 
 // Compare
 
-.checkbox {
-  padding: @padding-base-horizontal/2;
-  margin: 0px;
-  color: gray;
-  display: inline-block;
+.compare h2, .compare h3, .compare h5 {
+  text-align: center;
 }
 
+.compare .card {
+  padding: @padding-base-vertical*4 @padding-base-horizontal*2;
+}
 
 // Transitions
 

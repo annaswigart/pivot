@@ -1,41 +1,9 @@
 
 <div class="row ">
 
-  <!-- SIDEBAR -->
+<!-- SIDEBAR -->
 
-  <div class="col-xs-3 sidebar">
-
-    <!-- RECENT SEARCHES -->
-
-    <div class="row">
-        <div class="history card">
-          <h4 class="cardTitle">Search</h4>
-          <h5>Recent Searches</h5>
-          <ul>
-            <li ng-repeat="q in queryStackData track by $index">{{q}}</li>
-          </ul>
-        </div>
-    </div>
-
-    <!-- COMPARE  -->
-
-    <div class="row">
-      <div class="compare card">
-        <h4 class="cardTitle">Compare Careers</h4>
-        <h5>Pinned Careers</h5>
-          <ul>
-            <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
-              <span class="fa fa-square-o checkbox" aria-label="select career" ng-click="" ng-class="ng-show"></span>
-              {{p}}
-              <span class="fa fa-times xRemove colorTransFast" aria-label="remove from pinned careers" ng-click="togglePinnedCareer(p)"></span>
-            </li>
-          </ul>
-        <h5>Recently Viewed Careers</h5>
-        <button type="button" class="btn btn-default btn-block">COMPARE</button>
-      </div>
-    </div>
-
-  </div>
+  <div ng-include="'client/templates/sidebar.ng.html'"></div>
 
 <!-- MAIN -->
 
@@ -43,22 +11,212 @@
     
     <!-- CAREER COMPARISON -->
 
-    <div class="row">
+    <div class="row compare">
 
-      <div class="compare card">
+      <div class="card">
 
-        <div class="col-xs-6">
-          <h2>Career Title 1</h2>
+        <!-- HEADER -->
+        <div class="row">
+          <h2 class="cardTitle col-xs-10 col-xs-offset-1">Compare Careers</h2>
         </div>
 
-         <div class="col-xs-6">
-          <h2>Career Title 2</h2>
+        <!-- TITLES -->
+        <div class="row">
+          <div class="col-xs-6">
+            <a ui-sref="careerView({careerId: career1._id})" ng-click="viewCareer(career1.standardized_title, career._id)">
+            <h3>{{career1.standardized_title}}</h3>
+            </a>
+          </div>
+          <div class="col-xs-6">
+            <a ui-sref="careerView({careerId: career2._id})" ng-click="viewCareer(career2.standardized_title, career._id)">
+            <h3>{{career2.standardized_title}}</h3>
+            </a>
+          </div>
+        </div>
+
+        <!-- ACTIVITIES -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>ACTIVITIES</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul class="fa-ul">
+              <li ng-repeat="activity in career1.work_activities.activities" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{activity}}
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul class="fa-ul">
+              <li ng-repeat="activity in career2.work_activities.activities" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{activity}}
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SKILLS -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>SKILLS</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul>
+                <li ng-repeat="skill in career1.skills | orderBy: '-count' | limitTo: 20">
+                  {{skill.name}} ({{skill.count}})</li>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul>
+                <li ng-repeat="skill in career2.skills | orderBy: '-count' | limitTo: 20">
+                  {{skill.name}} ({{skill.count}})</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- INDUSTRIES -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>INDUSTRIES</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul>
+                <li ng-repeat="category in career1.categories | limitTo: 10" >
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                    {{category.name}} {{category.count}}
+                  </a>
+                </li>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul>
+                <li ng-repeat="category in career2.categories | limitTo: 10" >
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                    {{category.name}} {{category.count}}
+                  </a>
+                </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- WORK ENVIRONMENT -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>WORK ENVIRONMENT</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul class="fa-ul">
+                <li ng-repeat="context in career1.work_context.top_work_contexts" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{context}}</li>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul class="fa-ul">
+                <li ng-repeat="context in career2.work_context.top_work_contexts" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{context}}</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- SALARY -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>SALARY</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <table>
+              <tr>
+                <td>San Francisco Bay Area</td>
+                <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
+              </tr>
+              <tr>
+                <td>California</td>
+                <td>{{career1.salary.annual_salary_ca | currency}}</td>
+              </tr>
+            </table>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <table>
+              <tr>
+                <td>San Francisco Bay Area</td>
+                <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
+              </tr>
+              <tr>
+                <td>California</td>
+                <td>{{career2.salary.annual_salary_ca | currency}}</td>
+              </tr>
+            </table>
+          </div>
+        </div>
+
+        <!-- EDUCATION -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>EDUCATION</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul>
+              <li ng-repeat="(degree, percent) in career1.education">
+                {{degree}} {{percent}}%
+              </li>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul>
+              <li ng-repeat="(degree, percent) in career2.education">
+                {{degree}} {{percent}}%
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- DATA SOURCE -->
+        <div class="row">
+          
+          <div class="col-xs-12">
+            <h5>DATA SOURCE</h5>
+          </div>
+
+          <div class="col-xs-6 subSection border-right">
+            <span>
+                This career profile is a composite of 
+                <strong>{{career1.job_ids.length}} job postings</strong>
+
+                <span ng-hide="onetIsNull(career1.onet_titles[0].name)"> and the O*NET profile for 
+                  <a href="http://www.onetonline.org/link/summary/{{career1.onet_codes[0].name}}" target="_blank">
+                    {{career1.onet_titles[0].name}}. 
+                  </a>
+                  Salary information is sourced from the Bureau of Labor Statistics 
+                  <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
+                </span>
+            </span>
+          </div>
+
+          <div class="col-xs-6 subSection border-left">
+            <span>
+                This career profile is a composite of 
+                <strong>{{career2.job_ids.length}} job postings</strong>
+
+                <span ng-hide="onetIsNull(career2.onet_titles[0].name)"> and the O*NET profile for 
+                  <a href="http://www.onetonline.org/link/summary/{{career2.onet_codes[0].name}}" target="_blank">
+                    {{career2.onet_titles[0].name}}. 
+                  </a>
+                  Salary information is sourced from the Bureau of Labor Statistics 
+                  <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
+                </span>
+            </span>
+          </div>
+
         </div>
         
       </div>
      
     </div>
 
-  </div>
+  </div> 
 
 </div>
