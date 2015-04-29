@@ -34,7 +34,7 @@
 
       <!-- SEARCH STATEMENT -->
       <div class="col-xs-12">
-        <h3 class="col-xs-12 result-box" style="margin: 0px; padding: 12px 12px 12px 0px;">Career profiles related to <strong>{{query}}</strong></h3>
+        <h3 class="col-xs-12 resultBox resultsHeader">Career profiles related to <strong>{{query}}</strong></h3>
       </div>
 
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
@@ -47,22 +47,26 @@
 
           <div class="row col-xs-12">
             <h5>ACTIVITIES</h5>
-            <ul>
+            <ul class="fa-ul">
               <li ng-repeat="activity in placeholderText | limitTo: 3" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{activity.text}}</li>
             </ul>
           </div>
 
           <div class="row">
 
-            <div class="skills-wrapper col-xs-5">
+            <div class="skills-wrapper col-xs-4">
               <h5>TOP SKILLS</h5>
-              <ul>
-                <li ng-repeat="skill in career.skills | limitTo: 5">{{skill.name}}</li>
+              <ul class="fa-ul">
+                <li ng-repeat="skill in career.skills | limitTo: 5">
+                  <span class="fa fa-li fa-angle-right fa-lg"></span>
+                  {{skill.name}}
+                </li>
               </ul>
             </div>
 
-            <div class="tags-wrapper col-xs-7">
+            <div class="tags-wrapper col-xs-8">
               <h5>TOP INDUSTRIES</h5>
               <ul>
                 <li ng-repeat="category in career.categories | limitTo: 5"><span class="industryTag colorTransFast">{{category.name}}</span></li>
@@ -73,7 +77,10 @@
         </div>
 
       </div>
-        <button ng-click="showMoreResults()">Show More</button>
+        <button class="showMore colorTransFast center-block" ng-click="showMoreResults()">
+          <h6>show more</h6>
+          <span class="fa fa-chevron-down"></span>
+        </button>
     </div>
   </div>
 

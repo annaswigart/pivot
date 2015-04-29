@@ -243,13 +243,40 @@ li .xRemove:hover {
   padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
 
-.result-box {
+.resultBox {
   padding: @padding-base-vertical 0px;
   border-bottom: 1px solid @gray-light; 
 }
 
+.resultsHeader {
+  margin: 0px; 
+  padding: 12px 12px 12px 0px;
+}
+
 .resultTitle {
   display: inline-block;
+}
+
+.showMore {
+  background: none;
+  border: none;
+  text-align: center;
+}
+
+.showMore h6 {
+  margin: @padding-base-vertical*4 0px @padding-base-vertical;
+}
+
+.showMore:hover h6 {
+  color: @brand-primary;
+}
+
+.showMore .fa {
+  color: @brand-primary;
+}
+
+.showMore:hover .fa {
+  color: @brand-primary-dark;
 }
 
 
