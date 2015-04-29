@@ -14,6 +14,8 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 
 
 
+
+
 }]);
 
 
@@ -84,9 +86,9 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', '$http',
     function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, $window){
+        $state, $meteorObject, $rootScope, $meteorUtils, $window, $http){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
     
@@ -151,9 +153,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 //                 // $scope.resultsLoading = false;
 //      });
 // });
-            
-            
-
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
