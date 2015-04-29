@@ -13,65 +13,139 @@
 
     <div class="row">
 
-      <div class="compare card">
+      <div class="card compare">
 
-        <!-- CAREER 1 COLUMN -->
+        <!-- TITLES -->
+        <div class="row">
+          <div class="col-xs-5">
+            <h2>{{career1.standardized_title}}</h2>
+          </div>
+          <div class="col-xs-5 col-xs-offset-2">
+            <h2>{{career2.standardized_title}}</h2>
+          </div>
+        </div>
 
-        <div class="col-xs-5">
-          <h2>{{career1.standardized_title}}</h2>
-
-          <!-- Section: About This Career-->
-
-          <div class="section">
-
-            <div class="col-xs-12 subSection">
-              <h5>ACTIVITIES</h5>
-              <ul class="fa-ul">
+        <!-- ACTIVITIES -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>ACTIVITIES</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul class="fa-ul">
                 <li ng-repeat="activity in placeholderText" class="longListItem">
                   <span class="fa fa-li fa-angle-right fa-lg"></span>
                   {{activity.text}}
                 </li>
               </ul>
-            </div>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul class="fa-ul">
+                <li ng-repeat="activity in placeholderText" class="longListItem">
+                  <span class="fa fa-li fa-angle-right fa-lg"></span>
+                  {{activity.text}}
+                </li>
+              </ul>
+          </div>
+        </div>
 
-            <div class="col-xs-12 subSection">
-              <h5>SKILLS</h5>
-              <ul>
+        <!-- SKILLS -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>SKILLS</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul>
                 <li ng-repeat="skill in career1.skills | orderBy: '-count' | limitTo: 20">
                   {{skill.name}} ({{skill.count}})</li>
-              </ul>
-            </div>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul>
+                <li ng-repeat="skill in career1.skills | orderBy: '-count' | limitTo: 20">
+                  {{skill.name}} ({{skill.count}})</li>
+            </ul>
+          </div>
+        </div>
 
-            <div class="tags-wrapper col-xs-12 subSection">
-              <h5>INDUSTRIES</h5>
-              <ul>
+        <!-- INDUSTRIES -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>INDUSTRIES</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul>
                 <li ng-repeat="category in career1.categories | limitTo: 10" >
                   <span class="industryTag colorTransFast">
                   {{category.name}} ({{category.count}})</span>
                 </li>
-              </ul>
-            </div>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul>
+                <li ng-repeat="category in career2.categories | limitTo: 10" >
+                  <span class="industryTag colorTransFast">
+                  {{category.name}} ({{category.count}})</span>
+                </li>
+            </ul>
+          </div>
+        </div>
 
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career1.onet_titles[0].name)">
-              <h5>WORK ENVIRONMENT</h5>
-              <ul class="fa-ul">
+        <!-- WORK ENVIRONMENT -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>WORK ENVIRONMENT</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            <ul class="fa-ul">
                 <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
                   <span class="fa fa-li fa-angle-right fa-lg"></span>
                   {{activity.text}}</li>
-              </ul>
-            </div>
+            </ul>
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            <ul class="fa-ul">
+                <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
+                  <span class="fa fa-li fa-angle-right fa-lg"></span>
+                  {{activity.text}}</li>
+            </ul>
+          </div>
+        </div>
 
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career1.onet_titles[0].name)">
-              <h5>SALARY</h5>
-            </div>
-              
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career1.onet_titles[0].name)">
-              <h5>EDUCATION</h5>
-            </div>
+        <!-- SALARY -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>SALARY</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            
+          </div>
+        </div>
 
-            <div class="col-xs-12 sourceBox">
-              <h6>Data Source</h6>
-              <span>
+        <!-- EDUCATION -->
+        <div class="row">
+          <div class="col-xs-12">
+            <h5>EDUCATION</h5>
+          </div>
+          <div class="col-xs-6 subSection border-right">
+            
+          </div>
+          <div class="col-xs-6 subSection border-left">
+            
+          </div>
+        </div>
+
+        <!-- DATA SOURCE -->
+        <div class="row">
+          
+          <div class="col-xs-12">
+            <h5>DATA SOURCE</h5>
+          </div>
+
+          <div class="col-xs-6 subSection border-right">
+            <span>
                 This career profile is a composite of 
                 <strong>{{career1.job_ids.length}} job postings</strong>
 
@@ -82,78 +156,11 @@
                   Salary information is sourced from the Bureau of Labor Statistics 
                   <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
                 </span>
-                
-              </span>
-            </div>
-
+            </span>
           </div>
 
-          <div class="col-xs-12 hr"></div>
-
-        </div>
-
-        <div class="col-xs-2">
-
-        </div>
-
-
-        <!-- CAREER 2 COLUMN -->
-        
-        <div class="col-xs-5">
-          <h2>{{career2.standardized_title}}</h2>
-
-          <!-- Section: About This Career-->
-
-          <div class="section">
-
-            <div class="col-xs-12 subSection">
-              <h5>ACTIVITIES</h5>
-              <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-xs-12 subSection">
-              <h5>SKILLS</h5>
-              <ul>
-                <li ng-repeat="skill in career2.skills | orderBy: '-count' | limitTo: 20">
-                  {{skill.name}} ({{skill.count}})</li>
-              </ul>
-            </div>
-
-            <div class="tags-wrapper col-xs-12 subSection">
-              <h5>INDUSTRIES</h5>
-              <ul>
-                <li ng-repeat="category in career2.categories | limitTo: 10" >
-                  <span class="industryTag colorTransFast">
-                  {{category.name}} ({{category.count}})</span>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career2.onet_titles[0].name)">
-              <h5>WORK ENVIRONMENT</h5>
-              <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}</li>
-              </ul>
-            </div>
-
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career2.onet_titles[0].name)">
-              <h5>SALARY</h5>
-            </div>
-              
-            <div class="col-xs-12 subSection" ng-hide="onetIsNull(career2.onet_titles[0].name)">
-              <h5>EDUCATION</h5>
-            </div>
-
-            <div class="col-xs-12 sourceBox">
-              <h6>Data Source</h6>
-              <span>
+          <div class="col-xs-6 subSection border-left">
+            <span>
                 This career profile is a composite of 
                 <strong>{{career2.job_ids.length}} job postings</strong>
 
@@ -164,13 +171,8 @@
                   Salary information is sourced from the Bureau of Labor Statistics 
                   <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
                 </span>
-                
-              </span>
-            </div>
-
+            </span>
           </div>
-
-          <div class="col-xs-12 hr"></div>
 
         </div>
         
@@ -178,6 +180,6 @@
      
     </div>
 
-  </div>
+  </div> 
 
 </div>

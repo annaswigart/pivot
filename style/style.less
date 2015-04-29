@@ -92,7 +92,7 @@ a {
 // Cards
 
 .card {
-  padding: @padding-base-vertical*4 @padding-base-horizontal*4;
+  padding: @padding-base-vertical*4 @padding-base-horizontal*2;
   margin: @padding-base-vertical*2 @padding-base-horizontal*-1 @padding-base-vertical*2 @padding-base-horizontal;
   box-shadow: 0px 2px 2px @gray-light;
   background-color: #ffffff;
@@ -262,6 +262,14 @@ li .xRemove:hover {
 
 // Compare
 
+.compare h2 {
+  text-align: center;
+}
+
+.compare h5 {
+  text-align: center;
+}
+
 .checkbox {
   padding: @padding-base-horizontal/2;
   margin: 0px;
@@ -283,6 +291,21 @@ li .xRemove:hover {
   text-indent: 0px;
   font-size: 100%;
 }
+
+.border-right, .border-left, .border-both {
+    position: relative;
+}
+.border-left:before, .border-right:after {
+    position: absolute;
+    content:'';
+    height: auto;
+    top: 0px;
+    bottom: 0px;
+    border-right: 1px solid @gray-light;
+    width: 0;
+}
+.border-left:before { left: -1px; }
+.border-right:after { right: 0px; }
 
 
 // Transitions
