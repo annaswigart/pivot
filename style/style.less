@@ -89,7 +89,7 @@ a {
 }
 
 .checkbox {
-  padding: @padding-base-horizontal/2;
+  padding: @padding-base-vertical/2 @padding-base-horizontal/2;
   margin: 0px;
   color: @gray;
   display: inline-block;
@@ -101,10 +101,25 @@ a {
 }
 
 .sidebarList {
-  margin-left: 30px;
-  text-indent: -15px;
   font-size: @font-size-small;
 }
+
+.sidebarColLeft {
+  padding-top: @padding-base-vertical;
+  vertical-align: top;
+}
+
+.sidebarColMid {
+ width: 170px;
+ padding: @padding-base-vertical 0px 0px @padding-base-horizontal;
+ vertical-align: top;
+}
+
+.sidebarColRight{
+  padding-top: @padding-base-vertical;
+  vertical-align: top;
+}
+
 .sidebarListTail {
   text-indent: 0px;
   font-size: 100%;
@@ -190,7 +205,7 @@ a {
 
 .xRemove {
   color: #fff;
-  padding: @padding-base-vertical @padding-base-horizontal;
+  padding: @padding-base-vertical/2 @padding-base-horizontal;
   cursor: pointer;
 }
 
