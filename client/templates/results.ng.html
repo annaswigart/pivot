@@ -46,11 +46,13 @@
           </h4>
 
           <div class="row col-xs-12">
-            <h5>ACTIVITIES</h5>
+
+            <h5>TOP ACTIVITIES</h5>
             <ul class="fa-ul">
-              <li ng-repeat="activity in placeholderText | limitTo: 3" class="longListItem">
+              <li ng-repeat="activity in career.work_activities | limitTo: 3" class="longListItem">
                 <span class="fa fa-li fa-angle-right fa-lg"></span>
-                {{activity.text}}</li>
+                {{activity}}
+              </li>
             </ul>
           </div>
 
