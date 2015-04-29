@@ -14,6 +14,8 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 
 
 
+
+
 }]);
 
 
@@ -84,9 +86,9 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window',
+    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', '$http',
     function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, $window){
+        $state, $meteorObject, $rootScope, $meteorUtils, $window, $http){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
     
@@ -114,6 +116,9 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $scope.queryStack.unshift(input);
         $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+
+        // reset number of results displayed
+        $scope.numResultsDisplayed = 10;
      
         return $scope.query;
     }
@@ -125,7 +130,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     }
 
 
-    // $scope.resultsLoading = true;
+    $scope.resultsLoading = true;
     
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerResults', {
@@ -134,24 +139,20 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         }, $scope.getReactively('submittedQuery')).then(function(sub){
             
             $scope.careers = $meteor.collection(function() {
-                return Careers.find({});
-                $scope.resultsLoading = false;
+                return Careers.find({}, {sort: {score: -1}});
+                
             });
-
-            console.log($scope.careers);
+            $scope.resultsLoading = false;
             
         });
     });
 
- $meteor.autorun($scope, function() {
-    $scope.careers = $meteor.collection(function() {
-            return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
-                // $scope.resultsLoading = false;
-     });
-});
-            
-            
-
+//  $meteor.autorun($scope, function() {
+//     $scope.careers = $meteor.collection(function() {
+//             return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
+//                 // $scope.resultsLoading = false;
+//      });
+// });
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
