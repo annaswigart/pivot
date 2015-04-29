@@ -6,7 +6,7 @@
         <div class="sidebar card">
           <form class="form-horizontal" name="resultsQuery" role="form">
             <div class="form-group"> 
-              <div class="input-group input-group-lg">
+              <div class="input-group input-group-sm">
                 <input type="text" name="text" class="form-control" ng-model="query"/>
                 <span class="input-group-btn">
                   <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
@@ -41,9 +41,9 @@
     <div class="row">
       <div class="sidebar card">
 
-        <h4 class="cardTitle">Compare Careers</h4>
+        <h4 class="cardTitle">Pinned Careers</h4>
 
-        <h5>Pinned Careers</h5>
+        <!-- <h5>Pinned Careers</h5> -->
           <ul class="sidebarList">
             <li ng-repeat="p in pinnedCareers track by $index" class="careerName">
               <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(p.id), 'fa-square-o': !isCompared(p.id)}" aria-label="select career" ng-click="toggleComparedCareer(p.id)"></span>
@@ -65,7 +65,7 @@
             </li>
           </ul> -->
 
-        <button type="button" class="btn btn-default btn-block" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE</button>
+        <button type="button" class="btn btn-default btn-block" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
       </div>
     </div>

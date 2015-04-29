@@ -15,7 +15,7 @@
 
       <div class="profile card">
 
-        <h2 class="cardTitle careerName">{{career.standardized_title}}
+        <h2 class="col-xs-12 cardTitle careerName">{{career.standardized_title}}
           <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
         </h2>
 
@@ -78,8 +78,8 @@
 
               <span ng-hide="onetIsNull(career.onet_titles[0].name)"> and the O*NET profile for 
                 <a href="http://www.onetonline.org/link/summary/{{career.onet_codes[0].name}}" target="_blank">
-                  {{career.onet_titles[0].name}}
-                </a>. 
+                  {{career.onet_titles[0].name}}. 
+                </a>
                 Salary information is sourced from the Bureau of Labor Statistics 
                 <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
               </span>
