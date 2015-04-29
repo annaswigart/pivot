@@ -49,7 +49,7 @@
               <table>
                 <tr>
                   <td class="sidebarColLeft">
-                    <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(p.id), 'fa-square-o': !isCompared(p.id)}" aria-label="select career" ng-click="toggleComparedCareer(p.id)"></span>
+                    <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(p.id), 'fa-square-o': !isCompared(p.id), 'fa-square': isNotActive(p.id)}" aria-label="select career" ng-click="toggleComparedCareer(p.id)"></span>
                   </td>
                   <td class="sidebarColMid">
                     <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.name, p.id)">

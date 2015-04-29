@@ -258,12 +258,23 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         } else {
             $scope.comparedCareers.push(careerId);
         }
+        $scope.comparedCareers = $scope.comparedCareers.slice(0,2);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 
     // apply checkbox style if checked
     $scope.isCompared = function(careerId) {
         return _.contains($scope.comparedCareers, careerId);
+    }
+
+    // apply inactive style when 2 are checked
+    $scope.isNotActive = function(careerId) {
+        if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
+            console.log(true);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // placeholder text
@@ -422,12 +433,23 @@ function($scope, $meteor, $stateParams, $window){
         } else {
             $scope.comparedCareers.push(careerId);
         }
+        $scope.comparedCareers = $scope.comparedCareers.slice(0,2);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 
     // apply checkbox style if checked
     $scope.isCompared = function(careerId) {
         return _.contains($scope.comparedCareers, careerId);
+    }
+
+    // apply inactive style when 2 are checked
+    $scope.isNotActive = function(careerId) {
+        if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
+            console.log(true);
+            return true;
+        } else {
+            return false;
+        }
     }
 
     // apply inactive style when less than 2 checked
@@ -593,6 +615,7 @@ function($scope, $meteor, $stateParams, $window){
         } else {
             $scope.comparedCareers.push(careerId);
         }
+        $scope.comparedCareers = $scope.comparedCareers.slice(0,2);
         $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
     }
 
@@ -601,7 +624,15 @@ function($scope, $meteor, $stateParams, $window){
         return _.contains($scope.comparedCareers, careerId);
     }
 
-    // apply inactive style when less than 2 checked
+    // apply inactive style when 2 are checked
+    $scope.isNotActive = function(careerId) {
+        if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
+            console.log(true);
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
