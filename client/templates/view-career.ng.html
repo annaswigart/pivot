@@ -28,9 +28,9 @@
           <div class="col-xs-12 subSection">
             <h5>ACTIVITIES</h5>
             <ul class="fa-ul">
-              <li ng-repeat="activity in placeholderText" class="longListItem">
+              <li ng-repeat="activity in career.work_activities.activities" class="longListItem">
                 <span class="fa fa-li fa-angle-right fa-lg"></span>
-                {{activity.text}}
+                {{activity}}
               </li>
             </ul>
           </div>
@@ -57,18 +57,33 @@
           <div class="col-xs-12 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>WORK ENVIRONMENT</h5>
             <ul class="fa-ul">
-              <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
+              <li ng-repeat="context in career.work_context.top_work_contexts" class="longListItem">
                 <span class="fa fa-li fa-angle-right fa-lg"></span>
-                {{activity.text}}</li>
+                {{context}}</li>
             </ul>
           </div>
 
           <div class="col-xs-6 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>SALARY</h5>
+            <table>
+              <tr>
+                <td>San Francisco Bay Area</td>
+                <td>{{career.salary.annual_salary_bay_area | currency}}</td>
+              </tr>
+              <tr>
+                <td>California</td>
+                <td>{{career.salary.annual_salary_ca | currency}}</td>
+              </tr>
+            </table>
           </div>
             
           <div class="col-xs-6 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
             <h5>EDUCATION</h5>
+            <ul>
+              <li ng-repeat="(degree, percent) in career.education">
+                {{degree}} {{percent}}%
+              </li>
+            </ul>
           </div>
 
           <div class="col-xs-12 sourceBox">
@@ -112,22 +127,44 @@
 
           <div class="subSection"></div>
 
-          <div class="col-xs-4 subSection">
+          <div class="col-xs-6 subSection">
             <h5>TOP COMPANIES</h5>
             <ul>
               <li ng-repeat="company in career.companies | orderBy: '-count' | limitTo:6">{{company.name}} ({{company.count}})</li>
             </ul>
           </div>
 
-          <div class="col-xs-4 subSection" >
+          <div class="col-xs-6 subSection" >
             <h5>SAMPLE JOB TITLES</h5>
             <ul>
               <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo:6">{{title.name}} ({{title.count}})</li>
             </ul>
           </div>
 
-          <div class="col-xs-4 subSection">
+          <div class="col-xs-12">
             <h5>RESUME KEYWORDS</h5>
+            <p>Use these top words from <strong>{{career.standardized_title}}</strong> job postings when you update you reseume and cover letter.</p>
+          </div>
+
+          <div class="col-xs-4 subSection">
+            <h5>Top Verbs</h5>
+            <ul>
+              <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
+            </ul>
+          </div>
+          
+          <div class="col-xs-4 subSection">
+            <h5>Top Nouns</h5>
+              <ul>
+                <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
+              </ul>
+          </div>
+          
+          <div class="col-xs-4 subSection">
+            <h5>Top Adjectives</h5>
+            <ul>
+              <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
+            </ul>
           </div>
 
         </div>

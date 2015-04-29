@@ -41,19 +41,19 @@
           </div>
           <div class="col-xs-6 subSection border-right">
             <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}
-                </li>
-              </ul>
+              <li ng-repeat="activity in career1.work_activities.activities" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{activity}}
+              </li>
+            </ul>
           </div>
           <div class="col-xs-6 subSection border-left">
             <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}
-                </li>
-              </ul>
+              <li ng-repeat="activity in career2.work_activities.activities" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{activity}}
+              </li>
+            </ul>
           </div>
         </div>
 
@@ -108,16 +108,16 @@
           </div>
           <div class="col-xs-6 subSection border-right">
             <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}</li>
+                <li ng-repeat="context in career1.work_context.top_work_contexts" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{context}}</li>
             </ul>
           </div>
           <div class="col-xs-6 subSection border-left">
             <ul class="fa-ul">
-                <li ng-repeat="activity in placeholderText | limitTo: 4" class="longListItem">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{activity.text}}</li>
+                <li ng-repeat="context in career2.work_context.top_work_contexts" class="longListItem">
+                <span class="fa fa-li fa-angle-right fa-lg"></span>
+                {{context}}</li>
             </ul>
           </div>
         </div>
@@ -128,10 +128,28 @@
             <h5>SALARY</h5>
           </div>
           <div class="col-xs-6 subSection border-right">
-            
+            <table>
+              <tr>
+                <td>San Francisco Bay Area</td>
+                <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
+              </tr>
+              <tr>
+                <td>California</td>
+                <td>{{career1.salary.annual_salary_ca | currency}}</td>
+              </tr>
+            </table>
           </div>
           <div class="col-xs-6 subSection border-left">
-            
+            <table>
+              <tr>
+                <td>San Francisco Bay Area</td>
+                <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
+              </tr>
+              <tr>
+                <td>California</td>
+                <td>{{career2.salary.annual_salary_ca | currency}}</td>
+              </tr>
+            </table>
           </div>
         </div>
 
@@ -141,10 +159,18 @@
             <h5>EDUCATION</h5>
           </div>
           <div class="col-xs-6 subSection border-right">
-            
+            <ul>
+              <li ng-repeat="(degree, percent) in career1.education">
+                {{degree}} {{percent}}%
+              </li>
+            </ul>
           </div>
           <div class="col-xs-6 subSection border-left">
-            
+            <ul>
+              <li ng-repeat="(degree, percent) in career2.education">
+                {{degree}} {{percent}}%
+              </li>
+            </ul>
           </div>
         </div>
 
