@@ -84,16 +84,18 @@
           <div class="col-xs-6 subSection border-right">
             <ul>
                 <li ng-repeat="category in career1.categories | limitTo: 10" >
-                  <span class="industryTag colorTransFast">
-                  {{category.name}} ({{category.count}})</span>
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                    {{category.name}} {{category.count}}
+                  </a>
                 </li>
             </ul>
           </div>
           <div class="col-xs-6 subSection border-left">
             <ul>
                 <li ng-repeat="category in career2.categories | limitTo: 10" >
-                  <span class="industryTag colorTransFast">
-                  {{category.name}} ({{category.count}})</span>
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                    {{category.name}} {{category.count}}
+                  </a>
                 </li>
             </ul>
           </div>

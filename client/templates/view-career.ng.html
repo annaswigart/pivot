@@ -47,8 +47,9 @@
             <h5>INDUSTRIES</h5>
             <ul>
               <li ng-repeat="category in career.categories | limitTo: 10" >
-                <span class="industryTag colorTransFast">
-                {{category.name}} ({{category.count}})</span>
+                <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                  {{category.name}} {{category.count}}
+                </a>
               </li>
             </ul>
           </div>

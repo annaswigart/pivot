@@ -39,7 +39,7 @@
 
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
 
-        <div class="result-box">
+        <div class="resultBox">
           <h4 class="careerName">
             <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">{{career.standardized_title}} ({{career.num_ids}})</a>
             <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
@@ -69,7 +69,10 @@
             <div class="tags-wrapper col-xs-8">
               <h5>TOP INDUSTRIES</h5>
               <ul>
-                <li ng-repeat="category in career.categories | limitTo: 5"><span class="industryTag colorTransFast">{{category.name}}</span></li>
+                <li ng-repeat="category in career.categories | limitTo: 5">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                    {{category.name}}
+                  </a></li>
               </ul>
             </div>
 
