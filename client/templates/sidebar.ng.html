@@ -75,7 +75,7 @@
             </li>
           </ul> -->
 
-        <button type="button" class="btn btn-default btn-block" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+        <button type="button" class="btn btn-default btn-block" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
       </div>
     </div>
