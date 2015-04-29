@@ -9,7 +9,7 @@
               <div class="input-group input-group-sm">
                 <input type="text" name="text" class="form-control" ng-model="query"/>
                 <span class="input-group-btn">
-                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search">
+                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
                     <span class="fa fa-search" aria-hidden="true"></span>
                   </button>
                 </span>
@@ -20,7 +20,7 @@
           
           <h5>Recent Searches</h5>
           <ul class="sidebarList">
-            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)">{{q}}</a></li>
+            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results(query)">{{q}}</a></li>
           </ul>
 
           <h5>Recently Viewed Careers</h5>
