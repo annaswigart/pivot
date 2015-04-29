@@ -43,6 +43,11 @@ li {
   margin-left: @padding-base-horizontal*-1;
 }
 
+.listIconTail {
+  text-indent: 0px;
+  font-size: 100%;
+}
+
 
 // Home Search
 
@@ -69,6 +74,24 @@ a {
 .navbar {
   box-shadow: 0px 3px 3px @gray-light;
 }
+
+
+// Vertical Dividers
+
+.border-right, .border-left, .border-both {
+    position: relative;
+}
+.border-left:before, .border-right:after {
+    position: absolute;
+    content:'';
+    height: auto;
+    top: 0px;
+    bottom: 0px;
+    border-right: 1px solid @gray-light;
+    width: 0;
+}
+.border-left:before { left: -1px; }
+.border-right:after { right: 0px; }
 
 
 // Main
@@ -124,12 +147,6 @@ a {
   padding-top: @padding-base-vertical;
   vertical-align: top;
 }
-
-.sidebarListTail {
-  text-indent: 0px;
-  font-size: 100%;
-}
-
 
 // Cards
 
@@ -340,22 +357,6 @@ li .xRemove:hover {
 .compare .card {
   padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
-
-.border-right, .border-left, .border-both {
-    position: relative;
-}
-.border-left:before, .border-right:after {
-    position: absolute;
-    content:'';
-    height: auto;
-    top: 0px;
-    bottom: 0px;
-    border-right: 1px solid @gray-light;
-    width: 0;
-}
-.border-left:before { left: -1px; }
-.border-right:after { right: 0px; }
-
 
 // Transitions
 
