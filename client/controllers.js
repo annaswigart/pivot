@@ -1,8 +1,4 @@
 
-CareerData = new Mongo.Collection("careerData");
-
-
-
 if (Meteor.isClient) {
 
 // ***********************************
@@ -139,7 +135,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         }, $scope.getReactively('submittedQuery')).then(function(sub){
             
             $scope.careers = $meteor.collection(function() {
-                return Careers.find({}, {sort: {score: -1}});
+                return CareerSearch.find({}, {sort: {score: -1}});
                 
             });
             $scope.resultsLoading = false;
