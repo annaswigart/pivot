@@ -271,7 +271,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
@@ -308,7 +307,7 @@ function($scope, $meteor, $stateParams, $window){
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log($scope.career);
+            console.log("Career View object: " + $scope.career);
         });
     });
 
@@ -446,7 +445,6 @@ function($scope, $meteor, $stateParams, $window){
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
@@ -628,7 +626,6 @@ function($scope, $meteor, $stateParams, $window){
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
