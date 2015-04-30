@@ -21,7 +21,7 @@
           <div class="input-group input-group-lg">
             <input type="text" name="text" class="form-control" placeholder="{{selectedCategory.placeholder}}" ng-model="searchQuery"/>
             <span class="input-group-btn">
-              <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
+              <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                 <span class="fa fa-search" aria-hidden="true"></span>
               </button>
             </span>

@@ -20,7 +20,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
         })
         
         .state('results', {
-            url: '/results/:query', //query terms should probably be in the URL
+            url: '/results/:queryString', //query terms should probably be in the URL
             views: {
                 navBar: {
                     templateUrl: 'client/templates/nav-bar.ng.html',

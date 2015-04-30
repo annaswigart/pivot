@@ -75,7 +75,7 @@
 
         <div class="resultBox">
           <h4 class="text-capitalize">
-            <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">{{career.standardized_title}} ({{career.num_ids}})</a>
+            <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career._id)">{{career.standardized_title}} ({{career.num_ids}})</a>
             <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
           </h4>
 

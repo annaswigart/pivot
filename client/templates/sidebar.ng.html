@@ -42,9 +42,9 @@
 
           <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize">
-                <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
-                  {{v.name}}
+            <li ng-repeat="id in viewedCareerIds" class="text-capitalize">
+                <a ui-sref="careerView({careerId: id})" ng-click="viewCareer(id)">
+                  {{ getCareerName(id) }}
                 </a>
               <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
             </li>
@@ -72,8 +72,8 @@
                     <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(p.id), 'fa-square-o': !isCompared(p.id), 'fa-square': isNotActive(p.id)}" aria-label="select career" ng-click="toggleComparedCareer(p.id)"></span>
                   </td>
                   <td class="sidebarColMid">
-                    <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.name, p.id)">
-                      {{p.name}}
+                    <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.id)">
+                      {{ getCareerName(p.id) }}
                     </a>
                   </td>
                   <td class="sidebarColRight">
