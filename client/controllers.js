@@ -104,7 +104,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.selectedCategory = JSON.stringify($window.localStorage.getItem('searchCategory'));
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -114,7 +114,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
 
         // reset number of results displayed
@@ -271,26 +271,14 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
         }
     }
 
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
+    // for accordion class styling
+    var status = {isFirstOpen: true, isFirstDisabled: false};
 
 }]);
 
@@ -308,14 +296,14 @@ function($scope, $meteor, $stateParams, $window){
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log($scope.career);
+            console.log("Career View object: " + $scope.career);
         });
     });
 
     // functions for search sidebar
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -324,7 +312,7 @@ function($scope, $meteor, $stateParams, $window){
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
@@ -446,33 +434,16 @@ function($scope, $meteor, $stateParams, $window){
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
         }
     }
 
-    // apply inactive style when less than 2 checked
-
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
    
 
 
@@ -498,7 +469,7 @@ function($scope, $meteor, $stateParams, $window){
     // functions for search sidebar
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -507,7 +478,7 @@ function($scope, $meteor, $stateParams, $window){
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
@@ -628,7 +599,6 @@ function($scope, $meteor, $stateParams, $window){
     // apply inactive style when 2 are checked
     $scope.isNotActive = function(careerId) {
         if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            console.log(true);
             return true;
         } else {
             return false;
@@ -639,20 +609,6 @@ function($scope, $meteor, $stateParams, $window){
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
 
 }]);
 
