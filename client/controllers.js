@@ -277,19 +277,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         }
     }
 
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
+    // for accordion class styling
+    var status = {isFirstOpen: true, isFirstDisabled: false};
 
 }]);
 
@@ -451,26 +440,10 @@ function($scope, $meteor, $stateParams, $window){
         }
     }
 
-    // apply inactive style when less than 2 checked
-
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
    
 
 
@@ -636,20 +609,6 @@ function($scope, $meteor, $stateParams, $window){
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-
-    // placeholder text
-    $scope.placeholderText = [
-        {text: "Vivendum incorrupte nam cu, eu eam alii dolor scribentur, an everti option principes eum."},
-        {text: "Qui cu epicurei accusamus. Eu dicit partem erroribus per, ei diam labitur volumus vel, et mel quis nominavi."},
-        {text: "Ex mel tamquam recusabo. His aliquip accusata an, stet consul ne sit, mucius possim pri in."},
-        {text: "Recteque disputando signiferumque no vis. In rebum numquam pri."},
-        {text: "Sed primis adipiscing eu, te pro graecis nominavi reprehendunt. Aeterno integre fierent no his, at est propriae copiosae. "},
-        {text: "Ne posse tractatos definiebas sea, ei exerci putent mea, ne deserunt."},
-        {text: "At pri movet audire feugiat, vix eu alia urbanitas. Cu his atqui facilis facilisi, eos at velit sadipscing."},
-        {text: "Malorum offendit vis ei, purto aperiri neglegentur ex mel, omnis numquam mei et."},
-        {text: "Vim dicunt nominati te, amet periculis vim ei. Forensibus reprimique ne sea."},
-        {text: "Per vidisse perfecto aliquando id. Purto timeam ius at, sit modo dico maiorum et. Eos at atomorum deseruisse."}
-    ];
 
 }]);
 
