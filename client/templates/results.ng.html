@@ -85,8 +85,10 @@
               <h5>TOP SKILLS</h5>
               <ul class="fa-ul">
                 <li ng-repeat="skill in career.skills | limitTo: 5">
-                  <span class="fa fa-li fa-angle-right fa-lg"></span>
-                  {{skill.name}}
+                  <span class="fa fa-li fa-angle-right fa-lg" ></span>
+                  <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results(skill.name)">
+                    {{skill.name}}
+                  </a>
                 </li>
               </ul>
             </div>
