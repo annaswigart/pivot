@@ -143,12 +143,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         });
     });
 
-//  $meteor.autorun($scope, function() {
-//     $scope.careers = $meteor.collection(function() {
-//             return Careers.find({},{sort: {score: -1}}, {limit: parseInt($scope.getReactively('numResultsDisplayed'))});
-//                 // $scope.resultsLoading = false;
-//      });
-// });
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
