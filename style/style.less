@@ -104,8 +104,34 @@ a {
 // Sidebar
 
 .sidebar .card {
-    padding: @padding-base-vertical*2 @padding-base-horizontal*2;
+    padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
+
+.sidebar .form-control {
+  margin-top: @padding-base-vertical;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style glyph */
+.inner-addon .fa {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align glyph */
+.left-addon .fa  { left:  0px;}
+.right-addon .fa { right: 0px;}
+
+/* add padding  */
+.left-addon input  { padding-left:  30px; }
+.right-addon input { padding-right: 30px; }
+
+
 
 .checkbox {
   padding: @padding-base-vertical/2 @padding-base-horizontal/2;
@@ -128,8 +154,29 @@ a {
   color: @gray-lighter;
 }
 
+.sidebar h5 {
+  padding-top: @padding-base-vertical*2;
+}
+
+.sidebar button {
+  font-size: @font-size-small;
+}
+
 .sidebarList {
   font-size: @font-size-small;
+  margin-bottom: 0px;
+}
+
+.sidebarList li {
+  padding-bottom: @padding-base-vertical*2;
+}
+
+.pinnedList li {
+  padding-bottom: @padding-base-vertical;
+}
+
+.sidebar button {
+  margin-top: @padding-base-vertical*4;
 }
 
 .sidebarColLeft {
@@ -161,10 +208,6 @@ a {
 .cardTitle {
   border-bottom: 1px solid @brand-primary;
   padding-bottom: @padding-base-vertical;
-}
-
-.skill-wrapper {
-  /*display: inline-block;*/
 }
 
 .label {
@@ -206,8 +249,7 @@ a {
 // Pinning
 
 .pin {
-  font-size: 80%;
-  padding: @padding-base-vertical @padding-base-horizontal;
+  padding: 0px @padding-base-horizontal;
   color: @gray-light;
   cursor: pointer;
 

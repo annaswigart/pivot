@@ -104,7 +104,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     $scope.selectedCategory = JSON.stringify($window.localStorage.getItem('searchCategory'));
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -114,7 +114,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
 
         // reset number of results displayed
@@ -303,7 +303,7 @@ function($scope, $meteor, $stateParams, $window){
     // functions for search sidebar
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -312,7 +312,7 @@ function($scope, $meteor, $stateParams, $window){
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
@@ -469,7 +469,7 @@ function($scope, $meteor, $stateParams, $window){
     // functions for search sidebar
 
     // JSON.parse to read the stack in as an array
-    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,4);
+    $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
 
     $scope.setQuery = function(input) {
         //set query
@@ -478,7 +478,7 @@ function($scope, $meteor, $stateParams, $window){
 
         //update query stack
         $scope.queryStack.unshift(input);
-        $scope.queryStack = _.uniq($scope.queryStack).slice(0,4);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
         $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
      
         return $scope.query;
