@@ -97,7 +97,7 @@ a {
 // Main
 
 .main h5 {
-  color: @brand-primary-dark;
+  color: @gray;
 }
 
 
@@ -232,8 +232,8 @@ a {
 }
 
 .industryTag {
-  color: @gray-dark;
-  background-color: @brand-primary-light;
+  color: @brand-primary;
+  background-color: @brand-primary-lighter;
   font-size: 90%;
   line-height: 3;
   padding: @padding-base-vertical @padding-base-horizontal;
@@ -242,8 +242,8 @@ a {
 }
 
 .industryTag:hover{
-  color: @brand-primary;
-  background-color: @brand-primary-lighter;
+  color: @brand-primary-dark;
+  background-color: @brand-primary-light;
 }
 
 // Pinning
@@ -260,9 +260,8 @@ a {
 }
 
 .pinSelected {
-  font-size: 80%;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @brand-primary;
+  padding: 0px @padding-base-horizontal;
+  color: @brand-secondary;
   cursor: pointer;
 
 }
@@ -351,6 +350,14 @@ li .xRemove:hover {
   border-bottom: 1px solid @gray-light; 
 }
 
+.resultBox h4 a {
+  color: @brand-primary-dark;
+}
+
+.resultBox h4 a:hover {
+  color: @brand-primary-darker;
+}
+
 .resultsHeader {
   margin: 0px; 
   padding: 12px 12px 12px 0px;
@@ -361,6 +368,7 @@ li .xRemove:hover {
 }
 
 .resultCount{
+  color: @gray;
   margin: @padding-base-vertical 0px;
 }
 

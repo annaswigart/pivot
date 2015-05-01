@@ -24,16 +24,22 @@
 @gray-lighter:          lighten(@gray-base, 93.5%); // #eee
 @gray-lightest:         lighten(@gray-base, 97.3%); // #fefefe (added this one)
 
-@brand-primary:         #555555;       // changed from #428bca to #555 for typography focus
+@brand-primary:         #3498db;       // changed from #428bca to #555 for typography focus
+@brand-primary-darker:  darken(@brand-primary, 20%);  // #245682
+@brand-primary-dark:    darken(@brand-primary, 10%);  // #3071a9
+@brand-primary-light:   lighten(@brand-primary, 35%); // #cde1f1
+@brand-primary-lighter: lighten(@brand-primary, 40%); // #e1edf7
+
+@brand-secondary:           #ff4500;
+@brand-secondary-darker:    darken(@brand-secondary, 20%);
+@brand-secondary-dark:      darken(@brand-secondary, 10%);
+@brand-secondary-light:     lighten(@brand-secondary, 35%);
+@brand-secondary-lighter:   lighten(@brand-secondary, 40%);
+
 @brand-success:         #5cb85c;
 @brand-info:            #5bc0de;
 @brand-warning:         #f0ad4e;
 @brand-danger:          #d9534f;
-
-@brand-primary-darker:  darken(@brand-primary, 20$);  // #245682
-@brand-primary-dark:    darken(@brand-primary, 10%);  // #3071a9
-@brand-primary-light:   lighten(@brand-primary, 35%); // #cde1f1
-@brand-primary-lighter: lighten(@brand-primary, 40%); // #e1edf7
 
 //== Scaffolding
 //
@@ -368,12 +374,12 @@
 @navbar-padding-vertical:          ((@navbar-height - @line-height-computed) / 2);
 @navbar-collapse-max-height:       340px;
 
-@navbar-default-color:             #fff;        // changed from #777 to #fff
-@navbar-default-bg:                @brand-primary;     // changed from #f8f8f8 to @brand-primary
+@navbar-default-color:             @brand-primary;        // changed from #777 to #3498db
+@navbar-default-bg:                #fff;     // changed from #f8f8f8 to #fff
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
-@navbar-default-link-color:                #fff;    // changed from #777 to #fff
+@navbar-default-link-color:                @brand-primary;        // changed from #777 to @brand-primary
 @navbar-default-link-hover-color:          #333;
 @navbar-default-link-hover-bg:             transparent;
 @navbar-default-link-active-color:         #555;

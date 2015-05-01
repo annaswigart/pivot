@@ -78,9 +78,8 @@
             <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">{{career.standardized_title}} ({{career.num_ids}})</a>
             <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
           </h4>
-
+<!-- 
           <div class="row col-xs-12">
-
             <h5>TOP ACTIVITIES</h5>
             <ul class="fa-ul">
               <li ng-repeat="activity in career.work_activities | limitTo: 3" class="longListItem">
@@ -88,12 +87,12 @@
                 {{activity}}
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="row">
 
             <div class="skills-wrapper col-xs-4">
-              <h5>TOP SKILLS</h5>
+              <h5>Top Skills</h5>
               <ul class="fa-ul">
                 <li ng-repeat="skill in career.skills | limitTo: 5">
                   <span class="fa fa-li fa-angle-right fa-lg" ></span>
@@ -105,7 +104,7 @@
             </div>
 
             <div class="tags-wrapper col-xs-8">
-              <h5>TOP INDUSTRIES</h5>
+              <h5>Top Industries</h5>
               <ul>
                 <li ng-repeat="category in career.categories | limitTo: 5">
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
