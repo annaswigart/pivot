@@ -60,12 +60,16 @@ li {
 
 a:hover {
   text-decoration: none;
+  border-bottom: 1px dotted @brand-primary;
 }
 
 a {
   text-decoration: none;
 }
 
+.navbar-header a {
+  border-bottom: none;
+}
 
 // Nav
 
@@ -97,7 +101,7 @@ a {
 // Main
 
 .main h5 {
-  color: @brand-primary-dark;
+  color: @gray;
 }
 
 
@@ -232,18 +236,17 @@ a {
 }
 
 .industryTag {
-  color: @gray-dark;
-  background-color: @brand-primary-light;
-  font-size: 90%;
+  background-color: @brand-primary-lighter;
+  font-size: @font-size-small;
   line-height: 3;
   padding: @padding-base-vertical @padding-base-horizontal;
   margin-right: @padding-base-horizontal;
   border-radius: @border-radius-small;
 }
 
-.industryTag:hover{
-  color: @brand-primary;
-  background-color: @brand-primary-lighter;
+.industryTag:hover {
+  background-color: @brand-primary-light;
+  /*border-bottom: 1px solid @brand-primary;*/
 }
 
 // Pinning
@@ -260,9 +263,8 @@ a {
 }
 
 .pinSelected {
-  font-size: 80%;
-  padding: @padding-base-vertical @padding-base-horizontal;
-  color: @brand-primary;
+  padding: 0px @padding-base-horizontal;
+  color: @brand-secondary;
   cursor: pointer;
 
 }
@@ -317,12 +319,17 @@ li .xRemove:hover {
 
 // Results
 
-.personalize h4 {
+.personalize h5 {
   display: inline-block;
 }
 
 .personalize .fa {
   padding: @padding-base-horizontal;
+}
+
+.personalizeInput {
+  font-size: @font-size-small;
+  padding-left: @padding-base-horizontal*3;
 }
 
 .personalize .panel {
@@ -342,6 +349,10 @@ li .xRemove:hover {
   margin-bottom: 0px;
 }
 
+.skills-wrapper {
+  font-size: @font-size-small;
+}
+
 .results .card {
   padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
@@ -351,9 +362,22 @@ li .xRemove:hover {
   border-bottom: 1px solid @gray-light; 
 }
 
+.resultBox h5 {
+  margin-bottom: @padding-base-vertical;
+}
+
+.resultBox h5 a {
+  color: @brand-primary-dark;
+}
+
+.resultBox h5 a:hover {
+  color: @brand-primary-darker;
+  border-bottom: 1px dotted @brand-primary-darker;
+}
+
 .resultsHeader {
   margin: 0px; 
-  padding: 12px 12px 12px 0px;
+  padding-bottom: @padding-base-vertical*2;
 }
 
 .resultTitle {
@@ -361,6 +385,7 @@ li .xRemove:hover {
 }
 
 .resultCount{
+  color: @gray-med;
   margin: @padding-base-vertical 0px;
 }
 
