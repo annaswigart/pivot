@@ -20,6 +20,7 @@
 @gray-darker:           lighten(@gray-base, 13.5%); // #222
 @gray-dark:             lighten(@gray-base, 20%);   // #333
 @gray:                  lighten(@gray-base, 33.5%); // #555
+@gray-med:              lighten(@gray-base, 46.7%); // #777 (renamed from gray-light to gray-med)
 @gray-light:            lighten(@gray-base, 73.3%); // changed from 46.7% (#777) to 73.3% (#bbb)
 @gray-lighter:          lighten(@gray-base, 93.5%); // #eee
 @gray-lightest:         lighten(@gray-base, 97.3%); // #fefefe (added this one)
@@ -32,7 +33,7 @@
 
 @brand-secondary:           #ff4500;
 @brand-secondary-darker:    darken(@brand-secondary, 20%);
-@brand-secondary-dark:      darken(@brand-secondary, 10%);
+@brand-secondary-dark:      darken(@brand-secondary, 15%);
 @brand-secondary-light:     lighten(@brand-secondary, 35%);
 @brand-secondary-lighter:   lighten(@brand-secondary, 40%);
 
@@ -52,11 +53,9 @@
 
 //** Global textual link color.
 @link-color:            @brand-primary;
-//** Link hover color set via `darken()` function.
-@link-hover-color:      darken(@link-color, 15%);
+@link-hover-color:      @brand-primary-dark;
 //** Link hover decoration.
 @link-hover-decoration: underline;
-
 
 //== Typography
 //
@@ -379,17 +378,17 @@
 @navbar-default-border:            darken(@navbar-default-bg, 6.5%);
 
 // Navbar links
-@navbar-default-link-color:                @brand-primary;        // changed from #777 to @brand-primary
-@navbar-default-link-hover-color:          #333;
+@navbar-default-link-color:                @gray-med;        // changed from #777 to @brand-primary
+@navbar-default-link-hover-color:          @gray-dark;
 @navbar-default-link-hover-bg:             transparent;
-@navbar-default-link-active-color:         #555;
-@navbar-default-link-active-bg:            darken(@navbar-default-bg, 6.5%);
+@navbar-default-link-active-color:         @gray-med;
+@navbar-default-link-active-bg:            @brand-primary-lighter;
 @navbar-default-link-disabled-color:       #ccc;
 @navbar-default-link-disabled-bg:          transparent;
 
 // Navbar brand label
-@navbar-default-brand-color:               @navbar-default-link-color;
-@navbar-default-brand-hover-color:         darken(@navbar-default-brand-color, 10%);
+@navbar-default-brand-color:               @brand-primary;
+@navbar-default-brand-hover-color:         @brand-primary-dark;
 @navbar-default-brand-hover-bg:            transparent;
 
 // Navbar toggle

@@ -37,9 +37,6 @@
             <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results(query)">{{q}}</a></li>
           </ul>
 
-          <div class="hr"></div>
-
-
           <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
             <li ng-repeat="v in viewedCareers" class="text-capitalize">
