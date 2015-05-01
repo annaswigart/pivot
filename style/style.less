@@ -122,6 +122,7 @@ a {
 
 /* style glyph */
 .inner-addon .fa {
+  color: @gray-med;
   position: absolute;
   padding: 10px;
   pointer-events: none;
@@ -207,6 +208,7 @@ a {
   box-shadow: 0px 2px 2px @gray-light;
   background-color: #ffffff;
   overflow: hidden;
+  border: 1px solid @gray-lighter;
 }
 
 .cardTitle {
@@ -415,8 +417,8 @@ li .xRemove:hover {
 // View Career
 
 .sectionTitle {
-  padding-top: @padding-base-vertical*2;
-  padding-bottom: @padding-base-vertical*4;
+  padding-top: @padding-base-vertical;
+  padding-bottom: @padding-base-vertical;
 }
 
 .titleSubSection {
@@ -424,12 +426,17 @@ li .xRemove:hover {
 }
 
 .sourceBox {
-  background: @gray-lightest;
-  border: 1px solid @gray-lighter;
+  color: @gray-med;
+  background: @brand-primary-lightest;
+  border: 1px solid @brand-primary-light;
   box-shadow: -6px 0px @brand-primary;
   padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
   margin: @padding-base-vertical*4 0px;
 
+}
+
+.sourceBox h6 {
+  color: @gray;
 }
 
 .subSection {
