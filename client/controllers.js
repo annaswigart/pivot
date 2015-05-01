@@ -20,32 +20,9 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$meteorCollection', '$meteorSubscribe', '$window',
-function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){   
+'$state', '$window',
+function($scope, $meteor, $state, $window){   
     
-    // search categories and placeholder text
-    $scope.searchCategories = [
-        {name:'Skill', placeholder: "Skill"},
-        {name:'Industry', placeholder: "Industry"},
-        {name:'Title', placeholder: "Job Title or Career Name"}
-    ];
-
-    // init selected search category
-    $scope.selectedCategory = $scope.searchCategories[0];
-    $window.localStorage.searchCategory = $scope.selectedCategory.name;
-
-    // change selected search category
-    $scope.selectCategory = function(category) {
-        $scope.selectedCategory = category;
-        $window.localStorage.searchCategory = $scope.selectedCategory.name;
-    }
-
-    // for changing style applied to search category
-    $scope.isSelected = function(category) {
-        return $scope.selectedCategory === category;
-    }
-
-
     $scope.query = $window.localStorage.getItem('currentQuery');
 
     // init queryStack in local storage, if doesn't exist
@@ -81,10 +58,9 @@ function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){
 // ResultsController
 // ***********************************
 
-angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', '$http',
-    function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, $window, $http){
+angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', 
+    '$stateParams', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window',
+    function($scope, $meteor, $stateParams, $state, $meteorObject, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
     
@@ -96,8 +72,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
     if($window.localStorage.getItem("queryStack") === null){
         $window.localStorage.queryStack = '[]';
     }
-
-    $scope.selectedCategory = JSON.stringify($window.localStorage.getItem('searchCategory'));
 
     // JSON.parse to read the stack in as an array
     $scope.queryStack = _.uniq(JSON.parse($window.localStorage.getItem('queryStack'))).slice(0,3);
@@ -278,8 +252,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams', '$window',
-function($scope, $meteor, $stateParams, $window){
+ '$stateParams', '$window', function($scope, $meteor, $stateParams, $window){
 
     // $scope.careerID = $stateParams.careerId;
 
