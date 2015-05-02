@@ -25,7 +25,7 @@
 @gray-lighter:          lighten(@gray-base, 93.5%); // #eee
 @gray-lightest:         lighten(@gray-base, 97.3%); // #fefefe (added this one)
 
-@brand-primary:         #3498db;       // changed from #428bca to #555 for typography focus
+@brand-primary:         #3498db;                      // changed from #428bca to #3498db
 @brand-primary-darker:  darken(@brand-primary, 20%);  // #245682
 @brand-primary-dark:    darken(@brand-primary, 10%);  // #3071a9
 @brand-primary-light:   lighten(@brand-primary, 35%); // #cde1f1
@@ -35,7 +35,7 @@
 
 @brand-secondary:           #e76e3c;
 @brand-secondary-darker:    darken(@brand-secondary, 20%);
-@brand-secondary-dark:      darken(@brand-secondary, 15%);
+@brand-secondary-dark:      darken(@brand-secondary, 10%);
 @brand-secondary-light:     lighten(@brand-secondary, 35%);
 @brand-secondary-lighter:   lighten(@brand-secondary, 40%);
 
@@ -57,7 +57,7 @@
 @link-color:            @brand-primary;
 @link-hover-color:      @brand-primary-dark;
 //** Link hover decoration.
-@link-hover-decoration: underline;
+@link-hover-decoration: none;  // changed from underline to none
 
 //== Typography
 //

@@ -48,7 +48,6 @@ li {
   font-size: 100%;
 }
 
-
 // Home Search
 
 .search-label {
@@ -71,12 +70,28 @@ a {
   border-bottom: none;
 }
 
+.showMoreLink, .showMoreLink:visited {
+  font-size: @font-size-small;
+  font-weight: 500;
+  color: @gray;
+  text-decoration: none;
+}
+
+.showMoreLink .fa {
+  padding: 0px @padding-base-horizontal;
+}
+
+.showMoreLink:hover {
+  color: @gray-darker;
+  border-bottom: none;
+}
+
 // Nav
 
 @navbar-padding: 70px;
 
 .navbar {
-  box-shadow: 0px 3px 3px @gray-light;
+  box-shadow: 0px 2px 6px @gray-light;
 }
 
 
@@ -421,18 +436,21 @@ li .xRemove:hover {
   padding-bottom: @padding-base-vertical;
 }
 
+.titleIcon {
+  color: @brand-secondary;
+  padding: @padding-base-horizontal;
+}
+
 .titleSubSection {
   padding: @padding-base-vertical*6 0px;
 }
 
 .sourceBox {
   color: @gray-med;
-  background: @brand-primary-lightest;
   border: 1px solid @brand-primary-light;
-  box-shadow: -6px 0px @brand-primary;
+  box-shadow: -6px 0px @brand-primary, -3px 2px 4px @gray-lighter;
   padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
-  margin: @padding-base-vertical*4 0px;
-
+  margin-top: @padding-base-vertical*2;
 }
 
 .sourceBox h6 {
@@ -440,7 +458,11 @@ li .xRemove:hover {
 }
 
 .subSection {
-  padding-bottom: @padding-base-vertical*10;
+  padding-bottom: @padding-base-vertical*8;
+}
+
+.subSection h5 {
+  color: @brand-secondary;
 }
 
 .subSection .longListItem {
