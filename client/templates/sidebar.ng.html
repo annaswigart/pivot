@@ -6,29 +6,18 @@
 
         <div class="sidebar card">
 
-<!--           <form class="form-horizontal" name="resultsQuery" role="form">
+          <form  name="resultsQuery" role="form">
             <div class="form-group"> 
               <div class="input-group input-group-sm">
                 <input type="text" name="text" class="form-control" ng-model="query"/>
                 <span class="input-group-btn">
-                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
+                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                     <span class="fa fa-search" aria-hidden="true"></span>
                   </button>
                 </span>
               </div>
             </div>
-          </form> -->
-
-          <form name="resultsQuery" role="form" ng-submit="setQuery(query)" ui-sref="results({queryString: queryStringURL})">
-            <div class="form-group">
-              <label class="sr-only">Search</label>
-              <div class="inner-addon right-addon">
-                <span class="fa fa-search"></span>
-                <input type="text" class="form-control" placeholder="Search" ng-model="query" />
-              </div>
-            </div>
           </form>
-
 
           <!-- <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a> -->
 
@@ -40,13 +29,13 @@
           <div class="hr" ng-hide="viewedCareers.length == 0"></div>
 
 
-          <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
+          <h5>Recently Viewed Careers</h5>
           <ul class="sidebarList">
-            <li ng-repeat="c in viewedCareers" class="text-capitalize">
-                <a ui-sref="careerView({careerId: c.id})" ng-click="viewCareer(c.name, c.id)">
-                  {{ c.name }}
+            <li ng-repeat="v in viewedCareers track by v.id" class="text-capitalize"> 
+                <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
+                  {{v.name}}
                 </a>
-             <!--  <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span> -->
+              <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
             </li>
           </ul>
 
@@ -64,7 +53,7 @@
         </h4>
 
         <!-- <h5>Pinned Careers</h5> -->
-          <!-- <ul class="sidebarList pinnedList">
+          <ul class="sidebarList pinnedList">
             <li ng-repeat="p in pinnedCareers track by $index" class="text-capitalize">
               <table>
                 <tr>
@@ -72,8 +61,8 @@
                     <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(p.id), 'fa-square-o': !isCompared(p.id), 'fa-square': isNotActive(p.id)}" aria-label="select career" ng-click="toggleComparedCareer(p.id)"></span>
                   </td>
                   <td class="sidebarColMid">
-                    <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.id)">
-                      {{ getCareerName(p.id) }}
+                    <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.name, p.id)">
+                      {{ p.name }}
                     </a>
                   </td>
                   <td class="sidebarColRight">
@@ -82,18 +71,7 @@
                 </tr>
               </table>
             </li>
-          </ul> -->
-
-<!--         <h5>Recently Viewed Careers</h5>
-          <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize">
-              <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(v.id), 'fa-square-o': !isCompared(v.id)}" aria-label="select career" ng-click="toggleComparedCareer(v.id)"></span>
-                <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
-                  {{v.name}}
-                </a>
-              <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
-            </li>
-          </ul> -->
+          </ul>
 
         <button type="button" class="btn btn-default btn-block" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 

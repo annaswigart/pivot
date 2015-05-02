@@ -86,6 +86,8 @@ angular.module('reflectivePath').controller('SidebarController', ['$scope', '$me
  '$stateParams', '$state', '$window',
 function($scope, $meteor, $stateParams, $state, $window){
 
+    console.log($state.current.name);
+
     $scope.query = $window.localStorage.getItem('currentQuery');
     
     if ($scope.submittedQuery == undefined) {
@@ -127,9 +129,11 @@ function($scope, $meteor, $stateParams, $state, $window){
 
     $scope.viewCareer = function(careerName, careerId) {
         var viewedCareer = {name: careerName, id: careerId};
+        var oldViewed = $scope.viewedCareers.slice(); // makes copy of viewed careers object
 
-        $scope.viewedCareers.unshift(viewedCareer);
-        $scope.viewedCareers = _.uniq($scope.viewedCareers, 'id').slice(0,3);
+        oldViewed.unshift(viewedCareer);
+        $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
+        console.log($scope.viewedCareers);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
@@ -319,9 +323,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
 
     $scope.viewCareer = function(careerName, careerId) {
         var viewedCareer = {name: careerName, id: careerId};
+        var oldViewed = $scope.viewedCareers.slice(); // makes copy of viewed careers object
 
-        $scope.viewedCareers.unshift(viewedCareer);
-        $scope.viewedCareers = _.uniq($scope.viewedCareers, 'id').slice(0,3);
+        oldViewed.unshift(viewedCareer);
+        $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
@@ -499,6 +504,18 @@ function($scope, $meteor, $stateParams, $window){
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
+    }
+
+    // // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    $scope.viewCareer = function(careerName, careerId) {
+        var viewedCareer = {name: careerName, id: careerId};
+        var oldViewed = $scope.viewedCareers.slice(); // makes copy of viewed careers object
+
+        oldViewed.unshift(viewedCareer);
+        $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
 }]);
