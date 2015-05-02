@@ -19,7 +19,7 @@
             </div>
           </form> -->
 
-          <form name="resultsQuery" role="form" ng-submit="setQuery(query)" ui-sref="results(query)">
+          <form name="resultsQuery" role="form" ng-submit="setQuery(query)" ui-sref="results({queryString: queryStringURL})">
             <div class="form-group">
               <label class="sr-only">Search</label>
               <div class="inner-addon right-addon">
@@ -34,19 +34,19 @@
 
           <h6>Recent Searches</h6>
           <ul class="sidebarList">
-            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results(query)">{{q}}</a></li>
+            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results({queryString: queryStringURL})">{{q}}</a></li>
           </ul>
 
-          <div class="hr"></div>
+          <div class="hr" ng-hide="viewedCareers.length == 0"></div>
 
 
           <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
-            <li ng-repeat="id in viewedCareerIds" class="text-capitalize">
-                <a ui-sref="careerView({careerId: id})" ng-click="viewCareer(id)">
-                  {{ getCareerName(id) }}
+            <li ng-repeat="c in viewedCareers" class="text-capitalize">
+                <a ui-sref="careerView({careerId: c.id})" ng-click="viewCareer(c.name, c.id)">
+                  {{ c.name }}
                 </a>
-              <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
+             <!--  <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span> -->
             </li>
           </ul>
 
@@ -64,7 +64,7 @@
         </h4>
 
         <!-- <h5>Pinned Careers</h5> -->
-          <ul class="sidebarList pinnedList">
+          <!-- <ul class="sidebarList pinnedList">
             <li ng-repeat="p in pinnedCareers track by $index" class="text-capitalize">
               <table>
                 <tr>
@@ -82,7 +82,7 @@
                 </tr>
               </table>
             </li>
-          </ul>
+          </ul> -->
 
 <!--         <h5>Recently Viewed Careers</h5>
           <ul class="sidebarList">

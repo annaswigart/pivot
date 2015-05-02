@@ -30,6 +30,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 'main@': {
                     templateUrl: 'client/templates/results.ng.html',
                     controller: 'ResultsController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })
@@ -45,6 +49,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 'main@': {
                     templateUrl: 'client/templates/view-career.ng.html',
                     controller: 'CareerViewController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })
@@ -59,6 +67,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 "main@": {
                     templateUrl: 'client/templates/compare-careers.ng.html',
                     controller: 'CompareViewController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })
