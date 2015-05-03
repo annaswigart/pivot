@@ -70,18 +70,18 @@ a {
   border-bottom: none;
 }
 
-.showMoreLink, .showMoreLink:visited {
+.showMoreCareerInfo, .showMoreCareerInfo:visited {
   font-size: @font-size-small;
-  font-weight: 500;
+  font-weight: 700;
   color: @gray;
   text-decoration: none;
 }
 
-.showMoreLink .fa {
+.showMoreCareerInfo .fa {
   padding: 0px @padding-base-horizontal;
 }
 
-.showMoreLink:hover {
+.showMoreCareerInfo:hover {
   color: @gray-darker;
   border-bottom: none;
 }
@@ -195,7 +195,7 @@ a {
   padding-bottom: @padding-base-vertical;
 }
 
-.sidebar button {
+#compareButton {
   margin-top: @padding-base-vertical*4;
 }
 
@@ -283,8 +283,11 @@ a {
   padding: 0px @padding-base-horizontal;
   color: @brand-secondary;
   cursor: pointer;
-
 }
+
+/*.pin:active, .pinSelected:active {
+  border: 1px solid;
+}*/
 
 .xRemove {
   color: #fff;
@@ -406,25 +409,25 @@ li .xRemove:hover {
   margin: @padding-base-vertical 0px;
 }
 
-.showMore {
+.showMoreResults {
   background: none;
   border: none;
   text-align: center;
 }
 
-.showMore h6 {
+.showMoreResults h6 {
   margin-bottom: @padding-base-vertical;
 }
 
-.showMore:hover h6 {
+.showMoreResults:hover h6 {
   color: @brand-primary;
 }
 
-.showMore .fa {
+.showMoreResults .fa {
   color: @brand-primary;
 }
 
-.showMore:hover .fa {
+.showMoreResults:hover .fa {
   color: @brand-primary-dark;
 }
 
@@ -445,8 +448,9 @@ li .xRemove:hover {
   padding: @padding-base-vertical*6 0px;
 }
 
-.sourceBox {
+/*.sourceBox {
   color: @gray-med;
+  font-size: @font-size-small;
   border: 1px solid @brand-primary-light;
   box-shadow: -6px 0px @brand-primary, -3px 2px 4px @gray-lighter;
   padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
@@ -455,6 +459,20 @@ li .xRemove:hover {
 
 .sourceBox h6 {
   color: @gray;
+}*/
+
+.featuredLinkBox {
+  font-size: @font-size-small;
+  border: 1px solid @gray-light;
+  background-color: #fdfdfd;
+  box-shadow: -6px 0px @gray-med, -3px 2px 4px @gray-lighter;
+  padding: @padding-base-vertical*3 @padding-base-horizontal*2 @padding-base-vertical*4;
+  margin-top: @padding-base-vertical*8;
+}
+
+.featuredLinkBox h5 {
+  color: @gray-dark;
+  line-height: 1.45;
 }
 
 .subSection {
@@ -467,10 +485,6 @@ li .xRemove:hover {
 
 .subSection .longListItem {
   margin-bottom: @padding-base-vertical*4;
-}
-
-.sourceBox span {
-  font-size: @font-size-small;
 }
 
 // Compare

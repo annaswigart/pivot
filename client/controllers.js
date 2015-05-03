@@ -92,11 +92,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
      
         return $scope.query;
     }
-    
-    $scope.numResultsDisplayed = 10;
 
     $scope.showMoreResults = function() {
-            $scope.numResultsDisplayed += 10;
+            var numLeft = $scope.careers.length - $scope.numResultsDisplayed
+            $scope.numResultsDisplayed += Math.min(10, numLeft);
     }
 
 
@@ -112,8 +111,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
                 return CareerSearch.find({}, {sort: {score: -1}});
                 
             });
+            $scope.numResultsDisplayed = Math.min(10, $scope.careers.length);
             $scope.resultsLoading = false;
-            
         });
     });
 
@@ -259,7 +258,8 @@ angular.module('reflectivePath').controller('CareerViewController', ['$scope', '
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log("Career View object: " + $scope.career);
+            console.log("Career View Object:")
+            console.log($scope.career);
         });
     });
 
@@ -407,7 +407,15 @@ angular.module('reflectivePath').controller('CareerViewController', ['$scope', '
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-   
+
+   $scope.createUrlString = function(string, stringType) {
+        if (stringType === "glassdoor") {
+            var urlString = string.replace(' ', '-');
+        } else {
+        var urlString = string.replace(' ', '+');
+        }
+        return urlString
+   }
 
 
 }]); 
