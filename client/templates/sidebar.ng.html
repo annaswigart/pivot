@@ -59,9 +59,18 @@
           <span class="fa fa-thumb-tack"></span>
           Pinned Careers
         </h4>
-        <span class="text-muted small">select 2 careers to compare</span>
 
-        <!-- <h5>Pinned Careers</h5> -->
+        <div ng-hide="pinnedCareers.length != 0">
+          <p>Click on the pin icon 
+            ( <span class="fa fa-thumb-tack"></span> )
+              to save careers here for later.
+          </p>
+        </div>
+
+        <div ng-hide="pinnedCareers.length == 0">
+
+          <span class="text-muted small">select 2 careers to compare</span>
+
           <ul class="sidebarList pinnedList">
             <li ng-repeat="p in pinnedCareers track by $index" class="text-capitalize">
               <table>
@@ -82,18 +91,11 @@
             </li>
           </ul>
 
-<!--         <h5>Recently Viewed Careers</h5>
-          <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize">
-              <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(v.id), 'fa-square-o': !isCompared(v.id)}" aria-label="select career" ng-click="toggleComparedCareer(v.id)"></span>
-                <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
-                  {{v.name}}
-                </a>
-              <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
-            </li>
-          </ul> -->
+          <button type="button" class="btn btn-primary btn-block colorTransFast" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
-        <button type="button" class="btn btn-primary btn-block colorTransFast" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+        </div>
+
+        
 
       </div>
     </div>
