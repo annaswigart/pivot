@@ -111,7 +111,6 @@ function($scope, $meteor, $stateParams, $state, $window){
 
         oldViewed.unshift(viewedCareer);
         $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
-        console.log($scope.viewedCareers);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
     
@@ -478,7 +477,7 @@ function($scope, $meteor, $stateParams, $window){
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
             $scope.career1 = $meteor.object(Careers, {_id: $stateParams.careerId1});
-            $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2})
+            $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2});
         });
     });
 
