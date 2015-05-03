@@ -1,6 +1,8 @@
 
 <div class="row ">
 
+<div ng-include="'client/templates/sidebar.ng.html'"></div>
+
 <!-- MAIN -->
 
   <div class="col-xs-9 main">
@@ -137,15 +139,23 @@
         
           <h3 class="col-xs-12 sectionTitle">Related Careers</h3>
 
-          <div class="col-xs-4 subSection"><a href="">Software Engineer</a></div>
-          <div class="col-xs-4 subSection"><a href="">User Experience Designer</a></div>
-          <div class="col-xs-4 subSection"><a href="">Search Marketing Strategist</a></div>
+          <div class="col-xs-4 subSection">
+            <ul>
+              <li class="longListItem"><a href="">Software Engineer</a></li>
+              <li class="longListItem"><a href="">User Experience Designer</a></li>
+            </ul>
+          </div>
 
-          <div class="subSection"></div>
+          <div class="col-xs-4 subSection">
+            <ul>
+              <li class="longListItem"><a href="">Search Marketing Strategist</a></li>
+              <li class="longListItem"><a href="">Software Quality Assurance Engineer</a></li>
+            </ul>
+          </div>
+
+          <div class="col-xs-12 hr"></div>
 
         </div>
-
-        <div class="col-xs-12 hr"></div>
 
         <!-- Section: Get Hired -->
 
@@ -160,7 +170,7 @@
               <p>Click below to search Glassdoor.com for jobs.</p>
               <ul>
                 <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 8">
-                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, glassdoor) }}-jobs-SRCH_KO0,{title.name.length}.htm">
+                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
                   {{title.name}}
                   </a>
                 </li>
@@ -177,31 +187,39 @@
               </span>
             </div> -->
           
-            <div class="col-xs-12 subSection">
-              <h5>RESUME KEYWORDS</h5>
-              <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
-            </div>
+            <div class="subSection">
 
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-7">
+                <h5>RESUME KEYWORDS</h5>
+                <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
+              </div>
+
+              <div class="col-xs-12"></div>
+
+              <div class="col-xs-3">
                 <h5>Verbs</h5>
                 <ul>
                   <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
                 </ul>
               </div>
               
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-3">
                 <h5>Nouns</h5>
                   <ul>
                     <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
                   </ul>
               </div>
               
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-3">
                 <h5>Adjectives</h5>
                 <ul>
                   <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
                 </ul>
               </div>
+
+            </div>
+
+              
 
           </div>
 

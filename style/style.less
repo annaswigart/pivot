@@ -197,6 +197,13 @@ a {
 
 #compareButton {
   margin-top: @padding-base-vertical*4;
+  border: none;
+}
+
+#compareButton:disabled {
+  color: @gray;
+  background-color: @gray-lighter;
+  border: 1px solid @gray-light;
 }
 
 .sidebarColLeft {
@@ -500,5 +507,5 @@ li .xRemove:hover {
 // Transitions
 
 .colorTransFast {
-  transition: color 300ms, background-color 300ms;
+  transition: color 300ms, background-color 300ms, border-color 300ms;
 }
