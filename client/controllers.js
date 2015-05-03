@@ -86,8 +86,6 @@ angular.module('reflectivePath').controller('SidebarController', ['$scope', '$me
  '$stateParams', '$state', '$window',
 function($scope, $meteor, $stateParams, $state, $window){
 
-    console.log($state.current.name);
-
     $scope.query = $window.localStorage.getItem('currentQuery');
     
     if ($scope.submittedQuery == undefined) {
@@ -138,41 +136,9 @@ function($scope, $meteor, $stateParams, $state, $window){
     }
 
 
-    // init compared careers in local storage
-    if($window.localStorage.getItem("checkedCareers") === null){
-        $window.localStorage.comparedCareers = '[]';
-    }
-    
-    // parse string from local storage
-    $scope.comparedCareers = JSON.parse($window.localStorage.comparedCareers);
+    // **** PINNED CAREERS ****
 
-    // toggle compared career (check / uncheck)
-    $scope.toggleComparedCareer = function(careerId) {
-        if (_.contains($scope.comparedCareers, careerId)) {
-            $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
-        } else {
-            $scope.comparedCareers.push(careerId);
-        }
-        $scope.comparedCareers = $scope.comparedCareers.slice(0,2);
-        $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
-    }
-
-    // apply checkbox style if checked
-    $scope.isCompared = function(careerId) {
-        return _.contains($scope.comparedCareers, careerId);
-    }
-
-    // apply inactive style when 2 are checked
-    $scope.isNotActive = function(careerId) {
-        if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-   
-
-    // init pinned careers in local storage
+        // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
         $window.localStorage.pinnedCareers = '[]';
     }
@@ -223,6 +189,41 @@ function($scope, $meteor, $stateParams, $state, $window){
     }
 
 
+    // **** COMPARE CAREERS ****
+
+    // init compared careers in local storage
+    if($window.localStorage.getItem("checkedCareers") === null){
+        $window.localStorage.comparedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.comparedCareers = JSON.parse($window.localStorage.comparedCareers);
+
+    // toggle compared career (check / uncheck)
+    $scope.toggleComparedCareer = function(careerId) {
+        if (_.contains($scope.comparedCareers, careerId)) {
+            $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+        } else {
+            $scope.comparedCareers.push(careerId);
+        }
+        $scope.comparedCareers = $scope.comparedCareers.slice(0,2);
+        $window.localStorage.comparedCareers = JSON.stringify($scope.comparedCareers);
+    }
+
+    // apply checkbox style if checked
+    $scope.isCompared = function(careerId) {
+        return _.contains($scope.comparedCareers, careerId);
+    }
+
+    // apply inactive style when 2 are checked
+    $scope.isNotActive = function(careerId) {
+        if (!$scope.isCompared(careerId) && $scope.comparedCareers.length == 2) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }]);
 
 // ***********************************
@@ -235,6 +236,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $state, $meteorObject, $rootScope, $meteorUtils, $window, $http){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
+
+    // $scope.setUrlString = function(input) {
+    //     return input.split(' ').join('+');
+    // }
     
     $scope.numResultsDisplayed = 10;
 
@@ -259,6 +264,36 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
             
         });
     });
+
+    //**** QUERYING BY TAG ****
+
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
+
+    // needed for querying by clicking on industry or skill
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        // construct query string for URL (replace spaces with +)
+        $scope.queryStringURL = input.split(' ').join('+');
+
+        return $scope.query;
+    } 
+
+    //**** PINNED CAREERS ****
+
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
@@ -350,6 +385,37 @@ function($scope, $meteor, $stateParams, $state, $window){
         });
     });
 
+
+    //**** QUERYING BY TAG ****
+
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
+
+    // needed for querying by clicking on industry or skill
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        // construct query string for URL (replace spaces with +)
+        $scope.queryStringURL = input.split(' ').join('+');
+
+        return $scope.query;
+    } 
+
+
+    // **** PINNED CAREERS ****
+
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
         $window.localStorage.pinnedCareers = '[]';
@@ -424,6 +490,36 @@ function($scope, $meteor, $stateParams, $window){
             $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2})
         });
     });
+
+    //**** QUERYING BY TAG ****
+
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
+
+    // needed for querying by clicking on industry or skill
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        // construct query string for URL (replace spaces with +)
+        $scope.queryStringURL = input.split(' ').join('+');
+
+        return $scope.query;
+    } 
+
+
+    // **** PINNED CAREERS ****
 
     // init pinned careers in local storage
     if($window.localStorage.getItem("pinnedCareers") === null){
@@ -506,7 +602,7 @@ function($scope, $meteor, $stateParams, $window){
         return career == 'null'
     }
 
-    // // parse string from local storage
+    // parse string from local storage
     $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
 
     $scope.viewCareer = function(careerName, careerId) {

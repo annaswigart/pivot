@@ -97,7 +97,7 @@
               <ul class="fa-ul">
                 <li ng-repeat="skill in career.skills | limitTo: 5">
                   <span class="fa fa-li fa-angle-right fa-lg" ></span>
-                  <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results(skill.name)">
+                  <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{skill.name}}
                   </a>
                 </li>
@@ -108,7 +108,7 @@
               <h5>TOP INDUSTRIES</h5>
               <ul>
                 <li ng-repeat="category in career.categories | limitTo: 5">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category.name}}
                   </a></li>
               </ul>

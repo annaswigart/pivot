@@ -39,7 +39,10 @@
             <h5>SKILLS</h5>
             <ul>
               <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
-                {{skill.name}} ({{skill.count}})</li>
+                <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
+                {{skill.name}} ({{skill.count}})
+              </a>
+              </li>
             </ul>
           </div>
 
@@ -47,7 +50,7 @@
             <h5>INDUSTRIES</h5>
             <ul>
               <li ng-repeat="category in career.categories | limitTo: 10" >
-                <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                   {{category.name}} {{category.count}}
                 </a>
               </li>
