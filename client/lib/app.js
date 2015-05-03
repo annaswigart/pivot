@@ -22,3 +22,8 @@ app.directive('ngConfirmClick', [
             }
         };
 }])
+
+app.run (['$anchorScroll', function($anchorScroll) {
+    $anchorScroll.yOffset = 50;
+}])
+    

@@ -319,8 +319,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams', '$state', '$window',
-function($scope, $meteor, $stateParams, $state, $window){
+ '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll',
+function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll){
 
 
     $meteor.autorun($scope, function() {
@@ -411,7 +411,6 @@ function($scope, $meteor, $stateParams, $state, $window){
         $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
-
 
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
