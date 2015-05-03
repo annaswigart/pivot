@@ -408,8 +408,8 @@ angular.module('reflectivePath').controller('CareerViewController', ['$scope', '
         return career == 'null'
     }
 
-   $scope.createUrlString = function(string, stringType) {
-        if (stringType === "glassdoor") {
+   $scope.createUrlString = function(string, glassdoorString) {
+        if (glassdoorString) {
             var urlString = string.replace(' ', '-');
         } else {
         var urlString = string.replace(' ', '+');

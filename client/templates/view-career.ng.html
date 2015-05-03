@@ -161,7 +161,7 @@
               <p>Click below to search Glassdoor.com for jobs.</p>
               <ul>
                 <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 8">
-                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, glassdoor) }}-jobs-SRCH_KO0,{title.name.length}.htm">
+                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
                   {{title.name}}
                   </a>
                 </li>
@@ -178,31 +178,39 @@
               </span>
             </div>
           
-            <div class="col-xs-12 subSection">
-              <h5>RESUME KEYWORDS</h5>
-              <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
-            </div>
+            <div class="subSection">
 
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-7">
+                <h5>RESUME KEYWORDS</h5>
+                <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
+              </div>
+
+              <div class="col-xs-12"></div>
+
+              <div class="col-xs-3">
                 <h5>Verbs</h5>
                 <ul>
                   <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
                 </ul>
               </div>
               
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-3">
                 <h5>Nouns</h5>
                   <ul>
                     <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
                   </ul>
               </div>
               
-              <div class="col-xs-4 subSection">
+              <div class="col-xs-3">
                 <h5>Adjectives</h5>
                 <ul>
                   <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
                 </ul>
               </div>
+
+            </div>
+
+              
 
           </div>
 
