@@ -3,7 +3,7 @@
 
 <!-- SIDEBAR -->
 
-  <div ng-include="'client/templates/sidebar.ng.html'"></div>
+  <!-- <div ng-include="'client/templates/sidebar.ng.html'"></div> -->
 
 <!-- MAIN -->
 
@@ -72,7 +72,7 @@
       <div class="col-xs-12 resultsHeader resultBox">
         <h4 class="col-xs-12">Career profiles related to <strong>{{query}}</strong></h4>
         <span class="col-xs-12 small resultCount">
-          Showing <strong>{{numResultsDisplayed}}</strong> of <strong>{{careers.length}}</strong> career profiles
+          Showing <strong>{{getNumDisplayed()}}</strong> of <strong>{{careers.length}}</strong> career profiles
         </span>
       </div>
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
@@ -100,7 +100,7 @@
               <ul class="fa-ul">
                 <li ng-repeat="skill in career.skills | limitTo: 4">
                   <span class="fa fa-li fa-angle-right fa-lg" ></span>
-                  <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results(skill.name)">
+                  <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{skill.name}}
                   </a>
                 </li>
@@ -111,7 +111,7 @@
               <h6>Top Industries</h6>
               <ul>
                 <li ng-repeat="category in career.categories | limitTo: 5">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category.name}}
                   </a></li>
               </ul>
@@ -123,10 +123,10 @@
       </div>
 
       <div class="col-xs-12 small resultCount">
-        Showing <strong>{{numResultsDisplayed}}</strong> of <strong>{{careers.length}}</strong> career profiles
+        Showing <strong>{{getNumDisplayed()}}</strong> of <strong>{{careers.length}}</strong> career profiles
       </div>
       
-      <button class="showMoreResults colorTransFast center-block" ng-click="showMoreResults()" ng-hide="numResultsDisplayed === careers.length">
+      <button class="showMoreResults colorTransFast center-block" ng-click="showMoreResults()" ng-hide="getNumDisplayed() === careers.length">
         <h6>show more</h6>
         <span class="fa fa-chevron-down"></span>
       </button>
