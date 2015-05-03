@@ -4,7 +4,7 @@
 
     <div class="row">
 
-        <div class="sidebar card">
+        <div class="sidebar card" ng-hide="(queryStack.length == 0) && (viewedCareers.length == 0)">
 
           <form  name="resultsQuery" role="form">
             <div class="form-group"> 
@@ -21,7 +21,7 @@
 
           <!-- <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a> -->
 
-          <h6>Recent Searches</h6>
+          <h6 ng-hide="queryStack.length == 0">Recent Searches</h6>
           <ul class="sidebarList">
             <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results({queryString: queryStringURL})">{{q}}</a></li>
           </ul>
@@ -30,7 +30,7 @@
 
           <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize"> 
+            <li ng-repeat="v in viewedCareers track by v.id" class="text-capitalize"> 
                 <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
                   {{v.name}}
                 </a>
@@ -51,9 +51,19 @@
           Pinned Careers
         </h4>
 
-        <!-- <h5>Pinned Careers</h5> -->
+        <div ng-hide="pinnedCareers.length != 0">
+          <p>Click on the pin icon 
+            ( <span class="fa fa-thumb-tack"></span> )
+              to save careers here for later.
+          </p>
+        </div>
+
+        <div ng-hide="pinnedCareers.length == 0">
+
+          <span class="text-muted small">select 2 careers to compare</span>
+
           <ul class="sidebarList pinnedList">
-            <li ng-repeat="p in pinnedCareers track by $index" class="text-capitalize">
+            <li ng-repeat="p in pinnedCareers track by p.id" class="text-capitalize">
               <table>
                 <tr>
                   <td class="sidebarColLeft">
@@ -72,7 +82,9 @@
             </li>
           </ul>
 
-        <button type="button" class="btn btn-default btn-block" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+          <button type="button" class="btn btn-primary btn-block colorTransFast" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+
+        </div>
 
       </div>
     </div>
