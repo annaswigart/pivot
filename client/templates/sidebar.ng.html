@@ -6,40 +6,31 @@
 
         <div class="sidebar card">
 
-<!--           <form class="form-horizontal" name="resultsQuery" role="form">
+          <form  name="resultsQuery" role="form">
             <div class="form-group"> 
               <div class="input-group input-group-sm">
                 <input type="text" name="text" class="form-control" ng-model="query"/>
                 <span class="input-group-btn">
-                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
+                  <button ng-click="setQuery(query)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                     <span class="fa fa-search" aria-hidden="true"></span>
                   </button>
                 </span>
               </div>
             </div>
-          </form> -->
-
-          <form name="resultsQuery" role="form" ng-submit="setQuery(query)" ui-sref="results(query)">
-            <div class="form-group">
-              <label class="sr-only">Search</label>
-              <div class="inner-addon right-addon">
-                <span class="fa fa-search"></span>
-                <input type="text" class="form-control" placeholder="Search" ng-model="query" />
-              </div>
-            </div>
           </form>
-
 
           <!-- <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a> -->
 
           <h6>Recent Searches</h6>
           <ul class="sidebarList">
-            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results(query)">{{q}}</a></li>
+            <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results({queryString: queryStringURL})">{{q}}</a></li>
           </ul>
+
+          <div class="hr" ng-hide="viewedCareers.length == 0"></div>
 
           <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize">
+            <li ng-repeat="v in viewedCareers" class="text-capitalize"> 
                 <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
                   {{v.name}}
                 </a>
@@ -70,7 +61,7 @@
                   </td>
                   <td class="sidebarColMid">
                     <a ui-sref="careerView({careerId: p.id})" ng-click="viewCareer(p.name, p.id)">
-                      {{p.name}}
+                      {{ p.name }}
                     </a>
                   </td>
                   <td class="sidebarColRight">
@@ -80,17 +71,6 @@
               </table>
             </li>
           </ul>
-
-<!--         <h5>Recently Viewed Careers</h5>
-          <ul class="sidebarList">
-            <li ng-repeat="v in viewedCareers" class="text-capitalize">
-              <span class="checkbox fa" ng-class="{'fa-check-square': isCompared(v.id), 'fa-square-o': !isCompared(v.id)}" aria-label="select career" ng-click="toggleComparedCareer(v.id)"></span>
-                <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
-                  {{v.name}}
-                </a>
-              <span class="fa fa-thumb-tack pin colorTransFast sidebarListTail" aria-label="pin this career" ng-class="{pinSelected: isPinned(v.id)}" ng-click="togglePinnedCareer(v.name, v.id)"></span>
-            </li>
-          </ul> -->
 
         <button type="button" class="btn btn-default btn-block" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
