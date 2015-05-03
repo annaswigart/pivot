@@ -63,7 +63,7 @@
           <span class="text-muted small">select 2 careers to compare</span>
 
           <ul class="sidebarList pinnedList">
-            <li ng-repeat="p in pinnedCareers track by $index" class="text-capitalize">
+            <li ng-repeat="p in pinnedCareers track by p.id" class="text-capitalize">
               <table>
                 <tr>
                   <td class="sidebarColLeft">
