@@ -59,6 +59,7 @@
           <span class="fa fa-thumb-tack"></span>
           Pinned Careers
         </h4>
+        <span class="text-muted small">select 2 careers to compare</span>
 
         <!-- <h5>Pinned Careers</h5> -->
           <ul class="sidebarList pinnedList">
@@ -92,7 +93,7 @@
             </li>
           </ul> -->
 
-        <button type="button" class="btn btn-default btn-block" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+        <button type="button" class="btn btn-primary btn-block colorTransFast" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
       </div>
     </div>
