@@ -1,10 +1,6 @@
 
 <div class="row ">
 
-<!-- SIDEBAR -->
-
-  <!-- <div ng-include="'client/templates/sidebar.ng.html'"></div> -->
-
 <!-- MAIN -->
 
   <div class="col-xs-9 main">
@@ -25,17 +21,20 @@
 
           <h3 class="col-xs-12 sectionTitle">About This Career</h3>
 
-          <div class="col-xs-12 subSection">
+          <div class="col-xs-7 subSection" ng-init="activityLimit = 4">
             <h5>ACTIVITIES</h5>
-            <ul class="fa-ul">
-              <li ng-repeat="activity in career.work_activities.activities" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
+            <ul>
+              <li ng-repeat="activity in career.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
               </li>
             </ul>
+            <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.work_activities.activities.length <= activityLimit" ng-click="activityLimit = activityLimit + 4">
+              show more activities
+              <span class="fa fa-chevron-down"></span>
+            </a>
           </div>
 
-          <div class="col-xs-12 subSection">
+          <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
             <h5>SKILLS</h5>
             <ul>
               <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
@@ -44,9 +43,22 @@
               </a>
               </li>
             </ul>
+            <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = skillLimit + 5">
+              show more skills
+              <span class="fa fa-chevron-down"></span>
+            </a>
           </div>
 
-          <div class="tags-wrapper col-xs-12 subSection">
+          <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
+            <h5>Build a New Skill</h5>
+            <span> Search for free online classes related to 
+              <strong>{{career.skills[0].name}}</strong> through 
+              <a href="https://www.class-central.com/search?q={{ career.skills[0].name }}" target="_blank">
+                Class-Central.com</a>.
+            </span>
+          </div>
+
+          <div class="tags-wrapper col-xs-7 subSection">
             <h5>INDUSTRIES</h5>
             <ul>
               <li ng-repeat="category in career.categories | limitTo: 10" >
@@ -57,56 +69,65 @@
             </ul>
           </div>
 
-          <div class="col-xs-12 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
-            <h5>WORK CONTEXT</h5>
-            <ul class="fa-ul">
-              <li ng-repeat="context in career.work_context.top_work_contexts" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
-                {{context}}</li>
-            </ul>
-          </div>
+          <!-- O*NET DATA: Hidden if O*Net title is null -->
 
-          <div class="col-xs-12 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
-            <h5>SALARY</h5>
-            <a href="http://www.onetonline.org/link/wages/{{career.onet_code[0]}}?w=1&st=CA&g=Go" target="_blank">Explore {{career.standardized_title}} salaries for other locations at CareerOneStop</a>.
-            <table>
-              <tr>
-                <td>San Francisco Bay Area</td>
-                <td>{{career.salary.annual_salary_bay_area | currency}}</td>
-              </tr>
-              <tr>
-                <td>California</td>
-                <td>{{career.salary.annual_salary_ca | currency}}</td>
-              </tr>
-            </table>
-          </div>
-            
-          <div class="col-xs-12 subSection" ng-hide="onetIsNull(career.onet_titles[0].name)">
-            <h5>EDUCATION</h5>
-            <ul>
-              <li ng-repeat="(degree, percent) in career.education">
-                {{degree}} {{percent}}%
-              </li>
-            </ul>
-          </div>
+          <div ng-hide="onetIsNull(career.onet_titles[0].name)">
 
-          <div class="col-xs-12 sourceBox">
-            <h6>Data Source</h6>
-            <span>
-              This career profile is a composite of 
-              <strong>{{career.job_ids.length}} job postings</strong>
+            <div class="col-xs-7 subSection" ng-init="contextLimit = 4">
+              <h5>WORK CONTEXT</h5>
+              <ul>
+                <li ng-repeat="context in career.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
+                  {{context}}</li>
+              </ul>
+              <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = contextLimit + 4">
+                show more
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            </div>
 
-              <span ng-hide="onetIsNull(career.onet_titles[0].name)"> and the O*NET profile for 
+            <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
+              <h5>Learn More <br>
+                About This Career</h5>
+              <span>
+                Check out  
                 <a href="http://www.onetonline.org/link/summary/{{career.onet_code[0]}}" target="_blank">
-                  {{career.onet_titles[0].name}}. 
+                  O*Net Online
                 </a>
-                <a href="http://www.onetonline.org/link/wages/{{career.onet_code[0]}}?w=1&st=CA&g=Go" target="_blank">Explore {{career.standardized_title}} salaries for other locations at CareerOneStop</a>.
+                for more information.
               </span>
-              
-            </span>
-          </div>
+            </div>
 
-        </div>
+            <div class="col-xs-7 subSection">
+              <h5>EDUCATION</h5>
+              <ul>
+                <li ng-repeat="(degree, percent) in career.education">
+                  {{degree}} {{percent}}%
+                </li>
+              </ul>
+            </div>
+
+            <div class="col-xs-7 subSection">
+              <h5>SALARY</h5>
+              <p>San Francisco Bay Area</p>
+              <p>{{career.salary.annual_salary_bay_area | currency}}</p>
+              <br>
+              <p>California</p>
+              <p>{{career.salary.annual_salary_ca | currency}}</p>
+            </div>
+
+            <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
+              <h5>Explore Salary Data</h5>
+              <span>
+                Find <strong>{{career.standardized_title}}</strong> salaries for other locations at 
+                <a href="http://www.onetonline.org/link/wages/{{career.onet_code[0]}}?w=1&st=CA&g=Go" target="_blank">
+                  CareerOneStop.
+                </a>
+              </span>
+            </div>
+          
+          </div>  <!-- End O*Net Data Section -->
+
+        </div>  <!-- End About This Career Section -->
 
         <div class="col-xs-12 hr"></div>
 
@@ -115,6 +136,10 @@
         <div class="section">
         
           <h3 class="col-xs-12 sectionTitle">Related Careers</h3>
+
+          <div class="col-xs-4 subSection"><a href="">Software Engineer</a></div>
+          <div class="col-xs-4 subSection"><a href="">User Experience Designer</a></div>
+          <div class="col-xs-4 subSection"><a href="">Search Marketing Strategist</a></div>
 
           <div class="subSection"></div>
 
@@ -128,80 +153,64 @@
           
           <h3 class="col-xs-12 sectionTitle">Get Hired</h3>
 
-          <div class="subSection"></div>
+          <div class="row col-xs-12">
 
-          <div class="col-xs-6 subSection">
-            <h5>TOP COMPANIES</h5>
-            <ul>
-              <li ng-repeat="company in career.companies | orderBy: '-count' | limitTo:6">{{company.name}} ({{company.count}})</li>
-            </ul>
-          </div>
-
-          <div class="col-xs-6 subSection" >
-            <h5>SAMPLE JOB TITLES</h5>
-            <ul>
-              <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo:6">{{title.name}} ({{title.count}})</li>
-            </ul>
-          </div>
-
-          <div class="col-xs-12">
-            <h5>RESUME KEYWORDS</h5>
-            <p>Use these top words from <strong>{{career.standardized_title}}</strong> job postings when you update your resume.</p>
-          </div>
-
-          <div class="col-xs-4 subSection">
-            <h5>Top Verbs</h5>
-            <ul>
-              <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
-            </ul>
-          </div>
-          
-          <div class="col-xs-4 subSection">
-            <h5>Top Nouns</h5>
+            <div class="col-xs-7 subSection">
+              <h5>SAMPLE JOB TITLES</h5>
+              <p>Click below to search Glassdoor.com for jobs.</p>
               <ul>
-                <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
+                <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 8">
+                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, glassdoor) }}-jobs-SRCH_KO0,{title.name.length}.htm">
+                  {{title.name}}
+                  </a>
+                </li>
               </ul>
-          </div>
+            </div>
+
+            <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
+              <h5>Meet Cool People</h5>
+              <span>Join a group on 
+                <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ createUrlString(career.standardized_title) }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
+                  Meetup.com
+                </a>
+                 to meet other people interested in this career.
+              </span>
+            </div>
           
-          <div class="col-xs-4 subSection">
-            <h5>Top Adjectives</h5>
-            <ul>
-              <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
-            </ul>
+            <div class="col-xs-12 subSection">
+              <h5>RESUME KEYWORDS</h5>
+              <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
+            </div>
+
+              <div class="col-xs-4 subSection">
+                <h5>Verbs</h5>
+                <ul>
+                  <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
+                </ul>
+              </div>
+              
+              <div class="col-xs-4 subSection">
+                <h5>Nouns</h5>
+                  <ul>
+                    <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
+                  </ul>
+              </div>
+              
+              <div class="col-xs-4 subSection">
+                <h5>Adjectives</h5>
+                <ul>
+                  <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
+                </ul>
+              </div>
+
           </div>
 
-        </div>
-
-        <div class="col-xs-12 hr"></div>
-
-        <!-- Section: Learn Something New -->
-
-        <div class="section">
-
-          <h3 class="col-xs-12 sectionTitle">Learn Something New</h3>
-
-          <div class="subSection"></div>
-
-        </div>
-
-        <div class="col-xs-12 hr"></div>
-
-        <!-- Section: Meet Cool People -->
-
-        <div class="section">
-
-          <h3 class="col-xs-12 sectionTitle">Meet Cool People</h3>
-
-          <div class="subSection"></div>
-
-        </div>
-
-      </div>
+        </div>  <!-- End of Get Hired Section -->
+        
+      </div>  <!-- End of Profile Card -->
      
-    </div>
+    </div>  <!-- End Career Profile --> 
 
-    <!-- End of Main -->
+  </div>  <!-- End of Main -->
 
-  </div>
-
-</div>
+</div>  <!-- End of Template -->

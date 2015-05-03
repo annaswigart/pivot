@@ -1,4 +1,4 @@
-(function(){
+// (function(){
 if (Meteor.isClient) {
 
 // ***********************************
@@ -11,7 +11,6 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 
 
 
-
 }]);
 
 
@@ -20,32 +19,8 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$meteorCollection', '$meteorSubscribe', '$window',
-function($scope, $meteor, $state, $meteorCollection, $meteorSubscribe, $window){   
+'$state', '$window', function($scope, $meteor, $state, $window){   
     
-    // search categories and placeholder text
-    $scope.searchCategories = [
-        {name:'Skill', placeholder: "Skill"},
-        {name:'Industry', placeholder: "Industry"},
-        {name:'Title', placeholder: "Job Title or Career Name"}
-    ];
-
-    // init selected search category
-    $scope.selectedCategory = $scope.searchCategories[0];
-    $window.localStorage.searchCategory = $scope.selectedCategory.name;
-
-    // change selected search category
-    $scope.selectCategory = function(category) {
-        $scope.selectedCategory = category;
-        $window.localStorage.searchCategory = $scope.selectedCategory.name;
-    }
-
-    // for changing style applied to search category
-    $scope.isSelected = function(category) {
-        return $scope.selectedCategory === category;
-    }
-
-
     $scope.query = $window.localStorage.getItem('currentQuery');
 
     // init queryStack in local storage, if doesn't exist
@@ -116,6 +91,12 @@ function($scope, $meteor, $stateParams, $state, $window){
         return $scope.query;
     }
 
+   
+    $scope.showMoreResults = function() {
+            var numLeft = $scope.careers.length - $scope.numResultsDisplayed
+            $scope.numResultsDisplayed += Math.min(10, numLeft);
+    }
+
     // init viewed careers in local storage
     if($window.localStorage.getItem("viewedCareers") === null){
         $window.localStorage.viewedCareers = '[]';
@@ -123,7 +104,6 @@ function($scope, $meteor, $stateParams, $state, $window){
 
     // parse string from local storage
     $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
-
 
     $scope.viewCareer = function(careerName, careerId) {
         var viewedCareer = {name: careerName, id: careerId};
@@ -134,7 +114,7 @@ function($scope, $meteor, $stateParams, $state, $window){
         console.log($scope.viewedCareers);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
-
+    
 
     // **** PINNED CAREERS ****
 
@@ -230,23 +210,13 @@ function($scope, $meteor, $stateParams, $state, $window){
 // ResultsController
 // ***********************************
 
-angular.module('reflectivePath').controller('ResultsController', ['$scope', '$meteor', '$meteorCollection',
-    '$stateParams', '$meteorSubscribe', '$state', '$meteorObject', '$rootScope', '$meteorUtils', '$window', '$http',
-    function($scope, $meteor, $meteorCollection, $stateParams, $meteorSubscribe,
-        $state, $meteorObject, $rootScope, $meteorUtils, $window, $http){
+angular.module('reflectivePath').controller('ResultsController', ['$scope', 
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
-    // $scope.setUrlString = function(input) {
-    //     return input.split(' ').join('+');
-    // }
-    
     $scope.numResultsDisplayed = 10;
-
-    $scope.showMoreResults = function() {
-            $scope.numResultsDisplayed += 10;
-    }
-
 
     $scope.resultsLoading = true;
     
@@ -257,13 +227,27 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         }, $scope.getReactively('query')).then(function(sub){
             
             $scope.careers = $meteor.collection(function() {
-                return CareerSearch.find({}, {sort: {score: -1}});
-                
+                return CareerSearch.find({}, {sort: {score: -1}}); 
             });
+
+            $scope.getNumDisplayed = function(){
+                if ($scope.careers.length <10){
+                    return $scope.careers.length;
+                } else {
+                    return $scope.numResultsDisplayed;
+                }
+            }
+
             $scope.resultsLoading = false;
-            
+
         });
     });
+
+    $scope.showMoreResults = function() {
+        var numLeft = $scope.careers.length - $scope.numResultsDisplayed
+        $scope.numResultsDisplayed += Math.min(10, numLeft);
+    }
+
 
     //**** QUERYING BY TAG ****
 
@@ -364,7 +348,6 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope', '$me
         $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
-
 
 
 }]);
@@ -471,7 +454,15 @@ function($scope, $meteor, $stateParams, $state, $window){
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
-   
+
+   $scope.createUrlString = function(string, stringType) {
+        if (stringType === "glassdoor") {
+            var urlString = string.replace(' ', '-');
+        } else {
+        var urlString = string.replace(' ', '+');
+        }
+        return urlString
+   }
 
 
 }]); 
@@ -619,4 +610,4 @@ function($scope, $meteor, $stateParams, $window){
 
 } //if Meteor isClient
 
-})();
+// })();

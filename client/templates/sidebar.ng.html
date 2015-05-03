@@ -28,8 +28,7 @@
 
           <div class="hr" ng-hide="viewedCareers.length == 0"></div>
 
-
-          <h5>Recently Viewed Careers</h5>
+          <h6 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h6>
           <ul class="sidebarList">
             <li ng-repeat="v in viewedCareers track by v.id" class="text-capitalize"> 
                 <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
@@ -73,7 +72,7 @@
             </li>
           </ul>
 
-        <button type="button" class="btn btn-default btn-block" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
+        <button type="button" class="btn btn-default btn-block" id="compareButton" ng-disabled="comparedCareers.length != 2" ui-sref="compareView({careerId1: comparedCareers[0], careerId2: comparedCareers[1]})" >COMPARE CAREERS</button>
 
       </div>
     </div>

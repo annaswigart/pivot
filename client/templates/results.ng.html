@@ -18,35 +18,39 @@
 
           <accordion-heading ng-click="status.isFirstDisabled = ! status.isFirstDisabled">
            <div>
-            <h4>Personalize Results</h4>
+            <h5>Personalize Results</h5>
             <span class="fa" ng-class="{'fa-chevron-down': !status.open, 'fa-chevron-up': status.open}"></span>
            </div>
           </accordion-heading>
 
           <div class="col-xs-6 text-center border-right">
-            <p>Are you interested in careers that involve:</p>
-            <p><strong>management</strong>?</p>
+            <p>I'm interested in careers that involve:</p>
+            <p>
+              <span class="fa fa-chevron-circle-left fa-lg"></span>
+              management
+              <span class="fa fa-chevron-circle-right fa-lg"></span>
+            </p>
             <button type="button" class="btn btn-default btn-sm">YES</button>
             <button type="button" class="btn btn-default btn-sm">NO</button>
           </div>
 
-          <div class="col-xs-3 border-left">
-            <h5>I'm Interested</h5>
+          <div class="col-xs-3 border-left personalizeInput">
+            <h6>I'm Interested</h6>
             <ul>
-              <li>management<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>programming<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>html<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>design<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">management</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">programming</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">html</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">design</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
             </ul>
           </div>
 
-          <div class="col-xs-3">
-            <h5>I'm Not Interested</h5>
+          <div class="col-xs-3 personalizeInput">
+            <h6>I'm Not Interested</h6>
             <ul>
-              <li>consulting<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>human resources<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>marketing<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
-              <li>java<span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">consulting</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">human resources</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">marketing</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
+              <li><a href="">java</a><span class="fa fa-times xRemove colorTransFast listIconTail" aria-label="remove" ng-click=""></span></li>
             </ul>
           </div>
 
@@ -66,36 +70,35 @@
 
       <!-- SEARCH STATEMENT -->
       <div class="col-xs-12 resultsHeader resultBox">
-        <h3 class="col-xs-12">Career profiles related to <strong>{{query}}</strong></h3>
+        <h4 class="col-xs-12">Career profiles related to <strong>{{query}}</strong></h4>
         <span class="col-xs-12 small resultCount">
-          Showing <strong>{{numResultsDisplayed}}</strong> of <strong>{{careers.length}}</strong> career profiles
+          Showing <strong>{{getNumDisplayed()}}</strong> of <strong>{{careers.length}}</strong> career profiles
         </span>
       </div>
       <div class="col-xs-12" dir-paginate="career in careers | itemsPerPage: numResultsDisplayed">
 
         <div class="resultBox">
-          <h4 class="text-capitalize">
+          <h5 class="text-capitalize">
             <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">{{career.standardized_title}} ({{career.num_ids}})</a>
             <span class="fa fa-thumb-tack pin colorTransFast" aria-label="pin this career" ng-class="{pinSelected: isPinned(career._id)}" ng-click="togglePinnedCareer(career.standardized_title, career._id)"></span>
-          </h4>
-
+          </h5>
+<!-- 
           <div class="row col-xs-12">
-
-            <h5>TOP ACTIVITIES</h5>
+            <h6>TOP ACTIVITIES</h6>
             <ul class="fa-ul">
               <li ng-repeat="activity in career.work_activities | limitTo: 3" class="longListItem">
                 <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{activity}}
               </li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="row">
 
             <div class="skills-wrapper col-xs-4">
-              <h5>TOP SKILLS</h5>
+              <h6>Top Skills</h6>
               <ul class="fa-ul">
-                <li ng-repeat="skill in career.skills | limitTo: 5">
+                <li ng-repeat="skill in career.skills | limitTo: 4">
                   <span class="fa fa-li fa-angle-right fa-lg" ></span>
                   <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{skill.name}}
@@ -105,7 +108,7 @@
             </div>
 
             <div class="tags-wrapper col-xs-8">
-              <h5>TOP INDUSTRIES</h5>
+              <h6>Top Industries</h6>
               <ul>
                 <li ng-repeat="category in career.categories | limitTo: 5">
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
@@ -120,10 +123,10 @@
       </div>
 
       <div class="col-xs-12 small resultCount">
-        Showing <strong>{{numResultsDisplayed}}</strong> of <strong>{{careers.length}}</strong> career profiles
+        Showing <strong>{{getNumDisplayed()}}</strong> of <strong>{{careers.length}}</strong> career profiles
       </div>
       
-      <button class="showMore colorTransFast center-block" ng-click="showMoreResults()">
+      <button class="showMoreResults colorTransFast center-block" ng-click="showMoreResults()" ng-hide="getNumDisplayed() === careers.length">
         <h6>show more</h6>
         <span class="fa fa-chevron-down"></span>
       </button>

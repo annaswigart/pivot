@@ -13,12 +13,8 @@
             <h2>Explore career profiles. Find a better career.</h2>
           </label>
 
-          <ul class="opts">
-            <li role="button" ng-repeat="cat in searchCategories" ng-class="{optSelected: isSelected(cat)}" ng-click="selectCategory(cat)" ng-attr-id="{{ 'searchLabel-' + cat.name }}" aria-label="{{'select search category: ' + cat.name}}">{{cat.name}}</li>
-          </ul>
-
           <div class="input-group input-group-lg">
-            <input type="text" name="text" class="form-control" placeholder="{{selectedCategory.placeholder}}" ng-model="searchQuery"/>
+            <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery"/>
             <span class="input-group-btn">
               <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                 <span class="fa fa-search" aria-hidden="true"></span>
