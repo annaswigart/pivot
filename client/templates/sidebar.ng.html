@@ -4,7 +4,7 @@
 
     <div class="row">
 
-        <div class="sidebar card">
+        <div class="sidebar card" ng-hide="(queryStack.length == 0) && (viewedCareers.length == 0)">
 
 <!--           <form class="form-horizontal" name="resultsQuery" role="form">
             <div class="form-group"> 
@@ -32,7 +32,7 @@
 
           <!-- <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a> -->
 
-          <h6>Recent Searches</h6>
+          <h6 ng-hide="queryStack.length == 0">Recent Searches</h6>
           <ul class="sidebarList">
             <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results(query)">{{q}}</a></li>
           </ul>
