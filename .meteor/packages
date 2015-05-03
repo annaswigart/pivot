@@ -9,8 +9,8 @@ less
 urigo:angular
 angularui:angular-ui-router
 fortawesome:fontawesome
-mquandalle:bower
 alethes:lodash
 urigo:angular-utils-pagination
 meteorhacks:aggregate
 artwells:accounts-guest
+mquandalle:bower

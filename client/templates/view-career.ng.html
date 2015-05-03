@@ -1,10 +1,6 @@
 
 <div class="row ">
 
-<!-- SIDEBAR -->
-
-  <div ng-include="'client/templates/sidebar.ng.html'"></div>
-
 <!-- MAIN -->
 
   <div class="col-xs-9 main">
@@ -41,8 +37,11 @@
           <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
             <h5>SKILLS</h5>
             <ul>
-              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
-                {{skill.name}} ({{skill.count}})</li>
+              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
+                <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
+                {{skill.name}} ({{skill.count}})
+              </a>
+              </li>
             </ul>
             <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = skillLimit + 5">
               show more skills
@@ -63,7 +62,7 @@
             <h5>INDUSTRIES</h5>
             <ul>
               <li ng-repeat="category in career.categories | limitTo: 10" >
-                <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                   {{category.name}} {{category.count}}
                 </a>
               </li>
@@ -176,7 +175,7 @@
               </ul>
             </div>
 
-            <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
+            <!-- <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
               <h5>Meet Cool People</h5>
               <span>Join a group on 
                 <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ createUrlString(career.standardized_title) }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
@@ -184,7 +183,7 @@
                 </a>
                  to meet other people interested in this career.
               </span>
-            </div>
+            </div> -->
           
             <div class="subSection">
 

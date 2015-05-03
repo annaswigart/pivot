@@ -3,7 +3,7 @@
 
 <!-- SIDEBAR -->
 
-  <div ng-include="'client/templates/sidebar.ng.html'"></div>
+  <!-- <div ng-include="'client/templates/sidebar.ng.html'"></div> -->
 
 <!-- MAIN -->
 
@@ -84,7 +84,7 @@
           <div class="col-xs-6 subSection border-right">
             <ul>
                 <li ng-repeat="category in career1.categories | limitTo: 10" >
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category.name}} {{category.count}}
                   </a>
                 </li>
@@ -93,7 +93,7 @@
           <div class="col-xs-6 subSection border-left">
             <ul>
                 <li ng-repeat="category in career2.categories | limitTo: 10" >
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results(category.name)">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category.name}} {{category.count}}
                   </a>
                 </li>

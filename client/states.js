@@ -20,7 +20,7 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
         })
         
         .state('results', {
-            url: '/results/:query', //query terms should probably be in the URL
+            url: '/results/:queryString', //query terms should probably be in the URL
             views: {
                 navBar: {
                     templateUrl: 'client/templates/nav-bar.ng.html',
@@ -30,6 +30,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 'main@': {
                     templateUrl: 'client/templates/results.ng.html',
                     controller: 'ResultsController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })
@@ -45,11 +49,15 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 'main@': {
                     templateUrl: 'client/templates/view-career.ng.html',
                     controller: 'CareerViewController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })
         .state('compareView', {
-            url: '/:careerId1&:careerId2',
+            url: '/compare/:careerId1&:careerId2',
             views: {
                 navBar: {
                     templateUrl: 'client/templates/nav-bar.ng.html',
@@ -59,6 +67,10 @@ function($urlRouterProvider, $stateProvider, $locationProvider){
                 "main@": {
                     templateUrl: 'client/templates/compare-careers.ng.html',
                     controller: 'CompareViewController'
+                },
+                'sidebar@': {
+                    templateUrl: 'client/templates/sidebar.ng.html',
+                    controller: 'SidebarController'
                 }
             }
         })

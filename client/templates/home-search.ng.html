@@ -1,5 +1,4 @@
 <div class="row">
-  <div ng-if="resultsLoading" ng-include="'client/templates/loading.tpl'"></div>
 
   <!-- SEARCH BOX CTA -->
 
@@ -17,7 +16,7 @@
           <div class="input-group input-group-lg">
             <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery"/>
             <span class="input-group-btn">
-              <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results(query)">
+              <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                 <span class="fa fa-search" aria-hidden="true"></span>
               </button>
             </span>
