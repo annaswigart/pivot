@@ -126,7 +126,7 @@
         Showing <strong>{{numResultsDisplayed}}</strong> of <strong>{{careers.length}}</strong> career profiles
       </div>
       
-      <button class="showMore colorTransFast center-block" ng-click="showMoreResults()">
+      <button class="showMoreResults colorTransFast center-block" ng-click="showMoreResults()" ng-hide="numResultsDisplayed === careers.length">
         <h6>show more</h6>
         <span class="fa fa-chevron-down"></span>
       </button>

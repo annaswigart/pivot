@@ -48,7 +48,6 @@ li {
   font-size: 100%;
 }
 
-
 // Home Search
 
 .search-label {
@@ -71,12 +70,28 @@ a {
   border-bottom: none;
 }
 
+.showMoreCareerInfo, .showMoreCareerInfo:visited {
+  font-size: @font-size-small;
+  font-weight: 700;
+  color: @gray;
+  text-decoration: none;
+}
+
+.showMoreCareerInfo .fa {
+  padding: 0px @padding-base-horizontal;
+}
+
+.showMoreCareerInfo:hover {
+  color: @gray-darker;
+  border-bottom: none;
+}
+
 // Nav
 
 @navbar-padding: 70px;
 
 .navbar {
-  box-shadow: 0px 3px 3px @gray-light;
+  box-shadow: 0px 2px 6px @gray-light;
 }
 
 
@@ -122,6 +137,7 @@ a {
 
 /* style glyph */
 .inner-addon .fa {
+  color: @gray-med;
   position: absolute;
   padding: 10px;
   pointer-events: none;
@@ -179,7 +195,7 @@ a {
   padding-bottom: @padding-base-vertical;
 }
 
-.sidebar button {
+#compareButton {
   margin-top: @padding-base-vertical*4;
 }
 
@@ -207,6 +223,7 @@ a {
   box-shadow: 0px 2px 2px @gray-light;
   background-color: #ffffff;
   overflow: hidden;
+  border: 1px solid @gray-lighter;
 }
 
 .cardTitle {
@@ -266,8 +283,11 @@ a {
   padding: 0px @padding-base-horizontal;
   color: @brand-secondary;
   cursor: pointer;
-
 }
+
+/*.pin:active, .pinSelected:active {
+  border: 1px solid;
+}*/
 
 .xRemove {
   color: #fff;
@@ -389,25 +409,25 @@ li .xRemove:hover {
   margin: @padding-base-vertical 0px;
 }
 
-.showMore {
+.showMoreResults {
   background: none;
   border: none;
   text-align: center;
 }
 
-.showMore h6 {
+.showMoreResults h6 {
   margin-bottom: @padding-base-vertical;
 }
 
-.showMore:hover h6 {
+.showMoreResults:hover h6 {
   color: @brand-primary;
 }
 
-.showMore .fa {
+.showMoreResults .fa {
   color: @brand-primary;
 }
 
-.showMore:hover .fa {
+.showMoreResults:hover .fa {
   color: @brand-primary-dark;
 }
 
@@ -415,33 +435,56 @@ li .xRemove:hover {
 // View Career
 
 .sectionTitle {
-  padding-top: @padding-base-vertical*2;
-  padding-bottom: @padding-base-vertical*4;
+  padding-top: @padding-base-vertical;
+  padding-bottom: @padding-base-vertical;
+}
+
+.titleIcon {
+  color: @brand-secondary;
+  padding: @padding-base-horizontal;
 }
 
 .titleSubSection {
   padding: @padding-base-vertical*6 0px;
 }
 
-.sourceBox {
-  background: @gray-lightest;
-  border: 1px solid @gray-lighter;
-  box-shadow: -6px 0px @brand-primary;
+/*.sourceBox {
+  color: @gray-med;
+  font-size: @font-size-small;
+  border: 1px solid @brand-primary-light;
+  box-shadow: -6px 0px @brand-primary, -3px 2px 4px @gray-lighter;
   padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
-  margin: @padding-base-vertical*4 0px;
+  margin-top: @padding-base-vertical*2;
+}
 
+.sourceBox h6 {
+  color: @gray;
+}*/
+
+.featuredLinkBox {
+  font-size: @font-size-small;
+  border: 1px solid @gray-light;
+  background-color: #fdfdfd;
+  box-shadow: -6px 0px @gray-med, -3px 2px 4px @gray-lighter;
+  padding: @padding-base-vertical*3 @padding-base-horizontal*2 @padding-base-vertical*4;
+  margin-top: @padding-base-vertical*8;
+}
+
+.featuredLinkBox h5 {
+  color: @gray-dark;
+  line-height: 1.45;
 }
 
 .subSection {
-  padding-bottom: @padding-base-vertical*10;
+  padding-bottom: @padding-base-vertical*8;
+}
+
+.subSection h5 {
+  color: @brand-secondary;
 }
 
 .subSection .longListItem {
   margin-bottom: @padding-base-vertical*4;
-}
-
-.sourceBox span {
-  font-size: @font-size-small;
 }
 
 // Compare
