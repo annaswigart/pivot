@@ -65,14 +65,14 @@
 
       <!-- <a><span class="fa fa-times query-link" ng-click="setQuery('')" aria-label="clear search"> clear search</span></a> -->
 
-      <h4 ng-hide="queryStack.length == 0">Recent Searches</h4>
+      <h5 ng-hide="queryStack.length == 0">Recent Searches</h5>
       <ul class="sidebarList">
         <li ng-repeat="q in queryStack track by $index"><a class="query-link" ng-click="setQuery(q)" ui-sref="results({queryString: queryStringURL})">{{q}}</a></li>
       </ul>
 
       <div class="hr" ng-hide="viewedCareers.length == 0"></div>
 
-      <h4 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h4>
+      <h5 ng-hide="viewedCareers.length == 0">Recently Viewed Careers</h5>
       <ul class="sidebarList">
         <li ng-repeat="v in viewedCareers track by v.id" class="text-capitalize"> 
             <a ui-sref="careerView({careerId: v.id})" ng-click="viewCareer(v.name, v.id)">
