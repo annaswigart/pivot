@@ -24,30 +24,46 @@
           <h3 class="col-xs-12 sectionTitle">About This Career</h3>
 
           <div class="col-xs-7 subSection" ng-init="activityLimit = 4">
-            <h5>ACTIVITIES</h5>
+            <h5 class="anchor" id="anchor-activities">ACTIVITIES</h5>
             <ul>
               <li ng-repeat="activity in career.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
               </li>
             </ul>
-            <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.work_activities.activities.length <= activityLimit" ng-click="activityLimit = activityLimit + 4">
-              show more activities
+            <a role="button" class="showMoreCareerInfo" ng-hide="career.work_activities.activities.length <= activityLimit" ng-click="activityLimit = career.work_activities.activities.length">
+              show all activities
               <span class="fa fa-chevron-down"></span>
+            </a>
+            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="career.work_activities.activities.length === activityLimit" ng-click="activityLimit = 4">
+              show fewer activities
+              <span class="fa fa-chevron-up"></span>
             </a>
           </div>
 
+          <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
+            <h5>Who wrote this profile?</h5>
+            <span>This career profile was compiled from government data and 
+              <strong>{{career.job_ids.length}}</strong> job postings. <br>
+              <a href="">Learn more about our data</a>.
+            </span>
+          </div>
+
           <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
-            <h5>SKILLS</h5>
+            <h5 class="anchor" id="anchor-skills">SKILLS</h5>
             <ul>
-              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
+              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
                 <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
                 {{skill.name}} ({{skill.count}})
               </a>
               </li>
             </ul>
-            <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = skillLimit + 5">
+            <a role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = 20">
               show more skills
               <span class="fa fa-chevron-down"></span>
+            </a>
+            <a href="#anchor-skills" role="button" class="showMoreCareerInfo" ng-show="skillLimit == 20" ng-click="skillLimit = 10">
+              show fewer skills
+              <span class="fa fa-chevron-up"></span>
             </a>
           </div>
 
@@ -76,15 +92,19 @@
           <div ng-hide="onetIsNull(career.onet_titles[0].name)">
 
             <div class="col-xs-7 subSection" ng-init="contextLimit = 4">
-              <h5>WORK CONTEXT</h5>
+              <h5 class="anchor" id="anchor-context">WORK CONTEXT</h5>
               <ul>
                 <li ng-repeat="context in career.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                   {{context}}</li>
               </ul>
-              <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = contextLimit + 4">
+              <a role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = career.work_activities.activities.length">
                 show more
-              <span class="fa fa-chevron-down"></span>
-            </a>
+                <span class="fa fa-chevron-down"></span>
+              </a>
+              <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit === career.work_activities.activities.length" ng-click="contextLimit = 4">
+                show less
+                <span class="fa fa-chevron-up"></span>
+              </a>
             </div>
 
             <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">

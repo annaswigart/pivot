@@ -48,6 +48,13 @@ li {
   font-size: 100%;
 }
 
+/*a.anchor {
+  display: block; 
+  position: relative; 
+  top: -250px; 
+  visibility: hidden;
+}*/
+
 // Home Search
 
 .search-label {
@@ -420,6 +427,7 @@ li .xRemove:hover {
   background: none;
   border: none;
   text-align: center;
+  cursor: pointer;
 }
 
 .showMoreResults h6 {
@@ -500,8 +508,45 @@ li .xRemove:hover {
   text-align: center;
 }
 
+.compare h5 {
+  color: @brand-secondary;
+}
+
 .compare .card {
-  padding: @padding-base-vertical*4 @padding-base-horizontal*2;
+  padding: @padding-base-vertical*4 0px;
+}
+
+.compare .col-right {
+  padding: @padding-base-vertical*2 @padding-base-horizontal*6 @padding-base-vertical*8 @padding-base-horizontal*4;
+}
+
+.compare .col-left {
+  padding: @padding-base-vertical*2 @padding-base-horizontal*4 @padding-base-vertical*8 @padding-base-horizontal*6;
+}
+
+.noOnetCompare {
+  font-size: @font-size-small;
+}
+
+.noOnetCompare.col-left {
+  margin-left: -428px; 
+}
+
+.noOnetCompare.col-right {
+  margin-top: -60px;
+}
+
+.noOnetCompare div {
+  background-color: @gray-lightest;
+  border: 1px solid @gray-light;
+  padding: @padding-base-vertical*4;
+  box-shadow: 0px 2px 4px @gray-lighter;
+}
+
+.noOnetCompare h5 {
+  text-align: left;
+  color: @gray-dark;
+  margin-top: 0px;
 }
 
 // Transitions

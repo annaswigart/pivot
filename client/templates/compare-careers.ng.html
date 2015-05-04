@@ -39,18 +39,16 @@
           <div class="col-xs-12">
             <h5>ACTIVITIES</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
-            <ul class="fa-ul">
+          <div class="col-xs-6 subSection border-right col-left">
+            <ul>
               <li ng-repeat="activity in career1.work_activities.activities" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{activity}}
               </li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left">
-            <ul class="fa-ul">
+          <div class="col-xs-6 subSection border-left col-right">
+            <ul>
               <li ng-repeat="activity in career2.work_activities.activities" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{activity}}
               </li>
             </ul>
@@ -62,13 +60,13 @@
           <div class="col-xs-12">
             <h5>SKILLS</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
+          <div class="col-xs-6 subSection border-right col-left">
             <ul>
                 <li ng-repeat="skill in career1.skills | orderBy: '-count' | limitTo: 20">
                   {{skill.name}} ({{skill.count}})</li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left">
+          <div class="col-xs-6 subSection border-left col-right">
             <ul>
                 <li ng-repeat="skill in career2.skills | orderBy: '-count' | limitTo: 20">
                   {{skill.name}} ({{skill.count}})</li>
@@ -81,7 +79,7 @@
           <div class="col-xs-12">
             <h5>INDUSTRIES</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
+          <div class="col-xs-6 subSection border-right col-left">
             <ul>
                 <li ng-repeat="category in career1.categories | limitTo: 10" >
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
@@ -90,7 +88,7 @@
                 </li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left">
+          <div class="col-xs-6 subSection border-left col-right">
             <ul>
                 <li ng-repeat="category in career2.categories | limitTo: 10" >
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
@@ -106,20 +104,38 @@
           <div class="col-xs-12">
             <h5>WORK CONTEXT</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
-            <ul class="fa-ul">
+          <div class="col-xs-6 subSection border-right col-left">
+            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
                 <li ng-repeat="context in career1.work_context.top_work_contexts" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{context}}</li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left">
-            <ul class="fa-ul">
+
+          <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career1.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
+          </div>
+
+          <div class="col-xs-6 subSection border-left col-right">
+            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
                 <li ng-repeat="context in career2.work_context.top_work_contexts" class="longListItem">
-                <span class="fa fa-li fa-angle-right fa-lg"></span>
                 {{context}}</li>
             </ul>
           </div>
+
+          <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career2.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
+          </div>
+
         </div>
 
         <!-- SALARY -->
@@ -127,8 +143,9 @@
           <div class="col-xs-12">
             <h5>SALARY</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
-            <table>
+
+          <div class="col-xs-6 subSection border-right col-left">
+            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
@@ -139,8 +156,18 @@
               </tr>
             </table>
           </div>
-          <div class="col-xs-6 subSection border-left">
-            <table>
+
+          <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career1.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
+          </div>
+
+          <div class="col-xs-6 subSection border-left col-right">
+            <table ng-hide="onetIsNull(career2.onet_titles[0].name)">
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
@@ -151,6 +178,16 @@
               </tr>
             </table>
           </div>
+
+          <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career2.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
+          </div>
+
         </div>
 
         <!-- EDUCATION -->
@@ -158,60 +195,43 @@
           <div class="col-xs-12">
             <h5>EDUCATION</h5>
           </div>
-          <div class="col-xs-6 subSection border-right">
-            <ul>
+
+          <div class="col-xs-6 subSection border-right col-left">
+            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
               <li ng-repeat="(degree, percent) in career1.education">
                 {{degree}} {{percent}}%
               </li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left">
-            <ul>
+
+          <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career1.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
+          </div>
+
+          <div class="col-xs-6 subSection border-left col-right">
+            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
               <li ng-repeat="(degree, percent) in career2.education">
                 {{degree}} {{percent}}%
               </li>
             </ul>
           </div>
-        </div>
 
-        <!-- DATA SOURCE -->
-        <div class="row">
-          
-          <div class="col-xs-12">
-            <h5>DATA SOURCE</h5>
-          </div>
-
-          <div class="col-xs-6 subSection border-right">
-            <span>
-                This career profile is a composite of 
-                <strong>{{career1.job_ids.length}} job postings</strong>
-
-                <span ng-hide="onetIsNull(career1.onet_titles[0].name)"> and the O*NET profile for 
-                  <a href="http://www.onetonline.org/link/summary/{{career1.onet_code[0]}}" target="_blank">
-                    {{career1.onet_titles[0].name}}. 
-                  </a>
-                  Salary information is sourced from the Bureau of Labor Statistics 
-                  <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
-                </span>
-            </span>
-          </div>
-
-          <div class="col-xs-6 subSection border-left">
-            <span>
-                This career profile is a composite of 
-                <strong>{{career2.job_ids.length}} job postings</strong>
-
-                <span ng-hide="onetIsNull(career2.onet_titles[0].name)"> and the O*NET profile for 
-                  <a href="http://www.onetonline.org/link/summary/{{career2.onet_code[0]}}" target="_blank">
-                    {{career2.onet_titles[0].name}}. 
-                  </a>
-                  Salary information is sourced from the Bureau of Labor Statistics 
-                  <a href="http://www.bls.gov/oes/current/oessrcma.htm" target="_blank">2014 wage data</a>.
-                </span>
-            </span>
+          <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
+            <div>
+              <h5>No Data</h5>
+              <p>Sorry, we don't have this data for 
+                <strong>{{career2.standardized_title}}</strong>.</p>
+              <p><a href="">Read more about our data sources</a>.</p>
+            </div>
           </div>
 
         </div>
+
         
       </div>
      
