@@ -230,6 +230,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
+
             $scope.career = Careers.findOne({_id: $stateParams.careerId});
 
             function getDegreeOrder(degree) {
@@ -400,9 +401,9 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $scope.createUrlString = function(string, glassdoorString) {
         if (glassdoorString) {
-            var urlString = string.replace(' ', '-');
+            var urlString = string.split(' ').join('-');
         } else {
-        var urlString = string.replace(' ', '+');
+        var urlString = string.replace(' ').join('+');
         }
         return urlString
    }
@@ -449,11 +450,12 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window',
-function($scope, $meteor, $stateParams, $window){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
+
             $scope.career1 = Careers.findOne({_id: $stateParams.careerId1});
             $scope.career2 = Careers.findOne({_id: $stateParams.careerId2});
 
@@ -519,7 +521,19 @@ function($scope, $meteor, $stateParams, $window){
             $scope.career2.education = newEdArray2;
 
             console.log($scope.career1);
+
+
+            // get top 20 skills for each career
+            $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
+            $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
+
+            // get intersecting and unique skills
+            $scope.skillsIntersect = _.intersection($scope.skills1, $scope.skills2);
+            $scope.skills1 = _.xor($scope.skills1, $scope.skillsIntersect);
+            $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
+
         });
+
     });
 
     //**** QUERYING BY TAG ****

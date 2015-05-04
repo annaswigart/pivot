@@ -61,7 +61,7 @@
                     </td>
                     <td skill-bar-column>
                       <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="14">
-                        <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="100" style="fill:teal" />
+                        <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="100" style="fill:#3071a9" />
                       </svg>
                       <span> <small>{{getSkillPercent(skill.count, career.num_ids)}}%</small></span>
                     </td>
@@ -93,7 +93,7 @@
             <ul>
               <li ng-repeat="category in career.categories | limitTo: 10" >
                 <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
-                  {{category.name}} {{category.count}}
+                  {{category.name}}
                 </a>
               </li>
             </ul>
@@ -141,7 +141,7 @@
                       <td width="220px" class="text-right chart-text-table-col">{{ed.degree}}</td>
                       <td class="skill-bar-column">
                         <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:teal" />
+                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
                         </svg>
                         <span> <small>{{ getRoundedPercent(ed.percent)}}%</small></span>
                       </td>
@@ -159,7 +159,7 @@
                   <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
                   <td class="chart-bar-table-col">
                     <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="14">
-                        <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="100" style="fill:teal" />
+                        <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
                     </svg>
                     <span><small>{{career.salary.annual_salary_bay_area | currency}}</small></span>
                   </td>
@@ -199,20 +199,28 @@
         
           <h3 class="col-xs-12 sectionTitle">Related Careers</h3>
 
-          <div class="col-xs-4 subSection">
+<!--           <div class="col-xs-4 subSection">
             <ul>
-              <li ng-repeat= "rel in career.related_careers" class="longListItem">
-                <!-- <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))"> -->
-                  <a>{{rel}}</a></li>
-            </ul>
-          </div>
-
-          <!-- <div class="col-xs-4 subSection">
-            <ul>
-              <li class="longListItem"><a href="">Search Marketing Strategist</a></li>
-              <li class="longListItem"><a href="">Software Quality Assurance Engineer</a></li>
+              <li ng-repeat= "rel in career.related_careers.slice" class="longListItem">
+                <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{rel}}</a></li>
             </ul>
           </div> -->
+
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[0]}}</a>
+          </div>
+
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[1]}}</a>
+          </div>
+
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[2]}}</a>
+          </div>
 
           <div class="col-xs-12 hr"></div>
 
@@ -226,17 +234,20 @@
 
           <div class="row col-xs-12">
 
-            <div class="col-xs-7 subSection">
+            <div class="col-xs-12">
               <h5>SAMPLE JOB TITLES</h5>
               <p>Click below to search Glassdoor.com for jobs.</p>
-              <ul>
-                <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 8">
-                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
-                  {{title.name}}
-                  </a>
-                </li>
-              </ul>
             </div>
+
+            <ul>
+              <li class="col-xs-4" ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 9">
+                <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
+                {{title.name}}
+                </a>
+              </li>
+            </ul>
+            
+            <div class="col-xs-12 subSection"></div>
 
             <!-- <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
               <h5>Meet Cool People</h5>
@@ -248,31 +259,32 @@
               </span>
             </div> -->
           
-            <div class="subSection">
+            <div>
 
-              <div class="col-xs-7">
+              <div class="col-xs-12">
                 <h5>RESUME KEYWORDS</h5>
-                <p>Use these top words from {{career.job_ids.length}} {{career.standardized_title}} job postings when updating your resume.</p>
+                <p>Use these top words drawn from <strong>{{career.job_ids.length}}</strong> 
+                {{career.standardized_title}} job postings when updating your resume.</p>
               </div>
 
-              <div class="col-xs-12"></div>
+              <!-- <div class="col-xs-12"></div> -->
 
-              <div class="col-xs-3">
-                <h5>Verbs</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Verbs</h4>
                 <ul>
                   <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
                 </ul>
               </div>
               
-              <div class="col-xs-3">
-                <h5>Nouns</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Nouns</h4>
                   <ul>
                     <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
                   </ul>
               </div>
               
-              <div class="col-xs-3">
-                <h5>Adjectives</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Adjectives</h4>
                 <ul>
                   <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
                 </ul>

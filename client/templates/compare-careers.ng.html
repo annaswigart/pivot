@@ -37,22 +37,43 @@
         <!-- ACTIVITIES -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>ACTIVITIES</h5>
+            <h5 class="anchor" id="anchor-activities">ACTIVITIES</h5>
           </div>
-          <div class="col-xs-6 subSection border-right col-left">
+
+          <!-- Left Column -->
+          <div class="col-xs-6 subSection border-right col-left" ng-init="activityLimit = 4">
             <ul>
-              <li ng-repeat="activity in career1.work_activities.activities" class="longListItem">
+              <li ng-repeat="activity in career1.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
               </li>
             </ul>
+            <a role="button" class="showMoreCareerInfo" ng-hide="career1.work_activities.activities.length <= activityLimit" ng-click="activityLimit = 30">
+              show all activities
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 4">
+              show fewer activities
+              <span class="fa fa-chevron-up"></span>
+            </a>
           </div>
-          <div class="col-xs-6 subSection border-left col-right">
+
+          <!-- Right Column -->
+          <div class="col-xs-6 subSection border-left col-right" ng-init="activityLimit = 4">
             <ul>
-              <li ng-repeat="activity in career2.work_activities.activities" class="longListItem">
+              <li ng-repeat="activity in career2.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
               </li>
             </ul>
+            <a role="button" class="showMoreCareerInfo" ng-hide="career2.work_activities.activities.length <= activityLimit" ng-click="activityLimit = 30">
+              show all activities
+              <span class="fa fa-chevron-down"></span>
+            </a>  
+            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 4">
+              show fewer activities
+              <span class="fa fa-chevron-up"></span>
+            </a>
           </div>
+
         </div>
 
         <!-- SKILLS -->
@@ -60,18 +81,34 @@
           <div class="col-xs-12">
             <h5>SKILLS</h5>
           </div>
-          <div class="col-xs-6 subSection border-right col-left">
+
+          <!-- Left Column -->
+          <div class="col-xs-4 subSection text-center">
+            <h4>{{career1.standardized_title}}</h4>
             <ul>
-                <li ng-repeat="skill in career1.skills | orderBy: '-count' | limitTo: 20">
-                  {{skill.name}} ({{skill.count}})</li>
+                <li ng-repeat="skill in skills1 | orderBy: '-count' | limitTo: 20">
+                  {{skill}}</li>
             </ul>
           </div>
-          <div class="col-xs-6 subSection border-left col-right">
+
+          <!-- Middle Column -->
+          <div class="col-xs-4 subSection text-center" ng-init="intersection = skillIntersection(career1.skills, career2.skills)">
+            <h4>Both Careers</h4>
             <ul>
-                <li ng-repeat="skill in career2.skills | orderBy: '-count' | limitTo: 20">
-                  {{skill.name}} ({{skill.count}})</li>
+                <li ng-repeat="skill in skillsIntersect">
+                  {{skill}}</li>
             </ul>
           </div>
+
+          <!-- Right Column -->
+          <div class="col-xs-4 subSection text-center">
+            <h4>{{career2.standardized_title}}</h4>
+            <ul>
+                <li ng-repeat="skill in skills2 | orderBy: '-count' | limitTo: 20">
+                  {{skill}}</li>
+            </ul>
+          </div>
+
         </div>
 
         <!-- INDUSTRIES -->
@@ -79,20 +116,24 @@
           <div class="col-xs-12">
             <h5>INDUSTRIES</h5>
           </div>
+
+          <!-- Left Column -->
           <div class="col-xs-6 subSection border-right col-left">
             <ul>
                 <li ng-repeat="category in career1.categories | limitTo: 10" >
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
-                    {{category.name}} {{category.count}}
+                    {{category.name}}
                   </a>
                 </li>
             </ul>
           </div>
+
+          <!-- Right Column -->
           <div class="col-xs-6 subSection border-left col-right">
             <ul>
                 <li ng-repeat="category in career2.categories | limitTo: 10" >
                   <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
-                    {{category.name}} {{category.count}}
+                    {{category.name}}
                   </a>
                 </li>
             </ul>
@@ -102,13 +143,23 @@
         <!-- WORK CONTEXT -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>WORK CONTEXT</h5>
+            <h5 class="anchor" id="anchor-context">WORK CONTEXT</h5>
           </div>
-          <div class="col-xs-6 subSection border-right col-left">
-            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
-                <li ng-repeat="context in career1.work_context.top_work_contexts" class="longListItem">
+
+          <!-- Left Column -->
+          <div class="col-xs-6 subSection border-right col-left" ng-init="contextLimit = 4" ng-hide="onetIsNull(career1.onet_titles[0].name)">
+            <ul>
+              <li ng-repeat="context in career1.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                 {{context}}</li>
             </ul>
+            <a role="button" class="showMoreCareerInfo" ng-hide="career1.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
+              show more
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
+              show less
+              <span class="fa fa-chevron-up"></span>
+            </a>
           </div>
 
           <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
@@ -120,11 +171,20 @@
             </div>
           </div>
 
-          <div class="col-xs-6 subSection border-left col-right">
-            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
-                <li ng-repeat="context in career2.work_context.top_work_contexts" class="longListItem">
+          <!-- Right Column -->
+          <div class="col-xs-6 subSection border-left col-right" ng-init="contextLimit = 4" ng-hide="onetIsNull(career2.onet_titles[0].name)">
+            <ul>
+              <li ng-repeat="context in career2.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                 {{context}}</li>
             </ul>
+            <a role="button" class="showMoreCareerInfo" ng-hide="career2.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
+              show more
+              <span class="fa fa-chevron-down"></span>
+            </a>
+            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
+              show less
+              <span class="fa fa-chevron-up"></span>
+            </a>
           </div>
 
           <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
@@ -144,13 +204,14 @@
             <h5>SALARY</h5>
           </div>
 
-          <div class="col-xs-6 subSection border-right col-left">
-              <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
+          <!-- Left column -->
+          <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
+            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
                 <tr>
                   <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
                   <td class="chart-bar-table-col">
                     <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="14">
-                        <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="100" style="fill:teal" />
+                        <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
                     </svg>
                     <span><small>{{career1.salary.annual_salary_bay_area | currency}}</small></span>
                   </td>
@@ -166,6 +227,7 @@
                   </td>
                 </tr>
               </table>
+
           </div>
 
           <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
@@ -177,13 +239,14 @@
             </div>
           </div>
 
-          <div class="col-xs-6 subSection border-left col-right">
+          <!-- Right Column -->
+          <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
             <table ng-hide="onetIsNull(career2.onet_titles[0].name)">
                 <tr>
                   <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
                   <td class="chart-bar-table-col">
                     <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="14">
-                        <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="100" style="fill:teal" />
+                        <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
                     </svg>
                     <span><small>{{career2.salary.annual_salary_bay_area | currency}}</small></span>
                   </td>
@@ -218,22 +281,23 @@
             <h5>EDUCATION</h5>
           </div>
 
-          <div class="col-xs-6 subSection border-right col-left">
+          <!-- Left Column -->
+          <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
             <ul>
-                <li ng-repeat="ed in career1.education | orderBy: 'order'" ng-show="ed.percent != null">
-                  <table>
-                    <tr>
-                      <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:teal" />
-                        </svg>
-                        <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
-                      </td>
-                    </tr>
-                  </table>
-                </li>
-              </ul>
+              <li ng-repeat="ed in career1.education | orderBy: 'order'" ng-show="ed.percent != null">
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                    <td class="skill-bar-column">
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                      </svg>
+                      <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
+                    </td>
+                  </tr>
+                </table>
+              </li>
+            </ul>
           </div>
 
           <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
@@ -245,22 +309,23 @@
             </div>
           </div>
 
-          <div class="col-xs-6 subSection border-left col-right">
+          <!-- Right Column -->
+          <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
             <ul>
-                <li ng-repeat="ed in career2.education | orderBy: 'order'" ng-show="ed.percent != null">
-                  <table>
-                    <tr>
-                      <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:teal" />
-                        </svg>
-                        <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
-                      </td>
-                    </tr>
-                  </table>
-                </li>
-              </ul>
+              <li ng-repeat="ed in career2.education | orderBy: 'order'" ng-show="ed.percent != null">
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                    <td class="skill-bar-column">
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                      </svg>
+                      <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
+                    </td>
+                  </tr>
+                </table>
+              </li>
+            </ul>
           </div>
 
           <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
