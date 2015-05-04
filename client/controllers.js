@@ -230,10 +230,73 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
-            $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
+
+            $scope.career = Careers.findOne({_id: $stateParams.careerId});
+
+            function getDegreeOrder(degree) {
+
+                if(degree == "Less than a High School Diploma"){
+                    return 1;
+                    
+                } else if (degree == "High School Diploma or GED") {
+                    return 2;
+
+                } else if (degree == "Associate's Degree"){
+                    return 3;
+
+                } else if (degree == "Post-Secondary Certificate"){
+                    return 4;
+
+                } else if (degree == "Bachelor's Degree"){
+                    return 5;
+
+                } else if (degree == "Master's Degree"){
+                    return 6;
+                
+                } else if (degree == "First Professional Degree"){
+                    return 7;
+
+                } else if (degree == "Doctoral Degree"){
+                    return 8;
+                }
+
+            }
+
+            // reshape education data to include ordinal degree rank
+            // TODO: move this functinoality to controller on data import
+            var newEdArray = []
+            _($scope.career.education).each(function(percent, degree) {
+                            newEdArray.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
+                        });
+
+            $scope.career.education = newEdArray;
+            // console.log($scope.career);
         });
+        
+
     });
 
+    // SKILLS CHARTS
+    $scope.getSkillPercent = function(skillCount, numIds) {
+        return Math.round(skillCount/numIds * 100);
+    }
+
+    $scope.getSalaryWidth = function(salary) {
+        return salary / 900;
+    }
+
+    $scope.getEdWidth = function(edPercent) {
+        return edPercent * 1.5;
+    }
+
+    $scope.getRoundedPercent = function(percent) {
+        var rounded = Math.round(percent)
+        if (rounded == 0) {
+            return "<1"
+        } else {
+            return rounded;
+        }
+    }
 
     //**** QUERYING BY TAG ****
 
@@ -386,8 +449,73 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
-            $scope.career1 = $meteor.object(Careers, {_id: $stateParams.careerId1});
-            $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2});
+
+            $scope.career1 = Careers.findOne({_id: $stateParams.careerId1});
+            $scope.career2 = Careers.findOne({_id: $stateParams.careerId2});
+
+            function getDegreeOrder(degree) {
+
+                if(degree == "Less than a High School Diploma"){
+                    return 1;
+                    
+                } else if (degree == "High School Diploma or GED") {
+                    return 2;
+
+                } else if (degree == "Associate's Degree"){
+                    return 3;
+
+                } else if (degree == "Post-Secondary Certificate"){
+                    return 4;
+
+                } else if (degree == "Bachelor's Degree"){
+                    return 5;
+
+                } else if (degree == "Master's Degree"){
+                    return 6;
+                
+                } else if (degree == "First Professional Degree"){
+                    return 7;
+
+                } else if (degree == "Doctoral Degree"){
+                    return 8;
+                }
+
+            }
+
+             $scope.getSalaryWidth = function(salary) {
+                return salary / 900;
+            }
+
+            $scope.getEdWidth = function(edPercent) {
+                return edPercent * 1.2;
+            }
+
+             $scope.getRoundedPercent = function(percent) {
+                var rounded = Math.round(percent)
+                if (rounded == 0) {
+                    return "<1"
+                } else {
+                    return rounded;
+                }
+            }
+
+            // reshape education data to include ordinal degree rank
+            // TODO: move this functinoality to controller on data import
+            var newEdArray1 = []
+            _($scope.career1.education).each(function(percent, degree) {
+                            newEdArray1.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
+                        });
+
+            var newEdArray2 = []
+            _($scope.career2.education).each(function(percent, degree) {
+                            newEdArray2.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
+                        });
+
+            $scope.career1.education = newEdArray1;
+            $scope.career2.education = newEdArray2;
+
+            console.log($scope.career1);
+
 
             // get top 20 skills for each career
             $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');

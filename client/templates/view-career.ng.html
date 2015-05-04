@@ -51,10 +51,22 @@
           <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
             <h5 class="anchor" id="anchor-skills">SKILLS</h5>
             <ul>
-              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
-                <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
-                {{skill.name}}
-              </a>
+              <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right chart-text-table-col">
+                      <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
+                      {{skill.name}} 
+                      </a>
+                    </td>
+                    <td skill-bar-column>
+                      <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="100" style="fill:#3071a9" />
+                      </svg>
+                      <span> <small>{{getSkillPercent(skill.count, career.num_ids)}}%</small></span>
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
             <a role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = 20">
@@ -121,20 +133,48 @@
 
             <div class="col-xs-7 subSection">
               <h5>EDUCATION</h5>
+              <small><i>Minimum education level required</i></small><br><br>
               <ul>
-                <li ng-repeat="(degree, percent) in career.education">
-                  {{degree}} {{percent}}%
+                <li ng-repeat="ed in career.education | orderBy: 'order'" ng-show="ed.percent != null">
+                  <table>
+                    <tr>
+                      <td width="220px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                      <td class="skill-bar-column">
+                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
+                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                        </svg>
+                        <span> <small>{{ getRoundedPercent(ed.percent)}}%</small></span>
+                      </td>
+                    </tr>
+                  </table>
                 </li>
               </ul>
             </div>
 
+
             <div class="col-xs-7 subSection">
-              <h5>SALARY</h5>
-              <p>San Francisco Bay Area</p>
-              <p>{{career.salary.annual_salary_bay_area | currency}}</p>
-              <br>
-              <p>California</p>
-              <p>{{career.salary.annual_salary_ca | currency}}</p>
+              <h5>MEDIAN SALARY</h5>
+              <table>
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
+                  <td class="chart-bar-table-col">
+                    <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="14">
+                        <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
+                    </svg>
+                    <span><small>{{career.salary.annual_salary_bay_area | currency}}</small></span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">California</td>
+                  <td class="chart-bar-table-col">
+                    <svg  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="14">
+                      <rect  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="100" style="fill:gray" />
+                  </svg>
+                  <span><small>{{career.salary.annual_salary_ca | currency}}</small></span>
+                  </td>
+                </tr>
+              </table>
             </div>
 
             <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
@@ -146,7 +186,7 @@
                 </a>
               </span>
             </div>
-          
+
           </div>  <!-- End O*Net Data Section -->
 
         </div>  <!-- End About This Career Section -->

@@ -206,16 +206,28 @@
 
           <!-- Left column -->
           <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
-            <table>
-              <tr>
-                <td>San Francisco Bay Area</td>
-                <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
-              </tr>
-              <tr>
-                <td>California</td>
-                <td>{{career1.salary.annual_salary_ca | currency}}</td>
-              </tr>
-            </table>
+            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
+                  <td class="chart-bar-table-col">
+                    <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="14">
+                        <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
+                    </svg>
+                    <span><small>{{career1.salary.annual_salary_bay_area | currency}}</small></span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">California</td>
+                  <td class="chart-bar-table-col">
+                    <svg  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="14">
+                      <rect  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="100" style="fill:gray" />
+                  </svg>
+                  <span><small>{{career1.salary.annual_salary_ca | currency}}</small></span>
+                  </td>
+                </tr>
+              </table>
+
           </div>
 
           <div class="col-xs-6 border-right noOnetCompare col-left" ng-show="onetIsNull(career1.onet_titles[0].name)">
@@ -229,16 +241,27 @@
 
           <!-- Right Column -->
           <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
-            <table>
-              <tr>
-                <td>San Francisco Bay Area</td>
-                <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
-              </tr>
-              <tr>
-                <td>California</td>
-                <td>{{career2.salary.annual_salary_ca | currency}}</td>
-              </tr>
-            </table>
+            <table ng-hide="onetIsNull(career2.onet_titles[0].name)">
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
+                  <td class="chart-bar-table-col">
+                    <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="14">
+                        <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
+                    </svg>
+                    <span><small>{{career2.salary.annual_salary_bay_area | currency}}</small></span>
+                  </td>
+                </tr>
+
+                <tr>
+                  <td width="100px" class="text-right chart-text-table-col">California</td>
+                  <td class="chart-bar-table-col">
+                    <svg  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="14">
+                      <rect  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="100" style="fill:gray" />
+                  </svg>
+                  <span><small>{{career2.salary.annual_salary_ca | currency}}</small></span>
+                  </td>
+                </tr>
+              </table>
           </div>
 
           <div class="col-xs-6 border-left noOnetCompare col-right" ng-show="onetIsNull(career2.onet_titles[0].name)">
@@ -261,8 +284,18 @@
           <!-- Left Column -->
           <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
             <ul>
-              <li ng-repeat="(degree, percent) in career1.education">
-                {{degree}} {{percent}}%
+              <li ng-repeat="ed in career1.education | orderBy: 'order'" ng-show="ed.percent != null">
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                    <td class="skill-bar-column">
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                      </svg>
+                      <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
           </div>
@@ -279,8 +312,18 @@
           <!-- Right Column -->
           <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
             <ul>
-              <li ng-repeat="(degree, percent) in career2.education">
-                {{degree}} {{percent}}%
+              <li ng-repeat="ed in career2.education | orderBy: 'order'" ng-show="ed.percent != null">
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                    <td class="skill-bar-column">
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                      </svg>
+                      <span> <small>{{getRoundedPercent(ed.percent)}}%</small></span>
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
           </div>
