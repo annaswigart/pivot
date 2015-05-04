@@ -9,6 +9,8 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 
     //**** QUERYING ****
 
+    $scope.query = $window.localStorage.getItem('currentQuery');
+
     // init queryStack in local storage, if doesn't exist
     if($window.localStorage.getItem("queryStack") === null){
         $window.localStorage.queryStack = '[]';
@@ -34,6 +36,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
         return $scope.query;
     }
 
+    $scope.currentState = $state.current.name;
 
 
 }]);
@@ -45,7 +48,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$window', function($scope, $meteor, $state, $window){   
-    
+
     $scope.query = $window.localStorage.getItem('currentQuery');
 
     // init queryStack in local storage, if doesn't exist
@@ -71,6 +74,29 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 
         return $scope.query;
     }
+
+    // **** VIEWED CAREERS ****
+
+    // init viewed careers in local storage
+    if($window.localStorage.getItem("viewedCareers") === null){
+        $window.localStorage.viewedCareers = '[]';
+    }
+
+    // // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    $scope.viewCareer = function(careerName, careerId) {
+        var viewedCareer = {name: careerName, id: careerId};
+        var oldViewed = $scope.viewedCareers.slice(); // makes copy of viewed careers object
+
+        oldViewed.unshift(viewedCareer);
+        $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
+    }
+
+    $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
+    $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
+    $scope.topIndustries = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
 }]);
@@ -256,6 +282,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
+
             $scope.career = Careers.findOne({_id: $stateParams.careerId});
 
             function getDegreeOrder(degree) {
@@ -426,9 +453,9 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $scope.createUrlString = function(string, glassdoorString) {
         if (glassdoorString) {
-            var urlString = string.replace(' ', '-');
+            var urlString = string.split(' ').join('-');
         } else {
-        var urlString = string.replace(' ', '+');
+        var urlString = string.replace(' ').join('+');
         }
         return urlString
    }
@@ -475,11 +502,12 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window',
-function($scope, $meteor, $stateParams, $window){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
+
             $scope.career1 = Careers.findOne({_id: $stateParams.careerId1});
             $scope.career2 = Careers.findOne({_id: $stateParams.careerId2});
 
@@ -545,7 +573,19 @@ function($scope, $meteor, $stateParams, $window){
             $scope.career2.education = newEdArray2;
 
             console.log($scope.career1);
+
+
+            // get top 20 skills for each career
+            $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
+            $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
+
+            // get intersecting and unique skills
+            $scope.skillsIntersect = _.intersection($scope.skills1, $scope.skills2);
+            $scope.skills1 = _.xor($scope.skills1, $scope.skillsIntersect);
+            $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
+
         });
+
     });
 
     //**** QUERYING BY TAG ****
