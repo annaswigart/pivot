@@ -143,7 +143,7 @@
                         <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
                           <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:teal" />
                         </svg>
-                        <span> <small>{{ed.percent}}%</small></span>
+                        <span> <small>{{ getRoundedPercent(ed.percent)}}%</small></span>
                       </td>
                     </tr>
                   </table>
