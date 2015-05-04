@@ -298,6 +298,12 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         }
     }
 
+    // $scope.lookupIdByName = function(careerTitle){
+    //     id = Careers.findOne({standardized_title: careerTitle}, {fields : {_id: 1}})
+    //     console.log(id);
+    //     return id;
+    // }
+
     //**** QUERYING BY TAG ****
 
     // init queryStack in local storage, if doesn't exist

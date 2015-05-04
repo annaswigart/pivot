@@ -201,17 +201,18 @@
 
           <div class="col-xs-4 subSection">
             <ul>
-              <li class="longListItem"><a href="">Software Engineer</a></li>
-              <li class="longListItem"><a href="">User Experience Designer</a></li>
+              <li ng-repeat= "rel in career.related_careers" class="longListItem">
+                <!-- <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))"> -->
+                  <a>{{rel}}</a></li>
             </ul>
           </div>
 
-          <div class="col-xs-4 subSection">
+          <!-- <div class="col-xs-4 subSection">
             <ul>
               <li class="longListItem"><a href="">Search Marketing Strategist</a></li>
               <li class="longListItem"><a href="">Software Quality Assurance Engineer</a></li>
             </ul>
-          </div>
+          </div> -->
 
           <div class="col-xs-12 hr"></div>
 
