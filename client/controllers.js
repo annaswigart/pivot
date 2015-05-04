@@ -389,7 +389,18 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
             $scope.career1 = $meteor.object(Careers, {_id: $stateParams.careerId1});
             $scope.career2 = $meteor.object(Careers, {_id: $stateParams.careerId2});
+
+            // get top 20 skills for each career
+            $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
+            $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
+
+            // get intersecting and unique skills
+            $scope.skillsIntersect = _.intersection($scope.skills1, $scope.skills2);
+            $scope.skills1 = _.xor($scope.skills1, $scope.skillsIntersect);
+            $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
+
         });
+
     });
 
     //**** QUERYING BY TAG ****
