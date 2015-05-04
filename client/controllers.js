@@ -234,6 +234,11 @@ function($scope, $meteor, $stateParams, $state, $window){
         });
     });
 
+    // SKILLS CHARTS
+    $scope.getSkillPercent = function(skillCount, numIds) {
+        return Math.round(skillCount/numIds * 100);
+    }
+
 
     //**** QUERYING BY TAG ****
 

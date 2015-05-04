@@ -40,9 +40,21 @@
             <h5>SKILLS</h5>
             <ul>
               <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
-                <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
-                {{skill.name}} ({{skill.count}})
-              </a>
+                <table>
+                  <tr>
+                    <td width="200px" class="text-right skill-text-column">
+                      <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
+                      {{skill.name}} 
+                      </a>
+                    </td>
+                    <td skill-bar-column>
+                      <svg width="200" height="14">
+                        <rect width="{{getSkillPercent(skill.count, career.num_ids)}}" height="100" style="fill:teal" />
+                      </svg>
+                      {{getSkillPercent(skill.count, career.num_ids)}}%
+                    </td>
+                  </tr>
+                </table>
               </li>
             </ul>
             <a href="" role="button" class="showMoreCareerInfo" ng-hide="career.skills.length < 10 || skillLimit === 20" ng-click="skillLimit = skillLimit + 5">
