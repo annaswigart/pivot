@@ -48,10 +48,10 @@
                       </a>
                     </td>
                     <td skill-bar-column>
-                      <svg width="200" height="14">
-                        <rect width="{{getSkillPercent(skill.count, career.num_ids)}}" height="100" style="fill:teal" />
+                      <svg width="{{getSkillPercent(skill.count, career.num_ids)*2}}" height="14">
+                        <rect width="{{getSkillPercent(skill.count, career.num_ids)*2}}" height="100" style="fill:teal" />
                       </svg>
-                      {{getSkillPercent(skill.count, career.num_ids)}}%
+                      <span> <small>{{getSkillPercent(skill.count, career.num_ids)}}%</small></span>
                     </td>
                   </tr>
                 </table>
