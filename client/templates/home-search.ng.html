@@ -27,6 +27,66 @@
       </div>
     </form>
 
+  </div>  <!-- End Search Box CTA -->
+
+  <!-- PRODUCT DESCRIPTION -->
+
+  <div class="col-xs-10 col-xs-offset-1">
+
+    <h2 class="text-center">Want to change careers? Pivot can help.</h2>
+
+    <div class="col-xs-4">
+      <h4>Find Other Careers</h4>
+      <p>Whether you have a new career in mind or not, Pivot helps you search hundreds of career profiles to find a better career fit for you.</p>
+    </div>
+
+    <div class="col-xs-4">
+      <h4>Understand Your Options</h4>
+      <p>Our career profiles are based on data aggregate from thousands of real job postings. Explore the data to get a deeper understanding of your options.</p>
+    </div>
+
+    <div class="col-xs-4">
+      <h4>Take the Next Step</h4>
+      <p>Prepare for your next career by building new skills and targeting your resume. We'll give you head start for finding free online classess and tips for updating your resume.</p>
+    </div>
+
+  </div>
+
+  <!-- BROWSING HELP -->
+
+  <div class="col-xs-12 text-center">
+
+    <div class="col-xs-4">
+      <h4>See Popular Careers</h4>
+      <ul>
+        <li ng-repeat="career in topCareers | limitTo: 5">
+          <a href="">{{career}}</a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-4">
+      <h4>Search Top Skills</h4>
+      <ul>
+        <li ng-repeat="skill in topSkills | limitTo: 5">
+          <a ng-click="setQuery(skill)" aria-label="search for {{skill}}" ui-sref="results({queryString: queryStringURL})">
+            {{skill}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="col-xs-4">
+      <h4>Search Top Industries</h4>
+      <ul>
+        <li ng-repeat="industry in topIndustries | limitTo: 5">
+          <a ng-click="setQuery(industry)" aria-label="search for {{industry}}" ui-sref="results({queryString: queryStringURL})">
+            {{industry}}
+          </a>
+        </li>
+      </ul>
+    </div>
+
   </div>
   
 </div>
