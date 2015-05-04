@@ -199,20 +199,28 @@
         
           <h3 class="col-xs-12 sectionTitle">Related Careers</h3>
 
-          <div class="col-xs-4 subSection">
+<!--           <div class="col-xs-4 subSection">
             <ul>
-              <li ng-repeat= "rel in career.related_careers" class="longListItem">
+              <li ng-repeat= "rel in career.related_careers.slice" class="longListItem">
                 <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
                   {{rel}}</a></li>
             </ul>
+          </div> -->
+
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[0]}}</a>
           </div>
 
-          <!-- <div class="col-xs-4 subSection">
-            <ul>
-              <li class="longListItem"><a href="">Search Marketing Strategist</a></li>
-              <li class="longListItem"><a href="">Software Quality Assurance Engineer</a></li>
-            </ul>
-          </div> -->
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[1]}}</a>
+          </div>
+
+          <div class="col-xs-4 subSection">
+              <a ui-sref="careerView({careerId: lookupIdByName(rel)})" ng-click="viewCareer(rel, lookupIdByName(rel))">
+                  {{career.related_careers[2]}}</a>
+          </div>
 
           <div class="col-xs-12 hr"></div>
 
@@ -226,17 +234,20 @@
 
           <div class="row col-xs-12">
 
-            <div class="col-xs-7 subSection">
+            <div class="col-xs-12">
               <h5>SAMPLE JOB TITLES</h5>
               <p>Click below to search Glassdoor.com for jobs.</p>
-              <ul>
-                <li ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 8">
-                  <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
-                  {{title.name}}
-                  </a>
-                </li>
-              </ul>
             </div>
+
+            <ul>
+              <li class="col-xs-4" ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 9">
+                <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
+                {{title.name}}
+                </a>
+              </li>
+            </ul>
+            
+            <div class="col-xs-12 subSection"></div>
 
             <!-- <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
               <h5>Meet Cool People</h5>
@@ -248,32 +259,32 @@
               </span>
             </div> -->
           
-            <div class="subSection">
+            <div>
 
-              <div class="col-xs-7">
+              <div class="col-xs-12">
                 <h5>RESUME KEYWORDS</h5>
                 <p>Use these top words drawn from <strong>{{career.job_ids.length}}</strong> 
                 {{career.standardized_title}} job postings when updating your resume.</p>
               </div>
 
-              <div class="col-xs-12"></div>
+              <!-- <div class="col-xs-12"></div> -->
 
-              <div class="col-xs-3">
-                <h5>Verbs</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Verbs</h4>
                 <ul>
                   <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
                 </ul>
               </div>
               
-              <div class="col-xs-3">
-                <h5>Nouns</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Nouns</h4>
                   <ul>
                     <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
                   </ul>
               </div>
               
-              <div class="col-xs-3">
-                <h5>Adjectives</h5>
+              <div class="col-xs-4 subSection">
+                <h4>Adjectives</h4>
                 <ul>
                   <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
                 </ul>
