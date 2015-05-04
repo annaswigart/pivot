@@ -26,4 +26,14 @@ app.directive('ngConfirmClick', [
 app.run (['$anchorScroll', function($anchorScroll) {
     $anchorScroll.yOffset = 50;
 }])
+
+app.directive('ngBindAttrs', function() {
+  return function(scope, element, attrs) {
+    scope.$watch(attrs.ngBindAttrs, function(value) {
+      angular.forEach(value, function(value, key) {
+        attrs.$set(key, value);
+      })
+    }, true)
+  }
+});
     

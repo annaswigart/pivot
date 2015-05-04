@@ -60,8 +60,8 @@
                       </a>
                     </td>
                     <td skill-bar-column>
-                      <svg width="{{getSkillPercent(skill.count, career.num_ids)*2}}" height="14">
-                        <rect width="{{getSkillPercent(skill.count, career.num_ids)*2}}" height="100" style="fill:teal" />
+                      <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="14">
+                        <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="100" style="fill:teal" />
                       </svg>
                       <span> <small>{{getSkillPercent(skill.count, career.num_ids)}}%</small></span>
                     </td>
