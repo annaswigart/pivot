@@ -172,7 +172,7 @@
           </div>
 
           <!-- Right Column -->
-          <div class="col-xs-6 subSection border-right col-left" ng-init="contextLimit = 4" ng-hide="onetIsNull(career2.onet_titles[0].name)">
+          <div class="col-xs-6 subSection border-left col-right" ng-init="contextLimit = 4" ng-hide="onetIsNull(career2.onet_titles[0].name)">
             <ul>
               <li ng-repeat="context in career2.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                 {{context}}</li>
@@ -205,8 +205,8 @@
           </div>
 
           <!-- Left column -->
-          <div class="col-xs-6 subSection border-right col-left">
-            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
+          <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
+            <table>
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
@@ -228,8 +228,8 @@
           </div>
 
           <!-- Right Column -->
-          <div class="col-xs-6 subSection border-left col-right">
-            <table ng-hide="onetIsNull(career2.onet_titles[0].name)">
+          <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
+            <table>
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
@@ -259,8 +259,8 @@
           </div>
 
           <!-- Left Column -->
-          <div class="col-xs-6 subSection border-right col-left">
-            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
+          <div class="col-xs-6 subSection border-right col-left" ng-hide="onetIsNull(career1.onet_titles[0].name)">
+            <ul>
               <li ng-repeat="(degree, percent) in career1.education">
                 {{degree}} {{percent}}%
               </li>
@@ -277,8 +277,8 @@
           </div>
 
           <!-- Right Column -->
-          <div class="col-xs-6 subSection border-left col-right">
-            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
+          <div class="col-xs-6 subSection border-left col-right" ng-hide="onetIsNull(career2.onet_titles[0].name)">
+            <ul>
               <li ng-repeat="(degree, percent) in career2.education">
                 {{degree}} {{percent}}%
               </li>
