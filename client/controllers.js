@@ -382,8 +382,8 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window',
-function($scope, $meteor, $stateParams, $window){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
