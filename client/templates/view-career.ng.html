@@ -49,7 +49,7 @@
         <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
           <h5 class="anchor" id="anchor-skills">SKILLS</h5>
           <ul>
-            <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: 20">
+            <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
               <table>
                 <tr>
                   <td width="200px" class="text-right chart-text-table-col">
