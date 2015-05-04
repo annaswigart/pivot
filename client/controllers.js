@@ -4,9 +4,35 @@ if (Meteor.isClient) {
 // NavBarController
 // ***********************************
 angular.module('reflectivePath').controller('NavBarController', ['$scope', 
-'$state', '$stateParams', '$meteorSubscribe', '$meteorCollection', '$meteorObject',
-function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $meteorObject) {
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
 
+    //**** QUERYING ****
+
+    // init queryStack in local storage, if doesn't exist
+    if($window.localStorage.getItem("queryStack") === null){
+        $window.localStorage.queryStack = '[]';
+    }
+
+    // JSON.parse to read the stack in as an array
+    $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
+
+    // needed for querying by clicking on industry or skill
+    $scope.setQuery = function(input) {
+        //set query
+        $scope.query = input;
+        $window.localStorage.currentQuery = $scope.query;
+
+        //update query stack
+        $scope.queryStack.unshift(input);
+        $scope.queryStack = _.uniq($scope.queryStack).slice(0,3);
+        $window.localStorage.queryStack = JSON.stringify($scope.queryStack);
+     
+        // construct query string for URL (replace spaces with +)
+        $scope.queryStringURL = input.split(' ').join('+');
+
+        return $scope.query;
+    }
 
 
 
@@ -94,7 +120,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 
 
 
-    //**** QUERYING BY TAG ****
+    //**** QUERYING ****
 
     // init queryStack in local storage, if doesn't exist
     if($window.localStorage.getItem("queryStack") === null){
