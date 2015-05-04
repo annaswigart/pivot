@@ -19,7 +19,7 @@ function($scope, $state, $stateParams, $meteorSubscribe, $meteorCollection, $met
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$window', function($scope, $meteor, $state, $window){   
-    
+
     $scope.query = $window.localStorage.getItem('currentQuery');
 
     // init queryStack in local storage, if doesn't exist
@@ -45,6 +45,29 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 
         return $scope.query;
     }
+
+    // **** VIEWED CAREERS ****
+
+    // init viewed careers in local storage
+    if($window.localStorage.getItem("viewedCareers") === null){
+        $window.localStorage.viewedCareers = '[]';
+    }
+
+    // // parse string from local storage
+    $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
+
+    $scope.viewCareer = function(careerName, careerId) {
+        var viewedCareer = {name: careerName, id: careerId};
+        var oldViewed = $scope.viewedCareers.slice(); // makes copy of viewed careers object
+
+        oldViewed.unshift(viewedCareer);
+        $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
+        $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
+    }
+
+    $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
+    $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
+    $scope.topIndustries = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
 }]);
