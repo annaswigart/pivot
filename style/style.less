@@ -525,12 +525,27 @@ li .xRemove:hover {
 }
 
 .noOnetCompare {
-  margin-top: @padding-base-vertical*-10;
+  font-size: @font-size-small;
+}
+
+.noOnetCompare.col-left {
+  margin-left: -428px; 
+}
+
+.noOnetCompare.col-right {
+  margin-top: -60px;
+}
+
+.noOnetCompare div {
+  background-color: @gray-lightest;
+  border: 1px solid @gray-light;
+  padding: @padding-base-vertical*4;
+  box-shadow: 0px 2px 4px @gray-lighter;
 }
 
 .noOnetCompare h5 {
   text-align: left;
-  color: @gray;
+  color: @gray-dark;
   margin-top: 0px;
 }
 
