@@ -589,15 +589,10 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.industries1 = _.pluck(_.sortBy($scope.career1.categories, -'count').slice(0,10), 'name');
             $scope.industries2 = _.pluck(_.sortBy($scope.career2.categories, -'count').slice(0,10), 'name');
 
-            console.log($scope.industries1);
-
             // get intersecting and unique industries
-            $scope.industriesIntersect = _.intersection($scope.industries1, $scope.industries1);
-
-            console.log($scope.industriesIntersect);
-            
+            $scope.industriesIntersect = _.intersection($scope.industries1, $scope.industries2);
             $scope.industries1 = _.xor($scope.industries1, $scope.industriesIntersect);
-            $scope.industries1 = _.xor($scope.industries2, $scope.skillsInindustriesIntersecttersect);
+            $scope.industries2 = _.xor($scope.industries2, $scope.industriesIntersect);
 
         });
 
