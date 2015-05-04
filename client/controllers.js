@@ -401,9 +401,9 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     $scope.createUrlString = function(string, glassdoorString) {
         if (glassdoorString) {
-            var urlString = string.replace(' ', '-');
+            var urlString = string.split(' ').join('-');
         } else {
-        var urlString = string.replace(' ', '+');
+        var urlString = string.replace(' ').join('+');
         }
         return urlString
    }
