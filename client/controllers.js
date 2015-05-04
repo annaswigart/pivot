@@ -161,7 +161,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         return _.contains(_.pluck($scope.pinnedCareers, 'id'), careerId);
     }
 
-    // VIEWED CAREERS
+    // **** VIEWED CAREERS ****
 
     // init viewed careers in local storage
     if($window.localStorage.getItem("viewedCareers") === null){
@@ -180,7 +180,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
-       // **** COMPARE CAREERS ****
+    // **** COMPARE CAREERS ****
 
     // init compared careers in local storage
     if($window.localStorage.getItem("checkedCareers") === null){
@@ -302,7 +302,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         return _.contains(_.pluck($scope.pinnedCareers, 'id'), careerId);
     }
 
-    // VIEWED CAREERS
+    // **** VIEWED CAREERS ****
 
     // init viewed careers in local storage
     if($window.localStorage.getItem("viewedCareers") === null){
@@ -321,12 +321,16 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
+    // **** ONET DATA ****
+
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
 
-   $scope.createUrlString = function(string, glassdoorString) {
+    // **** URL STRINGS ****
+
+    $scope.createUrlString = function(string, glassdoorString) {
         if (glassdoorString) {
             var urlString = string.replace(' ', '-');
         } else {
@@ -414,10 +418,53 @@ function($scope, $meteor, $stateParams, $window){
         return $scope.query;
     } 
 
+    // **** PINNED CAREERS ****
+
+    // init pinned careers in local storage
+    if($window.localStorage.getItem("pinnedCareers") === null){
+        $window.localStorage.pinnedCareers = '[]';
+    }
+    
+    // parse string from local storage
+    $scope.pinnedCareers = _.uniq(JSON.parse($window.localStorage.pinnedCareers), 'id');
+
+    // toggle pinned career (remove / add)
+    $scope.togglePinnedCareer = function(careerName, careerId){
+
+        // parse string from local storage
+        // $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+        var pinnedCareer = {name: careerName, id: careerId};
+
+        // if career id is pinned, remove it
+        if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
+            // remove id from pinned list
+            $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+        } else {
+            // else add to pinnedCareers
+            $scope.pinnedCareers.push(pinnedCareer);
+        }
+
+        $window.localStorage.pinnedCareers = JSON.stringify($scope.pinnedCareers);
+    }
+
+    // apply class to pinned careers
+    $scope.isPinned = function(careerId) {
+
+        // parse string from local storage
+        // $scope.pinnedCareers = JSON.parse($window.localStorage.pinnedCareers);
+
+        return _.contains(_.pluck($scope.pinnedCareers, 'id'), careerId);
+    }
+
+    // **** ONET DATA ****
+
     // Hide O*Net-related info if no O*Net title associated with this career
     $scope.onetIsNull = function(career) {
         return career == 'null'
     }
+
+    // **** VIEWED CAREERS ****
 
     // parse string from local storage
     $scope.viewedCareers = JSON.parse($window.localStorage.viewedCareers);
