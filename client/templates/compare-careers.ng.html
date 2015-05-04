@@ -17,7 +17,7 @@
 
         <!-- HEADER -->
         <div class="row">
-          <h2 class="cardTitle col-xs-12">Compare Careers</h2>
+          <h2 class="cardTitle col-xs-10 col-xs-offset-1">Compare Careers</h2>
         </div>
 
         <!-- TITLES -->
@@ -105,17 +105,25 @@
             <h5>WORK CONTEXT</h5>
           </div>
           <div class="col-xs-6 subSection border-right col-left">
-            <ul>
+            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
                 <li ng-repeat="context in career1.work_context.top_work_contexts" class="longListItem">
                 {{context}}</li>
             </ul>
           </div>
+
           <div class="col-xs-6 subSection border-left col-right">
-            <ul>
+            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
                 <li ng-repeat="context in career2.work_context.top_work_contexts" class="longListItem">
                 {{context}}</li>
             </ul>
           </div>
+
+          <div class="col-xs-6 border-left col-right noOnetCompare" ng-show="onetIsNull(career2.onet_titles[0].name)">
+            <h5>No Data</h5>
+            <p>Sorry, we don't have Work Context, Salary, or Education data for {{career2.standardized_title}}.
+              <a href="">Read more about our data sources</a>.</p>
+          </div>
+
         </div>
 
         <!-- SALARY -->
@@ -124,7 +132,7 @@
             <h5>SALARY</h5>
           </div>
           <div class="col-xs-6 subSection border-right col-left">
-            <table>
+            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career1.salary.annual_salary_bay_area | currency}}</td>
@@ -136,7 +144,7 @@
             </table>
           </div>
           <div class="col-xs-6 subSection border-left col-right">
-            <table>
+            <table ng-hide="onetIsNull(career2.onet_titles[0].name)">
               <tr>
                 <td>San Francisco Bay Area</td>
                 <td>{{career2.salary.annual_salary_bay_area | currency}}</td>
@@ -155,21 +163,21 @@
             <h5>EDUCATION</h5>
           </div>
           <div class="col-xs-6 subSection border-right col-left">
-            <ul>
+            <ul ng-hide="onetIsNull(career1.onet_titles[0].name)">
               <li ng-repeat="(degree, percent) in career1.education">
                 {{degree}} {{percent}}%
               </li>
             </ul>
           </div>
           <div class="col-xs-6 subSection border-left col-right">
-            <ul>
+            <ul ng-hide="onetIsNull(career2.onet_titles[0].name)">
               <li ng-repeat="(degree, percent) in career2.education">
                 {{degree}} {{percent}}%
               </li>
             </ul>
           </div>
         </div>
-        
+
         
       </div>
      

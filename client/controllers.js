@@ -231,6 +231,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
+            console.log($scope.career);
         });
     });
 
@@ -324,8 +325,8 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
     // **** ONET DATA ****
 
     // Hide O*Net-related info if no O*Net title associated with this career
-    $scope.onetIsNull = function(career) {
-        return career == 'null'
+    $scope.onetIsNull = function(onetName) {
+        return onetName == 'null'
     }
 
     // **** URL STRINGS ****
