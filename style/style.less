@@ -48,9 +48,12 @@ li {
   font-size: 100%;
 }
 
-a.anchor {
-  top: -250px;
-}
+/*a.anchor {
+  display: block; 
+  position: relative; 
+  top: -250px; 
+  visibility: hidden;
+}*/
 
 // Home Search
 
@@ -505,8 +508,20 @@ li .xRemove:hover {
   text-align: center;
 }
 
+.compare h5 {
+  color: @brand-secondary;
+}
+
 .compare .card {
-  padding: @padding-base-vertical*4 @padding-base-horizontal*2;
+  padding: @padding-base-vertical*4 0px;
+}
+
+.compare .col-right {
+  padding: @padding-base-vertical*2 @padding-base-horizontal*6 @padding-base-vertical*8 @padding-base-horizontal*4;
+}
+
+.compare .col-left {
+  padding: @padding-base-vertical*2 @padding-base-horizontal*4 @padding-base-vertical*8 @padding-base-horizontal*6;
 }
 
 // Transitions
