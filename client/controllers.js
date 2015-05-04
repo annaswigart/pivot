@@ -231,7 +231,6 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
             $scope.career = $meteor.object(Careers, {_id: $stateParams.careerId});
-            console.log($scope.career);
         });
     });
 
@@ -398,7 +397,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.skillsIntersect = _.intersection($scope.skills1, $scope.skills2);
             $scope.skills1 = _.xor($scope.skills1, $scope.skillsIntersect);
             $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
-            
+
         });
 
     });
