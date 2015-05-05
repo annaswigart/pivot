@@ -7,6 +7,12 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
     '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
     function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
 
+    // Data for autocomplete search
+    $meteor.subscribe('autoCompleteData').then(function(sub){                       
+          $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
+    });
+
+            
     //**** QUERYING ****
 
     $scope.query = $window.localStorage.getItem('currentQuery');
@@ -46,8 +52,13 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // ***********************************
 // HomeSearchController
 // ***********************************
-angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$window', function($scope, $meteor, $state, $window){   
+angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$rootScope', '$meteor',
+'$state', '$window', function($scope, $rootScope, $meteor, $state, $window){   
+
+    // Data for autocomplete search
+    $meteor.subscribe('autoCompleteData').then(function(sub){                       
+          $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
+    });
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
