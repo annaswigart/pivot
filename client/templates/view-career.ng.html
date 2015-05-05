@@ -107,11 +107,11 @@
               <li ng-repeat="context in career.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                 {{context}}</li>
             </ul>
-            <a role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = career.work_activities.activities.length">
+            <a role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
               show more
               <span class="fa fa-chevron-down"></span>
             </a>
-            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit === career.work_activities.activities.length" ng-click="contextLimit = 4">
+            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
               show less
               <span class="fa fa-chevron-up"></span>
             </a>
