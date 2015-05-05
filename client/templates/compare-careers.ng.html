@@ -111,19 +111,19 @@
 
         </div>
 
-        <!-- INDUSTRIES -->
+        <!-- CATEGORIES -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>INDUSTRIES</h5>
+            <h5>CATEGORIES</h5>
           </div>
 
           <!-- Left Column -->
           <div class="col-xs-4 subSection text-center">
             <h4>{{career1.standardized_title}}</h4>
             <ul>
-                <li ng-repeat="industry in industries1">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
-                    {{industry}}
+                <li ng-repeat="category in categories1">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
                   </a>   
                 </li>
             </ul>
@@ -133,14 +133,14 @@
           <div class="col-xs-4 subSection text-center" ng-init="intersection = skillIntersection(career1.skills, career2.skills)">
             <h4>Both Careers</h4>
             <ul>
-                <li ng-repeat="industry in industriesIntersect">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
-                    {{industry}}
+                <li ng-repeat="category in categoriesIntersect">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
                   </a>   
                 </li>
-                <li class="noOnetCompare" ng-if="industriesIntersect == 0">
+                <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
                   <div>
-                    The job postings aggregated for these careers did not share any industries
+                    The job postings aggregated for these careers did not share any categories
                   </div>
                 </li>
             </ul>
@@ -150,9 +150,9 @@
           <div class="col-xs-4 subSection text-center">
             <h4>{{career2.standardized_title}}</h4>
             <ul>
-                <li ng-repeat="industry in industries2">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
-                    {{industry}}
+                <li ng-repeat="category in categories2">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
                   </a>   
                 </li>
             </ul>

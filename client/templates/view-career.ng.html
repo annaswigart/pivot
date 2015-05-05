@@ -48,6 +48,9 @@
 
         <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
           <h5 class="anchor" id="anchor-skills">SKILLS</h5>
+
+          <small><i>Percentage of <strong>{{career.job_ids.length }}</strong> job postings for <strong>{{career.standardized_title}}</strong> that included these skills</i></small> <br> <br>
+
           <ul>
             <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
               <table>
@@ -87,10 +90,10 @@
         </div>
 
         <div class="tags-wrapper col-xs-7 subSection">
-          <h5>INDUSTRIES</h5>
+          <h5>CATEGORIES</h5>
           <ul>
             <li ng-repeat="category in career.categories | limitTo: 10" >
-              <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+              <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                 {{category.name}}
               </a>
             </li>

@@ -19,7 +19,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -96,7 +96,7 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 
     $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
     $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
-    $scope.topIndustries = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
+    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
 }]);
@@ -156,7 +156,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -366,7 +366,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -572,9 +572,6 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.career1.education = newEdArray1;
             $scope.career2.education = newEdArray2;
 
-            console.log($scope.career1);
-
-
             // get top 20 skills for each career
             $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
             $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
@@ -585,14 +582,14 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
 
 
-            // get top 10 industries for each career
-            $scope.industries1 = _.pluck(_.sortBy($scope.career1.categories, -'count').slice(0,10), 'name');
-            $scope.industries2 = _.pluck(_.sortBy($scope.career2.categories, -'count').slice(0,10), 'name');
+            // get top 10 categories for each career
+            $scope.categories1 = _.pluck(_.sortBy($scope.career1.categories, -'count').slice(0,10), 'name');
+            $scope.categories2 = _.pluck(_.sortBy($scope.career2.categories, -'count').slice(0,10), 'name');
 
-            // get intersecting and unique industries
-            $scope.industriesIntersect = _.intersection($scope.industries1, $scope.industries2);
-            $scope.industries1 = _.xor($scope.industries1, $scope.industriesIntersect);
-            $scope.industries2 = _.xor($scope.industries2, $scope.industriesIntersect);
+            // get intersecting and unique categories
+            $scope.categoriesIntersect = _.intersection($scope.categories1, $scope.categories2);
+            $scope.categories1 = _.xor($scope.categories1, $scope.categoriesIntersect);
+            $scope.categories2 = _.xor($scope.categories2, $scope.categoriesIntersect);
 
         });
 
@@ -608,7 +605,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
