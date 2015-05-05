@@ -196,6 +196,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
@@ -406,6 +410,10 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
@@ -644,6 +652,10 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
