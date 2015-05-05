@@ -38,21 +38,21 @@
   <div class="col-xs-12" id="productDescription">
     <div class="col-xs-10 col-xs-offset-1">
 
-      <h1 class="text-center">Want to change careers? Pivot can help.</h1>
+      <h1 class="text-center">Want to change careers? <span class="textBrand">Pivot can help.</span></h1>
 
       <div class="col-xs-4 productInfo">
         <h4>Find Other Careers</h4>
-        <p>Whether you have a new career in mind or not, Pivot helps you search hundreds of career profiles to find a better career fit for you.</p>
+        <p class="text-justify">Whether you have a new career in mind or not, Pivot helps you search hundreds of career profiles to find a better career fit for you.</p>
       </div>
 
       <div class="col-xs-4 productInfo">
-        <h4>Understand Your Options</h4>
-        <p>Our career profiles are based on data aggregate from thousands of real Bay Area job postings. Explore the data to get a deeper understanding of your options.</p>
+        <h4>Compare Your Options</h4>
+        <p class="text-justify">Our career profiles are based on data aggregated from thousands of real San Francisco Bay Area job postings. Compare careers to understand your options.</p>
       </div>
 
       <div class="col-xs-4 productInfo">
         <h4>Take the Next Step</h4>
-        <p>Prepare for your next career by building new skills and targeting your resume. We'll give you head start for finding free online classess and tips for updating your resume.</p>
+        <p class="text-justify">We'll provide tips for targeting your resume to different careers and point you in the direction of free online classes for building new skills.</p>
       </div>
 
     </div>
@@ -66,6 +66,7 @@
 
     <div class="col-xs-4">
       <h4>Jump to Popular Careers</h4>
+      <br>
       <ul>
         <li ng-repeat="career in topCareers | limitTo: 5">
           <a href="">{{career}}</a>
@@ -75,6 +76,7 @@
 
     <div class="col-xs-4">
       <h4>Search Careers by Top Skills</h4>
+      <br>
       <ul>
         <li ng-repeat="skill in topSkills | limitTo: 5">
           <a ng-click="setQuery(skill)" aria-label="search for {{skill}}" ui-sref="results({queryString: queryStringURL})">
@@ -86,6 +88,7 @@
 
     <div class="col-xs-4">
       <h4>Search Careers by Top Categories</h4>
+      <br>
       <ul>
         <li ng-repeat="category in topCategories | limitTo: 5">
           <a ng-click="setQuery(category)" aria-label="search for {{category}}" ui-sref="results({queryString: queryStringURL})">
