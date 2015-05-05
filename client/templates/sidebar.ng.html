@@ -6,19 +6,19 @@
 
       <h4 class="cardTitle">
         <span class="fa fa-thumb-tack"></span>
-        Pinned Careers
+        Compare Careers
       </h4>
 
       <div ng-hide="pinnedCareers.length != 0">
-        <p>Click on the pin icon 
-          ( <span class="fa fa-thumb-tack"></span> )
-            to save careers here for later.
+        <p>Click on the pin ( <span class="fa fa-thumb-tack fa-lg"></span> )
+            to save careers here for comparison
         </p>
       </div>
 
       <div ng-hide="pinnedCareers.length == 0">
 
-        <span class="text-center small">select 2 careers to compare</span>
+        <p class="small" ng-show="pinnedCareers.length == 1">pin 1 more career to compare</p>
+        <p class="small" ng-show="pinnedCareers.length >= 2" ng-class="{'text-muted': comparedCareers.length == 2}">select 2 careers to compare</p>
 
         <ul class="sidebarList pinnedList">
           <li ng-repeat="p in pinnedCareers track by p.id" class="text-capitalize">

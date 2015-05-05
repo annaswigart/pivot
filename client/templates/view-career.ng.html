@@ -48,6 +48,9 @@
 
         <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
           <h5 class="anchor" id="anchor-skills">SKILLS</h5>
+
+          <small><i>Percentage of <strong>{{career.job_ids.length }}</strong> job postings for <strong>{{career.standardized_title}}</strong> that included these skills</i></small> <br> <br>
+
           <ul>
             <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
               <table>
@@ -87,10 +90,10 @@
         </div>
 
         <div class="tags-wrapper col-xs-7 subSection">
-          <h5>INDUSTRIES</h5>
+          <h5>CATEGORIES</h5>
           <ul>
             <li ng-repeat="category in career.categories | limitTo: 10" >
-              <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+              <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                 {{category.name}}
               </a>
             </li>
@@ -107,11 +110,11 @@
               <li ng-repeat="context in career.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
                 {{context}}</li>
             </ul>
-            <a role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = career.work_activities.activities.length">
+            <a role="button" class="showMoreCareerInfo" ng-hide="career.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
               show more
               <span class="fa fa-chevron-down"></span>
             </a>
-            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit === career.work_activities.activities.length" ng-click="contextLimit = 4">
+            <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
               show less
               <span class="fa fa-chevron-up"></span>
             </a>
@@ -121,11 +124,11 @@
             <h5>Learn More <br>
               About This Career</h5>
             <span>
-              Check out  
+              Check out 
               <a href="http://www.onetonline.org/link/summary/{{career.onet_code[0]}}" target="_blank">
                 O*Net Online
               </a>
-              for more information.
+              to explore the government's data for this career.
             </span>
           </div>
 
@@ -253,7 +256,7 @@
               <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ career.standardized_title }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
                 Meetup.com
               </a>
-               to meet other people interested in this career.
+               to meet people in this career.
             </span>
           </div>
         
@@ -261,8 +264,8 @@
 
             <div class="col-xs-12">
               <h5>RESUME KEYWORDS</h5>
-              <p>Use these top words drawn from <strong>{{career.job_ids.length}}</strong> 
-              {{career.standardized_title}} job postings when updating your resume.</p>
+              <p>Update your resume with these top words drawn from <strong>{{career.job_ids.length}}</strong> 
+              job postings for <strong>{{career.standardized_title}}</strong>.</p>
             </div>
 
             <!-- <div class="col-xs-12"></div> -->

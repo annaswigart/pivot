@@ -19,7 +19,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -96,7 +96,7 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 
     $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
     $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
-    $scope.topIndustries = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
+    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
 }]);
@@ -156,7 +156,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -196,6 +196,10 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
@@ -366,7 +370,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -406,6 +410,10 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
@@ -572,9 +580,8 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.career1.education = newEdArray1;
             $scope.career2.education = newEdArray2;
 
-            console.log($scope.career1);
 
-
+            // *** Skill Intersection for Compare View
             // get top 20 skills for each career
             $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
             $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
@@ -583,6 +590,30 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.skillsIntersect = _.intersection($scope.skills1, $scope.skills2);
             $scope.skills1 = _.xor($scope.skills1, $scope.skillsIntersect);
             $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
+
+
+            // *** Category Intersection for Compare View
+            // get top 10 categories for each career
+            $scope.categories1 = _.pluck(_.sortBy($scope.career1.categories, -'count').slice(0,10), 'name');
+            $scope.categories2 = _.pluck(_.sortBy($scope.career2.categories, -'count').slice(0,10), 'name');
+
+            // get intersecting and unique categories
+            $scope.categoriesIntersect = _.intersection($scope.categories1, $scope.categories2);
+            $scope.categories1 = _.xor($scope.categories1, $scope.categoriesIntersect);
+            $scope.categories2 = _.xor($scope.categories2, $scope.categoriesIntersect);
+
+            // *** Work Context Intersection for Compare View
+            // get work contexts for each career
+            $scope.contexts1 = $scope.career1.work_context.top_work_contexts;
+            $scope.contexts2 = $scope.career2.work_context.top_work_contexts;
+
+            // get intersecting and unique contexts
+            $scope.contextIntersect = _.intersection($scope.contexts1, $scope.contexts2);
+            $scope.contexts1 = _.xor($scope.contexts1, $scope.contextIntersect);
+            $scope.contexts2 = _.xor($scope.contexts2, $scope.contextIntersect);
+            console.log($scope.contextIntersect);
+            console.log($scope.contexts1);
+            console.log($scope.contexts2);
 
         });
 
@@ -598,7 +629,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
     // JSON.parse to read the stack in as an array
     $scope.queryStack = JSON.parse($window.localStorage.getItem('queryStack'));
 
-    // needed for querying by clicking on industry or skill
+    // needed for querying by clicking on category or skill
     $scope.setQuery = function(input) {
         //set query
         $scope.query = input;
@@ -637,6 +668,10 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         if (_.contains(_.pluck($scope.pinnedCareers, 'id'), careerId)) {
             // remove id from pinned list
             $scope.pinnedCareers = _.without($scope.pinnedCareers, _.findWhere($scope.pinnedCareers, {id: careerId}));
+            // and remove from compared list if it's there
+            if (_.contains($scope.comparedCareers, careerId)) {
+                $scope.comparedCareers = _.without($scope.comparedCareers, careerId);
+            }
         } else {
             // else add to pinnedCareers
             $scope.pinnedCareers.push(pinnedCareer);
