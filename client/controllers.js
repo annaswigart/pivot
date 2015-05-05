@@ -580,6 +580,8 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.career1.education = newEdArray1;
             $scope.career2.education = newEdArray2;
 
+
+            // *** Skill Intersection for Compare View
             // get top 20 skills for each career
             $scope.skills1 = _.pluck(_.sortBy($scope.career1.skills, -'count').slice(0,20), 'name');
             $scope.skills2 = _.pluck(_.sortBy($scope.career2.skills, -'count').slice(0,20), 'name');
@@ -590,6 +592,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.skills2 = _.xor($scope.skills2, $scope.skillsIntersect);
 
 
+            // *** Category Intersection for Compare View
             // get top 10 categories for each career
             $scope.categories1 = _.pluck(_.sortBy($scope.career1.categories, -'count').slice(0,10), 'name');
             $scope.categories2 = _.pluck(_.sortBy($scope.career2.categories, -'count').slice(0,10), 'name');
@@ -598,6 +601,19 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.categoriesIntersect = _.intersection($scope.categories1, $scope.categories2);
             $scope.categories1 = _.xor($scope.categories1, $scope.categoriesIntersect);
             $scope.categories2 = _.xor($scope.categories2, $scope.categoriesIntersect);
+
+            // *** Work Context Intersection for Compare View
+            // get work contexts for each career
+            $scope.contexts1 = $scope.career1.work_context.top_work_contexts;
+            $scope.contexts2 = $scope.career2.work_context.top_work_contexts;
+
+            // get intersecting and unique contexts
+            $scope.contextIntersect = _.intersection($scope.contexts1, $scope.contexts2);
+            $scope.contexts1 = _.xor($scope.contexts1, $scope.contextIntersect);
+            $scope.contexts2 = _.xor($scope.contexts2, $scope.contextIntersect);
+            console.log($scope.contextIntersect);
+            console.log($scope.contexts1);
+            console.log($scope.contexts2);
 
         });
 
