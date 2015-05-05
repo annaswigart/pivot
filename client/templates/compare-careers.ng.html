@@ -41,7 +41,7 @@
           </div>
 
           <!-- Left Column -->
-          <div class="col-xs-6 subSection border-right col-left" ng-init="activityLimit = 4">
+          <div class="col-xs-6 subSection border-right col-left" ng-init="activityLimit = 3">
             <ul>
               <li ng-repeat="activity in career1.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
@@ -51,14 +51,14 @@
               show all activities
               <span class="fa fa-chevron-down"></span>
             </a>
-            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 4">
+            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 3">
               show fewer activities
               <span class="fa fa-chevron-up"></span>
             </a>
           </div>
 
           <!-- Right Column -->
-          <div class="col-xs-6 subSection border-left col-right" ng-init="activityLimit = 4">
+          <div class="col-xs-6 subSection border-left col-right" ng-init="activityLimit = 3">
             <ul>
               <li ng-repeat="activity in career2.work_activities.activities | limitTo: activityLimit" class="longListItem">
                 {{activity}}
@@ -68,7 +68,7 @@
               show all activities
               <span class="fa fa-chevron-down"></span>
             </a>  
-            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 4">
+            <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 3">
               show fewer activities
               <span class="fa fa-chevron-up"></span>
             </a>
