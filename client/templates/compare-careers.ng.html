@@ -122,7 +122,7 @@
             <h4>{{career1.standardized_title}}</h4>
             <ul>
                 <li ng-repeat="industry in industries1">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
                     {{industry}}
                   </a>   
                 </li>
@@ -134,7 +134,7 @@
             <h4>Both Careers</h4>
             <ul>
                 <li ng-repeat="industry in industriesIntersect">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
                     {{industry}}
                   </a>   
                 </li>
@@ -151,7 +151,7 @@
             <h4>{{career2.standardized_title}}</h4>
             <ul>
                 <li ng-repeat="industry in industries2">
-                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+                  <a class="industryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: industry})">
                     {{industry}}
                   </a>   
                 </li>
