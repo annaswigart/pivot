@@ -564,7 +564,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             }
 
             $scope.getEdWidth = function(edPercent) {
-                if (edPercent == 0) {
+                if (edPercent == 0 || edPercent < 1.6) {
                     return 2;
                 } else {
                     return edPercent * 1.2;
