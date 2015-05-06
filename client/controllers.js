@@ -58,7 +58,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$window', function($scope, $meteor, $state, $window){   
+'$state', '$window', '$http', function($scope, $meteor, $state, $window, $http){   
 
     // Data for autocomplete search
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
@@ -120,6 +120,7 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
     $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
+
 }]);
 
 
@@ -128,8 +129,8 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http',
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $http){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
@@ -193,6 +194,39 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 
         return $scope.query;
     } 
+
+
+    $scope.getWikiData = function(query) {
+
+        queryString = query.split(' ').join('%20');
+
+        $scope.method = 'JSONP';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+
+        // $scope.fetch = function() {
+        $scope.code = null;
+        $scope.response = null;
+
+        $http({method: 'JSONP', url: $scope.url}).
+            success(function(data, status) {
+              $scope.status = status;
+              $scope.data = data;
+
+              $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+
+            }).
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+
+                $scope.wikiText = "Sorry, we weren't able to find a blurb about " + query + ". But you should totally still look it up!"
+            });
+
+        // console.log(_.findKey($scope.data, 'extract'));
+
+        // console.log(_.pluck($scope.data.query.pages, ));
+
+    }
 
     //**** PINNED CAREERS ****
 
