@@ -361,17 +361,21 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         return salary / 900;
     }
 
-    $scope.getEdWidth = function(edPercent) {
-        return edPercent * 1.5;
-    }
-
     $scope.getRoundedPercent = function(percent) {
-        var rounded = Math.round(percent)
-        if (rounded == 0) {
-            return "<1"
+                var rounded = Math.round(percent)
+                if (rounded == 0) {
+                    return "<1"
+                } else {
+                    return rounded;
+                }
+            }
+
+    $scope.getEdWidth = function(edPercent) {
+        if (edPercent == 0 || edPercent < 1.6) {
+            return 2;
         } else {
-            return rounded;
-        }
+            return edPercent * 1.2;
+        }  
     }
 
     // $scope.lookupIdByName = function(careerTitle){

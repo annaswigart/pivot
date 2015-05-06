@@ -61,10 +61,10 @@
                     </a>
                   </td>
                   <td skill-bar-column>
-                    <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="14">
-                      <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="100" style="fill:#3071a9" />
+                    <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="20">
+                      <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="20" class="fill2" />
                     </svg>
-                    <span> <small>{{getSkillPercent(skill.count, career.num_ids)}}%</small></span>
+                    <span>{{getSkillPercent(skill.count, career.num_ids)}}%</span>
                   </td>
                 </tr>
               </table>
@@ -139,12 +139,12 @@
               <li ng-repeat="ed in career.education | orderBy: 'order'" ng-show="ed.percent != null">
                 <table>
                   <tr>
-                    <td width="220px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                    <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
                     <td class="skill-bar-column">
-                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="14">
-                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="100" style="fill:#3071a9" />
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*1)}} }" height="20">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*1)}} }" height="20" class="fill2" />
                       </svg>
-                      <span> <small>{{ getRoundedPercent(ed.percent)}}%</small></span>
+                      <span>{{ getRoundedPercent(ed.percent)}}%</span>
                     </td>
                   </tr>
                 </table>
