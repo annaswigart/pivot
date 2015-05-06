@@ -46,6 +46,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
         return $scope.query;
     }
 
+    // referenced to hide search box in nav bar on home search screen
     $scope.currentState = $state.current.name;
 
 
@@ -339,14 +340,13 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
             }
 
             // reshape education data to include ordinal degree rank
-            // TODO: move this functinoality to controller on data import
+            // TODO: move this functinoality to server-side on data import
             var newEdArray = []
             _($scope.career.education).each(function(percent, degree) {
                             newEdArray.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
                         });
 
             $scope.career.education = newEdArray;
-            // console.log($scope.career);
         });
         
 
@@ -586,7 +586,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             }
 
             // reshape education data to include ordinal degree rank
-            // TODO: move this functinoality to controller on data import
+            // TODO: move this functinoality to server-side on data import
             var newEdArray1 = []
             _($scope.career1.education).each(function(percent, degree) {
                             newEdArray1.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
