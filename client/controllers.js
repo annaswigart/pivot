@@ -4,9 +4,19 @@ if (Meteor.isClient) {
 // NavBarController
 // ***********************************
 angular.module('reflectivePath').controller('NavBarController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
+    '$meteor','$stateParams', '$state', '$meteorUtils', '$window',
+    function($scope, $meteor, $stateParams, $state, $meteorUtils, $window){
 
+    // Data for autocomplete search
+    $meteor.subscribe('autoCompleteData').then(function(sub){                       
+          $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
+    });
+
+    // Used in typeahead filter, on $viewValue to match on the start of a term
+    $scope.startsWith = function(state, viewValue) {
+      return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
+    } 
+    
     //**** QUERYING ****
 
     $scope.query = $window.localStorage.getItem('currentQuery');
@@ -36,6 +46,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
         return $scope.query;
     }
 
+    // referenced to hide search box in nav bar on home search screen
     $scope.currentState = $state.current.name;
 
 
@@ -48,6 +59,16 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$window', function($scope, $meteor, $state, $window){   
+
+    // Data for autocomplete search
+    $meteor.subscribe('autoCompleteData').then(function(sub){                       
+          $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
+    });
+
+    // Used in typeahead filter, on $viewValue to match on the start of a term
+    $scope.startsWith = function(state, viewValue) {
+      return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
+    } 
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
@@ -319,14 +340,13 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
             }
 
             // reshape education data to include ordinal degree rank
-            // TODO: move this functinoality to controller on data import
+            // TODO: move this functinoality to server-side on data import
             var newEdArray = []
             _($scope.career.education).each(function(percent, degree) {
                             newEdArray.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
                         });
 
             $scope.career.education = newEdArray;
-            // console.log($scope.career);
         });
         
 
@@ -566,7 +586,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             }
 
             // reshape education data to include ordinal degree rank
-            // TODO: move this functinoality to controller on data import
+            // TODO: move this functinoality to server-side on data import
             var newEdArray1 = []
             _($scope.career1.education).each(function(percent, degree) {
                             newEdArray1.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
