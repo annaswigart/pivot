@@ -12,7 +12,10 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
     });
 
-            
+    $scope.startsWith = function(state, viewValue) {
+      return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
+    } 
+    
     //**** QUERYING ****
 
     $scope.query = $window.localStorage.getItem('currentQuery');
@@ -59,6 +62,10 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
     });
+
+    $scope.startsWith = function(state, viewValue) {
+      return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
+    } 
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 

@@ -14,7 +14,7 @@
           </label>
 
           <div class="input-group input-group-lg">
-            <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue | limitTo:8"/>
+            <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:6" typeahead-focus-first= "false"/>
             <span class="input-group-btn">
               <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
                 <span class="fa fa-search" aria-hidden="true"></span>
