@@ -124,13 +124,13 @@ li {
 // Links
 
 a:hover {
-  color: @brand-secondary-light;
+  color: @brand-secondary;
   text-decoration: none;
-  border-bottom: 1px dotted @brand-secondary-light;
+  border-bottom: 1px dotted @brand-secondary;
 }
 
 a {
-  color: @brand-secondary;
+  color: @brand-secondary-light;
   text-decoration: none;
 }
 
@@ -311,7 +311,7 @@ a {
 }
 
 .cardTitle {
-  border-bottom: 1px solid @brand-primary;
+  border-bottom: 1px solid @brand-primary-light;
   padding-bottom: @padding-base-vertical;
 }
 
@@ -336,9 +336,9 @@ a {
   display: inline-block;
 }
 
-.categoryTag {
-  background-color: @brand-secondary-lightest;
-  border: 1px solid @brand-secondary-lighter;
+a.categoryTag {
+  background-color: @gray-lightest;
+  border: 1px solid darken(@gray-lightest, 10%);
   font-size: @font-size-small;
   line-height: 3;
   padding: @padding-base-vertical @padding-base-horizontal;
@@ -347,12 +347,12 @@ a {
   white-space: nowrap;
 }
 
-.categoryTag:hover {
-  background-color: @brand-secondary-lighter;
-}
+/*.categoryTag:hover {
+  background-color: @gray-lighter;
+}*/
 
 a.categoryTag:hover {
-  color: @brand-secondary-dark;
+  background-color: @gray-lighter;
   border: 1px solid @brand-secondary-light;
 }
 
@@ -442,14 +442,14 @@ li .xRemove:hover {
   margin-bottom: @padding-base-vertical;
 }
 
-.resultBox h5 a {
-  color: @brand-primary-dark;
+/*.resultBox h5 a {
+  color: @brand-secondary-light;
 }
 
 .resultBox h5 a:hover {
-  color: @brand-primary-darker;
-  border-bottom: 1px dotted @brand-primary-darker;
-}
+  color: @brand-secondary;
+  border-bottom: 1px dotted @brand-secondary;
+}*/
 
 .resultsHeader {
   margin: 0px; 
@@ -492,7 +492,7 @@ li .xRemove:hover {
 // View Career
 
 .profile h5, .compare h5 {
-  color: @brand-secondary;
+  color: @brand-primary-light;
 }
 
 .sectionTitle {
