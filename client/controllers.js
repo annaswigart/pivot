@@ -4,14 +4,15 @@ if (Meteor.isClient) {
 // NavBarController
 // ***********************************
 angular.module('reflectivePath').controller('NavBarController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
+    '$meteor','$stateParams', '$state', '$meteorUtils', '$window',
+    function($scope, $meteor, $stateParams, $state, $meteorUtils, $window){
 
     // Data for autocomplete search
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
     });
 
+    // Used in typeahead filter, on $viewValue to match on the start of a term
     $scope.startsWith = function(state, viewValue) {
       return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
     } 
@@ -55,14 +56,15 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // ***********************************
 // HomeSearchController
 // ***********************************
-angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$rootScope', '$meteor',
-'$state', '$window', function($scope, $rootScope, $meteor, $state, $window){   
+angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
+'$state', '$window', function($scope, $meteor, $state, $window){   
 
     // Data for autocomplete search
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
     });
 
+    // Used in typeahead filter, on $viewValue to match on the start of a term
     $scope.startsWith = function(state, viewValue) {
       return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
     } 
