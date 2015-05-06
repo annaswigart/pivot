@@ -124,11 +124,13 @@ li {
 // Links
 
 a:hover {
+  color: @brand-secondary;
   text-decoration: none;
-  border-bottom: 1px dotted @brand-primary;
+  border-bottom: 1px dotted @brand-secondary;
 }
 
 a {
+  color: @brand-secondary-light;
   text-decoration: none;
 }
 
@@ -265,8 +267,14 @@ a {
 }
 
 #compareButton {
+  color: #fff;
+  background-color: @brand-punch;
   margin-top: @padding-base-vertical*4;
-  border: none;
+  border: 1px solid @brand-punch-dark;
+}
+
+#compareButton:hover {
+  background-color:@brand-punch-darker;
 }
 
 #compareButton:disabled {
@@ -329,17 +337,22 @@ a {
 }
 
 .categoryTag {
-  background-color: @brand-primary-lighter;
+  background-color: @brand-secondary-lightest;
+  border: 1px solid @brand-secondary-lighter;
   font-size: @font-size-small;
   line-height: 3;
   padding: @padding-base-vertical @padding-base-horizontal;
   margin-right: @padding-base-horizontal;
   border-radius: @border-radius-small;
+  white-space: nowrap;
 }
 
 .categoryTag:hover {
-  background-color: @brand-primary-light;
-  /*border-bottom: 1px solid @brand-primary;*/
+  background-color: @brand-secondary-lighter;
+}
+
+a.categoryTag:hover {
+  border: 1px solid @brand-secondary-light;
 }
 
 // Pinning
@@ -357,7 +370,7 @@ a {
 
 .pinSelected {
   padding: 0px @padding-base-horizontal;
-  color: @brand-secondary;
+  color: @brand-punch;
   cursor: pointer;
 }
 
@@ -495,15 +508,6 @@ li .xRemove:hover {
   padding: @padding-base-vertical*6 0px;
 }
 
-.chart-text-table-col {
-  padding-right: 5px;
-  padding-bottom: 4px;
-}
-
-.chart-bar-table-col {
-  padding-bottom: 4px;
-}
-
 /*.sourceBox {
   color: @gray-med;
   font-size: @font-size-small;
@@ -539,6 +543,52 @@ li .xRemove:hover {
   margin-bottom: @padding-base-vertical*4;
 }
 
+.subSection .shortListItem {
+  margin-bottom: @padding-base-vertical*2;
+}
+
+// Bar Charts
+
+.chart-text-table-col {
+  padding: @padding-base-vertical @padding-base-horizontal;
+/*  padding-right: 5px;
+  padding-bottom: 4px;*/
+}
+
+.chart-bar-table-col {
+  /*padding-bottom: 4px;*/
+}
+
+th {
+  font-weight: 600;
+  padding-top: @padding-base-vertical*4;
+}
+
+tr {
+  /*padding-top: @padding-base-vertical*2;*/
+}
+
+.table-center {
+  margin: 0 auto !important;
+  float: none !important;
+}
+
+.fill1 {
+  fill: @brand-secondary-light;
+}
+
+.fill2 {
+  fill: @brand-punch-light;
+}
+
+.chart-text-left-compare {
+  max-width: 300px;
+}
+
+.chart-text-left {
+  max-width: 120px;
+}
+
 // Compare
 
 .compare h2, .compare h3, .compare h5 {
@@ -546,7 +596,11 @@ li .xRemove:hover {
 }
 
 .compare h5 {
-  color: @brand-secondary;
+  color: @brand-primary-light;
+}
+
+.intersectHeaders h5 {
+  color: @gray-dark;
 }
 
 .compare .card {
