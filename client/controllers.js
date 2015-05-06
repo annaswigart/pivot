@@ -196,14 +196,64 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
     } 
 
 
-    $scope.getWikiData = function(query) {
+    $scope.getWikiData = function(querySelection) {
+
+        var query = querySelection;
+
+        // some hard-coded wikipedia redirections
+        if (query == 'python'){
+            query = 'Python_%28programming_language%29';
+
+        } else if (query == 'javascript') {
+            query = 'JavaScript';
+
+        } else if (query == 'java') {
+            query = 'Java_%28programming_language%29';
+
+        } else if (query == 'ruby') {
+            query = 'Ruby_%28programming_language%29';
+
+        } else if (query == 'sql') {
+            query = 'SQL'
+
+        } else if (query == 'microsoft powerpoint') {
+            query = 'Microsoft PowerPoint';
+
+        } else if (query == 'microsoft excel') {
+            query = 'Microsoft Excel';
+
+        } else if (query == 'microsoft sharepoint') {
+            query = 'Microsoft SharePoint';
+
+        } else if (query == 'microsoft word') {
+            query = 'Microsoft Word';
+
+        } else if (query == 'microsoft dynamics') {
+            query = 'Microsoft Dynamics';
+        
+        } else if (query == 'sox') {
+            query = 'Sarbanes–Oxley_Act';
+        
+        } else if (query == 'peoplesoft') {
+            query = 'PeopleSoft';
+
+        } else if (query == 'html') {
+            query = 'HTML';
+
+        } else if (query == 'autocad') {
+            query = 'AutoCAD';
+        }
+
+
+        
 
         queryString = query.split(' ').join('%20');
 
         $scope.method = 'JSONP';
         $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
+        var redirectCapRegex = new RegExp("another method of capitalisation");
 
-        // $scope.fetch = function() {
         $scope.code = null;
         $scope.response = null;
 
@@ -212,14 +262,26 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
               $scope.status = status;
               $scope.data = data;
 
-              $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+              var extract = _.values($scope.data.query.pages)[0].extract
+
+              if (redirectMergeRegex.test(extract) || redirectCapRegex.test(extract) ){
+                $scope.wikiText = "Sorry, we weren't able to automatically find a blurb about " + "<b>" + query + "</b>" + 
+                                  ". But you should totally still look it up!";
+
+              } else {
+                $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+              }
+
+              console.log($scope.data);
+              console.log($scope.status);
+              
 
             }).
             error(function(data, status) {
                 $scope.data = data || "Request failed";
                 $scope.status = status;
 
-                $scope.wikiText = "Sorry, we weren't able to find a blurb about " + query + ". But you should totally still look it up!"
+                $scope.wikiTextMissing = "Sorry, we weren't able to find a blurb about " + "<b>" + query + "</b>" + ". But you should totally still look it up!"
             });
 
         // console.log(_.findKey($scope.data, 'extract'));

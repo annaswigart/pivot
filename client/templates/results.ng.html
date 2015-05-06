@@ -139,8 +139,8 @@
       </div>
 
       <div class="modal-body">
-        {{wikiText}}
-        <!-- <p ng-bind-html="wikiText"></p> -->
+        <p ng-if="status != 200"> {{wikiTextMissing}} </p>
+        <p ng-bind-html="wikiText"></p>
         
       </div>
 
