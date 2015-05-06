@@ -134,7 +134,7 @@
 
           <div class="col-xs-7 subSection">
             <h5>EDUCATION</h5>
-            <small><i>Minimum education level required</i></small><br><br>
+            <span class="small"><i>Minimum education level required</i></span><br><br>
             <ul>
               <li ng-repeat="ed in career.education | orderBy: 'order'" ng-show="ed.percent != null">
                 <table>
@@ -155,27 +155,30 @@
 
           <div class="col-xs-7 subSection">
             <h5>AVERAGE SALARY</h5>
-            <table>
+
+            <table ng-hide="onetIsNull(career1.onet_titles[0].name)">
               <tr>
-                <td width="100px" class="text-right chart-text-table-col">SF Bay Area</td>
+                <td class="text-right chart-text-table-col chart-text-left">SF Bay Area</td>
                 <td class="chart-bar-table-col">
-                  <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="14">
-                      <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="100" style="fill:#3071a9" />
+                  <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="20">
+                      <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
                   </svg>
-                  <span><small>{{career.salary.annual_salary_bay_area | currency}}</small></span>
+                  <span>{{career.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                 </td>
               </tr>
 
               <tr>
-                <td width="100px" class="text-right chart-text-table-col">California</td>
+                <td class="text-right chart-text-table-col chart-text-left">California</td>
                 <td class="chart-bar-table-col">
-                  <svg  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="14">
-                    <rect  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="100" style="fill:gray" />
+                  <svg  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="20">
+                    <rect  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="20" class="fill2" />
                 </svg>
-                <span><small>{{career.salary.annual_salary_ca | currency}}</small></span>
+                <span>{{career.salary.annual_salary_ca | currency : $ : 0}}</span>
                 </td>
               </tr>
             </table>
+
+
           </div>
 
           <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">

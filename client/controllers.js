@@ -626,14 +626,15 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll',
-function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
 
             $scope.career1 = Careers.findOne({_id: $stateParams.careerId1});
             $scope.career2 = Careers.findOne({_id: $stateParams.careerId2});
+
 
             function getDegreeOrder(degree) {
 
@@ -664,15 +665,12 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
 
             }
 
-             $scope.getSalaryWidth = function(salary) {
+            $scope.getSalaryWidth = function(salary) {
                 return salary / 900;
             }
 
-            $scope.getEdWidth = function(edPercent) {
-                return edPercent * 1.2;
-            }
 
-             $scope.getRoundedPercent = function(percent) {
+            $scope.getRoundedPercent = function(percent) {
                 var rounded = Math.round(percent)
                 if (rounded == 0) {
                     return "<1"
@@ -681,8 +679,19 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
                 }
             }
 
-            // reshape education data to include ordinal degree rank
-            // TODO: move this functinoality to server-side on data import
+
+            $scope.getEdWidth = function(edPercent) {
+                if (edPercent == 0 || edPercent < 1.6) {
+                    return 2;
+                } else {
+                    return edPercent * 1.2;
+                }  
+            }
+
+            
+
+            // reshape education data to include ordinal degree rank and orderBy that rank
+            // TODO: move this functinoality to controller on data import
             var newEdArray1 = []
             _($scope.career1.education).each(function(percent, degree) {
                             newEdArray1.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
@@ -693,9 +702,8 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
                             newEdArray2.push({degree: degree, percent: percent, order: getDegreeOrder(degree)});
                         });
 
-            $scope.career1.education = newEdArray1;
-            $scope.career2.education = newEdArray2;
-
+            $scope.career1.education = $filter('orderBy')(newEdArray1, 'order', false);
+            $scope.career2.education = $filter('orderBy')(newEdArray2, 'order', false);
 
             // *** Skill Intersection for Compare View
             // get top 20 skills for each career
@@ -727,9 +735,6 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
             $scope.contextIntersect = _.intersection($scope.contexts1, $scope.contexts2);
             $scope.contexts1 = _.xor($scope.contexts1, $scope.contextIntersect);
             $scope.contexts2 = _.xor($scope.contexts2, $scope.contextIntersect);
-            console.log($scope.contextIntersect);
-            console.log($scope.contexts1);
-            console.log($scope.contexts2);
 
         });
 
