@@ -55,7 +55,7 @@
             <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
               <table>
                 <tr>
-                  <td width="200px" class="text-right chart-text-table-col">
+                  <td width="160px" class="text-right chart-text-table-col">
                     <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{skill.name}} 
                     </a>
@@ -232,74 +232,64 @@
 
       <!-- Section: Get Hired -->
 
-      <div class="section">
-        
-        <h3 class="col-xs-12 sectionTitle">Get Hired</h3>
+      <h3 class="col-xs-12 sectionTitle">Get Hired</h3>
 
         <div class="col-xs-12">
-
-          <div class="col-xs-12">
-            <h5>SAMPLE JOB TITLES</h5>
-            <p>Click below to search Glassdoor.com for jobs.</p>
-          </div>
-
-          <ul>
-            <li class="col-xs-4" ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 9">
-              <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
-              {{title.name}}
-              </a>
-            </li>
-          </ul>
-          
-          <div class="col-xs-12 subSection"></div>
-
-          <div class="col-xs-12 subSection">
-            <h5>MEET COOL PEOPLE</h5>
-            <span>Join a group on 
-              <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ career.standardized_title }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
-                Meetup.com
-              </a>
-               to meet people in this career.
-            </span>
-          </div>
-        
-          <div>
-
-            <div class="col-xs-12">
-              <h5>RESUME KEYWORDS</h5>
-              <p>Update your resume with these top words drawn from <strong>{{career.job_ids.length}}</strong> 
-              job postings for <strong>{{career.standardized_title}}</strong>.</p>
-            </div>
-
-            <!-- <div class="col-xs-12"></div> -->
-
-            <div class="col-xs-4 subSection">
-              <h4>Verbs</h4>
-              <ul>
-                <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
-              </ul>
-            </div>
-            
-            <div class="col-xs-4 subSection">
-              <h4>Nouns</h4>
-                <ul>
-                  <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
-                </ul>
-            </div>
-            
-            <div class="col-xs-4 subSection">
-              <h4>Adjectives</h4>
-              <ul>
-                <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
-              </ul>
-            </div>
-
-          </div>
-
-            
-
+          <h5>SAMPLE JOB TITLES</h5>
+          <p>Click below to search Glassdoor.com for jobs.</p>
         </div>
 
+        <ul>
+          <li class="col-xs-4" ng-repeat="title in career.job_titles | orderBy: '-count' | limitTo: 9">
+            <a href="http://www.glassdoor.com/Job/{{ createUrlString(title.name, true) }}-jobs-SRCH_KO0,{{title.name.length}}.htm" target="_blank">
+            {{title.name}}
+            </a>
+          </li>
+        </ul>
+        
+        <div class="col-xs-12 subSection"></div>
+
+        <div class="col-xs-12 subSection">
+          <h5>MEET COOL PEOPLE</h5>
+          <span>Join a group on 
+            <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ career.standardized_title }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
+              Meetup.com
+            </a>
+             to meet people in this career.
+          </span>
+        </div>
+      
+        <div>
+
+          <div class="col-xs-12">
+            <h5>RESUME KEYWORDS</h5>
+            <p>Update your resume with these top words drawn from <strong>{{career.job_ids.length}}</strong> 
+            job postings for <strong>{{career.standardized_title}}</strong>.</p>
+          </div>
+
+          <!-- <div class="col-xs-12"></div> -->
+
+          <div class="col-xs-4 subSection">
+            <h4>Verbs</h4>
+            <ul>
+              <li ng-repeat="verb in career.work_activities.top_verbs">{{verb}}</li>
+            </ul>
+          </div>
+          
+          <div class="col-xs-4 subSection">
+            <h4>Nouns</h4>
+              <ul>
+                <li ng-repeat="noun in career.work_activities.top_nouns">{{noun}}</li>
+              </ul>
+          </div>
+          
+          <div class="col-xs-4 subSection">
+            <h4>Adjectives</h4>
+            <ul>
+              <li ng-repeat="adjective in career.work_activities.top_adjs">{{adjective}}</li>
+            </ul>
+          </div>
+          
       </div>  <!-- End of Get Hired Section -->
       
     </div>  <!-- End of Profile Card -->
