@@ -128,8 +128,8 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window',
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window){
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$animate', 
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $animate){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
@@ -301,8 +301,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll',
-function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll){
+ '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll', '$animate',
+function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll, $animate){
 
 
     $meteor.autorun($scope, function() {
@@ -534,8 +534,8 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter',
-function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter', '$animate',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter, $animate){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
