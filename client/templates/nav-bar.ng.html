@@ -4,12 +4,11 @@
   			<a class="navbar-brand text-primary" ui-sref="start">Pivot</a>
   		</div>
 
-
 	    <div class="col-xs-5" ng-if="currentState != 'start'">
 			<form  name="resultsQuery" role="form">
 			    <div class="form-group nav-search"> 
 			      <div class="input-group input-group-sm">
-			        <input type="text" name="text" class="form-control" ng-model="query"/>
+			        <input type="text" name="text" class="form-control" ng-model="query" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:8" typeahead-focus-first= "false"/>
 			        <span class="input-group-btn">
 			          <button ng-click="setQuery(query)" class="btn btn-default" aria-label="search" ui-sref="results({queryString: queryStringURL})">
 			            <span class="fa fa-search" aria-hidden="true"></span>
