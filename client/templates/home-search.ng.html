@@ -1,59 +1,77 @@
+<style>
+  #splash {
+    background: url('/img/shattered_island.gif') no-repeat center top;
+    margin-top: -50px;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+  }
+</style>
+
+
 <div class="home">
 
   <!-- SEARCH BOX CTA -->
+  <div class="col-xs-12" id="splash">
 
-  <div class="col-xs-6 col-xs-offset-3" id="cta-search-box" ng-if="!resultsLoading">
+    <div class="col-xs-6 col-xs-offset-3" id="cta-search-box" ng-if="!resultsLoading">
 
-    <form class="form-horizontal" onsubmit="this.reset(); return false;" name="homeQuery" role="form">
-      <div class="form-group">
+      <h1 class="text-center">Want to change careers? <span class="textBrand">Pivot can help.</span></h1>
 
-        <div class="col-xs-10 col-xs-offset-1">
+      <form class="form-horizontal" onsubmit="this.reset(); return false;" name="homeQuery" role="form">
+        <div class="form-group">
 
-          <label class="search-label">
-            <h2>Explore career profiles. Find a better career.</h2>
-          </label>
+          <div class="col-xs-10 col-xs-offset-1">
 
-          <div class="input-group input-group-lg">
-            <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:6" typeahead-focus-first= "false"/>
-            <span class="input-group-btn">
-              <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
-                <span class="fa fa-search" aria-hidden="true"></span>
-              </button>
-            </span>
+            <label class="search-label">
+              <h3>EXPLORE CAREER DATA</h3>
+            </label>
+
+            <div class="input-group input-group-lg">
+              <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:6" typeahead-focus-first= "false"/>
+              <span class="input-group-btn">
+                <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
+                  <span class="fa fa-search" aria-hidden="true"></span>
+                </button>
+              </span>
+            </div>
+
           </div>
 
         </div>
+      </form>
 
-      </div>
-    </form>
+    </div>  <!-- End Search Box CTA -->
 
-  </div>  <!-- End Search Box CTA -->
+   
+    <!-- <div> {{searchTerms}} </div> -->
 
- <!-- <div> {{searchTerms}} </div> -->
+    <div class="col-xs-12 text-center" id="down-button">
+      <a href="#productDescription">
+        <span class="fa fa-chevron-down fa-2x"></span>
+      </a>
+    </div>
 
-  <div class="col-xs-12 text-center">
-    <span class="fa fa-chevron-down fa-2x"></span>
-  </div>
+  </div> 
 
   <!-- PRODUCT DESCRIPTION -->
 
   <div class="col-xs-12" id="productDescription">
     <div class="col-xs-10 col-xs-offset-1">
 
-      <h1 class="text-center">Want to change careers? <span class="textBrand">Pivot can help.</span></h1>
-
       <div class="col-xs-4 productInfo">
-        <h4>Find Other Careers</h4>
+        <h3>Find Other Careers</h3>
         <p class="text-justify">Whether you have a new career in mind or not, Pivot helps you search hundreds of career profiles to find a better career fit for you.</p>
       </div>
 
       <div class="col-xs-4 productInfo">
-        <h4>Compare Your Options</h4>
+        <h3>Compare Your Options</h3>
         <p class="text-justify">Our career profiles are based on data aggregated from thousands of real San Francisco Bay Area job postings. Compare careers to understand your options.</p>
       </div>
 
       <div class="col-xs-4 productInfo">
-        <h4>Take the Next Step</h4>
+        <h3>Take the Next Step</h3>
         <p class="text-justify">We'll provide tips for targeting your resume to different careers and point you in the direction of free online classes for building new skills.</p>
       </div>
 
@@ -62,44 +80,44 @@
 
   <!-- BROWSING HELP -->
 
-  <div class="col-xs-8 col-xs-offset-2 text-center" id="browsingHelp">
+  <div class="col-xs-12 text-center" id="browsingHelp">
 
-    <h2 class="text-center">Not sure what to search for?</h2>
+    <div class="col-xs-10 col-xs-offset-1">
+      <h2 class="text-center">Not sure what you're looking for?</h2>
 
-    <div class="col-xs-4">
-      <h4>Jump to Popular Careers</h4>
-      <br>
-      <ul>
-        <li ng-repeat="career in topCareers | limitTo: 5">
-          <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">
-            {{career.standardized_title}}
-          </a>
-        </li>
-      </ul>
-    </div>
+      <div class="col-xs-4">
+        <h4>Jump to Popular Careers</h4>
+        <ul>
+          <li ng-repeat="career in topCareers | limitTo: 5">
+            <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">
+              {{career.standardized_title}}
+            </a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="col-xs-4">
-      <h4>Search Careers by Top Skills</h4>
-      <br>
-      <ul>
-        <li ng-repeat="skill in topSkills | limitTo: 5">
-          <a ng-click="setQuery(skill)" aria-label="search for {{skill}}" ui-sref="results({queryString: queryStringURL})">
-            {{skill}}
-          </a>
-        </li>
-      </ul>
-    </div>
+      <div class="col-xs-4">
+        <h4>Search Careers by Top Skills</h4>
+        <ul>
+          <li ng-repeat="skill in topSkills | limitTo: 5">
+            <a ng-click="setQuery(skill)" aria-label="search for {{skill}}" ui-sref="results({queryString: queryStringURL})">
+              {{skill}}
+            </a>
+          </li>
+        </ul>
+      </div>
 
-    <div class="col-xs-4">
-      <h4>Search Careers by Top Categories</h4>
-      <br>
-      <ul>
-        <li ng-repeat="category in topCategories | limitTo: 5">
-          <a ng-click="setQuery(category)" aria-label="search for {{category}}" ui-sref="results({queryString: queryStringURL})">
-            {{category}}
-          </a>
-        </li>
-      </ul>
+      <div class="col-xs-4">
+        <h4>Search Careers by Top Categories</h4>
+        <ul>
+          <li ng-repeat="category in topCategories | limitTo: 5">
+            <a ng-click="setQuery(category)" aria-label="search for {{category}}" ui-sref="results({queryString: queryStringURL})">
+              {{category}}
+            </a>
+          </li>
+        </ul>
+      </div>
+
     </div>
 
   </div>
