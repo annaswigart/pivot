@@ -58,7 +58,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$window', function($scope, $meteor, $state, $window){   
+'$state', '$window', '$anchorScroll', function($scope, $meteor, $state, $window, $anchorScroll){   
 
     // Data for autocomplete search
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
@@ -132,8 +132,8 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$animate', 
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $animate){
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$animate', '$anchorScroll',
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $animate, $anchorScroll){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
