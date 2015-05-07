@@ -85,7 +85,7 @@
           <div class="intersectHeaders">
             <!-- Left Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>{{career1.standardized_title}}</h5>
+              <h6>{{career1.standardized_title}}</h6>
               <ul>
                   <li ng-repeat="skill in skills1" class="shortListItem">
                     {{skill}}</li>
@@ -94,7 +94,7 @@
 
             <!-- Middle Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>Both Careers</h5>
+              <h6>Both Careers</h6>
               <ul>
                   <li ng-repeat="skill in skillsIntersect"  class="shortListItem">
                     {{skill}}</li>
@@ -108,7 +108,7 @@
 
             <!-- Right Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>{{career2.standardized_title}}</h5>
+              <h6>{{career2.standardized_title}}</h6>
               <ul>
                   <li ng-repeat="skill in skills2" class="shortListItem">
                     {{skill}}</li>
@@ -128,7 +128,7 @@
 
             <!-- Left Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>{{career1.standardized_title}}</h5>
+              <h6>{{career1.standardized_title}}</h6>
               <ul>
                   <li ng-repeat="category in categories1">
                     <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
@@ -140,7 +140,7 @@
 
             <!-- Middle Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>Both Careers</h5>
+              <h6>Both Careers</h6>
               <ul>
                   <li ng-repeat="category in categoriesIntersect">
                     <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
@@ -157,7 +157,7 @@
 
             <!-- Right Column -->
             <div class="col-xs-4 subSection text-center">
-              <h5>{{career2.standardized_title}}</h5>
+              <h6>{{career2.standardized_title}}</h6>
               <ul>
                   <li ng-repeat="category in categories2">
                     <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
@@ -185,7 +185,7 @@
 
               <!-- Left Column -->
               <div class="col-xs-4 subSection text-center">
-                <h5>{{career1.standardized_title}}</h5>
+                <h6>{{career1.standardized_title}}</h6>
                 <ul>
                     <li ng-repeat="context in contexts1" class="longListItem">
                       {{context}}  
@@ -195,7 +195,7 @@
 
               <!-- Middle Column -->
               <div class="col-xs-4 subSection text-center">
-                <h5>Both Careers</h5>
+                <h6>Both Careers</h6>
                 <ul>
                     <li ng-repeat="context in contextIntersect" class="longListItem">
                       {{context}}  
@@ -210,7 +210,7 @@
 
               <!-- Right Column -->
               <div class="col-xs-4 subSection text-center">
-                <h5>{{career2.standardized_title}}</h5>
+                <h6>{{career2.standardized_title}}</h6>
                 <ul>
                     <li ng-repeat="context in contexts2" class="longListItem">
                       {{context}}  
