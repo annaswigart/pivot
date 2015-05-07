@@ -44,13 +44,6 @@ li {
   font-size: 100%;
 }
 
-/*a.anchor {
-  display: block; 
-  position: relative; 
-  top: -250px; 
-  visibility: hidden;
-}*/
-
 .textBrand {
   color: @brand-punch;
 }
@@ -294,7 +287,7 @@ h6 {
 }
 
 #compareButton:hover {
-  background-color:@brand-punch-darker;
+  background-color:@brand-punch-dark;
 }
 
 #compareButton:disabled {
@@ -453,6 +446,10 @@ li .xRemove:hover {
   margin: @padding-base-vertical 0px;
 }
 
+.skills-wrapper h5 , .tags-wrapper h5 {
+  font-size: @font-size-small;
+}
+
 .showMoreResults {
   background: none;
   border: none;
@@ -483,10 +480,6 @@ li .xRemove:hover {
 
 // View Career
 
-/*.profile h5, .compare h5 {
-  color: @brand-primary-light;
-}*/
-
 .sectionTitle {
   padding-top: @padding-base-vertical;
   padding-bottom: @padding-base-vertical;
@@ -501,19 +494,6 @@ li .xRemove:hover {
   padding: @padding-base-vertical*6 0px;
 }
 
-/*.sourceBox {
-  color: @gray-med;
-  font-size: @font-size-small;
-  border: 1px solid @brand-primary-light;
-  box-shadow: -6px 0px @brand-primary, -3px 2px 4px @gray-lighter;
-  padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
-  margin-top: @padding-base-vertical*2;
-}
-
-.sourceBox h6 {
-  color: @gray;
-}*/
-
 .featuredLinkBox {
   font-size: @font-size-small;
   border: 1px solid @gray-light;
@@ -525,7 +505,6 @@ li .xRemove:hover {
 }
 
 .featuredLinkBox h5 {
-  /*color: @gray-dark;*/
   line-height: 1.45;
 }
 
@@ -606,14 +585,6 @@ tr {
   font-size: @font-size-large;
 }
 
-/*.compare h5 {
-  color: @brand-primary-light;
-}
-
-.intersectHeaders h5 {
-  color: @gray-dark;
-}*/
-
 .compare .card {
   padding: @padding-base-vertical*4 0px;
 }
@@ -647,7 +618,6 @@ tr {
 
 .noOnetCompare h5 {
   text-align: left;
-  /*color: @gray-dark;*/
   margin-top: 0px;
 }
 
@@ -656,12 +626,3 @@ tr {
 .colorTransFast {
   transition: color 300ms, background-color 300ms, border-color 300ms;
 }
-
-/*.fade.ng-enter {
-  transition:0.5s linear all;
-  opacity:0;
-}
-
-.fade.ng-enter.ng-enter-active {
-  opacity:0;
-}*/
