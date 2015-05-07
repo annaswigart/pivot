@@ -65,6 +65,14 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
     });
 
+    $scope.topCareerNames = ['Software Engineer', 'Registered Nurse', 'Sales Representative', 'Product Manager', 'Accountant'];
+    $scope.topSkills = ['marketing', 'programming', 'design', 'customer service', 'project management'];
+    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Sales', 'Nonprofit'];
+
+    $meteor.subscribe('careerLinkCollection', $scope.topCareerNames).then(function(){
+        $scope.topCareers = Careers.find().fetch();
+    });
+
     // Used in typeahead filter, on $viewValue to match on the start of a term
     $scope.startsWith = function(state, viewValue) {
       return state.substr(0, viewValue.length).toLowerCase() == viewValue.toLowerCase();
@@ -114,10 +122,6 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
         $scope.viewedCareers = _.uniq(oldViewed, 'id').slice(0,3);
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
-
-    $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
-    $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
-    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
 
 
 }]);
@@ -347,10 +351,15 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
                         });
 
             $scope.career.education = newEdArray;
+
         });
         
 
     });
+
+
+
+    
 
     // SKILLS CHARTS
     $scope.getSkillPercent = function(skillCount, numIds) {
@@ -377,12 +386,6 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
             return edPercent * 1.2;
         }  
     }
-
-    // $scope.lookupIdByName = function(careerTitle){
-    //     id = Careers.findOne({standardized_title: careerTitle}, {fields : {_id: 1}})
-    //     console.log(id);
-    //     return id;
-    // }
 
     //**** QUERYING BY TAG ****
 

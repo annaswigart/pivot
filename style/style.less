@@ -21,10 +21,6 @@ body {
 
 }
 
-h2 {
-  font-weight: normal;
-}
-
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -75,11 +71,6 @@ li {
 .search-label {
   display: block;
   text-align: center;
-}
-
-.home h2, .home h1 {
-  padding-bottom: @padding-base-horizontal*2;
-  font-weight: normal;
 }
 
 .home p {
@@ -134,14 +125,18 @@ a {
   text-decoration: none;
 }
 
+a:active, a:focus {
+  color: @brand-secondary;
+}
+
 .navbar-header a {
   border-bottom: none;
 }
 
 .showMoreCareerInfo, .showMoreCareerInfo:visited {
+  color: @brand-punch-dark;
   font-size: @font-size-small;
-  font-weight: 700;
-  color: @gray;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -150,8 +145,39 @@ a {
 }
 
 .showMoreCareerInfo:hover {
-  color: @gray-darker;
+  color: @brand-punch-darker;
   border-bottom: none;
+}
+
+// Headers
+
+h1, h2 {
+  padding-bottom: @padding-base-horizontal*2;
+  font-weight: normal;
+}
+
+h3 {
+  color: @brand-primary-light;
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin: @padding-base-vertical*8 0px @padding-base-vertical*4;
+}
+
+h4 {
+  color: @gray-dark;
+  padding-bottom: @padding-base-vertical;
+  border-bottom: 1px solid @gray-light;
+}
+
+h5 {
+  color: @gray-dark;
+  font-weight: 500;
+}
+
+h6 {
+  color: @brand-punch-dark;
+  font-size: @font-size-base;
 }
 
 // Nav
@@ -186,13 +212,6 @@ a {
 }
 .border-left:before { left: -1px; }
 .border-right:after { right: 0px; }
-
-
-// Main
-
-.main h5 {
-  color: @gray;
-}
 
 
 // Sidebar
@@ -396,41 +415,8 @@ li .xRemove:hover {
 
 // Results
 
-.personalize h5 {
-  display: inline-block;
-}
-
-.personalize .fa {
-  padding: @padding-base-horizontal;
-}
-
-.personalizeInput {
-  font-size: @font-size-small;
-  padding-left: @padding-base-horizontal*3;
-}
-
-.personalize .panel {
-  padding: 0px @padding-base-horizontal*2;
-  margin: @padding-base-vertical*2 0px @padding-base-vertical*2;
-  border: none;
-  border-radius: 0px;
-  box-shadow: 0px 2px 2px @gray-light;
-}
-
-.personalize .panel-heading {
-  background-color: #fff;
-  padding-bottom: @padding-base-vertical;
-}
-
-.personalize .panel-group {
-  margin-bottom: 0px;
-}
-
-.skills-wrapper {
-  font-size: @font-size-small;
-}
-
 .results .card {
+  font-size: @font-size-small;
   padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
 
@@ -443,25 +429,26 @@ li .xRemove:hover {
   margin-bottom: @padding-base-vertical;
 }
 
-/*.resultBox h5 a {
-  color: @brand-secondary-light;
-}
-
-.resultBox h5 a:hover {
-  color: @brand-secondary;
-  border-bottom: 1px dotted @brand-secondary;
-}*/
-
 .resultsHeader {
-  margin: 0px; 
+  font-size: @font-size-large;
+  font-weight: 500;
+  margin: 0px;
   padding-bottom: @padding-base-vertical*2;
 }
 
-.resultTitle {
+.resultTitle a {
+  color: @brand-secondary;
   display: inline-block;
+  border-bottom: 1px solid #fff;
+}
+
+.resultTitle a:hover {
+  color: @brand-secondary-dark;
+  border-bottom: 1px dotted @brand-secondary-dark;
 }
 
 .resultCount{
+  font-size: @font-size-small;
   color: @gray-med;
   margin: @padding-base-vertical 0px;
 }
@@ -473,28 +460,32 @@ li .xRemove:hover {
   cursor: pointer;
 }
 
-.showMoreResults h6 {
+.showMoreResults {
+  display: block;
+  color: @brand-punch-dark;
+  font-weight: 500;
   margin-bottom: @padding-base-vertical;
 }
 
-.showMoreResults:hover h6 {
-  color: @brand-primary;
+.showMoreResults:hover {
+  color: @brand-punch-darker;
 }
 
 .showMoreResults .fa {
-  color: @brand-primary;
+  display: block;
+  color: @brand-punch;
 }
 
 .showMoreResults:hover .fa {
-  color: @brand-primary-dark;
+  color: @brand-punch-darker;
 }
 
 
 // View Career
 
-.profile h5, .compare h5 {
+/*.profile h5, .compare h5 {
   color: @brand-primary-light;
-}
+}*/
 
 .sectionTitle {
   padding-top: @padding-base-vertical;
@@ -534,7 +525,7 @@ li .xRemove:hover {
 }
 
 .featuredLinkBox h5 {
-  color: @gray-dark;
+  /*color: @gray-dark;*/
   line-height: 1.45;
 }
 
@@ -594,17 +585,34 @@ tr {
 
 // Compare
 
-.compare h2, .compare h3, .compare h5 {
+.compare h2 {
   text-align: center;
+  margin: @padding-base-vertical*4;
+}
+
+.compare h4 {
+  font-size: @font-size-large;
+  text-align: center;
+  border-bottom: none;
 }
 
 .compare h5 {
+  text-align: center;
+  color: @gray;
+}
+
+.careerTitleCompare {
+  text-align: center;
+  font-size: @font-size-large;
+}
+
+/*.compare h5 {
   color: @brand-primary-light;
 }
 
 .intersectHeaders h5 {
   color: @gray-dark;
-}
+}*/
 
 .compare .card {
   padding: @padding-base-vertical*4 0px;
@@ -639,7 +647,7 @@ tr {
 
 .noOnetCompare h5 {
   text-align: left;
-  color: @gray-dark;
+  /*color: @gray-dark;*/
   margin-top: 0px;
 }
 

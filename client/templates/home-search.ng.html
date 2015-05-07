@@ -71,7 +71,9 @@
       <br>
       <ul>
         <li ng-repeat="career in topCareers | limitTo: 5">
-          <a href="">{{career}}</a>
+          <a ui-sref="careerView({careerId: career._id})" ng-click="viewCareer(career.standardized_title, career._id)">
+            {{career.standardized_title}}
+          </a>
         </li>
       </ul>
     </div>
