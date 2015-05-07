@@ -82,38 +82,53 @@
             <h4>Skills</h4>
           </div>
 
-          <div class="intersectHeaders">
+          <!-- Intersect Headers -->
+          <div class="row intersectHeaders">
+
             <!-- Left Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career1.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="skill in skills1" class="shortListItem">
-                    {{skill}}</li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>{{career1.standardized_title}}</h6>
             </div>
 
             <!-- Middle Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>Both Careers</h5>
-              <ul>
-                  <li ng-repeat="skill in skillsIntersect"  class="shortListItem">
-                    {{skill}}</li>
-                  <li class="noOnetCompare" ng-if="skillsIntersection == 0">
-                    <div>
-                      The job postings aggregated for these careers did not share any skills
-                    </div>
-                  </li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>Both Careers</h6>
             </div>
 
             <!-- Right Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career2.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="skill in skills2" class="shortListItem">
-                    {{skill}}</li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>{{career2.standardized_title}}</h6>
             </div>
+
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skills1" class="shortListItem">
+                  {{skill}}</li>
+            </ul>
+          </div>
+
+          <!-- Middle Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skillsIntersect"  class="shortListItem">
+                  {{skill}}</li>
+                <li class="noOnetCompare" ng-if="skillsIntersection == 0">
+                  <div>
+                    The job postings aggregated for these careers did not share any skills
+                  </div>
+                </li>
+            </ul>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skills2" class="shortListItem">
+                  {{skill}}</li>
+            </ul>
           </div>
 
         </div>
@@ -124,402 +139,436 @@
             <h4>Categories</h4>
           </div>
 
-          <div class="intersectHeaders">
+          <!-- Intersect Headers -->
+          <div class="row intersectHeaders">
 
             <!-- Left Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career1.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="category in categories1">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>{{career1.standardized_title}}</h6>
             </div>
 
             <!-- Middle Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>Both Careers</h5>
-              <ul>
-                  <li ng-repeat="category in categoriesIntersect">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-                  <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
-                    <div>
-                      The job postings aggregated for these careers did not share any categories
-                    </div>
-                  </li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>Both Careers</h6>
             </div>
 
             <!-- Right Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career2.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="category in categories2">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-              </ul>
+            <div class="col-xs-4 text-center">
+              <h6>{{career2.standardized_title}}</h6>
             </div>
 
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categories1">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+            </ul>
+          </div>
+
+          <!-- Middle Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categoriesIntersect">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+                <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
+                  <div>
+                    The job postings aggregated for these careers did not share any categories
+                  </div>
+                </li>
+            </ul>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categories2">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+            </ul>
           </div>
 
         </div>
 
+        <!-- Hide all O*Net Data if Both Careers don't have it -->
+        <div ng-if="!(onetIsNull(career1.onet_titles[0].name) && onetIsNull(career2.onet_titles[0].name))">
 
-        <!-- WORK CONTEXT -->
-        <div class="row">
-          <div class="col-xs-12">
-            <h4 class="anchor" id="anchor-context">Work Context</h4>
-          </div>
-
-          <!-- Begin Work Context Section with Intersect -->
-          <div class="intersectHeaders" ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
-
-            <!-- Left Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career1.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="context in contexts1" class="longListItem">
-                    {{context}}  
-                  </li>
-              </ul>
+          <!-- WORK CONTEXT -->
+          <div class="row">
+            <div class="col-xs-12">
+              <h4 class="anchor" id="anchor-context">Work Context</h4>
             </div>
 
-            <!-- Middle Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>Both Careers</h5>
-              <ul>
-                  <li ng-repeat="context in contextIntersect" class="longListItem">
-                    {{context}}  
-                  </li>
-                  <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
-                    <div>
-                      These careers did not share any work context descriptions in our data
-                    </div>
-                  </li>
-              </ul>
-            </div>
+            <!-- Begin Work Context Section with Intersect -->
+            <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
 
-            <!-- Right Column -->
-            <div class="col-xs-4 subSection text-center">
-              <h5>{{career2.standardized_title}}</h5>
-              <ul>
-                  <li ng-repeat="context in contexts2" class="longListItem">
-                    {{context}}  
-                  </li>
-              </ul>
-            </div>
+              <!-- Intersect Headers -->
+              <div class="row intersectHeaders">
 
-          </div> <!-- End Work Context Section with Intersect -->
+                <!-- Left Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>{{career1.standardized_title}}</h6>
+                </div>
 
-          <!-- Begin Work Context Section when some O*Net data is Missing -->
-          <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
+                <!-- Middle Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>Both Careers</h6>
+                </div>
 
-            <!-- Left Column -->
-            <div class="col-xs-6 subSection border-right col-left" ng-init="contextLimit = 4" ng-if="!onetIsNull(career1.onet_titles[0].name)">
-              <ul>
-                <li ng-repeat="context in career1.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
-                  {{context}}</li>
-              </ul>
-              <a role="button" class="showMoreCareerInfo" ng-hide="career1.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
-                show more
-                <span class="fa fa-chevron-down"></span>
-              </a>
-              <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
-                show less
-                <span class="fa fa-chevron-up"></span>
-              </a>
-            </div>
+                <!-- Right Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>{{career2.standardized_title}}</h6>
+                </div>
 
-            <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
               </div>
-            </div>
 
-            <!-- Right Column -->
-            <div class="col-xs-6 subSection border-left col-right" ng-init="contextLimit = 4" ng-if="!onetIsNull(career2.onet_titles[0].name)">
-              <ul>
-                <li ng-repeat="context in career2.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
-                  {{context}}</li>
-              </ul>
-              <a role="button" class="showMoreCareerInfo" ng-hide="career2.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
-                show more
-                <span class="fa fa-chevron-down"></span>
-              </a>
-              <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
-                show less
-                <span class="fa fa-chevron-up"></span>
-              </a>
-            </div>
-
-            <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+              <!-- Left Column -->
+              <div class="col-xs-4 subSection text-center">
+                <ul>
+                    <li ng-repeat="context in contexts1" class="longListItem">
+                      {{context}}  
+                    </li>
+                </ul>
               </div>
+
+              <!-- Middle Column -->
+              <div class="col-xs-4 subSection text-center">
+                <ul>
+                    <li ng-repeat="context in contextIntersect" class="longListItem">
+                      {{context}}  
+                    </li>
+                    <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
+                      <div>
+                        These careers did not share any work context descriptions in our data
+                      </div>
+                    </li>
+                </ul>
+              </div>
+
+              <!-- Right Column -->
+              <div class="col-xs-4 subSection text-center">
+                <ul>
+                    <li ng-repeat="context in contexts2" class="longListItem">
+                      {{context}}  
+                    </li>
+                </ul>
+              </div>
+
+            </div> <!-- End Work Context Section with Intersect -->
+
+            <!-- Begin Work Context Section when some O*Net data is Missing -->
+            <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
+
+              <!-- Left Column -->
+              <div class="col-xs-6 subSection border-right col-left" ng-init="contextLimit = 4" ng-if="!onetIsNull(career1.onet_titles[0].name)">
+                <ul>
+                  <li ng-repeat="context in career1.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
+                    {{context}}</li>
+                </ul>
+                <a role="button" class="showMoreCareerInfo" ng-hide="career1.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
+                  show more
+                  <span class="fa fa-chevron-down"></span>
+                </a>
+                <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
+                  show less
+                  <span class="fa fa-chevron-up"></span>
+                </a>
+              </div>
+
+              <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
+                </div>
+              </div>
+
+              <!-- Right Column -->
+              <div class="col-xs-6 subSection border-left col-right" ng-init="contextLimit = 4" ng-if="!onetIsNull(career2.onet_titles[0].name)">
+                <ul>
+                  <li ng-repeat="context in career2.work_context.top_work_contexts | limitTo: contextLimit" class="longListItem">
+                    {{context}}</li>
+                </ul>
+                <a role="button" class="showMoreCareerInfo" ng-hide="career2.work_context.top_work_contexts.length <= contextLimit" ng-click="contextLimit = 20">
+                  show more
+                  <span class="fa fa-chevron-down"></span>
+                </a>
+                <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
+                  show less
+                  <span class="fa fa-chevron-up"></span>
+                </a>
+              </div>
+
+              <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+                </div>
+              </div>
+
+            </div>  <!-- End Work Context Section when some O*Net data is Missing -->
+
+          </div> <!-- End Work Context Section -->
+
+          <!-- SALARY -->
+          <div class="row">
+            <div class="col-xs-12">
+              <h4>Average Salary</h4>
             </div>
 
-          </div>  <!-- End Work Context Section when some O*Net data is Missing -->
+            <!-- One Column: Show when both have O*Net data -->
+            <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
 
-        </div> <!-- End Work Context Section -->
+              <div class="col-xs-12 subSection">
+                <table class="table-center">
 
-        <!-- SALARY -->
-        <div class="row">
-          <div class="col-xs-12">
-            <h4>Average Salary</h4>
-          </div>
-
-          <!-- One Column: Show when both have O*Net data -->
-          <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
-
-            <div class="col-xs-12 subSection">
-              <table class="table-center">
-
-                <tr>
-                  <th class="text-center" colspan="2">San Francisco Bay Area </th>
-                </tr>
-                <tr>
-                  <td class="text-right chart-text-table-col chart-text-left-compare">{{career1.standardized_title}}</td>
-                  <td class="chart-bar-table-col">
-                    <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20">
-                        <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20" class="fill1" />
-                    </svg>
-                    <span>{{career1.salary.annual_salary_bay_area | currency : $ : 0}}</span>
-                  </td>
-                </tr>
-                <tr>
-                  <td class="text-right chart-text-table-col chart-text-left-compare">{{career2.standardized_title}}</td>
-                  <td class="chart-bar-table-col">
-                    <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20">
-                        <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20" class="fill2" />
-                    </svg>
-                    <span>{{career2.salary.annual_salary_bay_area | currency : $ : 0}}</span>
-                  </td>
-                </tr>
-
-              </table>
-            </div>
-
-          </div>  <!-- End One Column Salary for when both have O*Net data -->
-
-
-          <!-- Two Columns: Show when one career has O*Net data -->
-          <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
-
-            <!-- Left column -->
-            <div class="col-xs-6 subSection border-right col-left" ng-if="!onetIsNull(career1.onet_titles[0].name)">
-              <table ng-if="!onetIsNull(career1.onet_titles[0].name)" class="table-center">
                   <tr>
-                    <td class="text-right chart-text-table-col chart-text-left">SF Bay Area</td>
+                    <th class="text-center" colspan="2">San Francisco Bay Area </th>
+                  </tr>
+                  <tr>
+                    <td class="text-right chart-text-table-col chart-text-left-compare">{{career1.standardized_title}}</td>
                     <td class="chart-bar-table-col">
-                      <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20">
-                          <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                      <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20">
+                          <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20" class="fill1" />
                       </svg>
                       <span>{{career1.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                     </td>
                   </tr>
-
                   <tr>
-                    <td class="text-right chart-text-table-col chart-text-left">California</td>
+                    <td class="text-right chart-text-table-col chart-text-left-compare">{{career2.standardized_title}}</td>
                     <td class="chart-bar-table-col">
-                      <svg  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20">
-                        <rect  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20" class="fill2" />
-                    </svg>
-                    <span>{{career1.salary.annual_salary_ca | currency : $ : 0}}</span>
-                    </td>
-                  </tr>
-                </table>
-            </div>
-
-            <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
-              </div>
-            </div>
-
-            <!-- Right Column -->
-            <div class="col-xs-6 subSection border-left col-right" ng-if="!onetIsNull(career2.onet_titles[0].name)">
-              <table ng-if="!onetIsNull(career2.onet_titles[0].name)" class="table-center">
-                  <tr>
-                    <td width="120px" class="text-right chart-text-table-col">SF Bay Area</td>
-                    <td class="chart-bar-table-col">
-                      <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20">
-                          <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                      <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20">
+                          <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20" class="fill2" />
                       </svg>
                       <span>{{career2.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                     </td>
                   </tr>
 
+                </table>
+              </div>
+
+            </div>  <!-- End One Column Salary for when both have O*Net data -->
+
+
+            <!-- Two Columns: Show when one career has O*Net data -->
+            <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
+
+              <!-- Left column -->
+              <div class="col-xs-6 subSection border-right col-left" ng-if="!onetIsNull(career1.onet_titles[0].name)">
+                <table ng-if="!onetIsNull(career1.onet_titles[0].name)" class="table-center">
+                    <tr>
+                      <td class="text-right chart-text-table-col chart-text-left">SF Bay Area</td>
+                      <td class="chart-bar-table-col">
+                        <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20">
+                            <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                        </svg>
+                        <span>{{career1.salary.annual_salary_bay_area | currency : $ : 0}}</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td class="text-right chart-text-table-col chart-text-left">California</td>
+                      <td class="chart-bar-table-col">
+                        <svg  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20">
+                          <rect  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20" class="fill2" />
+                      </svg>
+                      <span>{{career1.salary.annual_salary_ca | currency : $ : 0}}</span>
+                      </td>
+                    </tr>
+                  </table>
+              </div>
+
+              <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
+                </div>
+              </div>
+
+              <!-- Right Column -->
+              <div class="col-xs-6 subSection border-left col-right" ng-if="!onetIsNull(career2.onet_titles[0].name)">
+                <table ng-if="!onetIsNull(career2.onet_titles[0].name)" class="table-center">
+                    <tr>
+                      <td width="120px" class="text-right chart-text-table-col">SF Bay Area</td>
+                      <td class="chart-bar-table-col">
+                        <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20">
+                            <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                        </svg>
+                        <span>{{career2.salary.annual_salary_bay_area | currency : $ : 0}}</span>
+                      </td>
+                    </tr>
+
+                    <tr>
+                      <td width="120px" class="text-right chart-text-table-col">California</td>
+                      <td class="chart-bar-table-col">
+                        <svg  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20">
+                          <rect  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20" class="fill2" />
+                      </svg>
+                      <span>{{career2.salary.annual_salary_ca | currency : $ : 0}}</span>
+                      </td>
+                    </tr>
+                  </table>
+              </div>
+
+              <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+                </div>
+              </div>
+
+            </div>  <!-- End Two Column Salary Section for when one career has O*Net data -->
+
+          </div>  <!-- End Salary Section -->
+
+          <!-- EDUCATION -->
+          <div class="row">
+            <div class="col-xs-12 text-center">
+              <h4>Education</h4>
+              <span class="small"><i>Minimum education level required</i></span><br><br>
+            </div>
+
+            <!-- One Column: Show when both Have O*Net data -->
+            <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
+
+              <!-- Start Bar Chart Legend -->
+              <div class="col-xs-12 subSection text-center">
+                <table class="table-center">
                   <tr>
-                    <td width="120px" class="text-right chart-text-table-col">California</td>
-                    <td class="chart-bar-table-col">
-                      <svg  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20">
-                        <rect  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20" class="fill2" />
-                    </svg>
-                    <span>{{career2.salary.annual_salary_ca | currency : $ : 0}}</span>
+                    <td class="skill-bar-column">
+                      <svg width="40" height="20">
+                        <rect width="40" height="20" class="fill1" />
+                      </svg>
+                    </td>
+                    <td class="chart-text-table-col chart-text-left-compare">
+                      <h5 class="text-left">{{career1.standardized_title}}</h5>
+                    </td>
+                    <td width="60"></td>
+                    <td class="skill-bar-column">
+                      <svg width="40" height="20">
+                        <rect width="40" height="20" class="fill2" />
+                      </svg>
+                    </td>
+                    <td class="chart-text-table-col chart-text-left-compare">
+                      <h5 class="text-left">{{career2.standardized_title}}</h5>
                     </td>
                   </tr>
                 </table>
-            </div>
+              </div>  <!-- End Bar Chart Legend -->
 
-            <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+              <div class="col-xs-10 col-xs-offset-2 subSection" ng-if="!onetIsNull(career1.onet_titles[0].name)">
+                <ul>
+                  <li ng-repeat="(key,ed) in career1.education" ng-if="ed.percent || career2.education[key].percent">
+                    <table>
+
+                      <tr>
+                        <td width="200px" class="text-right chart-text-table-col chart-text-left-compare" rowspan="2">{{ed.degree}}</td>
+                        <td class="skill-bar-column">
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20" class="fill1" />
+                          </svg>
+                          <span>{{getRoundedPercent(ed.percent)}}%</span>
+                        </td>
+                      </tr>
+
+                      <tr>
+                        <td class="skill-bar-column">
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20" class="fill2" />
+                          </svg>
+                          <span>{{getRoundedPercent(career2.education[key].percent)}}%</span>
+                        </td>
+                      </tr>
+
+                      <tr height="20"></tr>
+
+                    </table>
+
+                  </li>
+                </ul>
               </div>
-            </div>
 
-          </div>  <!-- End Two Column Salary Section for when one career has O*Net data -->
+            </div> <!-- End One Column Education Section for when both have O*Net data -->
 
-        </div>  <!-- End Salary Section -->
-
-        <!-- EDUCATION -->
-        <div class="row">
-          <div class="col-xs-12 text-center">
-            <h4>Education</h4>
-            <span class="small"><i>Minimum education level required</i></span><br><br>
-          </div>
-
-          <!-- One Column: Show when both Have O*Net data -->
-          <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
-
-            <!-- Start Bar Chart Legend -->
-            <div class="col-xs-12 subSection text-center">
-              <table class="table-center">
-                <tr>
-                  <td class="skill-bar-column">
-                    <svg width="40" height="20">
-                      <rect width="40" height="20" class="fill1" />
-                    </svg>
-                  </td>
-                  <td class="chart-text-table-col chart-text-left-compare intersectHeaders">
-                    <h5 class="text-left">{{career1.standardized_title}}</h5>
-                  </td>
-                  <td width="60"></td>
-                  <td class="skill-bar-column">
-                    <svg width="40" height="20">
-                      <rect width="40" height="20" class="fill2" />
-                    </svg>
-                  </td>
-                  <td class="chart-text-table-col chart-text-left-compare intersectHeaders">
-                    <h5 class="text-left">{{career2.standardized_title}}</h5>
-                  </td>
-                </tr>
-              </table>
-            </div>  <!-- End Bar Chart Legend -->
-
-            <div class="col-xs-10 col-xs-offset-2 subSection" ng-if="!onetIsNull(career1.onet_titles[0].name)">
-              <ul>
-                <li ng-repeat="(key,ed) in career1.education" ng-if="ed.percent || career2.education[key].percent">
-                  <table>
-
-                    <tr>
-                      <td width="200px" class="text-right chart-text-table-col chart-text-left-compare" rowspan="2">{{ed.degree}}</td>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20" class="fill1" />
-                        </svg>
-                        <span>{{getRoundedPercent(ed.percent)}}%</span>
-                      </td>
-                    </tr>
-
-                    <tr>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*4)}} }" height="20">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*4)}} }" height="20" class="fill2" />
-                        </svg>
-                        <span>{{getRoundedPercent(career2.education[key].percent)}}%</span>
-                      </td>
-                    </tr>
-
-                    <tr height="20"></tr>
-
-                  </table>
-
-                </li>
-              </ul>
-            </div>
-
-          </div> <!-- End One Column Education Section for when both have O*Net data -->
-
-          <!-- Two Columns: Show when one career has O*Net data -->
-          <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
-            <!-- Left Column -->
-            <div class="col-xs-6 subSection border-right" ng-if="!onetIsNull(career1.onet_titles[0].name)">
-              <ul>
-                <li ng-repeat="ed in career1.education | orderBy: 'order'" ng-if="ed.percent != null">
-                  <table>
-                    <tr>
-                      <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20" class="fill2" />
-                        </svg>
-                        <span>{{getRoundedPercent(ed.percent)}}%</span>
-                      </td>
-                    </tr>
-                  </table>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
+            <!-- Two Columns: Show when one career has O*Net data -->
+            <div ng-if="onetIsNull(career1.onet_titles[0].name) || onetIsNull(career2.onet_titles[0].name)">
+              <!-- Left Column -->
+              <div class="col-xs-6 subSection border-right" ng-if="!onetIsNull(career1.onet_titles[0].name)">
+                <ul>
+                  <li ng-repeat="ed in career1.education | orderBy: 'order'" ng-if="ed.percent != null">
+                    <table>
+                      <tr>
+                        <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                        <td class="skill-bar-column">
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20" class="fill2" />
+                          </svg>
+                          <span>{{getRoundedPercent(ed.percent)}}%</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </li>
+                </ul>
               </div>
-            </div>
 
-            <!-- Right Column -->
-            <div class="col-xs-6 subSection border-left" ng-if="!onetIsNull(career2.onet_titles[0].name)">
-              <ul>
-                <li ng-repeat="ed in career2.education | orderBy: 'order'" ng-if="ed.percent != null">
-                  <table>
-                    <tr>
-                      <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
-                      <td class="skill-bar-column">
-                        <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20">
-                          <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20" class="fill2" />
-                        </svg>
-                        <span>{{getRoundedPercent(ed.percent)}}%</span>
-                      </td>
-                    </tr>
-                  </table>
-                </li>
-              </ul>
-            </div>
-
-            <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
-              <div>
-                <h5>Sorry, we don't have this data</h5>
-                <p>We get this kind of data from the government's
-                  <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
-                  Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+              <div class="col-xs-6 border-right noOnetCompare col-left" ng-if="onetIsNull(career1.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career1.standardized_title}}</strong>.</p>
+                </div>
               </div>
-            </div>
 
-          </div>  <!-- End Two Column Education Section for when one career has O*Net data -->
+              <!-- Right Column -->
+              <div class="col-xs-6 subSection border-left" ng-if="!onetIsNull(career2.onet_titles[0].name)">
+                <ul>
+                  <li ng-repeat="ed in career2.education | orderBy: 'order'" ng-if="ed.percent != null">
+                    <table>
+                      <tr>
+                        <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
+                        <td class="skill-bar-column">
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20" class="fill2" />
+                          </svg>
+                          <span>{{getRoundedPercent(ed.percent)}}%</span>
+                        </td>
+                      </tr>
+                    </table>
+                  </li>
+                </ul>
+              </div>
 
-        </div>  <!-- End Education Section -->
+              <div class="col-xs-6 border-left noOnetCompare col-right" ng-if="onetIsNull(career2.onet_titles[0].name)">
+                <div>
+                  <h5>Sorry, we don't have this data</h5>
+                  <p>We get this kind of data from the government's
+                    <a href="http://www.onetonline.org/" target="_blank">O*Net Online</a> resource. 
+                    Unfortunately, the government isn't collecting data for <strong>{{career2.standardized_title}}</strong>.</p>
+                </div>
+              </div>
+
+            </div>  <!-- End Two Column Education Section for when one career has O*Net data -->
+
+          </div>  <!-- End Education Section -->
+
+        </div>  <!-- End O*Net Section -->
 
         
       </div>  <!-- End Card Section -->
