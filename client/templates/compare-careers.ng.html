@@ -82,38 +82,53 @@
             <h4>Skills</h4>
           </div>
 
-          <div class="intersectHeaders">
+          <!-- Intersect Headers -->
+          <div class="row intersectHeaders">
+
             <!-- Left Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>{{career1.standardized_title}}</h6>
-              <ul>
-                  <li ng-repeat="skill in skills1" class="shortListItem">
-                    {{skill}}</li>
-              </ul>
             </div>
 
             <!-- Middle Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>Both Careers</h6>
-              <ul>
-                  <li ng-repeat="skill in skillsIntersect"  class="shortListItem">
-                    {{skill}}</li>
-                  <li class="noOnetCompare" ng-if="skillsIntersection == 0">
-                    <div>
-                      The job postings aggregated for these careers did not share any skills
-                    </div>
-                  </li>
-              </ul>
             </div>
 
             <!-- Right Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>{{career2.standardized_title}}</h6>
-              <ul>
-                  <li ng-repeat="skill in skills2" class="shortListItem">
-                    {{skill}}</li>
-              </ul>
             </div>
+
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skills1" class="shortListItem">
+                  {{skill}}</li>
+            </ul>
+          </div>
+
+          <!-- Middle Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skillsIntersect"  class="shortListItem">
+                  {{skill}}</li>
+                <li class="noOnetCompare" ng-if="skillsIntersection == 0">
+                  <div>
+                    The job postings aggregated for these careers did not share any skills
+                  </div>
+                </li>
+            </ul>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="skill in skills2" class="shortListItem">
+                  {{skill}}</li>
+            </ul>
           </div>
 
         </div>
@@ -124,49 +139,62 @@
             <h4>Categories</h4>
           </div>
 
-          <div class="intersectHeaders">
+          <!-- Intersect Headers -->
+          <div class="row intersectHeaders">
 
             <!-- Left Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>{{career1.standardized_title}}</h6>
-              <ul>
-                  <li ng-repeat="category in categories1">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-              </ul>
             </div>
 
             <!-- Middle Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>Both Careers</h6>
-              <ul>
-                  <li ng-repeat="category in categoriesIntersect">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-                  <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
-                    <div>
-                      The job postings aggregated for these careers did not share any categories
-                    </div>
-                  </li>
-              </ul>
             </div>
 
             <!-- Right Column -->
-            <div class="col-xs-4 subSection text-center">
+            <div class="col-xs-4 text-center">
               <h6>{{career2.standardized_title}}</h6>
-              <ul>
-                  <li ng-repeat="category in categories2">
-                    <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
-                      {{category}}
-                    </a>   
-                  </li>
-              </ul>
             </div>
 
+          </div>
+
+          <!-- Left Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categories1">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+            </ul>
+          </div>
+
+          <!-- Middle Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categoriesIntersect">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+                <li class="noOnetCompare" ng-if="categoriesIntersect == 0">
+                  <div>
+                    The job postings aggregated for these careers did not share any categories
+                  </div>
+                </li>
+            </ul>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-xs-4 subSection text-center">
+            <ul>
+                <li ng-repeat="category in categories2">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: category})">
+                    {{category}}
+                  </a>   
+                </li>
+            </ul>
           </div>
 
         </div>
@@ -181,11 +209,30 @@
             </div>
 
             <!-- Begin Work Context Section with Intersect -->
-            <div class="intersectHeaders" ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
+            <div ng-if="!onetIsNull(career1.onet_titles[0].name) && !onetIsNull(career2.onet_titles[0].name)">
+
+              <!-- Intersect Headers -->
+              <div class="row intersectHeaders">
+
+                <!-- Left Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>{{career1.standardized_title}}</h6>
+                </div>
+
+                <!-- Middle Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>Both Careers</h6>
+                </div>
+
+                <!-- Right Column -->
+                <div class="col-xs-4 text-center">
+                  <h6>{{career2.standardized_title}}</h6>
+                </div>
+
+              </div>
 
               <!-- Left Column -->
               <div class="col-xs-4 subSection text-center">
-                <h6>{{career1.standardized_title}}</h6>
                 <ul>
                     <li ng-repeat="context in contexts1" class="longListItem">
                       {{context}}  
@@ -195,7 +242,6 @@
 
               <!-- Middle Column -->
               <div class="col-xs-4 subSection text-center">
-                <h6>Both Careers</h6>
                 <ul>
                     <li ng-repeat="context in contextIntersect" class="longListItem">
                       {{context}}  
@@ -210,7 +256,6 @@
 
               <!-- Right Column -->
               <div class="col-xs-4 subSection text-center">
-                <h6>{{career2.standardized_title}}</h6>
                 <ul>
                     <li ng-repeat="context in contexts2" class="longListItem">
                       {{context}}  
@@ -411,7 +456,7 @@
                         <rect width="40" height="20" class="fill1" />
                       </svg>
                     </td>
-                    <td class="chart-text-table-col chart-text-left-compare intersectHeaders">
+                    <td class="chart-text-table-col chart-text-left-compare">
                       <h5 class="text-left">{{career1.standardized_title}}</h5>
                     </td>
                     <td width="60"></td>
@@ -420,7 +465,7 @@
                         <rect width="40" height="20" class="fill2" />
                       </svg>
                     </td>
-                    <td class="chart-text-table-col chart-text-left-compare intersectHeaders">
+                    <td class="chart-text-table-col chart-text-left-compare">
                       <h5 class="text-left">{{career2.standardized_title}}</h5>
                     </td>
                   </tr>
@@ -444,8 +489,8 @@
 
                       <tr>
                         <td class="skill-bar-column">
-                          <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*4)}} }" height="20">
-                            <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*4)}} }" height="20" class="fill2" />
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20" class="fill2" />
                           </svg>
                           <span>{{getRoundedPercent(career2.education[key].percent)}}%</span>
                         </td>
