@@ -17,19 +17,19 @@
 
         <!-- HEADER -->
         <div class="row">
-          <h2 class="cardTitle col-xs-10 col-xs-offset-1">Compare Careers</h2>
+          <h2 class="cardTitle">Compare Careers</h2>
         </div>
 
         <!-- TITLES -->
         <div class="row">
-          <div class="col-xs-6">
+          <div class="col-xs-6  careerTitleCompare">
             <a ui-sref="careerView({careerId: career1._id})" ng-click="viewCareer(career1.standardized_title, career1._id)">
-            <h3>{{career1.standardized_title}}</h3>
+            {{career1.standardized_title}}
             </a>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-6 careerTitleCompare">
             <a ui-sref="careerView({careerId: career2._id})" ng-click="viewCareer(career2.standardized_title, career2._id)">
-            <h3>{{career2.standardized_title}}</h3>
+            {{career2.standardized_title}}
             </a>
           </div>
         </div>
@@ -37,7 +37,7 @@
         <!-- ACTIVITIES -->
         <div class="row">
           <div class="col-xs-12">
-            <h5 class="anchor" id="anchor-activities">ACTIVITIES</h5>
+            <h4 class="anchor" id="anchor-activities">Activities</h4>
           </div>
 
           <!-- Left Column -->
@@ -79,7 +79,7 @@
         <!-- SKILLS -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>SKILLS</h5>
+            <h4>Skills</h4>
           </div>
 
           <div class="intersectHeaders">
@@ -121,7 +121,7 @@
         <!-- CATEGORIES -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>CATEGORIES</h5>
+            <h4>Categories</h4>
           </div>
 
           <div class="intersectHeaders">
@@ -175,7 +175,7 @@
         <!-- WORK CONTEXT -->
         <div class="row">
           <div class="col-xs-12">
-            <h5 class="anchor" id="anchor-context">WORK CONTEXT</h5>
+            <h4 class="anchor" id="anchor-context">Work Context</h4>
           </div>
 
           <!-- Begin Work Context Section with Intersect -->
@@ -278,7 +278,7 @@
         <!-- SALARY -->
         <div class="row">
           <div class="col-xs-12">
-            <h5>AVERAGE SALARY</h5>
+            <h4>Average Salary</h4>
           </div>
 
           <!-- One Column: Show when both have O*Net data -->
@@ -393,7 +393,7 @@
         <!-- EDUCATION -->
         <div class="row">
           <div class="col-xs-12 text-center">
-            <h5>EDUCATION</h5>
+            <h4>Education</h4>
             <span class="small"><i>Minimum education level required</i></span><br><br>
           </div>
 

@@ -21,10 +21,6 @@ body {
 
 }
 
-h2 {
-  font-weight: normal;
-}
-
 ul {
   list-style-type: none;
   padding-left: 0px;
@@ -48,19 +44,13 @@ li {
   font-size: 100%;
 }
 
+
 .modal-backdrop {
   z-index: 0;
 }
 
-/*a.anchor {
-  display: block; 
-  position: relative; 
-  top: -250px; 
-  visibility: hidden;
-}*/
-
 .textBrand {
-  color: @brand-secondary;
+  color: @brand-primary-light;
 }
 
 // Nav Search 
@@ -81,11 +71,6 @@ li {
   text-align: center;
 }
 
-.home h2, .home h1 {
-  padding-bottom: @padding-base-horizontal*2;
-  font-weight: normal;
-}
-
 .home p {
   line-height: 1.45;
 }
@@ -94,27 +79,59 @@ li {
   padding-bottom: @padding-base-vertical*2;
 }
 
+.home h4 {
+  border-bottom: none;
+}
+
 #cta-search-box {
-  padding: 50px 0px;
-  box-shadow: 0px 2px 10px @gray-light;
-  background-color: #ffffff;
-  margin-top: @padding-base-horizontal*10;             // need to figure out better vertical positioning
-  margin-bottom: @padding-base-horizontal*6;
+  padding: 40px 0px;
+  box-shadow: 0px 2px 10px rgba(0,0,0,.8);
+  background-color: @gray-lightest;
+  margin-top: @padding-base-horizontal*14;             // need to figure out better vertical positioning
+  margin-bottom: @padding-base-horizontal*8;
+}
+
+#cta-search-box h1 {
+  margin: @padding-base-vertical*2;
+  padding: 0;
+}
+
+#cta-search-box h3 {
+  margin-top: @padding-base-vertical*4;
+}
+
+#cta-search-box button:hover {
+  border-left: none;
 }
 
 .home .fa-chevron-down {
   border-radius: 50px;
   padding: @padding-base-horizontal;
-  box-shadow: 0px 2px 10px @gray-light;
-  background-color: @gray;
+  box-shadow: 0px 2px 10px rgba(0,0,0,.8);
+  background-color: @brand-primary;
   color: white;
-  opacity: .5;
-  margin-bottom: @padding-base-horizontal*6;
+  opacity: .8;
+  margin-bottom: @padding-base-horizontal*8;
+}
+
+#down-button a:hover {
+  border: none;
+}
+
+.home .fa-chevron-down:hover {
+  background-color: @brand-primary-dark;
 }
 
 #productDescription {
   background-color: #fff;
+  border-top: 1px solid @gray-light;
+  border-bottom: 1px solid @gray-light;
   padding: @padding-base-horizontal*6 0px;
+}
+
+#productDescription h3 {
+  letter-spacing: normal;
+  margin-top: @padding-base-vertical*4;
 }
 
 .productInfo {
@@ -122,7 +139,12 @@ li {
 }
 
 #browsingHelp {
+  background-color: @gray-lightest;
   padding: @padding-base-horizontal*6 0px;
+}
+
+#browsingHelp h2 {
+  color: @brand-primary-light;
 }
 
 // Links
@@ -138,14 +160,18 @@ a {
   text-decoration: none;
 }
 
+a:active, a:focus {
+  color: @brand-secondary;
+}
+
 .navbar-header a {
   border-bottom: none;
 }
 
 .showMoreCareerInfo, .showMoreCareerInfo:visited {
+  color: @brand-punch-dark;
   font-size: @font-size-small;
-  font-weight: 700;
-  color: @gray;
+  font-weight: 500;
   text-decoration: none;
 }
 
@@ -154,8 +180,39 @@ a {
 }
 
 .showMoreCareerInfo:hover {
-  color: @gray-darker;
+  color: @brand-punch-darker;
   border-bottom: none;
+}
+
+// Headers
+
+h1, h2 {
+  padding-bottom: @padding-base-horizontal*2;
+  font-weight: normal;
+}
+
+h3 {
+  color: @brand-primary-light;
+  font-weight: normal;
+  text-align: center;
+  letter-spacing: 0.08em;
+  margin: @padding-base-vertical*8 0px @padding-base-vertical*4;
+}
+
+h4 {
+  color: @gray-dark;
+  padding-bottom: @padding-base-vertical;
+  border-bottom: 1px solid @gray-light;
+}
+
+h5 {
+  color: @gray-dark;
+  font-weight: 500;
+}
+
+h6 {
+  color: @brand-punch-dark;
+  font-size: @font-size-base;
 }
 
 // Nav
@@ -163,7 +220,7 @@ a {
 @navbar-padding: 70px;
 
 .navbar {
-  box-shadow: 0px 2px 6px @gray-light;
+  box-shadow: 0px 2px 3px rgba(0,0,0,.14), 0px 2px 6px rgba(0,0,0,.28);
 }
 
 .navbar a:hover {
@@ -190,13 +247,6 @@ a {
 }
 .border-left:before { left: -1px; }
 .border-right:after { right: 0px; }
-
-
-// Main
-
-.main h5 {
-  color: @gray;
-}
 
 
 // Sidebar
@@ -240,17 +290,18 @@ a {
   color: @gray-dark;
 }
 
+.fa-square-o {
+  padding-right: 7px;
+}
+
 .fa-square {
   color: @gray-lighter;
   cursor: inherit;
+  padding-right: 6px;
 }
 
 .fa-square:hover {
   color: @gray-lighter;
-}
-
-.sidebar h5 {
-  padding-top: @padding-base-vertical*2;
 }
 
 .sidebar button {
@@ -278,7 +329,7 @@ a {
 }
 
 #compareButton:hover {
-  background-color:@brand-punch-darker;
+  background-color:@brand-punch-dark;
 }
 
 #compareButton:disabled {
@@ -308,14 +359,14 @@ a {
 .card {
   padding: @padding-base-vertical*4 @padding-base-horizontal*4;
   margin: @padding-base-vertical*2 0px @padding-base-vertical*4;
-  box-shadow: 0px 2px 2px @gray-light;
+  box-shadow: 0px 2px 2px rgba(0,0,0,.28);
   background-color: #ffffff;
   overflow: hidden;
   border: 1px solid @gray-lighter;
 }
 
 .cardTitle {
-  border-bottom: 1px solid @brand-primary;
+  border-bottom: 1px solid @brand-primary-light;
   padding-bottom: @padding-base-vertical;
 }
 
@@ -340,9 +391,9 @@ a {
   display: inline-block;
 }
 
-.categoryTag {
-  background-color: @brand-secondary-lightest;
-  border: 1px solid @brand-secondary-lighter;
+a.categoryTag {
+  background-color: @gray-lightest;
+  border: 1px solid darken(@gray-lightest, 10%);
   font-size: @font-size-small;
   line-height: 3;
   padding: @padding-base-vertical @padding-base-horizontal;
@@ -351,11 +402,12 @@ a {
   white-space: nowrap;
 }
 
-.categoryTag:hover {
-  background-color: @brand-secondary-lighter;
-}
+/*.categoryTag:hover {
+  background-color: @gray-lighter;
+}*/
 
 a.categoryTag:hover {
+  background-color: @gray-lighter;
   border: 1px solid @brand-secondary-light;
 }
 
@@ -398,41 +450,8 @@ li .xRemove:hover {
 
 // Results
 
-.personalize h5 {
-  display: inline-block;
-}
-
-.personalize .fa {
-  padding: @padding-base-horizontal;
-}
-
-.personalizeInput {
-  font-size: @font-size-small;
-  padding-left: @padding-base-horizontal*3;
-}
-
-.personalize .panel {
-  padding: 0px @padding-base-horizontal*2;
-  margin: @padding-base-vertical*2 0px @padding-base-vertical*2;
-  border: none;
-  border-radius: 0px;
-  box-shadow: 0px 2px 2px @gray-light;
-}
-
-.personalize .panel-heading {
-  background-color: #fff;
-  padding-bottom: @padding-base-vertical;
-}
-
-.personalize .panel-group {
-  margin-bottom: 0px;
-}
-
-.skills-wrapper {
-  font-size: @font-size-small;
-}
-
 .results .card {
+  font-size: @font-size-small;
   padding: @padding-base-vertical*4 @padding-base-horizontal*2;
 }
 
@@ -445,27 +464,32 @@ li .xRemove:hover {
   margin-bottom: @padding-base-vertical;
 }
 
-.resultBox h5 a {
-  color: @brand-primary-dark;
-}
-
-.resultBox h5 a:hover {
-  color: @brand-primary-darker;
-  border-bottom: 1px dotted @brand-primary-darker;
-}
-
 .resultsHeader {
-  margin: 0px; 
+  font-size: @font-size-large;
+  font-weight: 500;
+  margin: 0px;
   padding-bottom: @padding-base-vertical*2;
 }
 
-.resultTitle {
+.resultTitle a {
+  color: @brand-secondary;
   display: inline-block;
+  border-bottom: 1px solid #fff;
+}
+
+.resultTitle a:hover {
+  color: @brand-secondary-dark;
+  border-bottom: 1px dotted @brand-secondary-dark;
 }
 
 .resultCount{
+  font-size: @font-size-small;
   color: @gray-med;
   margin: @padding-base-vertical 0px;
+}
+
+.skills-wrapper h5 , .tags-wrapper h5 {
+  font-size: @font-size-small;
 }
 
 .showMoreResults {
@@ -475,28 +499,28 @@ li .xRemove:hover {
   cursor: pointer;
 }
 
-.showMoreResults h6 {
+.showMoreResults {
+  display: block;
+  color: @brand-punch-dark;
+  font-weight: 500;
   margin-bottom: @padding-base-vertical;
 }
 
-.showMoreResults:hover h6 {
-  color: @brand-primary;
+.showMoreResults:hover {
+  color: @brand-punch-darker;
 }
 
 .showMoreResults .fa {
-  color: @brand-primary;
+  display: block;
+  color: @brand-punch;
 }
 
 .showMoreResults:hover .fa {
-  color: @brand-primary-dark;
+  color: @brand-punch-darker;
 }
 
 
 // View Career
-
-.profile h5, .compare h5 {
-  color: @brand-secondary;
-}
 
 .sectionTitle {
   padding-top: @padding-base-vertical;
@@ -512,30 +536,17 @@ li .xRemove:hover {
   padding: @padding-base-vertical*6 0px;
 }
 
-/*.sourceBox {
-  color: @gray-med;
-  font-size: @font-size-small;
-  border: 1px solid @brand-primary-light;
-  box-shadow: -6px 0px @brand-primary, -3px 2px 4px @gray-lighter;
-  padding: @padding-base-vertical*2 @padding-base-horizontal*2 @padding-base-vertical*4;
-  margin-top: @padding-base-vertical*2;
-}
-
-.sourceBox h6 {
-  color: @gray;
-}*/
-
 .featuredLinkBox {
   font-size: @font-size-small;
   border: 1px solid @gray-light;
   background-color: #fdfdfd;
-  box-shadow: -6px 0px @gray-med, -3px 2px 4px @gray-lighter;
+  box-shadow: -6px 0px @gray-med, -3px 2px 4px rgba(0,0,0,.14);
   padding: @padding-base-vertical*3 @padding-base-horizontal*2 @padding-base-vertical*4;
   margin-top: @padding-base-vertical*8;
+  margin-bottom: @padding-base-vertical*8;
 }
 
 .featuredLinkBox h5 {
-  color: @gray-dark;
   line-height: 1.45;
 }
 
@@ -595,16 +606,25 @@ tr {
 
 // Compare
 
-.compare h2, .compare h3, .compare h5 {
+.compare h2 {
   text-align: center;
+  margin: @padding-base-vertical*4;
+}
+
+.compare h4 {
+  font-size: @font-size-large;
+  text-align: center;
+  border-bottom: none;
 }
 
 .compare h5 {
-  color: @brand-primary-light;
+  text-align: center;
+  color: @gray;
 }
 
-.intersectHeaders h5 {
-  color: @gray-dark;
+.careerTitleCompare {
+  text-align: center;
+  font-size: @font-size-large;
 }
 
 .compare .card {
@@ -635,12 +655,11 @@ tr {
   background-color: @gray-lightest;
   border: 1px solid @gray-light;
   padding: @padding-base-vertical*4;
-  box-shadow: 0px 2px 4px @gray-lighter;
+  box-shadow: 0px 2px 4px rgba(0,0,0,.14);
 }
 
 .noOnetCompare h5 {
   text-align: left;
-  color: @gray-dark;
   margin-top: 0px;
 }
 

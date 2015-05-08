@@ -58,11 +58,19 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // HomeSearchController
 // ***********************************
 angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
-'$state', '$window', '$http', function($scope, $meteor, $state, $window, $http){   
+'$state', '$window', '$http', '$anchorScroll', function($scope, $meteor, $state, $window, $http, $anchorScroll){   
 
     // Data for autocomplete search
     $meteor.subscribe('autoCompleteData').then(function(sub){                       
           $scope.searchTerms = Autocomplete.findOne({ _id : '123'}).searchValues;   
+    });
+
+    $scope.topCareerNames = ['Software Engineer', 'Registered Nurse', 'Sales Representative', 'Product Manager', 'Accountant'];
+    $scope.topSkills = ['marketing', 'programming', 'design', 'customer service', 'project management'];
+    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Sales', 'Nonprofit'];
+
+    $meteor.subscribe('careerLinkCollection', $scope.topCareerNames).then(function(){
+        $scope.topCareers = Careers.find().fetch();
     });
 
     // Used in typeahead filter, on $viewValue to match on the start of a term
@@ -115,10 +123,6 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
         $window.localStorage.viewedCareers = JSON.stringify($scope.viewedCareers);   
     }
 
-    $scope.topCareers = ['Software Engineer', 'Medical Manager', 'Sales Representative', 'Product Manager', 'User Experience Designer', 'Data Scientist'];
-    $scope.topSkills = ['communication', 'programming', 'design', 'customer service', 'marketing', 'analytics'];
-    $scope.topCategories = ['Information Technology', 'Consulting', 'Health Care', 'Design', 'Nonprofit', 'Sales'];
-
 
 
 }]);
@@ -129,8 +133,8 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http',
-    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $http){
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http', '$animate', '$anchorScroll',
+    function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $http, $animate, $anchorScroll){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
 
@@ -397,8 +401,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll',
-function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll){
+ '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll', '$animate',
+function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll, $animate){
 
 
     $meteor.autorun($scope, function() {
@@ -443,10 +447,15 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
                         });
 
             $scope.career.education = newEdArray;
+
         });
         
 
     });
+
+
+
+    
 
     // SKILLS CHARTS
     $scope.getSkillPercent = function(skillCount, numIds) {
@@ -457,24 +466,22 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         return salary / 900;
     }
 
-    $scope.getEdWidth = function(edPercent) {
-        return edPercent * 1.5;
-    }
-
     $scope.getRoundedPercent = function(percent) {
-        var rounded = Math.round(percent)
-        if (rounded == 0) {
-            return "<1"
-        } else {
-            return rounded;
-        }
-    }
+                var rounded = Math.round(percent)
+                if (rounded == 0) {
+                    return "<1"
+                } else {
+                    return rounded;
+                }
+            }
 
-    // $scope.lookupIdByName = function(careerTitle){
-    //     id = Careers.findOne({standardized_title: careerTitle}, {fields : {_id: 1}})
-    //     console.log(id);
-    //     return id;
-    // }
+    $scope.getEdWidth = function(edPercent) {
+        if (edPercent == 0 || edPercent < 1.6) {
+            return 2;
+        } else {
+            return edPercent * 1.2;
+        }  
+    }
 
     //**** QUERYING BY TAG ****
 
@@ -626,8 +633,8 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter',
-function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter', '$animate',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter, $animate){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
