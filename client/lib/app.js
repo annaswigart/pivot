@@ -1,4 +1,4 @@
-var app = angular.module('reflectivePath', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination']);
+var app = angular.module('reflectivePath', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'ngSanitize']);
 
 Meteor.startup(function () {
     

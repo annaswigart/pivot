@@ -42,7 +42,7 @@
           <h5>Who wrote this profile?</h5>
           <span>This career profile was compiled from government data and 
             <strong>{{career.job_ids.length}}</strong> job postings. <br>
-            <a href="">Learn more about our data</a>.
+            <!-- <a href="">Learn more about our data</a>. -->
           </span>
         </div>
 
@@ -56,7 +56,8 @@
               <table>
                 <tr>
                   <td width="160px" class="text-right chart-text-table-col">
-                    <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})">
+                    <!-- <a ng-click="setQuery(skill.name)" aria-label="search for {{skill.name}}" ui-sref="results({queryString: queryStringURL})"> -->
+                    <a class="skill-name" ng-click="getWikiData(skill.name)" data-toggle="modal" data-target="#wikiModal">
                     {{skill.name}} 
                     </a>
                   </td>
@@ -93,7 +94,8 @@
           <h4>Categories</h4>
           <ul>
             <li ng-repeat="category in career.categories | limitTo: 10" >
-              <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+              <!-- <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})"> -->
+              <a class="categoryTag colorTransFast" ng-click="getWikiData((category.name.toLowerCase()))" data-toggle="modal" data-target="#wikiModal">
                 {{category.name}}
               </a>
             </li>
@@ -177,8 +179,6 @@
                 </td>
               </tr>
             </table>
-
-
           </div>
 
           <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
@@ -280,3 +280,34 @@
   </div>  <!-- End of Main -->
 
 </div>  <!-- End of Template -->
+
+
+<!-- WIKI MODAL -->
+
+<section>
+<div class="modal fade" id="wikiModal" ng-init="focus=false;blur=false"  tabindex="-1" modal-toggle role="dialog" aria-labelledby="wikipediaModal" aria-hidden="true">
+  <div class="modal-dialog">
+  <div class="modal-content">
+    <div>
+      <div class="modal-header">
+        <button type="button" class="close pull-right fug-close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <p class="lead wiki-blurb-title"><b>{{ wikiBlurbTitle }}</b></p>
+      </div>
+
+      <div class="modal-body">
+        <p ng-if="status != 200"> {{wikiTextMissing}} </p>
+        <p ng-bind-html="wikiText"></p>
+        <!-- <br> -->
+        <!-- <div class= "text-center">
+          <button type="button" class="btn btn-primary search-from-wiki-btn" data-dismiss="modal" ng-click="setQuery(queryClicked); modalClosed();" aria-label="search for {{queryClicked}}" ui-sref="results({queryString: queryStringURL})">Search more careers related to <b>{{queryClicked}}</b></button>
+        </div> -->
+      </div>
+
+      <div class="modal-footer">
+       <button type="button" class="btn" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>
+</section>
