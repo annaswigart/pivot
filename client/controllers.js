@@ -133,7 +133,7 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ***********************************
 
 angular.module('reflectivePath').controller('ResultsController', ['$scope', 
-    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http', '$animate', '$anchorScroll',
+    '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http', '$animate', '$anchorScroll', 
     function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $http, $animate, $anchorScroll){
 
     $scope.query = $window.localStorage.getItem('currentQuery');
@@ -200,9 +200,11 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
     } 
 
 
-    $scope.getWikiData = function(querySelection) {
+ $scope.getWikiData = function(querySelection) {
 
-        var query = querySelection;
+        $scope.queryClicked = querySelection;
+
+        var query = querySelection.split('/')[0];
 
         // some hard-coded wikipedia redirections
         if (query == 'python'){
@@ -246,10 +248,27 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 
         } else if (query == 'autocad') {
             query = 'AutoCAD';
+
+        } else if (query == 'r') {
+            query = 'R (programming language)';
+        
+        } else if (query == 'c++') {
+            query = 'C%2B%2B';
+
+        } else if (query == 'c') {
+            query = 'C (programming language)';
+        
+        } else if (query == 'matlab') {
+            query = 'MATLAB';
+
+        } else if (query == 'sas') {
+            query = 'SAS (software)'
+        
+        } else if (query == 'erp') {
+            query = 'Enterprise_resource_planning'
         }
 
 
-        
 
         queryString = query.split(' ').join('%20');
 
@@ -268,18 +287,16 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 
               var extract = _.values($scope.data.query.pages)[0].extract
 
-              if (redirectMergeRegex.test(extract) || redirectCapRegex.test(extract) ){
+              if (redirectMergeRegex.test(extract) || redirectCapRegex.test(extract) || (_.values($scope.data.query.pages)[0].extract).length == 0){
                 $scope.wikiText = "Sorry, we weren't able to automatically find a blurb about " + "<b>" + query + "</b>" + 
                                   ". But you should totally still look it up!";
-
+                $scope.wikiBlurbTitle = "Oops! No blurb found."
               } else {
                 $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+                $scope.wikiBlurbTitle = _.values($scope.data.query.pages)[0].title;
               }
 
-              console.log($scope.data);
-              console.log($scope.status);
-              
-
+        
             }).
             error(function(data, status) {
                 $scope.data = data || "Request failed";
@@ -288,11 +305,26 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
                 $scope.wikiTextMissing = "Sorry, we weren't able to find a blurb about " + "<b>" + query + "</b>" + ". But you should totally still look it up!"
             });
 
-        // console.log(_.findKey($scope.data, 'extract'));
-
-        // console.log(_.pluck($scope.data.query.pages, ));
-
     }
+
+
+    // $scope.modalClosed = function() {
+    //     Element.prototype.remove = function() {
+    //         this.parentElement.removeChild(this);
+    //     }
+    //     NodeList.prototype.remove = HTMLCollection.prototype.remove = function() {
+    //         for(var i = 0, len = this.length; i < len; i++) {
+    //             if(this[i] && this[i].parentElement) {
+    //                 this[i].parentElement.removeChild(this[i]);
+    //             }
+    //         }
+    //     }
+
+    //     document.getElementsByClassName("modal-backdrop").remove();
+    //     document.getElementsByClassName("container").focus();
+
+
+    // }
 
     //**** PINNED CAREERS ****
 
@@ -401,9 +433,8 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 // CareerViewController
 // ***********************************
 angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
- '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll', '$animate',
-function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll, $animate){
-
+'$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll', '$http',
+function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll, $http){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerProfileResults', $stateParams.careerId).then(function(sub) {
@@ -453,9 +484,113 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
     });
 
+    $scope.getWikiData = function(querySelection) {
+
+        $scope.queryClicked = querySelection;
+
+        var query = querySelection.split('/')[0];
+
+        // some hard-coded wikipedia redirections
+        if (query == 'python'){
+            query = 'Python_%28programming_language%29';
+
+        } else if (query == 'javascript') {
+            query = 'JavaScript';
+
+        } else if (query == 'java') {
+            query = 'Java_%28programming_language%29';
+
+        } else if (query == 'ruby') {
+            query = 'Ruby_%28programming_language%29';
+
+        } else if (query == 'sql') {
+            query = 'SQL'
+
+        } else if (query == 'microsoft powerpoint') {
+            query = 'Microsoft PowerPoint';
+
+        } else if (query == 'microsoft excel') {
+            query = 'Microsoft Excel';
+
+        } else if (query == 'microsoft sharepoint') {
+            query = 'Microsoft SharePoint';
+
+        } else if (query == 'microsoft word') {
+            query = 'Microsoft Word';
+
+        } else if (query == 'microsoft dynamics') {
+            query = 'Microsoft Dynamics';
+        
+        } else if (query == 'sox') {
+            query = 'Sarbanes–Oxley_Act';
+        
+        } else if (query == 'peoplesoft') {
+            query = 'PeopleSoft';
+
+        } else if (query == 'html') {
+            query = 'HTML';
+
+        } else if (query == 'autocad') {
+            query = 'AutoCAD';
+
+        } else if (query == 'r') {
+            query = 'R (programming language)';
+        
+        } else if (query == 'c++') {
+            query = 'C%2B%2B';
+
+        } else if (query == 'c') {
+            query = 'C (programming language)';
+        
+        } else if (query == 'matlab') {
+            query = 'MATLAB';
+
+        } else if (query == 'sas') {
+            query = 'SAS (software)'
+        
+        } else if (query == 'erp') {
+            query = 'Enterprise_resource_planning'
+        }
 
 
-    
+
+        queryString = query.split(' ').join('%20');
+
+        $scope.method = 'JSONP';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
+        var redirectCapRegex = new RegExp("another method of capitalisation");
+
+        $scope.code = null;
+        $scope.response = null;
+
+        $http({method: 'JSONP', url: $scope.url}).
+            success(function(data, status) {
+              $scope.status = status;
+              $scope.data = data;
+
+              var extract = _.values($scope.data.query.pages)[0].extract
+
+              if (redirectMergeRegex.test(extract) || redirectCapRegex.test(extract) || (_.values($scope.data.query.pages)[0].extract).length == 0){
+                $scope.wikiText = "Sorry, we weren't able to automatically find a blurb about " + "<b>" + query + "</b>" + 
+                                  ". But you should totally still look it up!";
+                $scope.wikiBlurbTitle = "Oops! No blurb found."
+              } else {
+                $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+                $scope.wikiBlurbTitle = _.values($scope.data.query.pages)[0].title;
+              }
+
+        
+            }).
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+
+                $scope.wikiTextMissing = "Sorry, we weren't able to find a blurb about " + "<b>" + query + "</b>" + ". But you should totally still look it up!"
+            });
+
+    }
+
 
     // SKILLS CHARTS
     $scope.getSkillPercent = function(skillCount, numIds) {
@@ -509,7 +644,6 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
         return $scope.query;
     } 
-
 
     // **** PINNED CAREERS ****
 
@@ -633,8 +767,8 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // CompareViewController
 // ***********************************
 angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
- '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter', '$animate',
-function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter, $animate){
+ '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter', '$animate', '$http',
+function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter, $animate, $http){
 
     $meteor.autorun($scope, function() {
         $meteor.subscribe('careerCompareResults', $stateParams.careerId1, $stateParams.careerId2).then(function(sub) {
@@ -746,6 +880,114 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         });
 
     });
+
+     $scope.getWikiData = function(querySelection) {
+
+        $scope.queryClicked = querySelection;
+
+        var query = querySelection.split('/')[0];
+
+        // some hard-coded wikipedia redirections
+        if (query == 'python'){
+            query = 'Python_%28programming_language%29';
+
+        } else if (query == 'javascript') {
+            query = 'JavaScript';
+
+        } else if (query == 'java') {
+            query = 'Java_%28programming_language%29';
+
+        } else if (query == 'ruby') {
+            query = 'Ruby_%28programming_language%29';
+
+        } else if (query == 'sql') {
+            query = 'SQL'
+
+        } else if (query == 'microsoft powerpoint') {
+            query = 'Microsoft PowerPoint';
+
+        } else if (query == 'microsoft excel') {
+            query = 'Microsoft Excel';
+
+        } else if (query == 'microsoft sharepoint') {
+            query = 'Microsoft SharePoint';
+
+        } else if (query == 'microsoft word') {
+            query = 'Microsoft Word';
+
+        } else if (query == 'microsoft dynamics') {
+            query = 'Microsoft Dynamics';
+        
+        } else if (query == 'sox') {
+            query = 'Sarbanes–Oxley_Act';
+        
+        } else if (query == 'peoplesoft') {
+            query = 'PeopleSoft';
+
+        } else if (query == 'html') {
+            query = 'HTML';
+
+        } else if (query == 'autocad') {
+            query = 'AutoCAD';
+
+        } else if (query == 'r') {
+            query = 'R (programming language)';
+        
+        } else if (query == 'c++') {
+            query = 'C%2B%2B';
+
+        } else if (query == 'c') {
+            query = 'C (programming language)';
+        
+        } else if (query == 'matlab') {
+            query = 'MATLAB';
+
+        } else if (query == 'sas') {
+            query = 'SAS (software)'
+        
+        } else if (query == 'erp') {
+            query = 'Enterprise_resource_planning'
+        }
+
+
+
+        queryString = query.split(' ').join('%20');
+
+        $scope.method = 'JSONP';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
+        var redirectCapRegex = new RegExp("another method of capitalisation");
+
+        $scope.code = null;
+        $scope.response = null;
+
+        $http({method: 'JSONP', url: $scope.url}).
+            success(function(data, status) {
+              $scope.status = status;
+              $scope.data = data;
+
+              var extract = _.values($scope.data.query.pages)[0].extract
+
+              if (redirectMergeRegex.test(extract) || redirectCapRegex.test(extract) || (_.values($scope.data.query.pages)[0].extract).length == 0){
+                $scope.wikiText = "Sorry, we weren't able to automatically find a blurb about " + "<b>" + query + "</b>" + 
+                                  ". But you should totally still look it up!";
+                $scope.wikiBlurbTitle = "Oops! No blurb found."
+              } else {
+                $scope.wikiText = _.values($scope.data.query.pages)[0].extract;
+                $scope.wikiBlurbTitle = _.values($scope.data.query.pages)[0].title;
+              }
+
+        
+            }).
+            error(function(data, status) {
+                $scope.data = data || "Request failed";
+                $scope.status = status;
+
+                $scope.wikiTextMissing = "Sorry, we weren't able to find a blurb about " + "<b>" + query + "</b>" + ". But you should totally still look it up!"
+            });
+
+    }
+
 
     //**** QUERYING BY TAG ****
 
