@@ -211,8 +211,9 @@ h5 {
 }
 
 h6 {
-  color: @brand-punch-dark;
+  color: @gray;
   font-size: @font-size-base;
+  text-decoration: underline;
 }
 
 // Nav
@@ -554,7 +555,7 @@ li .xRemove:hover {
   padding-bottom: @padding-base-vertical*8;
 }
 
-.subSection .longListItem {
+.longListItem {
   margin-bottom: @padding-base-vertical*4;
 }
 
@@ -617,9 +618,8 @@ tr {
   border-bottom: none;
 }
 
-.compare h5 {
+.compare h6 {
   text-align: center;
-  color: @gray;
 }
 
 .careerTitleCompare {
@@ -645,6 +645,11 @@ tr {
 
 .compare .col-mid {
   padding: @padding-base-vertical*2 @padding-base-horizontal*4;
+}
+
+.intersectHeaders h6 {
+  text-decoration: none;
+  margin-bottom: @padding-base-vertical*4;
 }
 
 .noOnetCompare {
