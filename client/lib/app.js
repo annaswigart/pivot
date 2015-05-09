@@ -23,9 +23,13 @@ app.directive('ngConfirmClick', [
         };
 }])
 
-app.run (['$anchorScroll', function($anchorScroll) {
+app.run (['$anchorScroll', '$rootScope', function($anchorScroll, $rootScope) {
     $anchorScroll.yOffset = 50;
-}])
+
+    $rootScope.$on('$stateChangeSuccess', function() {
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+}]);
 
 app.directive('ngBindAttrs', function() {
   return function(scope, element, attrs) {
