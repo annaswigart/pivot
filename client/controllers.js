@@ -200,7 +200,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
     } 
 
 
- $scope.getWikiData = function(querySelection) {
+      $scope.getWikiData = function(querySelection) {
 
         $scope.queryClicked = querySelection;
 
@@ -210,44 +210,14 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         if (query == 'python'){
             query = 'Python_%28programming_language%29';
 
-        } else if (query == 'javascript') {
-            query = 'JavaScript';
-
         } else if (query == 'java') {
             query = 'Java_%28programming_language%29';
 
         } else if (query == 'ruby') {
             query = 'Ruby_%28programming_language%29';
-
-        } else if (query == 'sql') {
-            query = 'SQL'
-
-        } else if (query == 'microsoft powerpoint') {
-            query = 'Microsoft PowerPoint';
-
-        } else if (query == 'microsoft excel') {
-            query = 'Microsoft Excel';
-
-        } else if (query == 'microsoft sharepoint') {
-            query = 'Microsoft SharePoint';
-
-        } else if (query == 'microsoft word') {
-            query = 'Microsoft Word';
-
-        } else if (query == 'microsoft dynamics') {
-            query = 'Microsoft Dynamics';
         
         } else if (query == 'sox') {
             query = 'Sarbanes–Oxley_Act';
-        
-        } else if (query == 'peoplesoft') {
-            query = 'PeopleSoft';
-
-        } else if (query == 'html') {
-            query = 'HTML';
-
-        } else if (query == 'autocad') {
-            query = 'AutoCAD';
 
         } else if (query == 'r') {
             query = 'R (programming language)';
@@ -257,13 +227,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 
         } else if (query == 'c') {
             query = 'C (programming language)';
-        
-        } else if (query == 'matlab') {
-            query = 'MATLAB';
 
-        } else if (query == 'sas') {
-            query = 'SAS (software)'
-        
         } else if (query == 'erp') {
             query = 'Enterprise_resource_planning'
         }
@@ -273,7 +237,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
         queryString = query.split(' ').join('%20');
 
         $scope.method = 'JSONP';
-        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&redirects&callback=JSON_CALLBACK';
         var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
         var redirectCapRegex = new RegExp("another method of capitalisation");
 
@@ -494,44 +458,14 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         if (query == 'python'){
             query = 'Python_%28programming_language%29';
 
-        } else if (query == 'javascript') {
-            query = 'JavaScript';
-
         } else if (query == 'java') {
             query = 'Java_%28programming_language%29';
 
         } else if (query == 'ruby') {
             query = 'Ruby_%28programming_language%29';
-
-        } else if (query == 'sql') {
-            query = 'SQL'
-
-        } else if (query == 'microsoft powerpoint') {
-            query = 'Microsoft PowerPoint';
-
-        } else if (query == 'microsoft excel') {
-            query = 'Microsoft Excel';
-
-        } else if (query == 'microsoft sharepoint') {
-            query = 'Microsoft SharePoint';
-
-        } else if (query == 'microsoft word') {
-            query = 'Microsoft Word';
-
-        } else if (query == 'microsoft dynamics') {
-            query = 'Microsoft Dynamics';
         
         } else if (query == 'sox') {
             query = 'Sarbanes–Oxley_Act';
-        
-        } else if (query == 'peoplesoft') {
-            query = 'PeopleSoft';
-
-        } else if (query == 'html') {
-            query = 'HTML';
-
-        } else if (query == 'autocad') {
-            query = 'AutoCAD';
 
         } else if (query == 'r') {
             query = 'R (programming language)';
@@ -541,13 +475,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 
         } else if (query == 'c') {
             query = 'C (programming language)';
-        
-        } else if (query == 'matlab') {
-            query = 'MATLAB';
 
-        } else if (query == 'sas') {
-            query = 'SAS (software)'
-        
         } else if (query == 'erp') {
             query = 'Enterprise_resource_planning'
         }
@@ -557,7 +485,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
         queryString = query.split(' ').join('%20');
 
         $scope.method = 'JSONP';
-        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&redirects&callback=JSON_CALLBACK';
         var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
         var redirectCapRegex = new RegExp("another method of capitalisation");
 
@@ -891,44 +819,14 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         if (query == 'python'){
             query = 'Python_%28programming_language%29';
 
-        } else if (query == 'javascript') {
-            query = 'JavaScript';
-
         } else if (query == 'java') {
             query = 'Java_%28programming_language%29';
 
         } else if (query == 'ruby') {
             query = 'Ruby_%28programming_language%29';
-
-        } else if (query == 'sql') {
-            query = 'SQL'
-
-        } else if (query == 'microsoft powerpoint') {
-            query = 'Microsoft PowerPoint';
-
-        } else if (query == 'microsoft excel') {
-            query = 'Microsoft Excel';
-
-        } else if (query == 'microsoft sharepoint') {
-            query = 'Microsoft SharePoint';
-
-        } else if (query == 'microsoft word') {
-            query = 'Microsoft Word';
-
-        } else if (query == 'microsoft dynamics') {
-            query = 'Microsoft Dynamics';
         
         } else if (query == 'sox') {
             query = 'Sarbanes–Oxley_Act';
-        
-        } else if (query == 'peoplesoft') {
-            query = 'PeopleSoft';
-
-        } else if (query == 'html') {
-            query = 'HTML';
-
-        } else if (query == 'autocad') {
-            query = 'AutoCAD';
 
         } else if (query == 'r') {
             query = 'R (programming language)';
@@ -938,13 +836,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
 
         } else if (query == 'c') {
             query = 'C (programming language)';
-        
-        } else if (query == 'matlab') {
-            query = 'MATLAB';
 
-        } else if (query == 'sas') {
-            query = 'SAS (software)'
-        
         } else if (query == 'erp') {
             query = 'Enterprise_resource_planning'
         }
@@ -954,7 +846,7 @@ function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorS
         queryString = query.split(' ').join('%20');
 
         $scope.method = 'JSONP';
-        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&callback=JSON_CALLBACK';
+        $scope.url = 'http://en.wikipedia.org/w/api.php?action=query&prop=extracts&format=json&exintro=&titles=' + queryString + '&redirects&callback=JSON_CALLBACK';
         var redirectMergeRegex = new RegExp("This is a redirect from a page that was");
         var redirectCapRegex = new RegExp("another method of capitalisation");
 
