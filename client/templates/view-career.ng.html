@@ -83,11 +83,13 @@
 
         <div class="col-xs-offset-1 col-xs-4 featuredLinkBox">
           <h5>Build a New Skill</h5>
-          <span> Search for free online classes related to 
-            <strong>{{career.skills[0].name}}</strong> through 
-            <a href="https://www.class-central.com/search?q={{ career.skills[0].name }}" target="_blank">
-              Class-Central.com</a>.
-          </span>
+          <p> <!-- Search for free online classes related to 
+            <strong>{{career.skills[0].name}}</strong> through  -->
+            <a href="https://www.class-central.com/search?lang=english&q={{ career.skills[0].name }}" target="_blank">
+             Search for free online classes</a>
+             related to <strong>{{career.skills[0].name}}</strong> through 
+            <img src="img/class-central_wordmark.png" alt="class central logo" height="16" style="margin-top: 12px;">
+          </p>
         </div>
 
         <div class="tags-wrapper col-xs-7 subSection">
@@ -125,13 +127,13 @@
           <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
             <h5>Learn More <br>
               About This Career</h5>
-            <span>
-              Check out 
+            <p>
               <a href="http://www.onetonline.org/link/summary/{{career.onet_code[0]}}" target="_blank">
-                O*Net Online
+                Browse the government data
               </a>
-              to explore the government's data for this career.
-            </span>
+                for this career with
+              <img src="img/onetonline_logo.png" alt="onet online logo" height="40" style="margin-top: 12px;">
+            </p>
           </div>
 
           <div class="col-xs-7 subSection">
@@ -184,10 +186,11 @@
           <div class="col-xs-4 col-xs-offset-1 featuredLinkBox">
             <h5>Explore Salary Data</h5>
             <span>
-              Find <strong>{{career.standardized_title}}</strong> salaries for other locations at 
               <a href="http://www.onetonline.org/link/wages/{{career.onet_code[0]}}?w=1&st=CA&g=Go" target="_blank">
-                CareerOneStop.
-              </a>
+                Find additional salary data
+              </a> 
+                for <strong>{{career.standardized_title}}</strong> through
+              <img src="img/careeronestop_logo_small.png" alt="careeronestop logo" height="35" style="margin-top: 12px;">
             </span>
           </div>
 
@@ -219,7 +222,10 @@
 
         <div class="col-xs-12">
           <h4>Sample Job Titles</h4>
-          <p>Click below to search Glassdoor.com for jobs.</p>
+          <p>
+            Click below to search for jobs on 
+            <img src="img/glassdoor_logo_500.png" alt="glassdoor.com logo" height="25" style="margin: 12px;">
+          </p>
         </div>
 
         <ul>
@@ -234,12 +240,13 @@
 
         <div class="col-xs-12 subSection">
           <h4>Meet Cool People</h4>
-          <span>Join a group on 
+          <p>
+            <img src="img/meetup_logo.jpg" alt="meetup.com logo" height="40" style="margin: 12px 12px 12px 0px;">
             <a href="http://www.meetup.com/find/?allMeetups=false&keywords={{ career.standardized_title }}&radius=50&userFreeform=san+francisco%2C+ca" target="_blank">
-              Meetup.com
+              Search Meetup.com
             </a>
-             to meet people in this career.
-          </span>
+             for interest groups related to <strong>{{career.standardized_title}}</strong>.
+          </p>
         </div>
       
         <div>
@@ -304,7 +311,11 @@
       </div>
 
       <div class="modal-footer">
-       <button type="button" class="btn" data-dismiss="modal">Close</button>
+        <span class="small text-left">
+          <img src="img/wikipedia_logo.png" alt="wikipedia.com logo" height="25" style="margin: 6px;">
+          Wikipedia
+        </span>
+       <button type="button" class="btn pull-right" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
