@@ -94,8 +94,8 @@
           <h4>Categories</h4>
           <ul>
             <li ng-repeat="category in career.categories | limitTo: 10" >
-              <!-- <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})"> -->
-              <a class="categoryTag colorTransFast" ng-click="getWikiData((category.name.toLowerCase()))" data-toggle="modal" data-target="#wikiModal">
+              <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
+              <!-- <a class="categoryTag colorTransFast" ng-click="getWikiData((category.name.toLowerCase()))" data-toggle="modal" data-target="#wikiModal"> -->
                 {{category.name}}
               </a>
             </li>
