@@ -170,7 +170,7 @@
           <div class="col-xs-4 subSection text-center">
             <ul>
                 <li ng-repeat="category in categories1">
-                  <a class="categoryTag colorTransFast" ng-click="getWikiData((category.toLowerCase()))" data-toggle="modal" data-target="#wikiModal">
+                 <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category}}
                   </a>   
                 </li>
@@ -181,7 +181,7 @@
           <div class="col-xs-4 subSection text-center">
             <ul>
                 <li ng-repeat="category in categoriesIntersect">
-                 <a class="categoryTag colorTransFast" ng-click="getWikiData((category.toLowerCase()))" data-toggle="modal" data-target="#wikiModal">
+                <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category}}
                   </a>   
                 </li>
@@ -197,7 +197,7 @@
           <div class="col-xs-4 subSection text-center">
             <ul>
                 <li ng-repeat="category in categories2">
-                  <a class="categoryTag colorTransFast" ng-click="getWikiData((category.toLowerCase()))" data-toggle="modal" data-target="#wikiModal">
+                  <a class="categoryTag colorTransFast" ng-click="setQuery(category.name)" aria-label="search for {{category.name}}" ui-sref="results({queryString: queryStringURL})">
                     {{category}}
                   </a>   
                 </li>
