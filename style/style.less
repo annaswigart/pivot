@@ -44,6 +44,39 @@ li {
   font-size: 100%;
 }
 
+// Icon
+
+.logo>a>img {
+  height: 50px;
+  padding-bottom: 20px;
+  margin: 0;
+  vertical-align: middle;
+  line-height: 70px;
+}
+
+// Wiki Blurb
+
+.modal-backdrop {
+  z-index: 0;
+}
+
+.wiki-blurb-title {
+  color: @brand-secondary;
+  margin-bottom: 0px;
+}
+
+/*.search-from-wiki-btn {
+  background-color: @brand-primary;
+  color: white;
+}*/
+
+/*a.anchor {
+  display: block; 
+  position: relative; 
+  top: -250px; 
+  visibility: hidden;
+}*/
+
 .textBrand {
   color: @brand-primary-light;
 }
@@ -380,6 +413,10 @@ h6 {
   cursor: pointer;
 }
 
+.skill-name {
+  cursor: help;
+}
+
 
 // Tags
 
@@ -405,6 +442,7 @@ a.categoryTag {
 a.categoryTag:hover {
   background-color: @gray-lighter;
   border: 1px solid @brand-secondary-light;
+  cursor: help;
 }
 
 // Pinning
@@ -493,14 +531,13 @@ li .xRemove:hover {
   border: none;
   text-align: center;
   cursor: pointer;
-}
-
-.showMoreResults {
   display: block;
   color: @brand-punch-dark;
   font-weight: 500;
-  margin-bottom: @padding-base-vertical;
+  margin-bottom: @padding-base-vertical * 2;
+  margin-top: @padding-base-vertical;
 }
+
 
 .showMoreResults:hover {
   color: @brand-punch-darker;

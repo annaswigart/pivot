@@ -19,31 +19,30 @@
 
       <h1 class="text-center">Want to change careers? <span class="textBrand">Pivot can help.</span></h1>
 
-      <form class="form-horizontal" onsubmit="this.reset(); return false;" name="homeQuery" role="form">
-        <div class="form-group">
+      <!-- <div class="col-xs-6 col-xs-offset-3" id="cta-search-box" ng-if="!resultsLoading"> -->
+          <form class="form-horizontal" onsubmit="this.reset(); return false;" name="homeQuery" role="form">
+            <div class="form-group">
+              <div class="col-xs-10 col-xs-offset-1">
 
-          <div class="col-xs-10 col-xs-offset-1">
+                <label class="search-label">
+                  <h3>EXPLORE CAREER DATA</h3>
+                </label>
 
-            <label class="search-label">
-              <h3>EXPLORE CAREER DATA</h3>
-            </label>
+                <div class="input-group input-group-lg">
+                  <input type="text" name="text" class="form-control" autocomplete="off" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:6" typeahead-focus-first= "false"/>
+                  <span class="input-group-btn">
+                    <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
+                      <span class="fa fa-search" aria-hidden="true"></span>
+                    </button>
+                  </span>
+                </div>
 
-            <div class="input-group input-group-lg">
-              <input type="text" name="text" class="form-control" placeholder="Job Title, Keywords, or Industry" ng-model="searchQuery" typeahead="item for item in searchTerms | filter:$viewValue:startsWith | limitTo:6" typeahead-focus-first= "false"/>
-              <span class="input-group-btn">
-                <button ng-click="setQuery(searchQuery)" class="btn btn-primary" aria-label="search" ui-sref="results({queryString: queryStringURL})">
-                  <span class="fa fa-search" aria-hidden="true"></span>
-                </button>
-              </span>
+              </div>
+
             </div>
+          </form>
 
-          </div>
-
-        </div>
-      </form>
-
-    </div>  <!-- End Search Box CTA -->
-
+        </div>  <!-- End Search Box CTA -->
    
     <!-- <div> {{searchTerms}} </div> -->
 
@@ -52,7 +51,6 @@
         <span class="fa fa-chevron-down fa-2x"></span>
       </a>
     </div>
-
   </div> 
 
   <!-- PRODUCT DESCRIPTION -->
