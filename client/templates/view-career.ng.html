@@ -29,7 +29,7 @@
             </li>
           </ul>
           <a role="button" class="showMoreCareerInfo" ng-hide="career.work_activities.activities.length <= activityLimit" ng-click="activityLimit = career.work_activities.activities.length">
-            show all activities
+            show more activities
             <span class="fa fa-chevron-down"></span>
           </a>
           <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="career.work_activities.activities.length === activityLimit" ng-click="activityLimit = 4">
@@ -49,7 +49,7 @@
         <div class="col-xs-7 subSection" ng-init="skillLimit = 10">
           <h4 class="anchor" id="anchor-skills">Skills</h4>
 
-          <small><i>Percentage of <strong>{{career.job_ids.length }}</strong> job postings for <strong>{{career.standardized_title}}</strong> that included these skills</i></small> <br> <br>
+          <small><i>Percentage of <strong>{{career.job_ids.length}}</strong> job postings for <strong>{{career.standardized_title}}</strong> that included these skills</i></small> <br> <br>
 
           <ul>
             <li ng-repeat="skill in career.skills | orderBy: '-count' | limitTo: skillLimit">
@@ -62,8 +62,8 @@
                     </a>
                   </td>
                   <td skill-bar-column>
-                    <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="20">
-                      <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids)*2}} }" height="20" class="fill2" />
+                    <svg ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids) * 1.7}} }" height="20">
+                      <rect ng-bind-attrs= "{width: {{getSkillPercent(skill.count, career.num_ids) * 1.7}} }" height="20" class="fill2" />
                     </svg>
                     <span>{{getSkillPercent(skill.count, career.num_ids)}}%</span>
                   </td>
@@ -88,7 +88,7 @@
             <a href="https://www.class-central.com/search?lang=english&q={{ career.skills[0].name }}" target="_blank">
              Search for free online classes</a>
              related to <strong>{{career.skills[0].name}}</strong> through 
-            <img src="img/class-central_wordmark.png" alt="class central logo" height="16" style="margin-top: 12px;">
+            <img src="img/class-central_wordmark.png" alt="class central logo" width="85%" style="margin-top: 12px;">
           </p>
         </div>
 
@@ -119,7 +119,7 @@
               <span class="fa fa-chevron-down"></span>
             </a>
             <a href="#anchor-context" role="button" class="showMoreCareerInfo" ng-show="contextLimit == 20" ng-click="contextLimit = 4">
-              show less
+              show fewer
               <span class="fa fa-chevron-up"></span>
             </a>
           </div>
@@ -132,7 +132,7 @@
                 Browse the government data
               </a>
                 for this career with
-              <img src="img/onetonline_logo.png" alt="onet online logo" height="40" style="margin-top: 12px;">
+              <img src="img/onetonline_logo.png" alt="onet online logo" width="100%" style="margin-top: 12px;">
             </p>
           </div>
 
@@ -145,8 +145,8 @@
                   <tr>
                     <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
                     <td class="skill-bar-column">
-                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*1)}} }" height="20">
-                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*1)}} }" height="20" class="fill2" />
+                      <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent* 0.8)}} }" height="20">
+                        <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent* 0.8)}} }" height="20" class="fill2" />
                       </svg>
                       <span>{{ getRoundedPercent(ed.percent)}}%</span>
                     </td>
@@ -164,8 +164,8 @@
               <tr>
                 <td class="text-right chart-text-table-col chart-text-left">SF Bay Area</td>
                 <td class="chart-bar-table-col">
-                  <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="20">
-                      <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                  <svg width = "{{getSalaryWidth(career.salary.annual_salary_bay_area) * 0.8}}" height="20">
+                      <rect width = "{{getSalaryWidth(career.salary.annual_salary_bay_area) * 0.8}}" height="20" class="fill1" />
                   </svg>
                   <span>{{career.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                 </td>
@@ -174,8 +174,8 @@
               <tr>
                 <td class="text-right chart-text-table-col chart-text-left">California</td>
                 <td class="chart-bar-table-col">
-                  <svg  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="20">
-                    <rect  width = "{{getSalaryWidth(career.salary.annual_salary_ca)}}" height="20" class="fill2" />
+                  <svg  width = "{{getSalaryWidth(career.salary.annual_salary_ca) * 0.7}}" height="20">
+                    <rect  width = "{{getSalaryWidth(career.salary.annual_salary_ca) * 0.7}}" height="20" class="fill2" />
                 </svg>
                 <span>{{career.salary.annual_salary_ca | currency : $ : 0}}</span>
                 </td>
@@ -190,7 +190,7 @@
                 Find additional salary data
               </a> 
                 for <strong>{{career.standardized_title}}</strong> through
-              <img src="img/careeronestop_logo_small.png" alt="careeronestop logo" height="35" style="margin-top: 12px;">
+              <img src="img/careeronestop_logo_small.png" alt="careeronestop logo" width="90%" style="margin-top: 12px;">
             </span>
           </div>
 
