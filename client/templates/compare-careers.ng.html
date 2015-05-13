@@ -48,7 +48,7 @@
               </li>
             </ul>
             <a role="button" class="showMoreCareerInfo" ng-hide="career1.work_activities.activities.length <= activityLimit" ng-click="activityLimit = 30">
-              show all activities
+              show more activities
               <span class="fa fa-chevron-down"></span>
             </a>
             <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 3">
@@ -65,7 +65,7 @@
               </li>
             </ul>
             <a role="button" class="showMoreCareerInfo" ng-hide="career2.work_activities.activities.length <= activityLimit" ng-click="activityLimit = 30">
-              show all activities
+              show more activities
               <span class="fa fa-chevron-down"></span>
             </a>  
             <a href="#anchor-activities" role="button" class="showMoreCareerInfo" ng-show="activityLimit == 30" ng-click="activityLimit = 3">
@@ -347,8 +347,8 @@
                   <tr>
                     <td class="text-right chart-text-table-col chart-text-left-compare">{{career1.standardized_title}}</td>
                     <td class="chart-bar-table-col">
-                      <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20">
-                          <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)*2}}" height="20" class="fill1" />
+                      <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area) * 1.7}}" height="20">
+                          <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area) * 1.7}}" height="20" class="fill1" />
                       </svg>
                       <span>{{career1.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                     </td>
@@ -356,8 +356,8 @@
                   <tr>
                     <td class="text-right chart-text-table-col chart-text-left-compare">{{career2.standardized_title}}</td>
                     <td class="chart-bar-table-col">
-                      <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20">
-                          <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)*2}}" height="20" class="fill2" />
+                      <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area) * 1.7}}" height="20">
+                          <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area) * 1.7}}" height="20" class="fill2" />
                       </svg>
                       <span>{{career2.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                     </td>
@@ -378,8 +378,8 @@
                     <tr>
                       <td class="text-right chart-text-table-col chart-text-left">SF Bay Area</td>
                       <td class="chart-bar-table-col">
-                        <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20">
-                            <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                        <svg width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area) * 1.7}}" height="20">
+                            <rect width = "{{getSalaryWidth(career1.salary.annual_salary_bay_area) * 1.7}}" height="20" class="fill1" />
                         </svg>
                         <span>{{career1.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                       </td>
@@ -388,8 +388,8 @@
                     <tr>
                       <td class="text-right chart-text-table-col chart-text-left">California</td>
                       <td class="chart-bar-table-col">
-                        <svg  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20">
-                          <rect  width = "{{getSalaryWidth(career1.salary.annual_salary_ca)}}" height="20" class="fill2" />
+                        <svg  width = "{{getSalaryWidth(career1.salary.annual_salary_ca) * 1.7}}" height="20">
+                          <rect  width = "{{getSalaryWidth(career1.salary.annual_salary_ca) * 1.7}}" height="20" class="fill2" />
                       </svg>
                       <span>{{career1.salary.annual_salary_ca | currency : $ : 0}}</span>
                       </td>
@@ -412,8 +412,8 @@
                     <tr>
                       <td width="120px" class="text-right chart-text-table-col">SF Bay Area</td>
                       <td class="chart-bar-table-col">
-                        <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20">
-                            <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)}}" height="20" class="fill1" />
+                        <svg width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)  * 1.7}}" height="20">
+                            <rect width = "{{getSalaryWidth(career2.salary.annual_salary_bay_area)  * 1.7}}" height="20" class="fill1" />
                         </svg>
                         <span>{{career2.salary.annual_salary_bay_area | currency : $ : 0}}</span>
                       </td>
@@ -422,8 +422,8 @@
                     <tr>
                       <td width="120px" class="text-right chart-text-table-col">California</td>
                       <td class="chart-bar-table-col">
-                        <svg  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20">
-                          <rect  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)}}" height="20" class="fill2" />
+                        <svg  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)  * 1.7}}" height="20">
+                          <rect  width = "{{getSalaryWidth(career2.salary.annual_salary_ca)  * 1.7}}" height="20" class="fill2" />
                       </svg>
                       <span>{{career2.salary.annual_salary_ca | currency : $ : 0}}</span>
                       </td>
@@ -487,8 +487,8 @@
                       <tr>
                         <td width="200px" class="text-right chart-text-table-col chart-text-left-compare" rowspan="2">{{ed.degree}}</td>
                         <td class="skill-bar-column">
-                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20">
-                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*3)}} }" height="20" class="fill1" />
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent*2)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent*2)}} }" height="20" class="fill1" />
                           </svg>
                           <span>{{getRoundedPercent(ed.percent)}}%</span>
                         </td>
@@ -496,8 +496,8 @@
 
                       <tr>
                         <td class="skill-bar-column">
-                          <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20">
-                            <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*3)}} }" height="20" class="fill2" />
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*2)}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(career2.education[key].percent*2)}} }" height="20" class="fill2" />
                           </svg>
                           <span>{{getRoundedPercent(career2.education[key].percent)}}%</span>
                         </td>
@@ -551,8 +551,8 @@
                       <tr>
                         <td width="200px" class="text-right chart-text-table-col">{{ed.degree}}</td>
                         <td class="skill-bar-column">
-                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20">
-                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent)}} }" height="20" class="fill2" />
+                          <svg ng-bind-attrs= "{width: {{getEdWidth(ed.percent) * 1.7}} }" height="20">
+                            <rect ng-bind-attrs= "{width: {{getEdWidth(ed.percent) * 1.7}} }" height="20" class="fill2" />
                           </svg>
                           <span>{{getRoundedPercent(ed.percent)}}%</span>
                         </td>
