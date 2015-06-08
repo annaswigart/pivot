@@ -1,4 +1,4 @@
-angular.module('reflectivePath').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
+angular.module('pivotApp').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
 function($urlRouterProvider, $stateProvider, $locationProvider){
     // debugger;
     $locationProvider.html5Mode(true);

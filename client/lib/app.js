@@ -1,11 +1,11 @@
-var app = angular.module('reflectivePath', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'ngSanitize']);
+var app = angular.module('pivotApp', ['angular-meteor', 'ui.router', 'ui.bootstrap', 'angularUtils.directives.dirPagination', 'ngSanitize']);
 
 Meteor.startup(function () {
     
 });
 
 function onReady() {
-  angular.bootstrap(document, ['reflectivePath']);
+  angular.bootstrap(document, ['pivotApp']);
 }
 
 app.directive('ngConfirmClick', [
