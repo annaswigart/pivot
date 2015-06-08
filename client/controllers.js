@@ -3,7 +3,7 @@ if (Meteor.isClient) {
 // ***********************************
 // NavBarController
 // ***********************************
-angular.module('reflectivePath').controller('NavBarController', ['$scope', 
+angular.module('pivotApp').controller('NavBarController', ['$scope', 
     '$meteor','$stateParams', '$state', '$meteorUtils', '$window',
     function($scope, $meteor, $stateParams, $state, $meteorUtils, $window){
 
@@ -57,7 +57,7 @@ angular.module('reflectivePath').controller('NavBarController', ['$scope',
 // ***********************************
 // HomeSearchController
 // ***********************************
-angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '$meteor',
+angular.module('pivotApp').controller('HomeSearchController', ['$scope', '$meteor',
 '$state', '$window', '$http', '$anchorScroll', function($scope, $meteor, $state, $window, $http, $anchorScroll){   
 
     // Data for autocomplete search
@@ -132,7 +132,7 @@ angular.module('reflectivePath').controller('HomeSearchController', ['$scope', '
 // ResultsController
 // ***********************************
 
-angular.module('reflectivePath').controller('ResultsController', ['$scope', 
+angular.module('pivotApp').controller('ResultsController', ['$scope', 
     '$meteor','$stateParams', '$state', '$rootScope', '$meteorUtils', '$window', '$http', '$animate', '$anchorScroll', 
     function($scope, $meteor, $stateParams, $state, $rootScope, $meteorUtils, $window, $http, $animate, $anchorScroll){
 
@@ -396,7 +396,7 @@ angular.module('reflectivePath').controller('ResultsController', ['$scope',
 // ***********************************
 // CareerViewController
 // ***********************************
-angular.module('reflectivePath').controller('CareerViewController', ['$scope', '$meteor',
+angular.module('pivotApp').controller('CareerViewController', ['$scope', '$meteor',
 '$stateParams', '$state', '$window', '$rootScope', '$location', '$anchorScroll', '$http',
 function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, $anchorScroll, $http){
 
@@ -694,7 +694,7 @@ function($scope, $meteor, $stateParams, $state, $window, $rootScope, $location, 
 // ***********************************
 // CompareViewController
 // ***********************************
-angular.module('reflectivePath').controller('CompareViewController', ['$scope', '$meteor',
+angular.module('pivotApp').controller('CompareViewController', ['$scope', '$meteor',
  '$stateParams', '$window', '$rootScope', '$location', '$anchorScroll', '$filter', '$animate', '$http',
 function($scope, $meteor, $stateParams, $window, $rootScope, $location, $anchorScroll, $filter, $animate, $http){
 

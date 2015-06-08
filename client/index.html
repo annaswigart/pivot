@@ -4,17 +4,43 @@
 </head>
 
 <body>
-    <div ng-app="reflectivePath">
+    <div ng-app="pivotApp">
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="container">
                 <div ui-view="navBar"></div>
             </div>
         </nav>
-        
-<!--         <div ui-view="sidebar"></div>
- -->
-        <!-- <div class="container"> -->
-            <div ui-view="main"></div>
-        <!-- </div> -->
+        <div ui-view="main"></div>
     </div>
+    <footer>
+    <div class="row">
+        <div id="footer">
+            <table style="width:100%; height:100%;">
+                <tr>
+                    <td class="footer-col footer-left">
+                        <a href="http://www.ischool.berkeley.edu/programs/mims/projects/2015/pivot" target="_blank" class="footer-col">About</a>
+                    </td>
+                    <td class="footer-col footer-center">
+                        <p id="copyright" class="footer-col">&copy; 2015 Team Pivot All Rights Reserved</p>
+                    </td>
+                    <td class="footer-col footer-right">
+                         <a href="https://github.com/annaswigart/pivot" target="_blank" class="github-logo footer-col"><img
+            src='img/primary-Github-logo.png' alt='github' height="32px" onmouseover="this.src='img/hover-Github-logo.png';" onmouseout="this.src='img/primary-Github-logo.png';"/></a>
+                    </td>
+                </tr>
+            </table>
+
+            <!-- <div class="col-xs-4">
+                <a href="http://www.ischool.berkeley.edu/programs/mims/projects/2015/pivot" target="_blank" class="footer-col">About</a>
+            </div>
+            <div class="col-xs-4">
+                <p id="copyright" class="footer-col">&copy; 2015 Team Pivot All Rights Reserved</p>
+            </div>
+            <div class="col-xs-4">
+                <a href="https://github.com/annaswigart/pivot" target="_blank" class="github-logo footer-col"><img
+            src='img/primary-Github-logo.png' alt='github' height="32px" onmouseover="this.src='img/hover-Github-logo.png';" onmouseout="this.src='img/primary-Github-logo.png';"/></a>
+            </div> -->
+        </div>
+    </div>
+</footer>
 </body>
